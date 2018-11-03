@@ -1,19 +1,24 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import DoctorsList from "./components/doctorList";
+import React, { Component } from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { Root } from "native-base";
 import FirstPage from "./components/firstPage";
 import LoginPage from "./components/loginPage";
 import DoctorList from "./components/doctorList";
+import Area from "./components/Area";
+import anime from "./components/animation";
+import anime1 from "./components/animation1";
 import SpecialityPage from "./components/specialityPage";
-import Icon from "react-native-vector-icons/Ionicons";
 import {
   createStackNavigator,
   createBottomTabNavigator
 } from "react-navigation";
 import DoctorProfile from "./components/doctorProfile";
+import BottomNavigation, {
+  FullTab
+} from "react-native-material-bottom-navigation";
 
-export default class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = { fontLoaded: false };
@@ -26,15 +31,15 @@ export default class App extends React.Component {
         "GTWalsheim-Black": require("./assets/fonts/GT-Walsheim-Black.ttf")
       });
       this.setState({ fontLoaded: true });
-      console.log("fonts are loaded");
     } catch (error) {
       console.log(error);
     }
   }
+
   render() {
     if (this.state.fontLoaded) {
       console.log("fonts loaded: ", this.state.fontLoaded);
-      return <FirstPage />;
+      return <RootStack />;
     } else {
       return (
         <View>
@@ -49,29 +54,16 @@ const RootStack = createStackNavigator(
   {
     FirstPage: FirstPage,
     LoginPage: LoginPage,
-    DoctorList: DoctorList
+    DoctorList: DoctorList,
+    Area: Area,
+    DoctorProfile: DoctorProfile,
+    SpecialityPage: SpecialityPage,
+    anime: anime,
+    anime1: anime1
   },
   {
-    initialRouteName: "FirstPage"
+    initialRouteName: "DoctorList"
   }
 );
 
-// const BottomTabBar = createBottomTabNavigator({
-//   FirstPage: {
-//     screen: FirstPage,
-//     navigationOptions: {
-//       tabBarLabel: "FirstPage",
-//       tabBarIcon: ({ tintColor }) => <Icon name="ios-home" size={24} />
-//     }
-//   },
-//   LoginPage: { screen: LoginPage }
-// });
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+export default App;

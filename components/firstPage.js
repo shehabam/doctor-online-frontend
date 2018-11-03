@@ -12,10 +12,13 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { StyleSheet, TouchableHighlight, Image } from "react-native";
 
 class FirstPage extends Component {
+  static navigationOptions = {
+    header: null
+  };
   render() {
     return (
-      <Grid>
-        <Row style={{ backgroundColor: "transparent" }} size={1} />
+      <Grid style={{ backgroundColor: "rgba(153, 204, 255, .6)" }}>
+        <Row size={1} />
         <Row size={2.5}>
           <Image
             source={require("../images/logo.png")}
@@ -27,12 +30,12 @@ class FirstPage extends Component {
             Book the Best Doctors in Kuwait
           </Text>
         </Row>
-        <Row size={0.5} style={{ backgroundColor: "transparent" }} />
+        <Row size={0.5} />
         <Row size={1} style={styles.buttonRow}>
           <Button
             rounded
             style={styles.button}
-            onPress={() => this.props.navigation.navigate("LoginPage")}
+            onPress={() => this.props.navigation.navigate("Area")}
           >
             <Text style={styles.text}>
               <Icon
@@ -44,13 +47,18 @@ class FirstPage extends Component {
             </Text>
           </Button>
         </Row>
-        <Row size={1.5} style={{ backgroundColor: "transparent" }} />
+        <Row size={1.5} />
         <Row size={1.5} style={styles.touchableTextRow}>
           <TouchableHighlight>
-            <Text style={styles.loginText}>Login</Text>
+            <Button
+              rounded
+              style={styles.button}
+              onPress={() => this.props.navigation.navigate("LoginPage")}
+            >
+              <Text style={styles.text}>Login</Text>
+            </Button>
           </TouchableHighlight>
         </Row>
-        <Row size={1} style={{ backgroundColor: "pink" }} />
 
         {/* <Button rounded style={styles.button}>
           <Text style={styles.text}>
@@ -79,7 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: "red"
   },
   button: {
-    height: "70%",
+    // height: "70%",
     width: "90%",
     shadowColor: "rgba(0,0,0,0.5)",
     shadowRadius: 4,

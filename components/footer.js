@@ -7,34 +7,69 @@ import {
   FooterTab,
   Button,
   Icon,
-  Text
+  Text,
+  Body,
+  Left
 } from "native-base";
-export default class FooterTabsIconTextExample extends Component {
+import { StyleSheet, TouchableHighlight, Image } from "react-native";
+
+import { Col, Row, Grid } from "react-native-easy-grid";
+import { colors } from "react-native-elements";
+
+class FooterApp extends Component {
   render() {
     return (
-      <Container>
-        <Content />
-        <Footer>
-          <FooterTab>
-            <Button vertical>
-              <Icon name="apps" />
-              <Text>Apps</Text>
-            </Button>
-            <Button vertical>
-              <Icon name="camera" />
-              <Text>Camera</Text>
-            </Button>
-            <Button vertical active>
-              <Icon active name="navigate" />
-              <Text>Navigate</Text>
-            </Button>
-            <Button vertical>
-              <Icon name="person" />
-              <Text>Contact</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
+      <Footer>
+        <Row>
+          <Col style={styles.inputStyle}>
+            <Icon style={styles.ImageStyle} name="search" />
+            <Text style={styles.ImageStyle}>Search</Text>
+          </Col>
+          <Col style={styles.inputStyle}>
+            <Icon style={styles.ImageStyle} name="camera" />
+            <Text style={styles.ImageStyle}>Camera</Text>
+          </Col>
+          <Col style={styles.inputStyle}>
+            <Icon style={styles.ImageStyle} name="navigate" />
+            <Text style={styles.ImageStyle}>Navigate</Text>
+          </Col>
+          <Col style={styles.inputStyle}>
+            <Icon style={styles.ImageStyle} name="person" />
+            <Text style={styles.ImageStyle}>Contact</Text>
+          </Col>
+        </Row>
+      </Footer>
     );
   }
 }
+
+export default FooterApp;
+
+const styles = StyleSheet.create({
+  inputStyle: {
+    alignSelf: "center",
+    alignContent: "center",
+    justifyContent: "center"
+    // fontSize: 22,
+    // height: 60,
+    // fontFamily: 'GTWalsheim-Medium',
+    // color: '#ffffff',
+    // backgroundColor: '#00bfff',
+    // flex: 1
+  },
+  ImageStyle: {
+    alignSelf: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    color: "gray"
+    // height: 60,
+    // backgroundColor: '#00bfff',
+    // flex: 1
+  },
+  cardBoxStyle: {
+    marginLeft: 7,
+    width: 190,
+    height: 150,
+    backgroundColor: "#00bfff"
+  }
+});

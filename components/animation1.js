@@ -10,14 +10,17 @@ import {
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { StyleSheet, TouchableHighlight, Image } from "react-native";
-class header extends Component {
+
+class anime1 extends Component {
+  componentDidMount() {
+    this.timeoutHandle = setTimeout(() => {
+      this.props.navigation.navigate("anime");
+    }, 5000);
+  }
+
   render() {
-    return (
-      <header>
-        <Text> Hello World !!!</Text>
-      </header>
-    );
+    return <Text>This page will destroyit Self in 5 Sec...</Text>;
   }
 }
 
-export default header;
+export default anime1;
