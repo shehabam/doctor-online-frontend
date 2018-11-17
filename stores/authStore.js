@@ -7,7 +7,8 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
 
 const instance = axios.create({
-  baseURL: "http://127.0.0.1:8000/"
+  // baseURL: "http://192.168.100.244:8000/"
+  baseURL: "http://127.0.0.1:8000"
 });
 
 class Store {
@@ -35,13 +36,6 @@ class Store {
       }
     );
   }
-  getUserProfile() {
-    axios
-      .get("http://127.0.0.1:8000//api/user/profile/" + 22 + "/")
-      .then(res => console.log(res.data))
-      .then(profile => (this.userDetails = profile))
-      .catch(err => console.error(err));
-  }
 
   loginUser(username, password) {
     const userData = {
@@ -49,7 +43,7 @@ class Store {
       password: password
     };
     instance
-      .post("/api/login/", userData)
+      .post("login/", userData)
       .then(res => res.data)
       .then(user => {
         const { token } = user;
@@ -62,6 +56,7 @@ class Store {
             const decoded = jwt_decode(token);
             // Set current user
             this.setCurrentUser(decoded);
+            // this.props.navigation.navigate('FirstPage');
           },
           () => console.log("something went wrong with setting jwt token")
         );
@@ -75,7 +70,7 @@ class Store {
       password: password
     };
     instance
-      .post("/api/register/", userData)
+      .post("register/", userData)
       .then(res => res.response)
       .then(user => {
         const { token } = user;
@@ -125,8 +120,7 @@ class Store {
 
 decorate(Store, {
   user: observable,
-  isAuthenticated: computed,
-  getUserProfile: action
+  isAuthenticated: computed
 });
 
 export default new Store();

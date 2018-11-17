@@ -19,26 +19,72 @@ import { colors } from "react-native-elements";
 class FooterApp extends Component {
   render() {
     return (
-      <Footer>
-        <Row>
-          <Col style={styles.inputStyle}>
-            <Icon style={styles.ImageStyle} name="search" />
-            <Text style={styles.ImageStyle}>Search</Text>
-          </Col>
-          <Col style={styles.inputStyle}>
-            <Icon style={styles.ImageStyle} name="camera" />
-            <Text style={styles.ImageStyle}>Camera</Text>
-          </Col>
-          <Col style={styles.inputStyle}>
-            <Icon style={styles.ImageStyle} name="navigate" />
-            <Text style={styles.ImageStyle}>Navigate</Text>
-          </Col>
-          <Col style={styles.inputStyle}>
-            <Icon style={styles.ImageStyle} name="person" />
-            <Text style={styles.ImageStyle}>Contact</Text>
-          </Col>
-        </Row>
-      </Footer>
+      <TouchableHighlight>
+        <Footer>
+          <FooterTab>
+            <Button
+              vertical
+              onPress={() => this.props.navigation.navigate("SearchByDoctor")}
+            >
+              <Image
+                source={require("../assets/SearchForFooter.png")}
+                style={styles.ImageStyle}
+                name="Search"
+              />
+              <Text style={styles.TextStyle}>Search</Text>
+            </Button>
+            <Button vertical>
+              <Image
+                source={require("../assets/appointment.png")}
+                style={styles.ImageStyle}
+                name="appointment"
+              />
+              <Text style={styles.TextStyle}>appointment</Text>
+            </Button>
+            <Button vertical active>
+              <Image
+                source={require("../assets/offers.png")}
+                style={styles.ImageStyle}
+                name="Offers"
+              />
+              <Text style={styles.TextStyle}>Offers</Text>
+            </Button>
+            <Button vertical>
+              <Image
+                source={require("../assets/settings.png")}
+                style={styles.ImageStyle}
+                name="Settings"
+              />
+              <Text style={styles.TextStyle}>Settings</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </TouchableHighlight>
+
+      /////////////////////////////////////////////////////////////////////////////////
+
+      // <Footer>
+      // 	<Row>
+      // 		{/* <TouchableHighlight transparent onPress={() => this.props.navigation.navigate('SearchByDoctor')}> */}
+      // 		<Col style={styles.inputStyle} >
+      // 		<Image source={require("../assets/SearchForFooter.png")} style={styles.ImageStyle} name="Search" />
+      // 			<Text style={styles.TextStyle}>Search</Text>
+      // 		</Col>
+      // 		{/* </TouchableHighlight> */}
+      // 		<Col style={styles.inputStyle}>
+      // 			<Image source={require("../assets/appointment.png")} style={styles.ImageStyle} name="appointment" />
+      // 			<Text style={styles.TextStyle} >Appointment</Text>
+      // 		</Col>
+      // 		<Col style={styles.inputStyle}>
+      // 		<Image source={require("../assets/offers.png")} style={styles.ImageStyle} name="Offers" />
+      // 			<Text style={styles.TextStyle}>Offers</Text>
+      // 		</Col>
+      // 		<Col style={styles.inputStyle}>
+      // 		<Image source={require("../assets/settings.png")} style={styles.ImageStyle} name="Settings" />
+      // 			<Text style={styles.TextStyle}>Settings</Text>
+      // 		</Col>
+      // 	</Row>
+      // </Footer>
     );
   }
 }
@@ -61,10 +107,17 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignContent: "center",
     justifyContent: "center",
-    color: "gray"
-    // height: 60,
-    // backgroundColor: '#00bfff',
-    // flex: 1
+    width: 22.5,
+    height: 22.5
+  },
+  TextStyle: {
+    alignSelf: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    color: "gray",
+    fontSize: 12
+    // width: 22.5,
+    // height: 22.5
   },
   cardBoxStyle: {
     marginLeft: 7,

@@ -1,65 +1,65 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Store from "../stores/store";
-import FooterApp from "./footer";
+import FooterApp from "../components/footer";
 import { Theme } from "./Theme";
+
 import {
   Container,
   Header,
   Content,
   Button,
   Text,
-  Icon,
+  Item,
+  Input,
+  List,
   View,
+  Icon,
+  ListItem,
   Card,
   CardItem,
   Body,
   Thumbnail,
-  Spinner,
   Right,
   Left
 } from "native-base";
-// import { Col, Row, Grid } from "react-native-easy-grid";
+import { Col, Row, Grid } from "react-native-easy-grid";
 import {
   StyleSheet,
   TouchableHighlight,
-  Image,
-  ScrollView
+  ScrollView,
+  Image
 } from "react-native";
 
-type RatingsProps = {
-  value: number,
-  votes: number
-};
-
-class DoctorList extends Component {
+class SearchByDoctor extends Component {
   static navigationOptions = {
-    title: "Choose Your Doctor",
-    headerTintColor: "white",
+    title: "Choose Your Area",
     headerStyle: {
       backgroundColor: "#00bfff"
-    },
-    headerRight: (
-      <Button
-        onPress={() => alert("This is a button!")}
-        style={{ backgroundColor: "#00bfff", height: 35 }}
-      >
-        <Image
-          large
-          source={require("../assets/filter.png")}
-          style={{ height: 25, width: 25, marginRight: 10 }}
-        />
-      </Button>
-    )
+    }
   };
 
-  componentDidMount() {
-    const profileID = this.props.navigation.getParam("SpeId");
-    Store.bringAreaAndSpe(profileID);
+  showAreas(id) {
+    const productInCat = Store.Area.filter(item => +item.city === +id);
+    const doctorProfile = productInCat;
+
+    let listOfAreas = doctorProfile.map(area => (
+      // <List key={area.id}>
+      // 	<List>
+      <ListItem key={area.id} onPress={() => alert("hello World")}>
+        <Text>{area.name}</Text>
+      </ListItem>
+      // 	</List>
+      // </List>
+    ));
+    return listOfAreas;
   }
   render() {
+    // console.log(Store.getRating());
+    // console.log(Store.RatingList);
     // const { votes, value } = this.props;
-    const value = 3.6;
+    // let counter = Store.RatingList.ratings;
+    const value = 5;
     const votes = 3;
     const filledStars = value - (value % 1);
     const halfStar = value % 1 !== 0;
@@ -76,14 +76,9 @@ class DoctorList extends Component {
       return numbers;
     };
 
-    if (!Store.DoctorAreaAndSpe)
-      return (
-        <View>
-          <Spinner color="red" />
-        </View>
-      );
+    if (!Store.city) return <View style={styles.thumbnailStyle} />;
 
-    let listOfDoctors = Store.DoctorAreaAndSpe.map(list => (
+    let listOfcities = Store.filteredDoctors.map(list => (
       <TouchableHighlight
         onPress={() =>
           this.props.navigation.navigate("DoctorProfile", {
@@ -180,7 +175,7 @@ class DoctorList extends Component {
                   {...{ key, size, color }}
                 />
               ))}
-              <Text>{`${votes} votes`}</Text>
+              <Text style={styles.text}>{`${votes} votes`}</Text>
             </View>
             <CardItem style={styles.bookingButtonCardItem}>
               <Button
@@ -205,10 +200,19 @@ class DoctorList extends Component {
 
     return (
       <View style={{ backgroundColor: "white", flex: 1 }}>
-        <View style={{ flex: 13 }}>
-          <ScrollView>{listOfDoctors}</ScrollView>
+        <View style={{ backgroundColor: "white" }}>
+          <Item style={{ margin: 10 }}>
+            <Icon style={{ margin: 10 }} name="search" />
+            <Input
+              placeholder="Search By Products..."
+              onChangeText={e => Store.changeDoctorValue(e)}
+            />
+          </Item>
         </View>
-        <View style={{ backgroundColor: "white", flex: 1 }}>
+        <ScrollView style={{ backgroundColor: "white" }}>
+          {listOfcities}
+        </ScrollView>
+        <View>
           <FooterApp />
         </View>
       </View>
@@ -216,7 +220,7 @@ class DoctorList extends Component {
   }
 }
 
-export default observer(DoctorList);
+export default observer(SearchByDoctor);
 
 const styles = StyleSheet.create({
   thumbnailStyle: {
@@ -282,99 +286,3 @@ const styles = StyleSheet.create({
     fontFamily: "GTWalsheim-Medium"
   }
 });
-
-// if (!Store.doctorList) return <View />;
-//     const listOfDoctors = Store.doctorList.map(list => (
-//       <TouchableHighlight
-//         onPress={() =>
-//           this.props.navigation.navigate("Products", {
-//             cat: list.id,
-//             store: Store
-//           })
-//         }
-//         key={list.id}
-//       >
-//         <Card>
-//           <CardItem>
-//             <Left>
-//               <Thumbnail source={{ uri: list.doctor_img }} />
-//               <Body>
-//                 <Text>{list.name}</Text>
-//                 <Text note>the best {list.name} you will find here </Text>
-//               </Body>
-//             </Left>
-//           </CardItem>
-//           <CardItem cardBody>
-//             <Image
-//               source={{ uri: list.doctor_img }}
-//               style={{ height: 200, width: null, flex: 1 }}
-//             />
-//           </CardItem>
-//           <CardItem />
-//         </Card>
-//       </TouchableHighlight>
-//     ));
-
-// return (
-//   <Grid>
-//     <Row size={1} style={{ backgroundColor: "purple" }} />
-
-//     <Row size={5}>
-//       <Container>
-//         <Content>
-//           <Card>
-//             <CardItem large style={styles.thumbnailStyle}>
-//               <Thumbnail source={require("../images/logo.png")} />
-//             </CardItem>
-//             <CardItem>
-//               <Body>
-//                 <Text style={styles.firstText}>Doctor Osama Habib</Text>
-//                 <Text style={styles.secondText}>Professor in Dentist</Text>
-//                 <Text style={styles.thirdText}>
-//                   <Icon
-//                     type="EvilIcons"
-//                     name="location"
-//                     style={styles.locationIcon}
-//                   />
-//                   Hawally: Al-Hamra Tower
-//                 </Text>
-
-//                 <Text style={styles.fourthText}>
-//                   <Image
-//                     style={styles.iconsStyle}
-//                     source={require("../assets/doctorTool.png")}
-//                   />
-//                   Doctor Audiology and neuorology
-//                 </Text>
-
-//                 <Text style={styles.fourthText}>
-//                   <Image
-//                     style={styles.iconsStyle}
-//                     source={require("../assets/clock.png")}
-//                   />
-//                   Waiting Time: 60 Minutes
-//                 </Text>
-//                 <Text style={styles.fourthText}>
-//                   <Image
-//                     style={styles.iconsStyle}
-//                     source={require("../assets/money.png")}
-//                   />
-//                   Fees: 30 KD
-//                 </Text>
-//               </Body>
-//             </CardItem>
-//             <CardItem style={styles.bookingButtonCardItem}>
-//               <Button rounded warning style={styles.bookingButton}>
-//                 <Text style={styles.buttonText}>Book</Text>
-//               </Button>
-//             </CardItem>
-//           </Card>
-//         </Content>
-//       </Container>
-//     </Row>
-
-//     <Row size={3} style={{ backgroundColor: "yellow" }} />
-
-//     <Row size={1} style={{ backgroundColor: "pink" }} />
-//   </Grid>
-// );

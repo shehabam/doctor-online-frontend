@@ -9,58 +9,91 @@ import {
   View
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { StyleSheet, TouchableHighlight, Image } from "react-native";
+import {
+  StyleSheet,
+  TouchableHighlight,
+  Image,
+  ImageBackground
+} from "react-native";
+import BottomStack from "./TabBottomFotter";
+import { observer } from "mobx-react";
+
+// import Search from '../assets/Search.png';
+// import FirstBackground from "../assets"
 
 class FirstPage extends Component {
   static navigationOptions = {
-    header: null
+    header: null,
+    footerStyle: {
+      backgroundColor: "#00bfff"
+    }
   };
   render() {
     return (
-      <Grid style={{ backgroundColor: "rgba(153, 204, 255, .6)" }}>
-        <Row size={1} />
-        <Row size={2.5}>
-          <Image
-            source={require("../images/logo.png")}
-            style={{ height: 200, width: null, flex: 1 }}
-          />
-        </Row>
-        <Row size={0.5} style={styles.bookTheBestTextRow}>
-          <Text style={styles.bookTheBestText}>
-            Book the Best Doctors in Kuwait
-          </Text>
-        </Row>
-        <Row size={0.5} />
-        <Row size={1} style={styles.buttonRow}>
-          <Button
-            rounded
-            style={styles.button}
-            onPress={() => this.props.navigation.navigate("Area")}
-          >
-            <Text style={styles.text}>
-              <Icon
-                type="MaterialCommunityIcons"
-                name="needle"
-                style={styles.needleIcon}
-              />
-              Choose by Speciality and Area
+      // rgba(153, 204, 255, .6)
+      <ImageBackground
+        source={require("../assets/doc.png")}
+        style={{ flex: 1, width: "100%", height: "100%" }}
+      >
+        <Grid>
+          <Row size={1} />
+          <Row size={2.5}>
+            <Image
+              source={require("../assets/WhiteLogo.png")}
+              style={styles.ImageStyle}
+            />
+          </Row>
+          <Row size={0.5} style={styles.bookTheBestTextRow}>
+            <Text style={styles.bookTheBestText}>
+              Book the Best Doctors in Kuwait
             </Text>
-          </Button>
-        </Row>
-        <Row size={1.5} />
-        <Row size={1.5} style={styles.touchableTextRow}>
-          <TouchableHighlight>
+          </Row>
+          <Row size={0.5} />
+          <Row size={1.5} style={styles.buttonRow}>
             <Button
               rounded
               style={styles.button}
-              onPress={() => this.props.navigation.navigate("LoginPage")}
+              onPress={() => this.props.navigation.navigate("Area")}
             >
-              <Text style={styles.text}>Login</Text>
+              <Text style={styles.text}>
+                <Icon
+                  type="MaterialCommunityIcons"
+                  name="needle"
+                  style={styles.needleIcon}
+                />
+                Choose by Speciality and Area
+              </Text>
             </Button>
-          </TouchableHighlight>
-        </Row>
+          </Row>
+          <Row size={1.5} style={styles.buttonRow}>
+            <Button
+              rounded
+              style={styles.button}
+              onPress={() => this.props.navigation.navigate("SearchByDoctor")}
+            >
+              <Text style={styles.text}>
+                <Icon
+                  type="MaterialCommunityIcons"
+                  name="magnify"
+                  style={styles.needleIcon}
+                />
+                Search By Doctor Name
+              </Text>
+            </Button>
+          </Row>
+          <Row size={2} style={styles.touchableTextRow}>
+            <TouchableHighlight>
+              <Button
+                rounded
+                style={styles.button}
+                onPress={() => this.props.navigation.navigate("LoginPage")}
+              >
+                <Text style={styles.text}>Login</Text>
+              </Button>
+            </TouchableHighlight>
+          </Row>
 
-        {/* <Button rounded style={styles.button}>
+          {/* <Button rounded style={styles.button}>
           <Text style={styles.text}>
             <Icon
               type="MaterialCommunityIcons"
@@ -73,7 +106,9 @@ class FirstPage extends Component {
         <TouchableHighlight style={styles.touchable}>
           <Text style={styles.loginText}>Login</Text>
         </TouchableHighlight> */}
-      </Grid>
+        </Grid>
+        //{" "}
+      </ImageBackground>
     );
   }
 }
@@ -88,7 +123,7 @@ const styles = StyleSheet.create({
   },
   button: {
     // height: "70%",
-    width: "90%",
+    // width: '90%',
     shadowColor: "rgba(0,0,0,0.5)",
     shadowRadius: 4,
     shadowOpacity: 1,
@@ -105,6 +140,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     alignContent: "center"
+  },
+  ImageStyle: {
+    justifyContent: "center",
+    alignSelf: "center",
+    alignContent: "center",
+    margin: "10%"
+    // height: "110%",
+    //  width: "100%"
   },
   text: {
     color: "#54BEED",
@@ -156,4 +199,4 @@ const styles = StyleSheet.create({
     fontFamily: "GTWalsheim-Medium"
   }
 });
-export default FirstPage;
+export default observer(FirstPage);

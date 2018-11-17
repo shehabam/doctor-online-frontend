@@ -12,14 +12,39 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import { StyleSheet, TouchableHighlight, Image } from "react-native";
 
 class anime extends Component {
+  static navigationOptions = {
+    header: null,
+    footerStyle: {
+      backgroundColor: "#00bfff"
+    }
+  };
   componentDidMount() {
     this.timeoutHandle = setTimeout(() => {
       this.props.navigation.navigate("FirstPage");
-    }, 5000);
+    }, 3000);
   }
 
   render() {
-    return <Text>This page will destroyit Self in 5 Sec...</Text>;
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "red",
+          justifyContent: "center",
+          // alignSelf: 'center',
+          alignContent: "center"
+        }}
+      >
+        <Image
+          source={require("../assets/WhiteLogo.png")}
+          style={{
+            justifyContent: "center",
+            alignSelf: "center",
+            alignContent: "center"
+          }}
+        />
+      </View>
+    );
   }
 }
 

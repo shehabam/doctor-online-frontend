@@ -6,6 +6,7 @@ import {
   Content,
   Button,
   Text,
+  CustomIcon,
   Icon,
   View,
   Card,
@@ -41,6 +42,10 @@ class DoctorProfile extends Component {
   ProfileImageMaxHeight = 40;
   ProfileImageMinHeight = 30;
   HalfProfileImageMaxHeight = this.ProfileImageMaxHeight / 2;
+
+  // LikeIconChangeColor(){
+  // 	if color === "red"?"black";
+  // }
 
   componentDidMount() {
     let profileID = this.props.navigation.getParam("cat");
@@ -111,6 +116,8 @@ class DoctorProfile extends Component {
               }
             }}
           >
+            <Icon type="Feather" name="heart" style={{ color: "red" }} full />
+            <Text style={styles.userViewsText}>Views 80,938</Text>
             <View
               style={{
                 height: this.ProfileImageMaxHeight,
@@ -122,7 +129,7 @@ class DoctorProfile extends Component {
                   this.HeaderMaxHeight - this.HalfProfileImageMaxHeight,
                 marginLeft: "45%",
                 position: "relative",
-                top: -55,
+                top: -115,
 
                 zIndex: 20
               }}
@@ -133,10 +140,9 @@ class DoctorProfile extends Component {
                 source={{ uri: Store.doctorProfile.img }}
               />
             </View>
-            <Icon type="Feather" name="clock" style={styles.locationIcon} />
-            <Text style={styles.userViewsText}>Views 80,938></Text>
             <View
               style={{
+                top: -35,
                 alignSelf: "center",
                 alignContent: "center",
                 justifyContent: "center",
@@ -162,21 +168,12 @@ class DoctorProfile extends Component {
               ))}
               <Text style={styles.text}>{`${votes} votes`}</Text>
             </View>
-            <Text style={styles.visitorsText}>From # Visitors</Text>
-            {/* <Text style={styles.doctorName}>Doctor: {doctorname.email}</Text> */}
-            <Text style={styles.doctordesc1}>
-              {Store.doctorProfile.description}
+
+            <Text style={[styles.visitorsText]}>From # Visitors</Text>
+            <Text style={[styles.doctorName]}>
+              Doctor: {Store.doctorProfile.email}
             </Text>
-            <Text style={styles.doctordesc1}>
-              {Store.doctorProfile.description}
-            </Text>
-            <Text style={styles.doctordesc1}>
-              {Store.doctorProfile.description}
-            </Text>
-            <Text style={styles.doctordesc1}>
-              {Store.doctorProfile.description}
-            </Text>
-            <Text style={styles.doctordesc1}>
+            <Text style={[styles.doctordesc1]}>
               {Store.doctorProfile.description}
             </Text>
           </View>
@@ -185,7 +182,6 @@ class DoctorProfile extends Component {
           <View
             style={{
               borderColor: "#CCCCCC",
-
               zIndex: 2,
               borderWidth: 0.5,
               backgroundColor: "white",
@@ -214,8 +210,7 @@ class DoctorProfile extends Component {
               Book now and you will recieve full address details and clinic
               number
             </Text>
-            <Swiper style={styles.wrapper} showsButtons={true} index={5}>
-              {/* <ScrollView horizontal={true}> */}
+            <Swiper style={styles.wrapper} showsButtons={true}>
               <View style={{ flexDirection: "row", justifyContent: "center" }}>
                 <Button rounded warning style={styles.bookingButton}>
                   <Text style={styles.buttonText}>Today</Text>
@@ -227,16 +222,40 @@ class DoctorProfile extends Component {
                   <Text style={styles.buttonText}>After Tommorow</Text>
                 </Button>
               </View>
-              <Button rounded warning style={styles.bookingButton}>
-                <Text style={styles.buttonText}>Today</Text>
-              </Button>
-              <Button rounded warning style={styles.bookingButton}>
-                <Text style={styles.buttonText}>Tommorow</Text>
-              </Button>
-              <Button rounded warning style={styles.bookingButton}>
-                <Text style={styles.buttonText}>After Tommorow</Text>
-              </Button>
-              {/* </ScrollView> */}
+              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Today</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Tommorow</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>After Tommorow</Text>
+                </Button>
+              </View>
+              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Today</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Tommorow</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>After Tommorow</Text>
+                </Button>
+              </View>
+              >
+              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Today</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Tommorow</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>After Tommorow</Text>
+                </Button>
+              </View>
             </Swiper>
           </View>
         </Row>
@@ -282,10 +301,12 @@ class DoctorProfile extends Component {
             </Row>
           </View>
         </Row>
-        <Row size={1}>
-          <View>
-            <FooterApp />
-          </View>
+        <Row size={0.7}>
+          <Container>
+            <Content>
+              <FooterApp />
+            </Content>
+          </Container>
         </Row>
       </Grid>
     );
@@ -314,8 +335,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#92BBD9"
   },
   text: {
-    color: "#fff",
-    fontSize: 30,
+    color: "#000",
+    fontSize: 20,
     fontWeight: "bold"
   },
   thumbnailStyle: {
@@ -393,7 +414,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   bookingButton: {
-    width: "15%",
+    width: "25%",
     alignSelf: "center",
     alignContent: "center",
     justifyContent: "center",

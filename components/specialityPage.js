@@ -31,23 +31,36 @@ class SpecialityPage extends Component {
       backgroundColor: "#00bfff"
     }
   };
+
+  componentDidMount() {
+    const profileID = this.props.navigation.getParam("AreaName");
+    Store.bringToSpeciality(profileID);
+  }
+
   render() {
     if (!Store.Speciality) return <View />;
-    let Specialities = Store.Speciality.map((Speciality, index) => {
+    let Specialities = Store.filteredSpeciality.map((Speciality, index) => {
       if (index % 2 === 0)
         return (
           <Row key={Speciality.id}>
             <Col key={Speciality.id}>
-              <TouchableHighlight>
+              <TouchableHighlight
+                onPress={() =>
+                  this.props.navigation.navigate("DoctorList", {
+                    SpeId: Speciality.id,
+                    store: Store
+                  })
+                }
+              >
                 <Card style={styles.cardBoxStyle}>
                   <Body>
-                    <Thumbnail
+                    <Image
                       square
                       source={{ uri: Speciality.img }}
                       style={{
                         marginTop: 15,
-                        width: 75,
-                        height: 75
+                        width: 70,
+                        height: 70
                       }}
                     />
                     <Text style={styles.inputStyle}>{Speciality.name}</Text>
@@ -57,14 +70,24 @@ class SpecialityPage extends Component {
             </Col>
             {Store.Speciality.length > index + 1 ? (
               <Col key={Store.Speciality[index + 1].id}>
-                <TouchableHighlight>
+                <TouchableHighlight
+                  onPress={() =>
+                    this.props.navigation.navigate("DoctorList", {
+                      SpeaId: Speciality.id,
+                      store: Store
+                    })
+                  }
+                >
                   <Card style={styles.cardBoxStyle}>
                     <Body>
-                      <Thumbnail
-                        large
-                        transparent
-                        source={{ uri: Store.Speciality[index + 1].img }}
-                        style={{ marginTop: 15 }}
+                      <Image
+                        square
+                        source={{ uri: Speciality.img }}
+                        style={{
+                          marginTop: 15,
+                          width: 70,
+                          height: 70
+                        }}
                       />
                       <Text style={styles.inputStyle}>
                         {Store.Speciality[index + 1].name}
@@ -80,12 +103,10 @@ class SpecialityPage extends Component {
     return (
       <View style={{ backgroundColor: "white", flex: 1 }}>
         <View style={{ flex: 12 }}>
-          <Item>
-            <Input
-              placeholder="Search By Products..."
-              onChangeText={e => Store.changeCategoryValue(e)}
-            />
-          </Item>
+          {/* <Item style={{ margin: 10 }}>
+						<Icon style={{ margin: 10 }} name="search" />
+						<Input placeholder="Search By Products..." style={{color:"skyblue"}}onChangeText={(e) => Store.changeSpecialityValue(e)} />
+					</Item> */}
 
           <ScrollView>{Specialities}</ScrollView>
         </View>

@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Store from "../stores/store";
-// import Icon from 'react-native-vector-icons/EvilIcons';
+import { Col, Row, Grid } from "react-native-easy-grid";
+// import BottomTab from './BottomTab';
+import BottomStack from "./BottomTab";
 import {
   Container,
   Header,
   Content,
   Button,
   Text,
+  List,
   View,
   Icon,
+  ListItem,
   Card,
   CardItem,
   Body,
@@ -19,6 +23,7 @@ import {
 } from "native-base";
 // import { Col, Row, Grid } from "react-native-easy-grid";
 import { StyleSheet, TouchableHighlight, ScrollView } from "react-native";
+import FooterApp from "./footer";
 
 class Area extends Component {
   static navigationOptions = {
@@ -27,28 +32,67 @@ class Area extends Component {
       backgroundColor: "#00bfff"
     }
   };
-  render() {
-    if (!Store.Areas) return <View />;
 
-    let listOfAreas = Store.Areas.map(list => (
+  showAreas(id) {
+    const sortableList = Store.Area;
+    const productInCat = sortableList.filter(item => +item.city === +id);
+    const doctorSpeAndPro = productInCat;
+
+    let listOfAreas = doctorSpeAndPro.map(area => (
+      // <List key={area.id}>
+      // 	<List>
+      <ListItem
+        key={area.id}
+        onPress={() =>
+          this.props.navigation.navigate("SpecialityPage", {
+            AreaName: area.id,
+            store: Store
+          })
+        }
+      >
+        <Text>{area.name}</Text>
+      </ListItem>
+      // 	</List>
+      // </List>
+    ));
+    return listOfAreas;
+  }
+  render() {
+    if (!Store.city) return <View style={styles.thumbnailStyle} />;
+
+    let listOfcities = Store.city.map(list => (
       <TouchableHighlight key={list.id}>
-        <Card onPress={() => alert("hello World")}>
-          <CardItem>
-            <Left>
-              <Text>{list.name}</Text>
-            </Left>
-            <Right>
-              <Icon type="EvilIcons" name="chevron-right" />
-            </Right>
-          </CardItem>
-        </Card>
+        <List>
+          <ListItem itemDivider>
+            <Text>{list.name}</Text>
+          </ListItem>
+          {this.showAreas(list.id)}
+        </List>
       </TouchableHighlight>
+
+      // <TouchableHighlight key={list.id}>
+      // 	<Card onPress={() => alert('hello World')}>
+      // 		<CardItem>
+      // 			<Left>
+      // 				<Text>{list.name}</Text>
+      // 			</Left>
+      // 			<Right>
+
+      // 			</Right>
+      // 		</CardItem>
+      // 	</Card>
+      // </TouchableHighlight>
     ));
 
     return (
-      <ScrollView style={{ backgroundColor: "white" }}>
-        {listOfAreas}
-      </ScrollView>
+      <View style={{ backgroundColor: "white", flex: 1 }}>
+        <ScrollView style={{ backgroundColor: "white" }}>
+          {listOfcities}
+        </ScrollView>
+        <FooterApp />
+        {/* <BottomTab /> */}
+        {/* <BottomStack /> */}
+      </View>
     );
   }
 }
@@ -118,3 +162,35 @@ const styles = StyleSheet.create({
     fontFamily: "GTWalsheim-Medium"
   }
 });
+
+// import React, { Component } from 'react';
+// import { Container, Header, Content, List, ListItem, Text } from 'native-base';
+// export default class ListDividerExample extends Component {
+//   render() {
+//     return (
+// <Container>
+//   <Content>
+//     <List>
+//       <ListItem itemDivider>
+//         <Text>A</Text>
+//       </ListItem>
+//       <ListItem>
+//         <Text>Aaron Bennet</Text>
+//       </ListItem>
+//       <ListItem>
+//         <Text>Ali Connors</Text>
+//       </ListItem>
+//       <ListItem itemDivider>
+//         <Text>B</Text>
+//       </ListItem>
+//       <ListItem>
+//         <Text>Bradley Horowitz</Text>
+//       </ListItem>
+//     </List>
+//   </Content>
+// </Container>
+//     );
+//   }
+// }
+
+<Icon type="EvilIcons" name="chevron-right" />;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-// import authStore from "../stores/authStore";
+// import Hr from 'react-native-hr-plus';
+import authStore from "../stores/authStore";
 
 import {
   Container,
@@ -15,11 +16,17 @@ import {
   Input
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { StyleSheet, TouchableHighlight, Image } from "react-native";
+import { SocialIcon } from "react-native-elements";
+import {
+  StyleSheet,
+  TouchableHighlight,
+  Image,
+  ImageBackground
+} from "react-native";
 
 class LoginPage extends Component {
   static navigationOptions = {
-    title: "Doctor Online"
+    header: null
   };
 
   constructor(props) {
@@ -30,19 +37,29 @@ class LoginPage extends Component {
     };
   }
   render() {
+    if (authStore.isAuthenticated) {
+      this.props.navigation.navigate("FirstPage");
+    }
     return (
-      <Grid style={{ backgroundColor: "rgba(153, 204, 255, .6)" }}>
-        {/* if (authStore.isAuthenticated); */}
+      <ImageBackground
+        source={require("../assets/Rectangle.png")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <Grid>
+          {/* if (authStore.isAuthenticated); */}
 
-        <Row size={1}>
-          <Image
-            source={require("../images/logo.png")}
-            style={{ height: 200, width: null, flex: 1 }}
-          />
-        </Row>
-        <Row size={2.5}>
-          <Form>
-            <Item rounded style={styles.formBorder}>
+          <Row size={1} style={[, styles.Row]} />
+
+          <Row size={2.5} style={[styles.Row]}>
+            <Image
+              source={require("../images/logo.png")}
+              style={{ height: 200, width: null, flex: 1 }}
+            />
+          </Row>
+          <Row size={1} style={[styles.Row]} />
+          {/* <Form> */}
+          <Row size={0.65} style={[styles.Row]}>
+            <Button rounded transparent style={styles.formBorder}>
               <Icon name="person" />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
@@ -50,9 +67,11 @@ class LoginPage extends Component {
                 autoCapitalize="none"
                 onChangeText={username => this.setState({ username })}
               />
-            </Item>
-            <Row size={0.05} />
-            <Item rounded style={styles.formBorder}>
+            </Button>
+          </Row>
+          <Row size={0.1} style={[styles.Row]} />
+          <Row size={0.65} style={[styles.Row]}>
+            <Button rounded transparent style={styles.formBorder}>
               <Icon name="lock" />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
@@ -61,8 +80,11 @@ class LoginPage extends Component {
                 secureTextEntry={true}
                 onChangeText={password => this.setState({ password })}
               />
-            </Item>
-            <Row size={0.05} />
+            </Button>
+          </Row>
+          {/* </Form> */}
+          <Row size={0.75} />
+          <Row size={1} style={[styles.Row]}>
             <Button
               transparent
               style={styles.buttonBorder}
@@ -71,22 +93,30 @@ class LoginPage extends Component {
                 authStore.loginUser(this.state.username, this.state.password)
               }
             >
-              <Text style={{ alignContent: "center" }}>Login</Text>
+              <Text style={styles.TextStyle}>Login</Text>
             </Button>
-            <Row size={0.5} />
+          </Row>
+          <Row size={0.5} style={[styles.Row]}>
+            <Text style={{ color: "white" }}>
+              ─────────── <Text style={{ color: "white" }}>Or</Text> ───────────
+            </Text>
+            {/* <Hr /> */}
+          </Row>
+
+          <Row size={1.85} style={[styles.Row]}>
             <Button
               rounded
               transparent
-              style={styles.buttonBorder}
+              style={[styles.buttonBorder]}
               onPress={() =>
-                authStore.loginUser(this.state.username, this.state.password)
+                authStore.registerUser(this.state.username, this.state.password)
               }
             >
-              <Text>Register</Text>
+              <Text style={styles.TextStyle}>Register</Text>
             </Button>
-          </Form>
-        </Row>
-      </Grid>
+          </Row>
+        </Grid>
+      </ImageBackground>
     );
   }
 }
@@ -94,16 +124,45 @@ class LoginPage extends Component {
 export default observer(LoginPage);
 
 const styles = StyleSheet.create({
+  Row: {
+    justifyContent: "center",
+    alignSelf: "center",
+    alignContent: "center"
+    // marginTop: '5%'
+  },
+  TextStyle: {
+    justifyContent: "center",
+    alignSelf: "center",
+    alignContent: "center",
+    marginLeft: 110,
+    fontFamily: "GTWalsheim-Medium",
+    fontSize: 20
+  },
   buttonBorder: {
-    width: 320,
-    marginLeft: 50,
+    width: "75%",
     borderColor: "#fff",
     borderWidth: 3
   },
+  outerCircle: {
+    borderRadius: 40,
+    // overflow: 'hidden',
+    borderColor: "white"
+    // width: 80,
+    // height: 80
+  },
+  innerCircle: {
+    borderRadius: 35,
+    borderColor: "white",
+    overflow: "hidden",
+    color: "white",
+    width: 70,
+    height: 70,
+    margin: 5
+  },
   formBorder: {
-    width: 320,
-    marginLeft: 50,
-    borderWidth: 10,
+    width: "80%",
+    height: "100%",
+    borderWidth: 3,
     borderColor: "#fff"
   }
 });
