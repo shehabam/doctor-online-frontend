@@ -111,9 +111,9 @@ class SpecialityPage extends Component {
           <ScrollView>{Specialities}</ScrollView>
         </View>
 
-        <View style={{ backgroundColor: "white", flex: 1 }}>
+        {/* <View style={{ backgroundColor: "white", flex: 1 }}>
           <FooterApp />
-        </View>
+        </View> */}
       </View>
     );
   }

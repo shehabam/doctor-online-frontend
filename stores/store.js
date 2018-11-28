@@ -1,12 +1,26 @@
 import { decorate, observable, action, computed } from "mobx";
+import React, { Component } from "react";
 import axios from "axios";
 import authStore from "./authStore";
+import {
+  Container,
+  Header,
+  Content,
+  Button,
+  Text,
+  Icon,
+  View,
+  Form,
+  Item,
+  Input
+} from "native-base";
 
 class Store {
   constructor() {
     this.doctorList = [];
+    this.ratingSet = [];
     this.filteredDoctors = [];
-    this.doctorProfile = [];
+    this.doctorProfile = null;
     this.DoctorAreaAndSpe = [];
     this.AreaDoctorNoSpeciality = [];
     this.city = [];
@@ -22,7 +36,11 @@ class Store {
     this.totalPrice = 0;
     this.Speciality = [];
     this.filteredSpeciality = [];
-    this.RatingList = 0;
+    this.RatingList = [];
+    this.counter = 3;
+    this.Like = false;
+    this.LikeList = [];
+    this.editProf = [];
   }
   //for bringing Doctors only
   getDoctors() {
@@ -64,7 +82,6 @@ class Store {
       .then(res => res.data)
       .then(Speciality => {
         this.Speciality = Speciality.slice().sort();
-        console.log(Speciality);
         this.filteredSpeciality = Speciality.sort();
         // this.filteredSpeciality;
       })
@@ -85,6 +102,54 @@ class Store {
   bringToProfile(id) {
     const productInCat = this.doctorList.find(item => +item.id === +id);
     this.doctorProfile = productInCat;
+
+    axios
+      .post(`http://127.0.0.1:8000/doctor/views/` + id)
+      .then(() => console.log("Done"))
+      .catch(err => console.error(err));
+
+    return productInCat;
+  }
+
+  EditProfile(
+    id,
+    description,
+    google_maps,
+    waiting_time,
+    service,
+    fees,
+    opening_file,
+    block,
+    street,
+    building,
+    floor
+  ) {
+    const userData = {
+      description: description,
+      google_maps: google_maps,
+      waiting_time: waiting_time,
+      service: service,
+      fees: fees,
+      opening_file,
+      block: block,
+      street: street,
+      building: building,
+      floor: floor
+    };
+    axios
+      .put(`http://127.0.0.1:8000/update/profile/` + id, userData)
+      .then(res => res.data)
+      .catch(() => console.log("You Failed"));
+  }
+
+  getEditProfile(id) {
+    axios
+      .get(`http://127.0.0.1:8000/update/profile/` + id)
+      .then(res => res.data)
+      .then(rates => {
+        this.editProf = rates;
+      })
+      .catch(() => console.log("llllllllllllll"));
   }
 
   //for bringing area id to the Speciality page to get doctor from this area only
@@ -125,8 +190,63 @@ class Store {
     this.theQuery = e.toLowerCase();
     this.onSearchSpecialityChangeHandler(this.theQuery);
   }
+
+  StarRating() {
+    if (!this.doctorProfile) {
+      return 0;
+    } else {
+      let ratingSet = this.doctorProfile.rating_set;
+      let rates =
+        ratingSet.reduce((total, rating) => total + rating.ratings, 0) /
+        ratingSet.length;
+      if (!rates) {
+        rates = 0;
+      }
+      return rates;
+    }
+  }
+
+  StarRatingDoctorSearch(id) {
+    let DoctorRating = this.doctorList.find(item => +item.id === +id);
+    let doctorRating = DoctorRating.rating_set;
+    let Rate = 0;
+    for (let i in doctorRating) {
+      Rate += doctorRating[i].ratings;
+    }
+    Rate = Rate / doctorRating.length;
+
+    if (!Rate) {
+      Rate = 0;
+    }
+    return Rate;
+  }
+
+  addToLikeList(id) {
+    const productInCat = this.doctorList.find(item => +item.id === +id);
+    this.LikeList = productInCat;
+  }
+
+  // removeFromLikeList(id) {
+  // 	let indx = this.LikeList.filter((item) => +item.id === +id);
+  // 	if (indx) {
+  // 		console.log(indx);
+  // 	} else {
+  // 		console.log('nothing Happens');
+  // 	}
+  // 	// let indx = this.LikeList.filter((item) => +item.id === +id);
+  // }
+
+  ProfileToEdit(theUser) {
+    const productInCat = this.doctorList.find(
+      item => item.user.username === theUser
+    );
+    this.doctorProfile = productInCat;
+
+    return productInCat;
+  }
 }
 decorate(Store, {
+  ratingSet: observable,
   Speciality: observable,
   filteredSpeciality: observable,
   onSearchSpecialityChangeHandler: action,
@@ -152,7 +272,18 @@ decorate(Store, {
   changeDoctorValue: action,
   bringToProfile: action,
   getRating: action,
-  RatingList: observable
+  StarRating: action,
+  Collapsing: action,
+  counter: observable,
+  StarRatingDoctorSearch: action,
+  Like: observable,
+  LikeList: observable,
+  addToLikeList: action,
+  removeFromLikeList: action,
+  EditProfile: action,
+  editProf: observable,
+  getEditProfile: action,
+  ProfileToEdit: action
 });
 
 const store = new Store();
@@ -160,9 +291,7 @@ store.getDoctors();
 store.getCities();
 store.getSpeciality();
 store.getAreas();
-// if (authStore.isAuthenticated) {
-// 	store.getRating();
-// }
+
 export default store;
 
 //.................................................................................

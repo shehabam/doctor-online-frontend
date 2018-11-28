@@ -6,16 +6,13 @@ import {
   Button,
   Text,
   Icon,
-  View
+  View,
+  Thumbnail
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { StyleSheet, TouchableHighlight, Image } from "react-native";
 
 class anime1 extends Component {
-  static navigationOptions = {
-    header: null
-  };
-
   componentDidMount() {
     this.timeoutHandle = setTimeout(() => {
       this.props.navigation.navigate("anime");
@@ -27,17 +24,22 @@ class anime1 extends Component {
       <View
         style={{
           flex: 1,
-          backgroundColor: "black",
+          backgroundColor: "white",
           justifyContent: "center",
-          // alignSelf: 'center',
+          alignSelf: "center",
+          // width: '100%',
+          // height: '100%',
           alignContent: "center"
         }}
       >
         <Image
-          source={require("../assets/WhiteLogo.png")}
+          source={require("../assets/colorfulLogo.png")}
           style={{
+            // flex: 1,
             justifyContent: "center",
             alignSelf: "center",
+            width: 420,
+            height: 320,
             alignContent: "center"
           }}
         />

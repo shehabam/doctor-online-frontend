@@ -39,7 +39,7 @@ class FirstPage extends Component {
           <Row size={1} />
           <Row size={2.5}>
             <Image
-              source={require("../assets/WhiteLogo.png")}
+              source={require("../assets/LogoWhite.png")}
               style={styles.ImageStyle}
             />
           </Row>
@@ -145,9 +145,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     alignContent: "center",
-    margin: "10%"
-    // height: "110%",
-    //  width: "100%"
+    // margin: '10%'
+    height: "110%",
+    width: "100%"
   },
   text: {
     color: "#54BEED",

@@ -24,7 +24,7 @@ class FooterApp extends Component {
           <FooterTab>
             <Button
               vertical
-              onPress={() => this.props.navigation.navigate("SearchByDoctor")}
+              onPress={() => this.props.navigation.navigate("FirstPage")}
             >
               <Image
                 source={require("../assets/SearchForFooter.png")}
@@ -49,13 +49,12 @@ class FooterApp extends Component {
               />
               <Text style={styles.TextStyle}>Offers</Text>
             </Button>
-            <Button vertical>
-              <Image
-                source={require("../assets/settings.png")}
-                style={styles.ImageStyle}
-                name="Settings"
-              />
-              <Text style={styles.TextStyle}>Settings</Text>
+            <Button
+              vertical
+              onPress={() => this.props.navigation.navigate("More")}
+            >
+              <Icon name="ios-more" />
+              <Text style={styles.TextStyle}>More</Text>
             </Button>
           </FooterTab>
         </Footer>

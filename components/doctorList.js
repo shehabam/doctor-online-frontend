@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Store from "../stores/store";
-import FooterApp from "./footer";
 import { Theme } from "./Theme";
 import {
-  Container,
-  Header,
   Content,
   Button,
   Text,
@@ -57,17 +54,8 @@ class DoctorList extends Component {
     const profileID = this.props.navigation.getParam("SpeId");
     Store.bringAreaAndSpe(profileID);
   }
+
   render() {
-    // const { votes, value } = this.props;
-    const value = 3.6;
-    const votes = 3;
-    const filledStars = value - (value % 1);
-    const halfStar = value % 1 !== 0;
-    const emptyStars = 5 - filledStars - (halfStar ? 1 : 0);
-    const size = 25;
-
-    const color = Theme.palette.primary;
-
     const to = (index: number): number[] => {
       const numbers: number[] = [];
       for (let i = 0; i < index; i += 1) {
@@ -83,133 +71,154 @@ class DoctorList extends Component {
         </View>
       );
 
-    let listOfDoctors = Store.DoctorAreaAndSpe.map(list => (
-      <TouchableHighlight
-        onPress={() =>
-          this.props.navigation.navigate("DoctorProfile", {
-            cat: list.id,
-            store: Store
-          })
-        }
-        key={list.id}
-      >
-        <Card style={{ alignSelf: "center", width: 400 }}>
-          <Content>
-            <CardItem>
-              <Body>
-                <Thumbnail
-                  style={styles.thumbnailStyle}
-                  large
-                  source={{ uri: list.img }}
-                />
-                <Text style={styles.firstText}>
-                  Doctor {list.user.first_name} {list.user.last_name}
-                </Text>
-                <Text note style={styles.secondText}>
-                  {list.description}{" "}
-                </Text>
-              </Body>
-            </CardItem>
-            <CardItem style={styles.bookingButtonCardItem}>
-              <Image
-                style={styles.locationIcon}
-                source={require("../assets/locationIcon.png")}
-              />
-              <Text note style={styles.thirdText}>
-                {" "}
-                Block:
-                {list.block} street:
-                {list.street} Building:
-                {list.building} Floor:
-                {list.floor}{" "}
-              </Text>
-            </CardItem>
-            <CardItem style={styles.bookingButtonCardItem}>
-              <Image
-                source={require("../assets/doctorTool.png")}
-                style={{ height: 20, width: 20 }}
-              />
-              <Text note style={styles.thirdText}>
-                Profession: {list.profession}{" "}
-              </Text>
-            </CardItem>
-            <CardItem style={styles.bookingButtonCardItem}>
-              <Image
-                source={require("../assets/money.png")}
-                style={{ height: 20, width: 20 }}
-              />
-              <Text note style={styles.thirdText}>
-                Fees: {list.fees} K.D
-              </Text>
-            </CardItem>
-            <CardItem style={styles.bookingButtonCardItem}>
-              <Image
-                source={require("../assets/clock.png")}
-                style={{ height: 20, width: 20 }}
-              />
-              <Text note style={styles.thirdText}>
-                waiting Time: {list.waiting_time}{" "}
-              </Text>
-            </CardItem>
-            <View
-              style={{
-                alignSelf: "center",
-                alignContent: "center",
-                justifyContent: "center",
-                flexDirection: "row"
-              }}
-            >
-              {to(filledStars).map(key => (
-                <Icon
-                  name="ios-star"
-                  style={{ color: "yellow" }}
-                  {...{ key, size, color }}
-                />
-              ))}
-              {halfStar && (
-                <Icon
-                  name="ios-star-half"
-                  style={{ color: "yellow" }}
-                  {...{ size }}
-                />
-              )}
-              {to(emptyStars).map(key => (
-                <Icon
-                  name="ios-star-outline"
-                  style={{ color: "yellow" }}
-                  {...{ key, size, color }}
-                />
-              ))}
-              <Text>{`${votes} votes`}</Text>
-            </View>
-            <CardItem style={styles.bookingButtonCardItem}>
-              <Button
-                full
-                warning
-                rounded
-                style={styles.bookingButton}
+    let listOfDoctors = Store.DoctorAreaAndSpe.map(list => {
+      const value = Store.StarRatingDoctorSearch(list.id);
+      const filledStars = value - (value % 1);
+      const halfStar = value % 1 !== 0;
+      const emptyStars = 5 - filledStars - (halfStar ? 1 : 0);
+      const size = 25;
+      const color = Theme.palette.primary;
+      return (
+        <TouchableHighlight
+          onPress={() =>
+            this.props.navigation.navigate("DoctorProfile", {
+              cat: list.id,
+              store: Store
+            })
+          }
+          key={list.id}
+        >
+          <Card style={{ alignSelf: "center", width: 400 }}>
+            <Content>
+              {/* <Right> */}
+              <Text
                 onPress={() =>
-                  this.props.navigation.navigate("DoctorProfile", {
-                    cat: list.id
-                    // store: Store
+                  this.props.navigation.navigate("Edit", {
+                    cat: list.id,
+                    // firstName: list.user.first_name,
+                    // lastName: list.user.last_name,
+                    store: Store
                   })
                 }
               >
-                <Text style={styles.buttonText}>Book </Text>
-              </Button>
-            </CardItem>
-          </Content>
-        </Card>
-      </TouchableHighlight>
-    ));
+                Edit
+              </Text>
+              {/* </Right> */}
+              <CardItem>
+                <Body>
+                  <Thumbnail
+                    style={styles.thumbnailStyle}
+                    large
+                    source={{ uri: list.img }}
+                  />
+                  <Text style={styles.firstText}>
+                    Doctor {list.user.first_name} {list.user.last_name}
+                  </Text>
+                  <Text note style={styles.secondText}>
+                    {list.description}{" "}
+                  </Text>
+                </Body>
+              </CardItem>
+              <CardItem style={styles.bookingButtonCardItem}>
+                <Image
+                  style={styles.locationIcon}
+                  source={require("../assets/locationIcon.png")}
+                />
+                <Text note style={styles.thirdText}>
+                  {" "}
+                  Block:
+                  {list.block} street:
+                  {list.street} Building:
+                  {list.building} Floor:
+                  {list.floor}{" "}
+                </Text>
+              </CardItem>
+              <CardItem style={styles.bookingButtonCardItem}>
+                <Image
+                  source={require("../assets/doctorTool.png")}
+                  style={{ height: 20, width: 20 }}
+                />
+                <Text note style={styles.thirdText}>
+                  Profession: {list.profession}{" "}
+                </Text>
+              </CardItem>
+              <CardItem style={styles.bookingButtonCardItem}>
+                <Image
+                  source={require("../assets/money.png")}
+                  style={{ height: 20, width: 20 }}
+                />
+                <Text note style={styles.thirdText}>
+                  Fees: {list.fees} K.D
+                </Text>
+              </CardItem>
+              <CardItem style={styles.bookingButtonCardItem}>
+                <Image
+                  source={require("../assets/clock.png")}
+                  style={{ height: 20, width: 20 }}
+                />
+                <Text note style={styles.thirdText}>
+                  waiting Time: {list.waiting_time}{" "}
+                </Text>
+              </CardItem>
+              <View
+                style={{
+                  alignSelf: "center",
+                  alignContent: "center",
+                  justifyContent: "center",
+                  flexDirection: "row"
+                }}
+              >
+                {to(filledStars).map(key => (
+                  <Icon
+                    name="ios-star"
+                    style={{ color: "yellow" }}
+                    {...{ key, size, color }}
+                  />
+                ))}
+                {halfStar && (
+                  <Icon
+                    name="ios-star-half"
+                    style={{ color: "yellow" }}
+                    {...{ size }}
+                  />
+                )}
+                {to(emptyStars).map(key => (
+                  <Icon
+                    name="ios-star-outline"
+                    style={{ color: "yellow" }}
+                    {...{ key, size, color }}
+                  />
+                ))}
+                <Text style={styles.text}>{`${
+                  list.rating_set.length
+                } votes`}</Text>
+              </View>
+              <CardItem style={styles.bookingButtonCardItem}>
+                <Button
+                  full
+                  warning
+                  rounded
+                  style={styles.bookingButton}
+                  onPress={() =>
+                    this.props.navigation.navigate("DoctorProfile", {
+                      cat: list.id
+                      // store: Store
+                    })
+                  }
+                >
+                  <Text style={styles.buttonText}>Book </Text>
+                </Button>
+              </CardItem>
+            </Content>
+          </Card>
+        </TouchableHighlight>
+      );
+    });
 
     return (
       <View style={{ backgroundColor: "white", flex: 1 }}>
         <View style={{ flex: 13 }}>
           <ScrollView>{listOfDoctors}</ScrollView>
-        </View>
-        <View style={{ backgroundColor: "white", flex: 1 }}>
-          <FooterApp />
         </View>
       </View>
     );

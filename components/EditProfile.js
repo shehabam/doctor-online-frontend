@@ -15,6 +15,7 @@ import {
   Thumbnail,
   Right,
   Left,
+  Input,
   Footer
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -26,56 +27,36 @@ import {
 } from "react-native";
 import Store from "../stores/store";
 import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
+import FooterApp from "./footer";
+import Swiper from "react-native-swiper";
 
-class DoctorProfile extends Component {
+class EditProfile extends Component {
   static navigationOptions = {
-    title: "Doctor Profile",
+    title: "Edit Profile",
     headerStyle: {
       backgroundColor: "#00bfff"
     }
   };
 
-  likeSwitch = false;
   HeaderMaxHeight = 40;
   HeaderMinHeight = 40;
   ProfileImageMaxHeight = 40;
   ProfileImageMinHeight = 30;
   HalfProfileImageMaxHeight = this.ProfileImageMaxHeight / 2;
 
-  // componentDidMount() {
-  // 	let profileID = this.props.navigation.getParam('cat');
-  // 	// Store.bringToProfile(profileID);
-  // 	const profile = Store.bringToProfile(profileID);
-  // }
-
-  likeButton() {
-    if (Store.Like === false) {
-      Store.Like = true;
-    } else {
-      Store.Like = false;
-    }
+  componentDidMount() {
+    let profileID = this.props.navigation.getParam("cat");
+    Store.bringToProfile(profileID);
+    let firstName = this.props.navigation.getParam("firstName");
+    let lastName = this.props.navigation.getParam("lastName");
   }
 
-  // chnageHeart() {
-  // 	const emptyHeart = <Icon name="ios-heart-outline" style={{ color: 'red' }} />;
-  // 	const fullHeart = <Icon name="ios-heart" style={{ color: 'red' }} />;
-
-  // 	if (Store.Like === true) {
-  // 		Store.addToLikeList(profile.id);
-  // 		console.log(Store.LikeList);
-  // 		return fullHeart;
-  // 	} else {
-  // 		// Store.removeFromLikeList(profile.id);
-  // 		Store.addToLikeList(profile.id);
-  // 		// console.log(Store.LikeList);
-  // 		return emptyHeart;
-  // 	}
-  // }
-
   render() {
-    const profileID = this.props.navigation.getParam("cat");
-    const profile = Store.bringToProfile(profileID);
-    const value = Store.StarRating();
+    const name1 = this.props.navigation.getParam("firstName");
+    // const name = Store.doctorProfile.user;
+    // const { votes, value } = this.props;
+    const value = 3;
+    const votes = 3;
     const filledStars = value - (value % 1);
     const halfStar = value % 1 !== 0;
     const emptyStars = 5 - filledStars - (halfStar ? 1 : 0);
@@ -90,9 +71,13 @@ class DoctorProfile extends Component {
       }
       return numbers;
     };
-    if (!profile) {
+    if (!Store.doctorProfile) {
       return <View />;
     }
+    const ID = Store.doctorProfile.id;
+    // console.log(Store.doctorProfile.rating_set);
+    // const A = Store.StarRating(ID);
+
     return (
       <Grid
         style={{
@@ -114,6 +99,7 @@ class DoctorProfile extends Component {
             }}
           />
         </Row>
+        {/* {Store.StarRatingDoctorSearch(Store.doctorProfile.id)} */}
         <Row size={3}>
           <View
             style={{
@@ -126,7 +112,6 @@ class DoctorProfile extends Component {
               margin: "1.75%",
               shadowColor: "rgba(0,0,0,0.9)",
               shadowRadius: 4,
-              top: -1,
               shadowOpacity: 0.3,
               shadowOffset: {
                 height: 4,
@@ -134,10 +119,6 @@ class DoctorProfile extends Component {
               }
             }}
           >
-            <Button transparent onPress={() => this.likeButton()}>
-              {/* {this.chnageHeart()} */}
-            </Button>
-            <Text style={styles.userViewsText}>Views {profile.viewers}</Text>
             <View
               style={{
                 height: this.ProfileImageMaxHeight,
@@ -149,7 +130,7 @@ class DoctorProfile extends Component {
                   this.HeaderMaxHeight - this.HalfProfileImageMaxHeight,
                 marginLeft: "45%",
                 position: "relative",
-                top: -115,
+                top: -75,
 
                 zIndex: 20
               }}
@@ -157,70 +138,47 @@ class DoctorProfile extends Component {
               <Thumbnail
                 style={styles.thumbnailStyle}
                 large
-                source={{ uri: profile.img }}
+                source={{ uri: Store.doctorProfile.img }}
               />
             </View>
-            <View
-              style={{
-                top: -45,
-                alignSelf: "center",
-                alignContent: "center",
-                justifyContent: "center",
-                flexDirection: "row"
-              }}
-            >
-              {to(filledStars).map(key => (
-                <Icon
-                  name="ios-star"
-                  style={{ color: "yellow" }}
-                  {...{ key, size }}
+            <View style={styles.thumbnailStyle}>
+              <Text style={[styles.doctorName]}>Doctor:</Text>
+              <Button onPress={() => Store.EditProfile(Store.doctorProfile.id)}>
+                <Text>confirm</Text>
+              </Button>
+              <Button
+                transparent
+                style={{ borderWidth: 1, borderColor: "gray", width: 300 }}
+              >
+                <Input
+                  style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                  placeholder="First Name"
+                  autoCapitalize="none"
+                  onChangeText={username => this.setState({ username })}
                 />
-              ))}
-              {halfStar && (
-                <Icon
-                  name="ios-star-half"
-                  style={{ color: "yellow" }}
-                  {...{ size }}
+              </Button>
+              <Button
+                transparent
+                style={{ borderWidth: 1, borderColor: "gray" }}
+              >
+                <Input
+                  style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                  placeholder="Last Name"
+                  autoCapitalize="none"
+                  onChangeText={username => this.setState({ username })}
                 />
-              )}
-              {to(emptyStars).map(key => (
-                <Icon
-                  name="ios-star-outline"
-                  style={{ color: "yellow" }}
-                  {...{
-                    key,
-                    size
-                  }}
+              </Button>
+              <Button
+                transparent
+                style={{ borderWidth: 1, borderColor: "gray", height: 130 }}
+              >
+                <Input
+                  style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                  placeholder="Description"
+                  autoCapitalize="none"
+                  onChangeText={username => this.setState({ username })}
                 />
-              ))}
-              {/* <Text style={styles.text}>{profile.rating_set.length()} votes</Text> */}
-            </View>
-            <View
-              style={{
-                top: -45,
-                alignSelf: "center",
-                alignContent: "center",
-                justifyContent: "center"
-                // flexDirection: 'row'
-              }}
-            >
-              <Text style={[styles.visitorsText]}>
-                From {profile.rating_set.length} Visitors
-              </Text>
-              <Text style={[styles.doctorName]}>
-                Doctor: {profile.user.email}
-              </Text>
-            </View>
-            <View
-              style={{
-                top: -45,
-                alignSelf: "center",
-                alignContent: "center",
-                justifyContent: "center",
-                flexDirection: "row"
-              }}
-            >
-              <Text style={[styles.doctordesc1]}>{profile.description}</Text>
+              </Button>
             </View>
           </View>
         </Row>
@@ -245,7 +203,9 @@ class DoctorProfile extends Component {
             <Icon type="EvilIcons" name="location" style={styles.locationIcon}>
               <Text
                 style={styles.locationText}
-                onPress={() => LinkingIOS.openURL(profile.google_maps)}
+                onPress={() =>
+                  LinkingIOS.openURL(Store.doctorProfile.google_maps)
+                }
               >
                 google maps
               </Text>
@@ -254,125 +214,53 @@ class DoctorProfile extends Component {
               Book now and you will recieve full address details and clinic
               number
             </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignContent: "center",
-                alignSelf: "center"
-              }}
-            >
-              <Button
-                rounded
-                warning
-                style={styles.bookingButton}
-                onPress={() =>
-                  this.props.navigation.navigate("TimeDatePicker", {
-                    cat: profile.id,
-                    store: Store
-                  })
-                }
-
-                // onPress={() => this.props.navigation.navigate('TimeDatePicker')}
+            <Swiper style={styles.wrapper} showsButtons={true}>
+              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Today</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Tommorow</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>After Tommorow</Text>
+                </Button>
+              </View>
+              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Today</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Tommorow</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>After Tommorow</Text>
+                </Button>
+              </View>
+              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Today</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Tommorow</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>After Tommorow</Text>
+                </Button>
+              </View>
               >
-                <Text style={styles.buttonText}>Today</Text>
-              </Button>
-              {/* <Button
-									rounded
-									warning
-									style={styles.bookingButton}
-									onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-								>
-									<Text style={styles.buttonText}>Tommorow</Text>
-								</Button>
-								<Button
-									rounded
-									warning
-									style={styles.bookingButton}
-									onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-								>
-									<Text style={styles.buttonText}>After Tommorow</Text>
-								</Button>
-							</View>
-							<View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-								<Button
-									rounded
-									warning
-									style={styles.bookingButton}
-									onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-								>
-									<Text style={styles.buttonText}>Today</Text>
-								</Button>
-								<Button
-									rounded
-									warning
-									style={styles.bookingButton}
-									onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-								>
-									<Text style={styles.buttonText}>Tommorow</Text>
-								</Button>
-								<Button
-									rounded
-									warning
-									style={styles.bookingButton}
-									onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-								>
-									<Text style={styles.buttonText}>After Tommorow</Text>
-								</Button>
-							</View>
-							<View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-								<Button
-									rounded
-									warning
-									style={styles.bookingButton}
-									onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-								>
-									<Text style={styles.buttonText}>Today</Text>
-								</Button>
-								<Button
-									rounded
-									warning
-									style={styles.bookingButton}
-									onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-								>
-									<Text style={styles.buttonText}>Tommorow</Text>
-								</Button>
-								<Button
-									rounded
-									warning
-									style={styles.bookingButton}
-									onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-								>
-									<Text style={styles.buttonText}>After Tommorow</Text>
-								</Button>
-							</View>
-							>
-							<View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-								<Button
-									rounded
-									warning
-									style={styles.bookingButton}
-									onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-								>
-									<Text style={styles.buttonText}>Today</Text>
-								</Button>
-								<Button
-									rounded
-									warning
-									style={styles.bookingButton}
-									onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-								>
-									<Text style={styles.buttonText}>Tommorow</Text>
-								</Button>
-								<Button
-									rounded
-									warning
-									style={styles.bookingButton}
-									onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-								>
-									<Text style={styles.buttonText}>After Tommorow</Text>
-								</Button> */}
-            </View>
+              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Today</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>Tommorow</Text>
+                </Button>
+                <Button rounded warning style={styles.bookingButton}>
+                  <Text style={styles.buttonText}>After Tommorow</Text>
+                </Button>
+              </View>
+            </Swiper>
           </View>
         </Row>
         <Row size={1.25}>
@@ -400,28 +288,51 @@ class DoctorProfile extends Component {
                   name="location"
                   style={styles.locationIcon}
                 >
-                  <Text style={styles.thirdText}>Fees: {profile.fees} KD</Text>
+                  <Button transparent rounded style={{ width: 50 }}>
+                    <Input
+                      style={{
+                        fontFamily: "GTWalsheim-Medium",
+                        fontSize: 15,
+                        borderWidth: 1
+                      }}
+                      placeholder="Fees"
+                      autoCapitalize="none"
+                      onChangeText={username => this.setState({ username })}
+                    />
+                  </Button>
+                  {/* <Text style={styles.thirdText}>Fees: {Store.doctorProfile.fees} KD</Text> */}
                 </Icon>
               </Col>
               <Col style={{ marginTop: 20 }}>
                 <Right>
                   <Icon type="Feather" name="clock" style={styles.clockIcon}>
-                    <Text style={styles.thirdText}>
-                      Waiting Time: {profile.waiting_time}
-                    </Text>
+                    <Button transparent rounded style={{ width: 110 }}>
+                      <Input
+                        style={{
+                          fontFamily: "GTWalsheim-Medium",
+                          fontSize: 15,
+                          borderWidth: 1
+                        }}
+                        placeholder="Waiting Time"
+                        autoCapitalize="none"
+                        onChangeText={username => this.setState({ username })}
+                      />
+                    </Button>
+                    {/* <Text style={styles.thirdText}>
+											Waiting Time: {Store.doctorProfile.waiting_time}
+										</Text> */}
                   </Icon>
                 </Right>
               </Col>
             </Row>
           </View>
         </Row>
-        <Row size={0.7} />
       </Grid>
     );
   }
 }
 
-export default observer(DoctorProfile);
+export default observer(EditProfile);
 
 const styles = StyleSheet.create({
   wrapper: {

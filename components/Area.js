@@ -38,59 +38,61 @@ class Area extends Component {
     const productInCat = sortableList.filter(item => +item.city === +id);
     const doctorSpeAndPro = productInCat;
 
-    let listOfAreas = doctorSpeAndPro.map(area => (
-      // <List key={area.id}>
-      // 	<List>
-      <ListItem
-        key={area.id}
-        onPress={() =>
-          this.props.navigation.navigate("SpecialityPage", {
-            AreaName: area.id,
-            store: Store
-          })
-        }
-      >
-        <Text>{area.name}</Text>
-      </ListItem>
-      // 	</List>
-      // </List>
-    ));
+    let listOfAreas = doctorSpeAndPro
+      .slice()
+      .sort(function(a, b) {
+        var textA = a.name.toUpperCase();
+        var textB = b.name.toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
+      })
+      .map(area => (
+        <ListItem
+          key={area.id}
+          onPress={() =>
+            this.props.navigation.navigate("SpecialityPage", {
+              AreaName: area.id,
+              store: Store
+            })
+          }
+        >
+          <Left>
+            <Text>{area.name}</Text>
+          </Left>
+          <Right>
+            <Icon name="arrow-forward" />
+          </Right>
+        </ListItem>
+      ));
     return listOfAreas;
   }
   render() {
+    Store.StarRating();
     if (!Store.city) return <View style={styles.thumbnailStyle} />;
 
-    let listOfcities = Store.city.map(list => (
-      <TouchableHighlight key={list.id}>
-        <List>
-          <ListItem itemDivider>
-            <Text>{list.name}</Text>
-          </ListItem>
-          {this.showAreas(list.id)}
-        </List>
-      </TouchableHighlight>
-
-      // <TouchableHighlight key={list.id}>
-      // 	<Card onPress={() => alert('hello World')}>
-      // 		<CardItem>
-      // 			<Left>
-      // 				<Text>{list.name}</Text>
-      // 			</Left>
-      // 			<Right>
-
-      // 			</Right>
-      // 		</CardItem>
-      // 	</Card>
-      // </TouchableHighlight>
-    ));
+    let listOfcities = Store.city
+      .slice()
+      .sort(function(a, b) {
+        var textA = a.name.toUpperCase();
+        var textB = b.name.toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
+      })
+      .map(list => (
+        <TouchableHighlight key={list.id}>
+          <List>
+            <ListItem itemDivider>
+              <Text>{list.name}</Text>
+            </ListItem>
+            {this.showAreas(list.id)}
+          </List>
+        </TouchableHighlight>
+      ));
 
     return (
       <View style={{ backgroundColor: "white", flex: 1 }}>
         <ScrollView style={{ backgroundColor: "white" }}>
           {listOfcities}
         </ScrollView>
-        <FooterApp />
-        {/* <BottomTab /> */}
+        {/* <FooterApp /> */}
         {/* <BottomStack /> */}
       </View>
     );

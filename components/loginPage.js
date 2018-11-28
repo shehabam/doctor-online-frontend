@@ -48,11 +48,20 @@ class LoginPage extends Component {
         <Grid>
           {/* if (authStore.isAuthenticated); */}
 
-          <Row size={1} style={[, styles.Row]} />
+          <Row size={0.5} style={[styles.Row][{ ImageBackground: "white" }]} />
+          <Row size={0.5} style={[styles.Row][{ ImageBackground: "white" }]}>
+            <Icon
+              name="arrow-back"
+              large
+              bold
+              style={{ color: "white" }}
+              onPress={() => this.props.navigation.goBack()}
+            />
+          </Row>
 
           <Row size={2.5} style={[styles.Row]}>
             <Image
-              source={require("../images/logo.png")}
+              source={require("../assets/LogoWhite.png")}
               style={{ height: 200, width: null, flex: 1 }}
             />
           </Row>
@@ -82,7 +91,6 @@ class LoginPage extends Component {
               />
             </Button>
           </Row>
-          {/* </Form> */}
           <Row size={0.75} />
           <Row size={1} style={[styles.Row]}>
             <Button
@@ -98,7 +106,7 @@ class LoginPage extends Component {
           </Row>
           <Row size={0.5} style={[styles.Row]}>
             <Text style={{ color: "white" }}>
-              ─────────── <Text style={{ color: "white" }}>Or</Text> ───────────
+              ───────── <Text style={{ color: "white" }}>Or</Text> ─────────
             </Text>
             {/* <Hr /> */}
           </Row>
