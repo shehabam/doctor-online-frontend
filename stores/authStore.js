@@ -8,7 +8,7 @@ import setAuthToken from "../utils/setAuthToken";
 
 const instance = axios.create({
   // baseURL: "http://192.168.100.244:8000/"
-  baseURL: "http://127.0.0.1:8000"
+  baseURL: "http://207.154.246.97"
 });
 
 class Store {
@@ -64,9 +64,12 @@ class Store {
       .catch(err => console.log(err));
   }
 
-  registerUser(username, password) {
+  registerUser(firstname, lastname, username, phonenumber, password) {
     const userData = {
+      firstname: firstname,
+      lastname: lastname,
       username: username,
+      phonenumber: phonenumber,
       password: password
     };
     instance

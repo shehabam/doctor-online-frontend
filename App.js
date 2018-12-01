@@ -25,6 +25,11 @@ import {
 } from "react-navigation";
 import DoctorProfile from "./components/doctorProfile";
 import EditProfile from "./components/EditProfile";
+import offersPage from "./components/offersPage";
+import AppointmentPage from "./components/AppointmentPage";
+import Filter from "./components/Filter";
+import RegisterPage from "./components/RegisterPage";
+import RatingPage from "./components/RatingPage";
 
 class App extends Component {
   constructor(props) {
@@ -49,13 +54,17 @@ class App extends Component {
       console.log("fonts loaded: ", this.state.fontLoaded);
       return (
         <Container>
-          <BottomTab />
+
+          <SuperNav />
+
         </Container>
       );
     } else {
       return (
         <View>
+
           <Text>loading</Text>
+
         </View>
       );
     }
@@ -95,7 +104,10 @@ const FirstPageTab = createStackNavigator(
         }
       }
     },
-    EditProfile: EditProfile
+    EditProfile: EditProfile,
+    Filter: Filter,
+    RegisterPage: RegisterPage,
+    RatingPage: RatingPage
   },
   {
     navigationOptions: {
@@ -122,17 +134,13 @@ const MoreTab = createStackNavigator(
 );
 const AppointmentTab = createStackNavigator(
   {
-    More: More,
-    Settings: Settings,
-    EditProfile: EditProfile
+    AppointmentPage: AppointmentPage
   },
   {}
 );
 const OffersTab = createStackNavigator(
   {
-    More: More,
-    Settings: Settings,
-    EditProfile: EditProfile
+    offersPage: offersPage
   },
   {}
 );
@@ -142,8 +150,7 @@ const BottomTab = createBottomTabNavigator(
     Home: FirstPageTab,
     Appointment: AppointmentTab,
     Offers: OffersTab,
-    More: MoreTab,
-    Anime: AnimeTab
+    More: MoreTab
   },
   {
     initialRouteName: "Home",
@@ -178,6 +185,18 @@ const BottomTab = createBottomTabNavigator(
       labelStyle: {
         fontSize: 12
       }
+    }
+  }
+);
+
+const SuperNav = createStackNavigator(
+  {
+    Anime: AnimeTab,
+    BottomTab: BottomTab
+  },
+  {
+    navigationOptions: {
+      header: null
     }
   }
 );

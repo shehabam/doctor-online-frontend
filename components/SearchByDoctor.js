@@ -66,7 +66,7 @@ class SearchByDoctor extends Component {
 
   render() {
     // console.log(authStore.user.username);
-    console.log(Store.ProfileToEdit(authStore.user.username));
+    // console.log(Store.ProfileToEdit(authStore.user.username));
 
     const to = (index: number): number[] => {
       const numbers: number[] = [];

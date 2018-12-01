@@ -24,7 +24,7 @@ import {
   ImageBackground
 } from "react-native";
 
-class LoginPage extends Component {
+class RegisterPage extends Component {
   static navigationOptions = {
     header: null
   };
@@ -32,7 +32,10 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      firstName: "",
+      lastName: "",
       username: "",
+      phoneNumber: "",
       password: ""
     };
   }
@@ -64,10 +67,33 @@ class LoginPage extends Component {
             />
           </Row>
           <Row size={1} style={[styles.Row]} />
-          {/* <Form> */}
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
-              <Icon name="person" />
+              <Icon name="person" style={{ color: "white" }} />
+              <Input
+                style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                placeholder="First Name"
+                autoCapitalize="none"
+                onChangeText={firstName => this.setState({ firstName })}
+              />
+            </Button>
+          </Row>
+          <Row size={0.1} style={[styles.Row]} />
+          <Row size={0.65} style={[styles.Row]}>
+            <Button rounded transparent style={styles.formBorder}>
+              <Icon name="person" style={{ color: "white" }} />
+              <Input
+                style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                placeholder="Last Name"
+                autoCapitalize="none"
+                onChangeText={lastName => this.setState({ lastName })}
+              />
+            </Button>
+          </Row>
+          <Row size={0.1} style={[styles.Row]} />
+          <Row size={0.65} style={[styles.Row]}>
+            <Button rounded transparent style={styles.formBorder}>
+              <Icon name="person" style={{ color: "white" }} />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
                 placeholder="Username"
@@ -79,7 +105,19 @@ class LoginPage extends Component {
           <Row size={0.1} style={[styles.Row]} />
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
-              <Icon name="lock" />
+              <Icon name="call" style={{ color: "white" }} />
+              <Input
+                style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                placeholder="Phone Number"
+                autoCapitalize="none"
+                onChangeText={phoneNumber => this.setState({ phoneNumber })}
+              />
+            </Button>
+          </Row>
+          <Row size={0.1} style={[styles.Row]} />
+          <Row size={0.65} style={[styles.Row]}>
+            <Button rounded transparent style={styles.formBorder}>
+              <Icon name="lock" style={{ color: "white" }} />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
                 placeholder="Password"
@@ -90,7 +128,7 @@ class LoginPage extends Component {
             </Button>
           </Row>
           <Row size={0.75} />
-          <Row size={1} style={[styles.Row]}>
+          {/* <Row size={1} style={[styles.Row]}>
             <Button
               transparent
               style={styles.buttonBorder}
@@ -101,21 +139,27 @@ class LoginPage extends Component {
             >
               <Text style={styles.TextStyle}>Login</Text>
             </Button>
-          </Row>
-          <Row size={0.5} style={[styles.Row]}>
+          </Row> */}
+          {/* <Row size={0.5} style={[styles.Row]}>
             <Text style={{ color: "white" }}>
               ───────── <Text style={{ color: "white" }}>Or</Text> ─────────
             </Text>
-            {/* <Hr /> */}
-          </Row>
+          </Row> */}
 
           <Row size={1.85} style={[styles.Row]}>
             <Button
               rounded
               transparent
               style={[styles.buttonBorder]}
-              onPress={() => this.props.navigation.navigate("RegisterPage")}
-              // authStore.registerUser(this.state.username, this.state.password)
+              onPress={() =>
+                authStore.registerUser(
+                  this.state.firstName,
+                  this.state.lastName,
+                  this.state.username,
+                  this.state.phoneNumber,
+                  this.state.password
+                )
+              }
             >
               <Text style={styles.TextStyle}>Register</Text>
             </Button>
@@ -126,7 +170,7 @@ class LoginPage extends Component {
   }
 }
 
-export default observer(LoginPage);
+export default observer(RegisterPage);
 
 const styles = StyleSheet.create({
   Row: {
@@ -136,13 +180,6 @@ const styles = StyleSheet.create({
     // marginTop: '5%'
   },
   TextStyle: {
-    // justifyContent: "center",
-    // textAlign:"center",
-    // textAlignVertical:"center",
-    // textAlign: "justify",
-    // alignSelf: "center",
-    // alignContent: "center",
-    // marginLeft: 110,
     fontFamily: "GTWalsheim-Medium",
     fontSize: 20
   },

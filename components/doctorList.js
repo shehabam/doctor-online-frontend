@@ -14,6 +14,7 @@ import {
   Thumbnail,
   Spinner,
   Right,
+  Input,
   Left
 } from "native-base";
 // import { Col, Row, Grid } from "react-native-easy-grid";
@@ -24,12 +25,12 @@ import {
   ScrollView
 } from "react-native";
 
-type RatingsProps = {
-  value: number,
-  votes: number
-};
-
 class DoctorList extends Component {
+  goTo() {
+    alert("This is a button!");
+    // this.props.navigation.navigate("DoctorProfile")
+  }
+
   static navigationOptions = {
     title: "Choose Your Doctor",
     headerTintColor: "white",
@@ -38,7 +39,8 @@ class DoctorList extends Component {
     },
     headerRight: (
       <Button
-        onPress={() => alert("This is a button!")}
+        onPress={() => this.goTo()}
+        // alert("This is a button!")}
         style={{ backgroundColor: "#00bfff", height: 35 }}
       >
         <Image
@@ -80,30 +82,16 @@ class DoctorList extends Component {
       const color = Theme.palette.primary;
       return (
         <TouchableHighlight
-          onPress={() =>
-            this.props.navigation.navigate("DoctorProfile", {
-              cat: list.id,
-              store: Store
-            })
-          }
+          // onPress={() =>
+          //   this.props.navigation.navigate("DoctorProfile", {
+          //     cat: list.id,
+          //     store: Store
+          //   })
+          // }
           key={list.id}
         >
           <Card style={{ alignSelf: "center", width: 400 }}>
             <Content>
-              {/* <Right> */}
-              <Text
-                onPress={() =>
-                  this.props.navigation.navigate("Edit", {
-                    cat: list.id,
-                    // firstName: list.user.first_name,
-                    // lastName: list.user.last_name,
-                    store: Store
-                  })
-                }
-              >
-                Edit
-              </Text>
-              {/* </Right> */}
               <CardItem>
                 <Body>
                   <Thumbnail
@@ -170,28 +158,31 @@ class DoctorList extends Component {
               >
                 {to(filledStars).map(key => (
                   <Icon
-                    name="ios-star"
+                    name="star"
                     style={{ color: "yellow" }}
                     {...{ key, size, color }}
                   />
                 ))}
                 {halfStar && (
                   <Icon
-                    name="ios-star-half"
+                    name="star-half"
                     style={{ color: "yellow" }}
                     {...{ size }}
                   />
                 )}
                 {to(emptyStars).map(key => (
                   <Icon
-                    name="ios-star-outline"
+                    name="md-star-outline"
                     style={{ color: "yellow" }}
                     {...{ key, size, color }}
                   />
                 ))}
-                <Text style={styles.text}>{`${
-                  list.rating_set.length
-                } votes`}</Text>
+                <Text
+                  onPress={() => this.props.navigation.navigate("RatingPage")}
+                  style={styles.text}
+                >
+                  {list.rating_set.length} votes
+                </Text>
               </View>
               <CardItem style={styles.bookingButtonCardItem}>
                 <Button
