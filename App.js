@@ -31,6 +31,27 @@ import Filter from "./components/Filter";
 import RegisterPage from "./components/RegisterPage";
 import RatingPage from "./components/RatingPage";
 
+// import {translate} from 'react-i18next'
+// import Home from "./src/screens/Home"
+// import Page2 from "./src/screens/Page2"
+
+// const Stack = createStackNavigator(
+//   {
+//     Home: {screen: Home},
+//     page2: {screen: Page2},
+//   },
+//   {}
+// );
+
+// const WrappedStack = ({ t }) =>{
+//   return <Stack screenProps={{ t }}/>;
+// };
+
+// const RelodAppOnLanguageChange = translate('common', {
+//   bindI18n: 'languageChanged',
+//   bindStore: false,
+// }) (WrappedStack);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -48,23 +69,19 @@ class App extends Component {
       console.log(error);
     }
   }
-
   render() {
     if (this.state.fontLoaded) {
       console.log("fonts loaded: ", this.state.fontLoaded);
       return (
         <Container>
-
           <SuperNav />
-
+          {/* <RelodAppOnLanguageChange  /> */}
         </Container>
       );
     } else {
       return (
         <View>
-
           <Text>loading</Text>
-
         </View>
       );
     }
@@ -192,33 +209,13 @@ const BottomTab = createBottomTabNavigator(
 const SuperNav = createStackNavigator(
   {
     Anime: AnimeTab,
+    //  RatingPage: RatingPage,
     BottomTab: BottomTab
   },
   {
     navigationOptions: {
       header: null
     }
-  }
-);
-
-const RootStack = createStackNavigator(
-  {
-    anime1: anime1,
-    anime: anime,
-    FirstPage: FirstPage,
-    SearchByDoctor: SearchByDoctor,
-    LoginPage: LoginPage,
-    Area: Area,
-    SpecialityPage: SpecialityPage,
-    DoctorList: DoctorList,
-    DoctorProfile: DoctorProfile,
-    More: More,
-    Settings: Settings,
-    TimeDatePicker: TimeDatePicker,
-    EditProfile: EditProfile
-  },
-  {
-    initialRouteName: "anime1"
   }
 );
 

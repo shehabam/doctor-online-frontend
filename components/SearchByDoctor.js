@@ -65,9 +65,6 @@ class SearchByDoctor extends Component {
   };
 
   render() {
-    // console.log(authStore.user.username);
-    // console.log(Store.ProfileToEdit(authStore.user.username));
-
     const to = (index: number): number[] => {
       const numbers: number[] = [];
       for (let i = 0; i < index; i += 1) {
@@ -164,27 +161,35 @@ class SearchByDoctor extends Component {
                 {to(filledStars).map(key => (
                   <Icon
                     name="ios-star"
-                    style={{ color: "yellow" }}
+                    style={{ color: "#FFD700" }}
                     {...{ key, size, color }}
                   />
                 ))}
                 {halfStar && (
                   <Icon
                     name="ios-star-half"
-                    style={{ color: "yellow" }}
+                    style={{ color: "#FFD700" }}
                     {...{ size }}
                   />
                 )}
                 {to(emptyStars).map(key => (
                   <Icon
                     name="ios-star-outline"
-                    style={{ color: "yellow" }}
+                    style={{ color: "#FFD700" }}
                     {...{ key, size, color }}
                   />
                 ))}
-                <Text style={styles.text}>{`${
-                  list.rating_set.length
-                } votes`}</Text>
+                <Text
+                  onPress={() =>
+                    this.props.navigation.navigate("RatingPage", {
+                      id: list.id,
+                      Store: Store
+                    })
+                  }
+                  style={styles.text}
+                >
+                  {list.rating_set.length} votes
+                </Text>
               </View>
               <CardItem style={styles.bookingButtonCardItem}>
                 <Button

@@ -82,12 +82,12 @@ class DoctorList extends Component {
       const color = Theme.palette.primary;
       return (
         <TouchableHighlight
-          // onPress={() =>
-          //   this.props.navigation.navigate("DoctorProfile", {
-          //     cat: list.id,
-          //     store: Store
-          //   })
-          // }
+          onPress={() =>
+            this.props.navigation.navigate("DoctorProfile", {
+              cat: list.id,
+              store: Store
+            })
+          }
           key={list.id}
         >
           <Card style={{ alignSelf: "center", width: 400 }}>
@@ -158,27 +158,32 @@ class DoctorList extends Component {
               >
                 {to(filledStars).map(key => (
                   <Icon
-                    name="star"
-                    style={{ color: "yellow" }}
+                    name="ios-star"
+                    style={{ color: "#FFD700" }}
                     {...{ key, size, color }}
                   />
                 ))}
                 {halfStar && (
                   <Icon
                     name="star-half"
-                    style={{ color: "yellow" }}
+                    style={{ color: "#FFD700" }}
                     {...{ size }}
                   />
                 )}
                 {to(emptyStars).map(key => (
                   <Icon
-                    name="md-star-outline"
-                    style={{ color: "yellow" }}
+                    name="ios-star-outline"
+                    style={{ color: "#FFD700" }}
                     {...{ key, size, color }}
                   />
                 ))}
                 <Text
-                  onPress={() => this.props.navigation.navigate("RatingPage")}
+                  onPress={() =>
+                    this.props.navigation.navigate("RatingPage", {
+                      id: list.id,
+                      Store: Store
+                    })
+                  }
                   style={styles.text}
                 >
                   {list.rating_set.length} votes

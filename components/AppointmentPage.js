@@ -18,6 +18,8 @@ import {
   Footer
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
+import authStore from "../stores/authStore";
+
 import {
   StyleSheet,
   TouchableHighlight,
@@ -29,13 +31,30 @@ import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
 
 class AppointmentPage extends Component {
   static navigationOptions = {
-    title: "Offers",
+    title: "Appointments",
     headerStyle: {
       backgroundColor: "#00bfff"
     }
   };
+
+  componentDidMount() {
+    if (authStore.isAuthenticated) {
+      const userID = authStore.user;
+      //  console.log(userID)
+      console.log(
+        "--------------------------------------------------------------"
+      );
+    } else {
+      console.log("login");
+    }
+  }
+
   render() {
-    if (!Store.offersPics) {
+    // const userUsername = Store.findUser(authStore.user.username)
+    const checkSchedule = Store.findSchedule(Store.Bla());
+
+    console.log(checkSchedule);
+    if (!authStore.isAuthenticated) {
       return (
         <View
           style={{
@@ -45,24 +64,52 @@ class AppointmentPage extends Component {
             alignItems: "center"
           }}
         >
-
-          <Text> You Don't Have Any Appointments</Text>
-
+          <Text> Login to see your appointments</Text>
         </View>
       );
     }
+
+    let dis = checkSchedule.map(Appointment => {
+      return (
+        <Grid
+          key={Appointment.id}
+          style={{
+            backgroundColor: "white"
+          }}
+        >
+          <Card style={{ width: "100%" }}>
+            <CardItem>
+              <Col>
+                <Text style={styles.textCall}>
+                  You Have an appointment in:{" "}
+                </Text>
+                <Text style={styles.text}>{Appointment.date}</Text>
+                <Text style={styles.textCall}>From:</Text>{" "}
+                <Text style={styles.text}>{Appointment._from}</Text>
+                <Text style={styles.textCall}>to </Text>{" "}
+                <Text style={styles.text}>{Appointment.to}</Text>
+                {/* <Text>with Doctor: {Appointment.doctor}</Text> */}
+              </Col>
+            </CardItem>
+            <CardItem>
+              <Right>
+                <Button
+                  onPress={() => Store.deleteAppointment(Appointment.id)}
+                  transparent
+                >
+                  <Text style={styles.text}>Done</Text>
+                </Button>
+              </Right>
+            </CardItem>
+          </Card>
+        </Grid>
+      );
+    });
+
     return (
-      <Grid
-        style={{
-          backgroundColor: "white",
-          position: "relative",
-          zIndex: 1
-        }}
-      >
-
-        <Text>Hello World</Text>
-
-      </Grid>
+      <View style={{ backgroundColor: "white", flex: 1 }}>
+        <ScrollView>{dis}</ScrollView>
+      </View>
     );
   }
 }
@@ -70,131 +117,12 @@ class AppointmentPage extends Component {
 export default observer(AppointmentPage);
 
 const styles = StyleSheet.create({
-  wrapper: {
-    marginTop: 80
-  },
-  slide1: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#9DD6EB"
-  },
-  slide2: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#97CAE5"
-  },
-  slide3: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#92BBD9"
-  },
   text: {
-    color: "#000",
-    fontSize: 20,
-    fontWeight: "bold"
+    color: "#00bfff",
+    fontSize: 20
   },
-  thumbnailStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center", // width: 40, // height: 40,
-    position: "absolute"
-  },
-  userViewsText: {
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 10,
-    color: "#919191",
-    paddingTop: 5
-  },
-  iconsStyle: {
-    width: 28,
-    height: 28,
-    justifyContent: "flex-start"
-  },
-  visitorsText: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 12,
-    color: "#919191"
-  },
-  textContainer: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-  },
-  startStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-  },
-  doctorName: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 15,
-    color: "#605F5F"
-  },
-  doctordesc1: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 13,
-    color: "#919191"
-  },
-  locationIcon: {
-    color: "#48C1F6",
-    paddingTop: 15
-  },
-  locationText: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 15,
-    color: "#605F5F"
-  },
-  BookingnowStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontFamily: "GTWalsheim-Black",
-    fontSize: 15,
-    color: "#919191",
-    fontWeight: "bold"
-  },
-  bookingButton: {
-    width: "25%",
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    margin: 5
-  },
-  ymenysarButtons: {
-    color: "#48C1F6"
-  },
-  thirdText: {
-    fontSize: 16,
-    fontFamily: "GTWalsheim-Medium",
-    color: "#919191"
-  },
-  locationIcon: {
-    color: "#48C1F6",
-    fontSize: 38
-  },
-  cardStyle: {
-    shadowColor: "rgba(0,0,0,0.7)",
-    shadowRadius: 4,
-    shadowOpacity: 0.7,
-    shadowOffset: {
-      height: 2,
-      width: 0
-    }
-  },
-  clockIcon: {
-    color: "#48C1F6",
-    fontSize: 30
+  textCall: {
+    fontWeight: "bold",
+    fontSize: 20
   }
 });

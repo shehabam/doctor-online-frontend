@@ -36,10 +36,17 @@ class LoginPage extends Component {
       password: ""
     };
   }
+  // componentWillMount(){
+  loginButton(username, password) {
+    authStore.loginUser(username, password);
+    // alert("You Are LoggedIn")
+    this.props.navigation.goBack();
+  }
+  // }
   render() {
-    if (authStore.isAuthenticated) {
-      this.props.navigation.navigate("FirstPage");
-    }
+    // if (authStore.isAuthenticated) {
+    //   this.props.navigation.navigate("FirstPage");
+    // }
     return (
       <ImageBackground
         source={require("../assets/Rectangle.png")}
@@ -96,7 +103,7 @@ class LoginPage extends Component {
               style={styles.buttonBorder}
               rounded
               onPress={() =>
-                authStore.loginUser(this.state.username, this.state.password)
+                this.loginButton(this.state.username, this.state.password)
               }
             >
               <Text style={styles.TextStyle}>Login</Text>

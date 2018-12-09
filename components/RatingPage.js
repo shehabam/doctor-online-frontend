@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+import authStore from "../stores/authStore";
 import {
   Container,
   Header,
@@ -34,26 +35,156 @@ class RatingPage extends Component {
       backgroundColor: "#00bfff"
     }
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      rate: 0
+    };
+  }
+
+  poorRate() {
+    this.setState({ rate: 1 });
+  }
+
+  AvaregeRate() {
+    this.setState({ rate: 2 });
+  }
+
+  GoodRate() {
+    this.setState({ rate: 3 });
+  }
+
+  VeryGoodRate() {
+    this.setState({ rate: 4 });
+  }
+
+  ExellentRate() {
+    this.setState({ rate: 5 });
+  }
+
+  confirmPressed(doctorID, rate, user) {
+    Store.postRate(doctorID, rate, user);
+    alert("your rate has been Submited");
+    this.props.navigation.goBack();
+  }
 
   render() {
+    // console.log(authStore.user.user_id)
+    let doctorID = this.props.navigation.getParam("id");
+    let iconName1;
+    let iconName2;
+    let iconName3;
+    let iconName4;
+    let iconName5;
+    if (this.state.rate === 0) {
+      iconName1 = "ios-star-outline";
+      iconName2 = "ios-star-outline";
+      iconName3 = "ios-star-outline";
+      iconName4 = "ios-star-outline";
+      iconName5 = "ios-star-outline";
+    } else if (this.state.rate === 1) {
+      iconName1 = "ios-star";
+      iconName2 = "ios-star-outline";
+      iconName3 = "ios-star-outline";
+      iconName4 = "ios-star-outline";
+      iconName5 = "ios-star-outline";
+    } else if (this.state.rate === 2) {
+      iconName1 = "ios-star";
+      iconName2 = "ios-star";
+      iconName3 = "ios-star-outline";
+      iconName4 = "ios-star-outline";
+      iconName5 = "ios-star-outline";
+    } else if (this.state.rate === 3) {
+      iconName1 = "ios-star";
+      iconName2 = "ios-star";
+      iconName3 = "ios-star";
+      iconName4 = "ios-star-outline";
+      iconName5 = "ios-star-outline";
+    } else if (this.state.rate === 4) {
+      iconName1 = "ios-star";
+      iconName2 = "ios-star";
+      iconName3 = "ios-star";
+      iconName4 = "ios-star";
+      iconName5 = "ios-star-outline";
+    } else if (this.state.rate === 5) {
+      iconName1 = "ios-star";
+      iconName2 = "ios-star";
+      iconName3 = "ios-star";
+      iconName4 = "ios-star";
+      iconName5 = "ios-star";
+    }
+
+    if (!authStore.isAuthenticated) {
+      return (
+        <View style={styles.notlogin}>
+          <Text>You Need To LogIn Or Register To Rate Any Dactor</Text>
+        </View>
+      );
+    }
     return (
       <Grid
         style={{
-          backgroundColor: "white",
-          position: "relative",
-          zIndex: 1
+          backgroundColor: "white"
         }}
       >
-        <Text
-          Style={{
-            justifyContent: "center",
-            alignItems: "center",
-            alignItems: "center"
-          }}
-        >
-          How would you describe your visit to Doctor:{" "}
-        </Text>
-
+        <Row size={4} style={{ flex: 1, justifyContent: "center" }}>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>
+              How would you describe your visit to Doctor:
+            </Text>
+          </View>
+        </Row>
+        <Row size={4} style={{ flex: 1, justifyContent: "center" }}>
+          <Button
+            transparent
+            style={styles.StarButton}
+            onPress={() => this.poorRate()}
+          >
+            <Icon large name={iconName1} style={styles.startStyle} />
+          </Button>
+          <Button
+            transparent
+            style={styles.StarButton}
+            onPress={() => this.AvaregeRate()}
+          >
+            <Icon large name={iconName2} style={styles.startStyle} />
+          </Button>
+          <Button
+            transparent
+            style={styles.StarButton}
+            onPress={() => this.GoodRate()}
+          >
+            <Icon large name={iconName3} style={styles.startStyle} />
+          </Button>
+          <Button
+            transparent
+            style={styles.StarButton}
+            onPress={() => this.VeryGoodRate()}
+          >
+            <Icon large name={iconName4} style={styles.startStyle} />
+          </Button>
+          <Button
+            transparent
+            style={styles.StarButton}
+            onPress={() => this.ExellentRate()}
+          >
+            <Icon large name={iconName5} style={styles.startStyle} />
+          </Button>
+        </Row>
+        <Row size={2} style={{ flex: 1, justifyContent: "center" }}>
+          <Button
+            style={styles.ConfirmButton}
+            onPress={() =>
+              this.confirmPressed(
+                doctorID,
+                this.state.rate,
+                authStore.user.user_id
+              )
+            }
+          >
+            <Text style={styles.ConfirmButtomText}>Confirm</Text>
+          </Button>
+        </Row>
       </Grid>
     );
   }
@@ -62,131 +193,55 @@ class RatingPage extends Component {
 export default observer(RatingPage);
 
 const styles = StyleSheet.create({
-  wrapper: {
-    marginTop: 80
-  },
-  slide1: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#9DD6EB"
-  },
-  slide2: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#97CAE5"
-  },
-  slide3: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#92BBD9"
-  },
   text: {
-    color: "#000",
-    fontSize: 20,
+    // color: "#000",
+    fontSize: 30,
     fontWeight: "bold"
   },
-  thumbnailStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center", // width: 40, // height: 40,
-    position: "absolute"
-  },
-  userViewsText: {
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 10,
-    color: "#919191",
-    paddingTop: 5
+  ConfirmButtomText: {
+    // color: "white",
+    fontSize: 30,
+    fontWeight: "bold"
   },
   iconsStyle: {
     width: 28,
     height: 28,
     justifyContent: "flex-start"
   },
-  visitorsText: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 12,
-    color: "#919191"
+  centerView: {
+    flex: 1
   },
   textContainer: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
+    flex: 1,
+    justifyContent: "flex-end"
   },
   startStyle: {
     alignSelf: "center",
     alignContent: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    color: "#FFD700",
+    flexDirection: "row"
   },
-  doctorName: {
+  StarButton: {
     alignSelf: "center",
     alignContent: "center",
     justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 15,
-    color: "#605F5F"
+    alignItems: "center"
+    // color:"#00bfff"
   },
-  doctordesc1: {
+  ConfirmButton: {
     alignSelf: "center",
     alignContent: "center",
     justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 13,
-    color: "#919191"
+    alignItems: "center",
+    backgroundColor: "#00bfff"
   },
-  locationIcon: {
-    color: "#48C1F6",
-    paddingTop: 15
-  },
-  locationText: {
-    alignSelf: "center",
+  notlogin: {
+    flex: 1,
+    backgroundColor: "white",
+    // alignSelf: "center",
     alignContent: "center",
     justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 15,
-    color: "#605F5F"
-  },
-  BookingnowStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontFamily: "GTWalsheim-Black",
-    fontSize: 15,
-    color: "#919191",
-    fontWeight: "bold"
-  },
-  bookingButton: {
-    width: "25%",
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    margin: 5
-  },
-  ymenysarButtons: {
-    color: "#48C1F6"
-  },
-  thirdText: {
-    fontSize: 16,
-    fontFamily: "GTWalsheim-Medium",
-    color: "#919191"
-  },
-  locationIcon: {
-    color: "#48C1F6",
-    fontSize: 38
-  },
-  cardStyle: {
-    shadowColor: "rgba(0,0,0,0.7)",
-    shadowRadius: 4,
-    shadowOpacity: 0.7,
-    shadowOffset: {
-      height: 2,
-      width: 0
-    }
-  },
-  clockIcon: {
-    color: "#48C1F6",
-    fontSize: 30
+    alignItems: "center"
   }
 });

@@ -17,6 +17,8 @@ import {
 } from "react-native";
 import BottomStack from "./TabBottomFotter";
 import { observer } from "mobx-react";
+import authStore from "../stores/authStore";
+import Store from "../stores/store";
 
 // import Search from '../assets/Search.png';
 // import FirstBackground from "../assets"

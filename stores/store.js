@@ -14,7 +14,6 @@ import {
   Item,
   Input
 } from "native-base";
-
 class Store {
   constructor() {
     this.doctorList = [];
@@ -43,6 +42,11 @@ class Store {
     this.editProf = [];
     this.offersPics = null;
     this.doctorSettingProfile = null;
+    this.AppointmentsList = [];
+    this.userPatient = [];
+    this.userDoctor = [];
+    this.users = [];
+    this.userName = "";
   } //for bringing Doctors only
   getDoctors() {
     axios
@@ -242,6 +246,83 @@ class Store {
 
     return this.doctorSettingProfile;
   }
+
+  postRate(id, ratings, userId) {
+    const userData = {
+      ratings: ratings,
+      doctor: id,
+      user: userId
+    };
+    axios
+      .post(`http://207.154.246.97/make/rating/`, userData)
+      .then(() => console.log("bla bla bla"))
+      .catch(err => console.error(err));
+  }
+
+  getUsers() {
+    axios
+      .get("http://207.154.246.97/users/")
+      .then(res => res.data)
+      .then(users => {
+        this.users = users;
+      })
+      .catch(err => console.error(err));
+  }
+
+  getAppointments() {
+    axios
+      .get("http://207.154.246.97/doctor/schedeul")
+      .then(res => res.data)
+      .then(Appointment => {
+        this.AppointmentsList = Appointment;
+      })
+      .catch(err => console.error(err));
+  }
+
+  findDoctorInUsers(theUser) {
+    const user = this.doctorList.find(item => item.id === theUser);
+    this.userDoctor = user;
+    return userDoctor;
+  }
+
+  findUser(theUser) {
+    const user = this.users.find(item => item.username === theUser);
+    // console.log(user)
+    this.userPatient = user;
+    return this.userPatient;
+  }
+
+  findSchedule(user) {
+    if (!authStore.isAuthenticated) {
+      const filterappointment = null;
+      return;
+    }
+    const filterappointment = this.AppointmentsList.filter(
+      item => item.patient.username === user
+    );
+    return filterappointment;
+  }
+
+  Bla() {
+    if (authStore.isAuthenticated) {
+      this.userName = authStore.user.username;
+      return this.userName;
+    } else {
+      return null;
+    }
+  }
+
+  deleteAppointment(id) {
+    // axios.delete(`http://207.154.246.97/doctor/schedeul` + id)
+    // this.AppointmentsList.splice(id, 1);
+    axios
+      .delete(`http://207.154.246.97/doctor/schedeul`, id)
+      .then(res => res.data)
+      .then(Appointment => {
+        this.AppointmentsList = Appointment;
+      })
+      .catch(err => console.error(err));
+  }
 }
 decorate(Store, {
   ratingSet: observable,
@@ -283,7 +364,19 @@ decorate(Store, {
   getEditProfile: action,
   ProfileToEdit: action,
   offersPics: observable,
-  doctorSettingProfile: observable
+  doctorSettingProfile: observable,
+  postRate: action,
+  getAppointments: action,
+  AppointmentsList: observable,
+  findDoctorInUsers: action,
+  userPatient: observable,
+  findUser: action,
+  userDoctor: observable,
+  users: observable,
+  getUsers: action,
+  findSchedule: action,
+  userName: observable,
+  deleteAppointment: action
 });
 
 const store = new Store();
@@ -291,6 +384,8 @@ store.getDoctors();
 store.getCities();
 store.getSpeciality();
 store.getAreas();
+store.getAppointments();
+store.getUsers();
 
 export default store;
 

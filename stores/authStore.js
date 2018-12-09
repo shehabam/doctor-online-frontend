@@ -66,10 +66,10 @@ class Store {
 
   registerUser(firstname, lastname, username, phonenumber, password) {
     const userData = {
-      firstname: firstname,
-      lastname: lastname,
+      first_name: firstname,
+      last_name: lastname,
       username: username,
-      phonenumber: phonenumber,
+      email: phonenumber,
       password: password
     };
     instance
