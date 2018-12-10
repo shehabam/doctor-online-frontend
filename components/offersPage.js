@@ -26,15 +26,18 @@ import {
 } from "react-native";
 import Store from "../stores/store";
 import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
+import { withNamespaces } from "react-i18next";
 
 class offersPage extends Component {
-  static navigationOptions = {
-    title: "Offers",
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: screenProps.t("offer:title"),
     headerStyle: {
       backgroundColor: "#00bfff"
     }
-  };
+  });
   render() {
+    const { t, i18n, navigation } = this.props;
+
     if (!Store.offersPics) {
       return (
         <View
@@ -45,9 +48,7 @@ class offersPage extends Component {
             alignItems: "center"
           }}
         >
-
-          <Text> There is no Offers</Text>
-
+          <Text>{t("offer:content")}</Text>
         </View>
       );
     }
@@ -59,15 +60,14 @@ class offersPage extends Component {
           zIndex: 1
         }}
       >
-
-        <Text>Hello World</Text>
-
+        <Text>{t("offer:hello")}</Text>
       </Grid>
     );
   }
 }
 
-export default observer(offersPage);
+//export default observer(offersPage);
+export default withNamespaces(["offer", "common"], { wait: true })(offersPage);
 
 const styles = StyleSheet.create({
   wrapper: {

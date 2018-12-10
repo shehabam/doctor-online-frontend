@@ -19,6 +19,7 @@ import BottomStack from "./TabBottomFotter";
 import { observer } from "mobx-react";
 import authStore from "../stores/authStore";
 import Store from "../stores/store";
+import { withNamespaces } from "react-i18next";
 
 // import Search from '../assets/Search.png';
 // import FirstBackground from "../assets"
@@ -31,6 +32,8 @@ class FirstPage extends Component {
     }
   };
   render() {
+    const { t, i18n, navigation } = this.props;
+
     return (
       // rgba(153, 204, 255, .6)
       <ImageBackground
@@ -46,9 +49,7 @@ class FirstPage extends Component {
             />
           </Row>
           <Row size={0.5} style={styles.bookTheBestTextRow}>
-            <Text style={styles.bookTheBestText}>
-              Book the Best Doctors in Kuwait
-            </Text>
+            <Text style={styles.bookTheBestText}>{t("first:description")}</Text>
           </Row>
           <Row size={0.5} />
           <Row size={1.5} style={styles.buttonRow}>
@@ -63,7 +64,7 @@ class FirstPage extends Component {
                   name="needle"
                   style={styles.needleIcon}
                 />
-                Choose by Speciality and Area
+                {t("first:input1")}
               </Text>
             </Button>
           </Row>
@@ -79,7 +80,7 @@ class FirstPage extends Component {
                   name="magnify"
                   style={styles.needleIcon}
                 />
-                Search By Doctor Name
+                {t("first:input2")}
               </Text>
             </Button>
           </Row>
@@ -90,7 +91,7 @@ class FirstPage extends Component {
                 style={styles.button}
                 onPress={() => this.props.navigation.navigate("LoginPage")}
               >
-                <Text style={styles.text}>Login</Text>
+                <Text style={styles.text}>{t("first:login")}</Text>
               </Button>
             </TouchableHighlight>
           </Row>
@@ -200,4 +201,5 @@ const styles = StyleSheet.create({
     fontFamily: "GTWalsheim-Medium"
   }
 });
-export default observer(FirstPage);
+//export default observer(FirstPage);
+export default withNamespaces(["first", "common"], { wait: true })(FirstPage);

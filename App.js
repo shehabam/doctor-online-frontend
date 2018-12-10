@@ -30,6 +30,14 @@ import AppointmentPage from "./components/AppointmentPage";
 import Filter from "./components/Filter";
 import RegisterPage from "./components/RegisterPage";
 import RatingPage from "./components/RatingPage";
+import { withNamespaces } from "react-i18next";
+import i18n from "./utils/i18n";
+
+const WrappedStack = ({ t }) => <SuperNav screenProps={{ t }} />;
+const ReloadAppOnLanguageChange = withNamespaces("common", {
+  bindI18n: "languageChanged",
+  bindStore: false
+})(WrappedStack);
 
 class App extends Component {
   constructor(props) {
@@ -56,7 +64,7 @@ class App extends Component {
       console.log("fonts loaded: ", this.state.fontLoaded);
       return (
         <Container>
-          <SuperNav />
+          <ReloadAppOnLanguageChange />
           {/* <RelodAppOnLanguageChange  /> */}
         </Container>
       );

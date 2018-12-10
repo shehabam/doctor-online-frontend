@@ -26,6 +26,7 @@ import {
   Left
 } from "native-base";
 import FooterApp from "./footer";
+import { withNamespaces } from "react-i18next";
 
 import { Col, Row, Grid } from "react-native-easy-grid";
 import {
@@ -38,16 +39,16 @@ import CollapsingToolbar from "react-native-collapse-view";
 import authStore from "../stores/authStore";
 
 class More extends Component {
-  static navigationOptions = {
-    title: "More",
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: screenProps.t("more:settings"),
     headerStyle: {
       backgroundColor: "#00bfff"
     }
-  };
+  });
 
   render() {
     console.log(this.props.onLogoutPress);
-
+    const { t, i18n, navigation } = this.props;
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <TouchableHighlight>
@@ -57,7 +58,7 @@ class More extends Component {
             >
               <Left>
                 <Icon name="md-settings" large style={{ color: "#00bfff" }} />
-                <Text>Settings</Text>
+                <Text>{t("more:settings")}</Text>
               </Left>
               <Right>
                 <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
@@ -66,7 +67,7 @@ class More extends Component {
             <ListItem>
               <Left>
                 <Icon name="ios-call" large style={{ color: "#00bfff" }} />
-                <Text>Contact Us</Text>
+                <Text>{t("more:contactus")}</Text>
               </Left>
               <Right>
                 <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
@@ -75,7 +76,7 @@ class More extends Component {
             <ListItem>
               <Left>
                 <Icon name="md-bulb" large style={{ color: "#00bfff" }} />
-                <Text>About Us</Text>
+                <Text>{t("more:aboutus")}</Text>
               </Left>
               <Right>
                 <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
@@ -84,7 +85,7 @@ class More extends Component {
             <ListItem onPress={() => authStore.logoutUser()}>
               <Left>
                 <Icon name="log-out" large style={{ color: "#00bfff" }} />
-                <Text>LogOut</Text>
+                <Text>{t("more:logout")}</Text>
               </Left>
               <Right>
                 <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
@@ -93,11 +94,11 @@ class More extends Component {
             <ListItem>
               <Left>
                 <Icon name="ios-glasses" large style={{ color: "#00bfff" }} />
-                <Text>medical information</Text>
+                <Text>{t("more:medicalinformation")}</Text>
               </Left>
               <Right>
                 <Text style={{ fontSize: 13 }} note>
-                  Coming Soon
+                  {t("more:commingsoon")}
                 </Text>
               </Right>
             </ListItem>
@@ -109,4 +110,5 @@ class More extends Component {
   }
 }
 
-export default observer(More);
+// export default observer(More);
+export default withNamespaces(["more", "common"], { wait: true })(More);
