@@ -31,27 +31,6 @@ import Filter from "./components/Filter";
 import RegisterPage from "./components/RegisterPage";
 import RatingPage from "./components/RatingPage";
 
-// import {translate} from 'react-i18next'
-// import Home from "./src/screens/Home"
-// import Page2 from "./src/screens/Page2"
-
-// const Stack = createStackNavigator(
-//   {
-//     Home: {screen: Home},
-//     page2: {screen: Page2},
-//   },
-//   {}
-// );
-
-// const WrappedStack = ({ t }) =>{
-//   return <Stack screenProps={{ t }}/>;
-// };
-
-// const RelodAppOnLanguageChange = translate('common', {
-//   bindI18n: 'languageChanged',
-//   bindStore: false,
-// }) (WrappedStack);
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +41,10 @@ class App extends Component {
     try {
       await Expo.Font.loadAsync({
         "GTWalsheim-Medium": require("./assets/fonts/GT-Walsheim-Medium.ttf"),
-        "GTWalsheim-Black": require("./assets/fonts/GT-Walsheim-Black.ttf")
+        "GTWalsheim-Black": require("./assets/fonts/GT-Walsheim-Black.ttf"),
+        Roboto: require("native-base/Fonts/Roboto.ttf"),
+        Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+        Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
       });
       this.setState({ fontLoaded: true });
     } catch (error) {

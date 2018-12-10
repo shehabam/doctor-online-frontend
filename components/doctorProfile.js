@@ -94,14 +94,12 @@ class DoctorProfile extends Component {
           zIndex: 1
         }}
       >
-
         <Row
           size={0.75}
           style={{
-            backgroundColor: "green"
+            backgroundColor: "white"
           }}
         >
-
           <View
             style={{
               position: "absolute",
@@ -113,16 +111,14 @@ class DoctorProfile extends Component {
               height: this.HeaderMaxHeight
             }}
           />
-
         </Row>
 
         <Row
           size={3}
           style={{
-            backgroundColor: "red"
+            backgroundColor: "white"
           }}
         >
-
           <View
             style={{
               borderColor: "#CCCCCC",
@@ -142,11 +138,8 @@ class DoctorProfile extends Component {
               }
             }}
           >
-
             <Button transparent onPress={() => this.likeButton()}>
-
               {this.chnageHeart(profile.id)}
-
             </Button>
 
             <Text style={styles.userViewsText}>Views {profile.viewers}</Text>
@@ -167,13 +160,11 @@ class DoctorProfile extends Component {
                 zIndex: 20
               }}
             >
-
               <Thumbnail
                 style={styles.thumbnailStyle}
                 large
                 source={{ uri: profile.img }}
               />
-
             </View>
 
             <View
@@ -185,7 +176,6 @@ class DoctorProfile extends Component {
                 flexDirection: "row"
               }}
             >
-
               {to(filledStars).map(key => (
                 <Icon
                   name="ios-star"
@@ -212,7 +202,6 @@ class DoctorProfile extends Component {
                   }}
                 />
               ))}
-
             </View>
 
             <View
@@ -223,7 +212,6 @@ class DoctorProfile extends Component {
                 justifyContent: "center"
               }}
             >
-
               <Text style={[styles.visitorsText]}>
                 From {profile.rating_set.length} Visitors
               </Text>
@@ -231,9 +219,7 @@ class DoctorProfile extends Component {
               <Text style={[styles.doctorName]}>
                                                 Doctor:{" "}
                 {profile.user.first_name} {profile.user.last_name}
-
               </Text>
-
             </View>
 
             <View
@@ -245,22 +231,17 @@ class DoctorProfile extends Component {
                 flexDirection: "row"
               }}
             >
-
               <Text style={[styles.doctordesc1]}>{profile.description}</Text>
-
             </View>
-
           </View>
-
         </Row>
 
         <Row
           size={3.5}
           style={{
-            backgroundColor: "yellow"
+            backgroundColor: "white"
           }}
         >
-
           <View
             style={{
               borderColor: "#CCCCCC",
@@ -279,21 +260,17 @@ class DoctorProfile extends Component {
             }}
           >
             <Left>
-
               <Icon
                 type="EvilIcons"
                 name="location"
                 style={styles.locationIcon}
               >
-
                 <Text
                   style={styles.locationText}
                   onPress={() => LinkingIOS.openURL(profile.google_maps)}
                 >
                                                   google maps
-
                 </Text>
-
               </Icon>
             </Left>
 
@@ -310,7 +287,6 @@ class DoctorProfile extends Component {
                 alignSelf: "center"
               }}
             >
-
               <Button
                 rounded
                 warning
@@ -322,24 +298,18 @@ class DoctorProfile extends Component {
                   })
                 } // onPress={() => this.props.navigation.navigate('TimeDatePicker')}
               >
-
                 <Text style={styles.buttonText}>Today</Text>
-
               </Button>
-
             </View>
-
           </View>
-
         </Row>
 
         <Row
           size={1.25}
           style={{
-            backgroundColor: "purple"
+            backgroundColor: "white"
           }}
         >
-
           <View
             style={{
               borderColor: "#CCCCCC",
@@ -357,47 +327,31 @@ class DoctorProfile extends Component {
               }
             }}
           >
-
             <Row>
-
               <Col style={{ marginTop: 20 }}>
-
                 <Icon
                   type="EvilIcons"
                   name="location"
                   style={styles.locationIcon}
                 >
-
                   <Text style={styles.thirdText}>Fees: {profile.fees} KD</Text>
-
                 </Icon>
-
               </Col>
 
               <Col style={{ marginTop: 20 }}>
-
                 <Right>
-
                   <Icon type="Feather" name="clock" style={styles.clockIcon}>
-
                     <Text style={styles.thirdText}>
                       Waiting Time: {profile.waiting_time}
                     </Text>
-
                   </Icon>
-
                 </Right>
-
               </Col>
-
             </Row>
-
           </View>
-
         </Row>
         {/*                 <Row size={0.7} style={{
                     backgroundColor: 'black',}}/> */}
-
       </Grid>
     );
   }

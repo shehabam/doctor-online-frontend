@@ -109,7 +109,6 @@ class FirstPage extends Component {
           <Text style={styles.loginText}>Login</Text>
         </TouchableHighlight> */}
         </Grid>
-        //{" "}
       </ImageBackground>
     );
   }

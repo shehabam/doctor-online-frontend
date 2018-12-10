@@ -48,7 +48,8 @@ class Edit extends Component {
       // building: '',
       // floor: '',
       // google_maps: '',
-      descriptionValue: "" // service: ''
+      descriptionValue: ""
+      // service: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -84,9 +85,7 @@ class Edit extends Component {
     if (!Store.editProf) {
       return (
         <View>
-
           <Text>nothing is here</Text>
-
         </View>
       );
     }
@@ -95,17 +94,9 @@ class Edit extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
-
-        {/* <Right>
-                    <Thumbnail style={styles.thumbnailStyle} large source={{ uri: Store.doctorProfile.img }} />
-                </Right>  */}
-
         <Row>
-
           <Text>waiting_time: </Text> <Text note>please enter HH:MM:SS</Text>
-
         </Row>
-
         <Button
           rounded
           transparent
@@ -116,26 +107,18 @@ class Edit extends Component {
             height: "5%"
           }}
         >
-
           <Input
             style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
             placeholder="waiting_time"
             autoCapitalize="none"
             onChangeText={w => (waiting_time = w)}
           >
-
             <Text>{waiting_time}</Text>
-
           </Input>
-
         </Button>
-
         <Row>
-
           <Text>fees: </Text> <Text note>please enter an integer</Text>
-
         </Row>
-
         <Button
           rounded
           transparent
@@ -146,26 +129,18 @@ class Edit extends Component {
             height: "5%"
           }}
         >
-
           <Input
             style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
             placeholder="fees"
             autoCapitalize="none"
             onChangeText={f => (fees = f)}
           >
-
             <Text>{Store.editProf.fees}</Text>
-
           </Input>
-
         </Button>
-
         <Row>
-
           <Text>opening_file: </Text> <Text note>please enter an integer</Text>
-
         </Row>
-
         <Button
           rounded
           transparent
@@ -176,26 +151,18 @@ class Edit extends Component {
             height: "5%"
           }}
         >
-
           <Input
             style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
             placeholder="opening_file"
             autoCapitalize="none"
             onChangeText={o => (opening_file = o)}
           >
-
             <Text>{Store.editProf.opening_file}</Text>
-
           </Input>
-
         </Button>
-
         <Row>
-
           <Text>block: </Text> <Text note>please enter an integer</Text>
-
         </Row>
-
         <Button
           rounded
           transparent
@@ -206,26 +173,18 @@ class Edit extends Component {
             height: "5%"
           }}
         >
-
           <Input
             style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
             placeholder="block"
             autoCapitalize="none"
             onChangeText={b => (block = b)}
           >
-
             <Text>{Store.editProf.block}</Text>
-
           </Input>
-
         </Button>
-
         <Row>
-
           <Text>street: </Text> <Text note>please enter an integer</Text>
-
         </Row>
-
         <Button
           rounded
           transparent
@@ -236,26 +195,18 @@ class Edit extends Component {
             height: "5%"
           }}
         >
-
           <Input
             style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
             placeholder="street"
             autoCapitalize="none"
             onChangeText={s => (street = s)}
           >
-
             <Text>{Store.editProf.street}</Text>
-
           </Input>
-
         </Button>
-
         <Row>
-
           <Text>building: </Text> <Text note>please enter an integer</Text>
-
         </Row>
-
         <Button
           rounded
           transparent
@@ -266,26 +217,18 @@ class Edit extends Component {
             height: "5%"
           }}
         >
-
           <Input
             style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
             placeholder="building"
             autoCapitalize="none"
             onChangeText={bu => (building = bu)}
           >
-
             <Text>{Store.editProf.building}</Text>
-
           </Input>
-
         </Button>
-
         <Row>
-
           <Text>floor: </Text> <Text note>please enter an integer</Text>
-
         </Row>
-
         <Button
           rounded
           transparent
@@ -296,26 +239,18 @@ class Edit extends Component {
             height: "5%"
           }}
         >
-
           <Input
             style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
             placeholder="floor"
             autoCapitalize="none"
             onChangeText={f => (floor = f)}
           >
-
             <Text>{Store.editProf.floor}</Text>
-
           </Input>
-
         </Button>
-
         <Row>
-
           <Text>google_maps: </Text> <Text note>please enter a link</Text>
-
         </Row>
-
         <Button
           rounded
           transparent
@@ -326,26 +261,18 @@ class Edit extends Component {
             height: "4%"
           }}
         >
-
           <Input
             style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
             placeholder="google_maps"
             autoCapitalize="none"
             onChangeText={g => (google_maps = g)}
           >
-
             <Text>{Store.editProf.google_maps}</Text>
-
           </Input>
-
         </Button>
-
         <Row>
-
           <Text>description: </Text>
-
         </Row>
-
         <Button
           transparent
           style={{
@@ -355,7 +282,6 @@ class Edit extends Component {
             height: "10%"
           }}
         >
-
           <Input
             style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
             placeholder="description"
@@ -363,19 +289,12 @@ class Edit extends Component {
             onChangeText={e => this.handleChange(e)}
             value={Store.editProf.description}
           >
-
             <Text>{Store.editProf.description}</Text>
-
           </Input>
-
         </Button>
-
         <Row>
-
           <Text>service: </Text>
-
         </Row>
-
         <Button
           transparent
           style={{
@@ -385,30 +304,22 @@ class Edit extends Component {
             height: "10%"
           }}
         >
-
           <Input
             style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
             placeholder="service"
             autoCapitalize="none"
             onChangeText={se => (service = se)}
           >
-
             <Text>{Store.editProf.service}</Text>
-
           </Input>
-
         </Button>
-
         <Button
           style={{ backgroundColor: "#00bfff", marginBottom: 5, marginTop: 5 }}
           full
           onPress={() => this.handleSubmit()}
         >
-
           <Text style={styles.doctorName}>confirm</Text>
-
         </Button>
-
       </View>
     );
   }
