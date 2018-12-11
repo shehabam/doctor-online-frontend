@@ -91,7 +91,8 @@ i18n
           doctor: "Doctor",
           today: "Today",
           doctorprofile: "Doctor Profile",
-          views: "Views"
+          views: "Views",
+          speciality: "Choose by Speciality"
         }
       },
       ar: {
@@ -159,7 +160,8 @@ i18n
           doctor: "طبيب",
           today: "اليوم",
           doctorprofile: "الملف الشخصي الطبيب",
-          views: "الآراء"
+          views: "الآراء",
+          speciality: "اختر من خلال التخصص"
         }
       }
     },
