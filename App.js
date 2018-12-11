@@ -33,6 +33,7 @@ import RegisterPage from "./components/RegisterPage";
 import RatingPage from "./components/RatingPage";
 import { withNamespaces } from "react-i18next";
 import i18n from "./utils/i18n";
+let iconName;
 
 const WrappedStack = ({ t }) => <SuperNav screenProps={{ t }} />;
 const ReloadAppOnLanguageChange = withNamespaces("common", {
@@ -156,17 +157,32 @@ const OffersTab = createStackNavigator(
 
 const BottomTab = createBottomTabNavigator(
   {
-    Home: FirstPageTab,
-    Appointment: AppointmentTab,
-    Offers: OffersTab,
-    More: MoreTab
+    Home: {
+      screen: FirstPageTab
+    },
+    Appointment: {
+      screen: AppointmentTab
+    },
+    Offers: {
+      screen: OffersTab
+    },
+    More: {
+      screen: MoreTab
+    }
   },
   {
     initialRouteName: "Home",
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: ({ navigation, screenProps }) => ({
+      title:
+        navigation.state.routeName === "Home"
+          ? screenProps.t("other:home")
+          : navigation.state.routeName === "Appointment"
+            ? screenProps.t("other:home")
+            : navigation.state.routeName === "Offers"
+              ? screenProps.t("other:offers")
+              : screenProps.t("other:more"),
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
-        let iconName;
         if (routeName === "Home") {
           iconName = "search";
         } else if (routeName === "Appointment") {
