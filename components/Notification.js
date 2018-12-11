@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { TouchableOpacity } from "react-native";
 import { observer } from "mobx-react";
 import Store from "../stores/store";
 import FooterApp from "./footer";
@@ -34,6 +35,7 @@ import {
 } from "react-native";
 import CollapsingToolbar from "react-native-collapse-view";
 import authStore from "../stores/authStore";
+import { from } from "rxjs/observable/from";
 
 class Notification extends Component {
   constructor(props) {
@@ -54,12 +56,15 @@ class Notification extends Component {
 
     return (
       <ScrollView style={{ padding: 10 }}>
-        <Text
-          onPress={this._presentLocalNotificationAsync}
-          title="notification immediately"
-        />
+        <TouchableOpacity onPress={this._presentLocalNotificationAsync}>
+          <Text>notification immediately</Text>
+        </TouchableOpacity>
+
         <Text>Push Notifications</Text>
-        <Text onPress={this._sendNotificationAsync} title="Send me" />
+
+        <TouchableOpacity onPress={this._sendNotificationAsync}>
+          <Text>Send Me</Text>
+        </TouchableOpacity>
       </ScrollView>
     );
   }
@@ -95,8 +100,8 @@ class Notification extends Component {
   _presentLocalNotificationAsync = async () => {
     await this._obtainUserFacingNotifPermissionsAsync();
     Notifications.presentLocalNotificationAsync({
-      title: "Here is a local notification!",
-      body: "This is the body",
+      title: "This project allowes push notification",
+      body: "You can see Push Notification perfectly. Good news!!!",
       data: {
         hello: "there"
       },
