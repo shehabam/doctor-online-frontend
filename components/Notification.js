@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { TouchableOpacity } from "react-native";
 import { observer } from "mobx-react";
 import Store from "../stores/store";
 import FooterApp from "./footer";
@@ -35,7 +34,6 @@ import {
 } from "react-native";
 import CollapsingToolbar from "react-native-collapse-view";
 import authStore from "../stores/authStore";
-import { from } from "rxjs/observable/from";
 
 class Notification extends Component {
   constructor(props) {
@@ -56,15 +54,15 @@ class Notification extends Component {
 
     return (
       <ScrollView style={{ padding: 10 }}>
-        <TouchableOpacity onPress={this._presentLocalNotificationAsync}>
+        <Text onPress={this._presentLocalNotificationAsync}>
           <Text>notification immediately</Text>
-        </TouchableOpacity>
+        </Text>
 
         <Text>Push Notifications</Text>
 
-        <TouchableOpacity onPress={this._sendNotificationAsync}>
+        <Text onPress={this._sendNotificationAsync}>
           <Text>Send Me</Text>
-        </TouchableOpacity>
+        </Text>
       </ScrollView>
     );
   }
