@@ -102,6 +102,17 @@ class More extends Component {
                 </Text>
               </Right>
             </ListItem>
+            <ListItem
+              onPress={() => this.props.navigation.navigate("Notification")}
+            >
+              <Left>
+                <Icon name="home" large style={{ color: "#00bfff" }} />
+                <Text>{t("more:notification")}</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
+              </Right>
+            </ListItem>
           </List>
         </TouchableHighlight>
         {/* <FooterApp /> */}

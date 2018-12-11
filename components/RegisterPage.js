@@ -16,7 +16,6 @@ import {
   Input
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { SocialIcon } from "react-native-elements";
 import {
   StyleSheet,
   TouchableHighlight,

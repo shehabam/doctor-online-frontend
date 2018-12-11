@@ -14,9 +14,6 @@ import {
 import { StyleSheet, TouchableHighlight, Image } from "react-native";
 import { withNamespaces } from "react-i18next";
 
-import { Col, Row, Grid } from "react-native-easy-grid";
-import { colors } from "react-native-elements";
-
 class FooterApp extends Component {
   render() {
     const { t, i18n, navigation } = this.props;

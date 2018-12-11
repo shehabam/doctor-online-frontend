@@ -34,7 +34,8 @@ i18n
           aboutus: "About Us",
           logout: "LogOut",
           medicalinformation: "medical information",
-          commingsoon: "Comming Soon"
+          commingsoon: "Comming Soon",
+          notification: "Notification"
         },
         settings: {
           editprofile: "Edit my Profile",
@@ -75,7 +76,8 @@ i18n
           aboutus: "معلومات عنا",
           logout: "الخروج",
           medicalinformation: "معلومات طبية",
-          commingsoon: "قريبا"
+          commingsoon: "قريبا",
+          notification: "إعلام"
         },
         settings: {
           editprofile: "تعديل ملفي الشخصي",
