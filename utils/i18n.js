@@ -65,7 +65,33 @@ i18n
         other: {
           or: "Or",
           register: "REGISTER",
-          search: "Search"
+          search: "Search",
+          home: "Home",
+          appointment: "Appointment",
+          offers: "Offers",
+          more: "More",
+          chooseyourarea: "Choose Your Area",
+          chooseyourdoctor: "Choose Your Doctor",
+          doctor: "Doctor",
+          block: "Block",
+          street: "Street",
+          building: "Building",
+          floor: "Floor",
+          profession: "Profession",
+          waitingtime: "waiting Time",
+          votes: "votes",
+          book: "Book",
+          bookdescription:
+            "Book now and you will recieve full address details and clinic number",
+          fees: "Fees",
+          from: "from",
+          to: "To",
+          googlemaps: "Google Map",
+          visitors: "Visitors",
+          doctor: "Doctor",
+          today: "Today",
+          doctorprofile: "Doctor Profile",
+          views: "Views"
         }
       },
       ar: {
@@ -107,7 +133,33 @@ i18n
         other: {
           or: "أو",
           register: "تسجيل",
-          search: "بحث"
+          search: "بحث",
+          home: "الصفحة الرئيسية",
+          appointment: "موعد",
+          offers: "عروض",
+          more: "أكثر من",
+          chooseyourarea: "اختر منطقتك",
+          chooseyourdoctor: "اختر طبيبك",
+          doctor: "طبيب",
+          block: "منع",
+          street: "شارع",
+          building: "بناء",
+          floor: "أرضية",
+          profession: "مهنة",
+          waitingtime: "وقت الانتظار",
+          votes: "الأصوات",
+          book: "كتاب",
+          bookdescription:
+            "احجز الآن وستتلقى تفاصيل العنوان الكامل ورقم العيادة",
+          fees: "رسوم",
+          from: "من عند",
+          to: "إلى",
+          googlemaps: "خرائط جوجل",
+          visitors: "الزائرين",
+          doctor: "طبيب",
+          today: "اليوم",
+          doctorprofile: "الملف الشخصي الطبيب",
+          views: "الآراء"
         }
       }
     },

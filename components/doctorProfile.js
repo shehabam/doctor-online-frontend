@@ -26,14 +26,15 @@ import {
 } from "react-native";
 import Store from "../stores/store";
 import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
+import { withNamespaces } from "react-i18next";
 
 class DoctorProfile extends Component {
-  static navigationOptions = {
-    title: "Doctor Profile",
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: screenProps.t("other:doctorprofile"),
     headerStyle: {
       backgroundColor: "#00bfff"
     }
-  };
+  });
 
   likeSwitch = false;
   HeaderMaxHeight = 40;
@@ -68,6 +69,8 @@ class DoctorProfile extends Component {
   }
 
   render() {
+    const { t, i18n, navigation } = this.props;
+
     const profileID = this.props.navigation.getParam("cat");
     const profile = Store.bringToProfile(profileID);
     const value = Store.StarRating();
@@ -142,7 +145,9 @@ class DoctorProfile extends Component {
               {this.chnageHeart(profile.id)}
             </Button>
 
-            <Text style={styles.userViewsText}>Views {profile.viewers}</Text>
+            <Text style={styles.userViewsText}>
+              {t("other:views")} {profile.viewers}
+            </Text>
 
             <View
               style={{
@@ -213,12 +218,14 @@ class DoctorProfile extends Component {
               }}
             >
               <Text style={[styles.visitorsText]}>
-                From {profile.rating_set.length} Visitors
+                {t("other:from")} {profile.rating_set.length}{" "}
+                {t("other:visitors")}
               </Text>
 
               <Text style={[styles.doctorName]}>
-                                                Doctor:{" "}
-                {profile.user.first_name} {profile.user.last_name}
+
+                {t("other:doctor")}: {profile.user.first_name}{" "}
+                {profile.user.last_name}
               </Text>
             </View>
 
@@ -269,14 +276,15 @@ class DoctorProfile extends Component {
                   style={styles.locationText}
                   onPress={() => LinkingIOS.openURL(profile.google_maps)}
                 >
-                                                  google maps
+                  {t("other:googlemaps")}
                 </Text>
               </Icon>
             </Left>
 
             <Text style={styles.BookingnowStyle}>
-                                          Book now and you will recieve full
-              address details and clinic number
+              {" "}
+
+              {t("other:bookdescription")}
             </Text>
 
             <View
@@ -298,7 +306,7 @@ class DoctorProfile extends Component {
                   })
                 } // onPress={() => this.props.navigation.navigate('TimeDatePicker')}
               >
-                <Text style={styles.buttonText}>Today</Text>
+                <Text style={styles.buttonText}>{t("other:today")}</Text>
               </Button>
             </View>
           </View>
@@ -334,7 +342,9 @@ class DoctorProfile extends Component {
                   name="location"
                   style={styles.locationIcon}
                 >
-                  <Text style={styles.thirdText}>Fees: {profile.fees} KD</Text>
+                  <Text style={styles.thirdText}>
+                    {t("other:fees")}: {profile.fees} KD
+                  </Text>
                 </Icon>
               </Col>
 
@@ -342,7 +352,7 @@ class DoctorProfile extends Component {
                 <Right>
                   <Icon type="Feather" name="clock" style={styles.clockIcon}>
                     <Text style={styles.thirdText}>
-                      Waiting Time: {profile.waiting_time}
+                      {t("other:waitingtime")}: {profile.waiting_time}
                     </Text>
                   </Icon>
                 </Right>
@@ -357,7 +367,10 @@ class DoctorProfile extends Component {
   }
 }
 
-export default observer(DoctorProfile);
+//export default observer(DoctorProfile);
+export default withNamespaces(["other", "common"], { wait: true })(
+  DoctorProfile
+);
 
 const styles = StyleSheet.create({
   wrapper: {

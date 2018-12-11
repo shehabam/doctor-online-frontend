@@ -26,12 +26,12 @@ import { StyleSheet, TouchableHighlight, ScrollView } from "react-native";
 import FooterApp from "./footer";
 
 class Area extends Component {
-  static navigationOptions = {
-    title: "Choose Your Area",
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: screenProps.t("other:chooseyourarea"),
     headerStyle: {
       backgroundColor: "#00bfff"
     }
-  };
+  });
 
   showAreas(id) {
     const sortableList = Store.Area;
