@@ -177,7 +177,7 @@ const BottomTab = createBottomTabNavigator(
         navigation.state.routeName === "Home"
           ? screenProps.t("other:home")
           : navigation.state.routeName === "Appointment"
-            ? screenProps.t("other:home")
+            ? screenProps.t("other:appointment")
             : navigation.state.routeName === "Offers"
               ? screenProps.t("other:offers")
               : screenProps.t("other:more"),

@@ -100,7 +100,11 @@ i18n
           searchplaceholder: "Search By Products...",
           loading: "loading...",
           confirm: "Confirm",
-          showdatepicker: "Show Datepicker"
+          showdatepicker: "Show Datepicker",
+          ratingpage: "Rating Page",
+          ratingvisiterror: "You Need To LogIn Or Register To Rate Any Dactor",
+          ratingcontent: "How would you describe your visit to Doctor",
+          ratealert: "your rate has been Submited"
         }
       },
       ar: {

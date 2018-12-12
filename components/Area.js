@@ -67,7 +67,6 @@ class Area extends Component {
   }
   render() {
     Store.StarRating();
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", Store);
     if (!Store.city) return <View style={styles.thumbnailStyle} />;
 
     let listOfcities = Store.city

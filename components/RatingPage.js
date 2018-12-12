@@ -64,7 +64,7 @@ class RatingPage extends Component {
 
   confirmPressed(doctorID, rate, user) {
     Store.postRate(doctorID, rate, user);
-    alert("your rate has been Submited");
+    alert(t("other:ratealert"));
     this.props.navigation.goBack();
   }
 
@@ -117,7 +117,7 @@ class RatingPage extends Component {
     if (!authStore.isAuthenticated) {
       return (
         <View style={styles.notlogin}>
-          <Text>You Need To LogIn Or Register To Rate Any Dactor</Text>
+          <Text>{t("other:ratingvisiterror")}</Text>
         </View>
       );
     }
@@ -129,9 +129,7 @@ class RatingPage extends Component {
       >
         <Row size={4} style={{ flex: 1, justifyContent: "center" }}>
           <View style={styles.textContainer}>
-            <Text style={styles.text}>
-              How would you describe your visit to Doctor:
-            </Text>
+            <Text style={styles.text}>{t("other:ratingcontent")}:</Text>
           </View>
         </Row>
         <Row size={4} style={{ flex: 1, justifyContent: "center" }}>
@@ -182,7 +180,7 @@ class RatingPage extends Component {
               )
             }
           >
-            <Text style={styles.ConfirmButtomText}>Confirm</Text>
+            <Text style={styles.ConfirmButtomText}>{t("other:confirm")}</Text>
           </Button>
         </Row>
       </Grid>
