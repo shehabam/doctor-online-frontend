@@ -98,6 +98,7 @@ class TimeDatePicker extends Component {
 
   _handleDatePicked = SelectedDate => {
     console.log("A date has been picked: ", SelectedDate);
+    this.setState({ res: SelectedDate.toString().slice(0, -15) });
     this._hideDateTimePicker();
   };
 
@@ -146,6 +147,7 @@ class TimeDatePicker extends Component {
             <Text>your reservation is: {this.state.res}</Text>
           </Card>
         </Container>
+
         <Container>
           <TouchableOpacity onPress={this._showDateTimePicker}>
             <Text style={styles.secondText}>{t("other:showdatepicker")}</Text>
@@ -158,11 +160,22 @@ class TimeDatePicker extends Component {
             />
           </TouchableOpacity>
         </Container>
-        <Container>
-          <Button onPress={() => this._reservation} full rounded>
-            <Text style={styles.firstText}>{t("other:confirm")}</Text>
-          </Button>
-        </Container>
+
+        {this.state.res ? (
+          <Container>
+            <Text style={{ textAlign: "center", fontSize: 18 }}>
+              Available Time
+            </Text>
+
+            <Text style={{ textAlign: "center", marginBottom: 10 }}>
+              {this.state.res}
+            </Text>
+
+            <Button onPress={() => this._reservation} full rounded>
+              <Text style={styles.firstText}>{t("other:confirm")}</Text>
+            </Button>
+          </Container>
+        ) : null}
       </View>
     );
   }

@@ -89,6 +89,8 @@ i18n
           googlemaps: "Google Map",
           visitors: "Visitors",
           today: "Today",
+          tomorrow: "Tomorrow",
+          aftertomorrow: "After tomorrow",
           doctorprofile: "Doctor Profile",
           views: "Views",
           speciality: "Choose by Speciality",
@@ -185,7 +187,9 @@ i18n
           ratingpage: "تصنيف الصفحة",
           ratingvisiterror: "تحتاج إلى تسجيل الدخول أو التسجيل لمعدل أي طبيب",
           ratingcontent: "كيف تصف زيارتك إلى الطبيب",
-          ratealert: "تم إرسال المعدل الخاص بك"
+          ratealert: "تم إرسال المعدل الخاص بك",
+          tomorrow: "Tomorrow",
+          aftertomorrow: "After tomorrow"
         }
       }
     },

@@ -23,11 +23,13 @@ import {
   TouchableHighlight,
   Image,
   AppRegistry,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from "react-native";
 import Store from "../stores/store";
 import { scrollViewHorizontal } from "react-native-gesture-handler";
 import { withNamespaces } from "react-i18next";
+import Swiper from "react-native-swiper";
 
 class DoctorProfile extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
@@ -71,6 +73,9 @@ class DoctorProfile extends Component {
 
   render() {
     const { t, i18n, navigation } = this.props;
+
+    const month = new Date().getMonth() + 1;
+    const day = new Date().getDate();
 
     const profileID = this.props.navigation.getParam("cat");
     const profile = Store.bringToProfile(profileID);
@@ -287,28 +292,239 @@ class DoctorProfile extends Component {
                 {t("other:bookdescription")}
               </Text>
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignContent: "center",
-                  alignSelf: "center"
-                }}
-              >
-                <Button
-                  rounded
-                  warning
-                  style={styles.bookingButton}
-                  onPress={() =>
-                    this.props.navigation.navigate("TimeDatePicker", {
-                      cat: profile.id,
-                      store: Store
-                    })
-                  } // onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-                >
-                  <Text style={styles.buttonText}>{t("other:today")}</Text>
-                </Button>
-              </View>
+              <Swiper style={styles.wrapper} showsButtons={true}>
+                <View style={styles.slide1}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignContent: "center",
+                      paddingHorizontal: 6
+                    }}
+                  >
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14 }
+                          ]}
+                        >
+                          {t("other:today")}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14 }
+                          ]}
+                        >
+                          {t("other:tomorrow")}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14, textAlign: "center" }
+                          ]}
+                        >
+                          {day}/{month}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={styles.slide1}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignContent: "center",
+                      paddingHorizontal: 6
+                    }}
+                  >
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14 }
+                          ]}
+                        >
+                          {day + 1}/{month}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14 }
+                          ]}
+                        >
+                          {day + 2}/{month}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14, textAlign: "center" }
+                          ]}
+                        >
+                          {day + 3}/{month}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={styles.slide1}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignContent: "center",
+                      paddingHorizontal: 6
+                    }}
+                  >
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14 }
+                          ]}
+                        >
+                          {day + 4}/{month}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14 }
+                          ]}
+                        >
+                          {day + 5}/{month}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14, textAlign: "center" }
+                          ]}
+                        >
+                          {day + 6}/{month}{" "}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </Swiper>
             </View>
           </Row>
 
@@ -374,6 +590,23 @@ export default withNamespaces(["other", "common"], { wait: true })(
 );
 
 const styles = StyleSheet.create({
+  card: {
+    borderRadius: 6,
+    height: 100,
+    width: "20%"
+  },
+  cardHeader: {
+    backgroundColor: "#ff7000",
+    flex: 1,
+    borderRadius: 20,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%"
+  },
+  buttonText: {
+    fontSize: 11
+  },
   // wrapper: {
   //   marginTop: 80
   // },
@@ -470,11 +703,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   bookingButton: {
-    width: "25%",
-    alignSelf: "center",
-    alignContent: "center",
+    width: "28%",
+    alignItems: "center",
     justifyContent: "center",
-    margin: 5
+    margin: 10,
+    borderColor: "#ddd",
+    borderWidth: 1,
+    borderRadius: 20,
+    height: 40
   },
   // ymenysarButtons: {
   //   color: "#48C1F6"
@@ -500,5 +736,29 @@ const styles = StyleSheet.create({
   clockIcon: {
     color: "#48C1F6",
     fontSize: 30
+  },
+  wrapper: {
+    height: 130,
+    flex: 1
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  text: {
+    color: "#fff",
+    fontSize: 30,
+    fontWeight: "bold"
   }
 });

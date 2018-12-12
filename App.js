@@ -54,7 +54,8 @@ class App extends Component {
         "GTWalsheim-Black": require("./assets/fonts/GT-Walsheim-Black.ttf"),
         Roboto: require("native-base/Fonts/Roboto.ttf"),
         Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-        Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
+        Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf"),
+        Arial: require("native-base/Fonts/Roboto.ttf")
       });
       this.setState({ fontLoaded: true });
     } catch (error) {
