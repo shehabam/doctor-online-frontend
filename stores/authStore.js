@@ -6,9 +6,11 @@ import jwt_decode from "jwt-decode";
 // Utils
 import setAuthToken from "../utils/setAuthToken";
 
+const BASEURL = "http://207.154.246.97";
+
 const instance = axios.create({
   // baseURL: "http://192.168.100.244:8000/"
-  baseURL: "http://207.154.246.97"
+  baseURL: BASEURL
 });
 
 class Store {

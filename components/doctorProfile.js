@@ -22,10 +22,11 @@ import {
   StyleSheet,
   TouchableHighlight,
   Image,
-  AppRegistry
+  AppRegistry,
+  ScrollView
 } from "react-native";
 import Store from "../stores/store";
-import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
+import { scrollViewHorizontal } from "react-native-gesture-handler";
 import { withNamespaces } from "react-i18next";
 
 class DoctorProfile extends Component {
@@ -90,277 +91,279 @@ class DoctorProfile extends Component {
       return <View />;
     }
     return (
-      <Grid
-        style={{
-          backgroundColor: "orange",
-          position: "relative",
-          zIndex: 1
-        }}
-      >
-        <Row
-          size={0.75}
+      <ScrollView>
+        <Grid
           style={{
-            backgroundColor: "white"
+            backgroundColor: "orange",
+            position: "relative",
+            zIndex: 1
           }}
         >
-          <View
+          <Row
+            size={0.75}
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              backgroundColor: "white",
-              zIndex: 2,
-              height: this.HeaderMaxHeight
-            }}
-          />
-        </Row>
-
-        <Row
-          size={3}
-          style={{
-            backgroundColor: "white"
-          }}
-        >
-          <View
-            style={{
-              borderColor: "#CCCCCC",
-              position: "relative",
-              zIndex: 2,
-              borderWidth: 0.5,
-              backgroundColor: "white",
-              width: "97%",
-              margin: "1.75%",
-              shadowColor: "rgba(0,0,0,0.9)",
-              shadowRadius: 4,
-              top: -1,
-              shadowOpacity: 0.3,
-              shadowOffset: {
-                height: 4,
-                width: 0
-              }
+              backgroundColor: "white"
             }}
           >
-            <Button transparent onPress={() => this.likeButton()}>
-              {this.chnageHeart(profile.id)}
-            </Button>
-
-            <Text style={styles.userViewsText}>
-              {t("other:views")} {profile.viewers}
-            </Text>
-
             <View
               style={{
-                height: this.ProfileImageMaxHeight,
-                width: this.ProfileImageMinHeight,
-                borderRadius: this.ProfileImageMaxHeight / 2,
-                borderColor: "white",
-                borderWidth: 3,
-                marginTop:
-                  this.HeaderMaxHeight - this.HalfProfileImageMaxHeight,
-                marginLeft: "45%",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                backgroundColor: "white",
+                zIndex: 2,
+                height: this.HeaderMaxHeight
+              }}
+            />
+          </Row>
+
+          <Row
+            size={3}
+            style={{
+              backgroundColor: "white"
+            }}
+          >
+            <View
+              style={{
+                borderColor: "#CCCCCC",
                 position: "relative",
-                top: -115,
-
-                zIndex: 20
+                zIndex: 2,
+                borderWidth: 0.5,
+                backgroundColor: "white",
+                width: "97%",
+                margin: "1.75%",
+                shadowColor: "rgba(0,0,0,0.9)",
+                shadowRadius: 4,
+                top: -1,
+                shadowOpacity: 0.3,
+                shadowOffset: {
+                  height: 4,
+                  width: 0
+                }
               }}
             >
-              <Thumbnail
-                style={styles.thumbnailStyle}
-                large
-                source={{ uri: profile.img }}
-              />
-            </View>
-
-            <View
-              style={{
-                top: -45,
-                alignSelf: "center",
-                alignContent: "center",
-                justifyContent: "center",
-                flexDirection: "row"
-              }}
-            >
-              {to(filledStars).map(key => (
-                <Icon
-                  name="ios-star"
-                  style={{ color: "yellow" }}
-                  {...{ key, size }}
-                />
-              ))}
-
-              {halfStar && (
-                <Icon
-                  name="ios-star-half"
-                  style={{ color: "yellow" }}
-                  {...{ size }}
-                />
-              )}
-
-              {to(emptyStars).map(key => (
-                <Icon
-                  name="ios-star-outline"
-                  style={{ color: "yellow" }}
-                  {...{
-                    key,
-                    size
-                  }}
-                />
-              ))}
-            </View>
-
-            <View
-              style={{
-                top: -45,
-                alignSelf: "center",
-                alignContent: "center",
-                justifyContent: "center"
-              }}
-            >
-              <Text style={[styles.visitorsText]}>
-                {t("other:from")} {profile.rating_set.length}{" "}
-                {t("other:visitors")}
-              </Text>
-
-              <Text style={[styles.doctorName]}>
-                {t("other:doctor")}: {profile.user.first_name}{" "}
-                {profile.user.last_name}
-              </Text>
-            </View>
-
-            <View
-              style={{
-                top: -45,
-                alignSelf: "center",
-                alignContent: "center",
-                justifyContent: "center",
-                flexDirection: "row"
-              }}
-            >
-              <Text style={[styles.doctordesc1]}>{profile.description}</Text>
-            </View>
-          </View>
-        </Row>
-
-        <Row
-          size={3.5}
-          style={{
-            backgroundColor: "white"
-          }}
-        >
-          <View
-            style={{
-              borderColor: "#CCCCCC",
-              zIndex: 2,
-              borderWidth: 0.5,
-              backgroundColor: "white",
-              width: "97%",
-              margin: "1.75%",
-              shadowColor: "rgba(0,0,0,0.9)",
-              shadowRadius: 4,
-              shadowOpacity: 0.3,
-              shadowOffset: {
-                height: 4,
-                width: 0
-              }
-            }}
-          >
-            <Left>
-              <Icon
-                type="EvilIcons"
-                name="location"
-                style={styles.locationIcon}
-              >
-                <Text
-                  style={styles.locationText}
-                  // onPress={() => LinkingIOS.openURL(profile.google_maps)}
-                >
-                  {t("other:googlemaps")}
-                </Text>
-              </Icon>
-            </Left>
-
-            <Text style={styles.BookingnowStyle}>
-              {" "}
-              {t("other:bookdescription")}
-            </Text>
-
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignContent: "center",
-                alignSelf: "center"
-              }}
-            >
-              <Button
-                rounded
-                warning
-                style={styles.bookingButton}
-                onPress={() =>
-                  this.props.navigation.navigate("TimeDatePicker", {
-                    cat: profile.id,
-                    store: Store
-                  })
-                } // onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-              >
-                <Text style={styles.buttonText}>{t("other:today")}</Text>
+              <Button transparent onPress={() => this.likeButton()}>
+                {this.chnageHeart(profile.id)}
               </Button>
-            </View>
-          </View>
-        </Row>
 
-        <Row
-          size={1.25}
-          style={{
-            backgroundColor: "white"
-          }}
-        >
-          <View
+              <Text style={styles.userViewsText}>
+                {t("other:views")} {profile.viewers}
+              </Text>
+
+              <View
+                style={{
+                  height: this.ProfileImageMaxHeight,
+                  width: this.ProfileImageMinHeight,
+                  borderRadius: this.ProfileImageMaxHeight / 2,
+                  borderColor: "white",
+                  borderWidth: 3,
+                  marginTop:
+                    this.HeaderMaxHeight - this.HalfProfileImageMaxHeight,
+                  marginLeft: "45%",
+                  position: "relative",
+                  top: -115,
+
+                  zIndex: 20
+                }}
+              >
+                <Thumbnail
+                  style={styles.thumbnailStyle}
+                  large
+                  source={{ uri: profile.img }}
+                />
+              </View>
+
+              <View
+                style={{
+                  top: -45,
+                  alignSelf: "center",
+                  alignContent: "center",
+                  justifyContent: "center",
+                  flexDirection: "row"
+                }}
+              >
+                {to(filledStars).map(key => (
+                  <Icon
+                    name="ios-star"
+                    style={{ color: "yellow" }}
+                    {...{ key, size }}
+                  />
+                ))}
+
+                {halfStar && (
+                  <Icon
+                    name="ios-star-half"
+                    style={{ color: "yellow" }}
+                    {...{ size }}
+                  />
+                )}
+
+                {to(emptyStars).map(key => (
+                  <Icon
+                    name="ios-star-outline"
+                    style={{ color: "yellow" }}
+                    {...{
+                      key,
+                      size
+                    }}
+                  />
+                ))}
+              </View>
+
+              <View
+                style={{
+                  top: -45,
+                  alignSelf: "center",
+                  alignContent: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <Text style={[styles.visitorsText]}>
+                  {t("other:from")} {profile.rating_set.length}{" "}
+                  {t("other:visitors")}
+                </Text>
+
+                <Text style={[styles.doctorName]}>
+                  {t("other:doctor")}: {profile.user.first_name}{" "}
+                  {profile.user.last_name}
+                </Text>
+              </View>
+
+              <View
+                style={{
+                  top: -45,
+                  alignSelf: "center",
+                  alignContent: "center",
+                  justifyContent: "center",
+                  flexDirection: "row"
+                }}
+              >
+                <Text style={[styles.doctordesc1]}>{profile.description}</Text>
+              </View>
+            </View>
+          </Row>
+
+          <Row
+            size={3.5}
             style={{
-              borderColor: "#CCCCCC",
-              zIndex: 2,
-              backgroundColor: "white",
-              borderWidth: 0.5,
-              width: "97%",
-              margin: "1.75%",
-              shadowColor: "rgba(0,0,0,0.9)",
-              shadowRadius: 4,
-              shadowOpacity: 0.3,
-              shadowOffset: {
-                height: 4,
-                width: 0
-              }
+              backgroundColor: "white"
             }}
           >
-            <Row>
-              <Col style={{ marginTop: 20 }}>
+            <View
+              style={{
+                borderColor: "#CCCCCC",
+                zIndex: 2,
+                borderWidth: 0.5,
+                backgroundColor: "white",
+                width: "97%",
+                margin: "1.75%",
+                shadowColor: "rgba(0,0,0,0.9)",
+                shadowRadius: 4,
+                shadowOpacity: 0.3,
+                shadowOffset: {
+                  height: 4,
+                  width: 0
+                }
+              }}
+            >
+              <Left>
                 <Icon
                   type="EvilIcons"
                   name="location"
                   style={styles.locationIcon}
                 >
-                  <Text style={styles.thirdText}>
-                    {t("other:fees")}: {profile.fees} KD
+                  <Text
+                    style={styles.locationText}
+                    // onPress={() => LinkingIOS.openURL(profile.google_maps)}
+                  >
+                    {t("other:googlemaps")}
                   </Text>
                 </Icon>
-              </Col>
+              </Left>
 
-              <Col style={{ marginTop: 20 }}>
-                <Right>
-                  <Icon type="Feather" name="clock" style={styles.clockIcon}>
+              <Text style={styles.BookingnowStyle}>
+                {" "}
+                {t("other:bookdescription")}
+              </Text>
+
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignContent: "center",
+                  alignSelf: "center"
+                }}
+              >
+                <Button
+                  rounded
+                  warning
+                  style={styles.bookingButton}
+                  onPress={() =>
+                    this.props.navigation.navigate("TimeDatePicker", {
+                      cat: profile.id,
+                      store: Store
+                    })
+                  } // onPress={() => this.props.navigation.navigate('TimeDatePicker')}
+                >
+                  <Text style={styles.buttonText}>{t("other:today")}</Text>
+                </Button>
+              </View>
+            </View>
+          </Row>
+
+          <Row
+            size={1.25}
+            style={{
+              backgroundColor: "white"
+            }}
+          >
+            <View
+              style={{
+                borderColor: "#CCCCCC",
+                zIndex: 2,
+                backgroundColor: "white",
+                borderWidth: 0.5,
+                width: "97%",
+                margin: "1.75%",
+                shadowColor: "rgba(0,0,0,0.9)",
+                shadowRadius: 4,
+                shadowOpacity: 0.3,
+                shadowOffset: {
+                  height: 4,
+                  width: 0
+                }
+              }}
+            >
+              <Row>
+                <Col style={{ marginTop: 20 }}>
+                  <Icon
+                    type="EvilIcons"
+                    name="location"
+                    style={styles.locationIcon}
+                  >
                     <Text style={styles.thirdText}>
-                      {t("other:waitingtime")}: {profile.waiting_time}
+                      {t("other:fees")}: {profile.fees} KD
                     </Text>
                   </Icon>
-                </Right>
-              </Col>
-            </Row>
-          </View>
-        </Row>
-        {/*                 <Row size={0.7} style={{
+                </Col>
+
+                <Col style={{ marginTop: 20 }}>
+                  <Right>
+                    <Icon type="Feather" name="clock" style={styles.clockIcon}>
+                      <Text style={styles.thirdText}>
+                        {t("other:waitingtime")}: {profile.waiting_time}
+                      </Text>
+                    </Icon>
+                  </Right>
+                </Col>
+              </Row>
+            </View>
+          </Row>
+          {/*                 <Row size={0.7} style={{
                     backgroundColor: 'black',}}/> */}
-      </Grid>
+        </Grid>
+      </ScrollView>
     );
   }
 }
