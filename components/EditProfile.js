@@ -203,9 +203,7 @@ class EditProfile extends Component {
             <Icon type="EvilIcons" name="location" style={styles.locationIcon}>
               <Text
                 style={styles.locationText}
-                onPress={() =>
-                  LinkingIOS.openURL(Store.doctorProfile.google_maps)
-                }
+                // onPress={() => LinkingIOS.openURL(Store.doctorProfile.google_maps) }
               >
                 google maps
               </Text>
@@ -338,26 +336,26 @@ const styles = StyleSheet.create({
   wrapper: {
     marginTop: 80
   },
-  slide1: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#9DD6EB"
-  },
-  slide2: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#97CAE5"
-  },
-  slide3: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#92BBD9"
-  },
-  text: {
-    color: "#000",
-    fontSize: 20,
-    fontWeight: "bold"
-  },
+  // slide1: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#9DD6EB"
+  // },
+  // slide2: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#97CAE5"
+  // },
+  // slide3: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#92BBD9"
+  // },
+  // text: {
+  //   color: "#000",
+  //   fontSize: 20,
+  //   fontWeight: "bold"
+  // },
   thumbnailStyle: {
     alignSelf: "center",
     alignContent: "center",
@@ -366,35 +364,35 @@ const styles = StyleSheet.create({
     // height: 40,
     position: "absolute"
   },
-  userViewsText: {
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 10,
-    color: "#919191",
-    paddingTop: 5
-  },
-  iconsStyle: {
-    width: 28,
-    height: 28,
-    justifyContent: "flex-start"
-  },
-  visitorsText: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 12,
-    color: "#919191"
-  },
-  textContainer: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-  },
-  startStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-  },
+  // userViewsText: {
+  //   fontFamily: "GTWalsheim-Medium",
+  //   fontSize: 10,
+  //   color: "#919191",
+  //   paddingTop: 5
+  // },
+  // iconsStyle: {
+  //   width: 28,
+  //   height: 28,
+  //   justifyContent: "flex-start"
+  // },
+  // visitorsText: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center",
+  //   fontFamily: "GTWalsheim-Medium",
+  //   fontSize: 12,
+  //   color: "#919191"
+  // },
+  // textContainer: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center"
+  // },
+  // startStyle: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center"
+  // },
   doctorName: {
     alignSelf: "center",
     alignContent: "center",
@@ -403,14 +401,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#605F5F"
   },
-  doctordesc1: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 13,
-    color: "#919191"
-  },
+  // doctordesc1: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center",
+  //   fontFamily: "GTWalsheim-Medium",
+  //   fontSize: 13,
+  //   color: "#919191"
+  // },
   locationIcon: {
     color: "#48C1F6",
     paddingTop: 15
@@ -439,27 +437,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     margin: 5
   },
-  ymenysarButtons: {
-    color: "#48C1F6"
-  },
-  thirdText: {
-    fontSize: 16,
-    fontFamily: "GTWalsheim-Medium",
-    color: "#919191"
-  },
-  locationIcon: {
-    color: "#48C1F6",
-    fontSize: 38
-  },
-  cardStyle: {
-    shadowColor: "rgba(0,0,0,0.7)",
-    shadowRadius: 4,
-    shadowOpacity: 0.7,
-    shadowOffset: {
-      height: 2,
-      width: 0
-    }
-  },
+  // ymenysarButtons: {
+  //   color: "#48C1F6"
+  // },
+  // thirdText: {
+  //   fontSize: 16,
+  //   fontFamily: "GTWalsheim-Medium",
+  //   color: "#919191"
+  // },
+  // locationIcon: {
+  //   color: "#48C1F6",
+  //   fontSize: 38
+  // },
+  // cardStyle: {
+  //   shadowColor: "rgba(0,0,0,0.7)",
+  //   shadowRadius: 4,
+  //   shadowOpacity: 0.7,
+  //   shadowOffset: {
+  //     height: 2,
+  //     width: 0
+  //   }
+  // },
   clockIcon: {
     color: "#48C1F6",
     fontSize: 30

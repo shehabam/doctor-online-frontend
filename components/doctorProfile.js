@@ -223,7 +223,6 @@ class DoctorProfile extends Component {
               </Text>
 
               <Text style={[styles.doctorName]}>
-
                 {t("other:doctor")}: {profile.user.first_name}{" "}
                 {profile.user.last_name}
               </Text>
@@ -274,7 +273,7 @@ class DoctorProfile extends Component {
               >
                 <Text
                   style={styles.locationText}
-                  onPress={() => LinkingIOS.openURL(profile.google_maps)}
+                  // onPress={() => LinkingIOS.openURL(profile.google_maps)}
                 >
                   {t("other:googlemaps")}
                 </Text>
@@ -283,7 +282,6 @@ class DoctorProfile extends Component {
 
             <Text style={styles.BookingnowStyle}>
               {" "}
-
               {t("other:bookdescription")}
             </Text>
 
@@ -373,29 +371,29 @@ export default withNamespaces(["other", "common"], { wait: true })(
 );
 
 const styles = StyleSheet.create({
-  wrapper: {
-    marginTop: 80
-  },
-  slide1: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#9DD6EB"
-  },
-  slide2: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#97CAE5"
-  },
-  slide3: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#92BBD9"
-  },
-  text: {
-    color: "#000",
-    fontSize: 20,
-    fontWeight: "bold"
-  },
+  // wrapper: {
+  //   marginTop: 80
+  // },
+  // slide1: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#9DD6EB"
+  // },
+  // slide2: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#97CAE5"
+  // },
+  // slide3: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#92BBD9"
+  // },
+  // text: {
+  //   color: "#000",
+  //   fontSize: 20,
+  //   fontWeight: "bold"
+  // },
   thumbnailStyle: {
     alignSelf: "center",
     alignContent: "center",
@@ -408,11 +406,11 @@ const styles = StyleSheet.create({
     color: "#919191",
     paddingTop: 5
   },
-  iconsStyle: {
-    width: 28,
-    height: 28,
-    justifyContent: "flex-start"
-  },
+  // iconsStyle: {
+  //   width: 28,
+  //   height: 28,
+  //   justifyContent: "flex-start"
+  // },
   visitorsText: {
     alignSelf: "center",
     alignContent: "center",
@@ -421,16 +419,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#919191"
   },
-  textContainer: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-  },
-  startStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-  },
+  // textContainer: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center"
+  // },
+  // startStyle: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center"
+  // },
   doctorName: {
     alignSelf: "center",
     alignContent: "center",
@@ -475,27 +473,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     margin: 5
   },
-  ymenysarButtons: {
-    color: "#48C1F6"
-  },
+  // ymenysarButtons: {
+  //   color: "#48C1F6"
+  // },
   thirdText: {
     fontSize: 16,
     fontFamily: "GTWalsheim-Medium",
     color: "#919191"
   },
-  locationIcon: {
-    color: "#48C1F6",
-    fontSize: 38
-  },
-  cardStyle: {
-    shadowColor: "rgba(0,0,0,0.7)",
-    shadowRadius: 4,
-    shadowOpacity: 0.7,
-    shadowOffset: {
-      height: 2,
-      width: 0
-    }
-  },
+  // locationIcon: {
+  //   color: "#48C1F6",
+  //   fontSize: 38
+  // },
+  // cardStyle: {
+  //   shadowColor: "rgba(0,0,0,0.7)",
+  //   shadowRadius: 4,
+  //   shadowOpacity: 0.7,
+  //   shadowOffset: {
+  //     height: 2,
+  //     width: 0
+  //   }
+  // },
   clockIcon: {
     color: "#48C1F6",
     fontSize: 30

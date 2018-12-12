@@ -140,25 +140,25 @@ class Settings extends Component {
 export default withNamespaces(["settings", "common"], { wait: true })(Settings);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 30,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    paddingHorizontal: 10
-  }
+  // container: {
+  //   flex: 1,
+  //   paddingTop: 30,
+  //   backgroundColor: "#fff",
+  //   justifyContent: "center",
+  //   paddingHorizontal: 10
+  // }
 });
 
 const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 16,
-    paddingTop: 13,
-    paddingHorizontal: 10,
-    paddingBottom: 12,
-    borderWidth: 1,
-    borderColor: "gray",
-    borderRadius: 4,
-    backgroundColor: "white",
-    color: "black"
-  }
+  // inputIOS: {
+  //   fontSize: 16,
+  //   paddingTop: 13,
+  //   paddingHorizontal: 10,
+  //   paddingBottom: 12,
+  //   borderWidth: 1,
+  //   borderColor: "gray",
+  //   borderRadius: 4,
+  //   backgroundColor: "white",
+  //   color: "black"
+  // }
 });

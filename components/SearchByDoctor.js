@@ -221,7 +221,7 @@ class SearchByDoctor extends Component {
           <Item style={{ margin: 10 }}>
             <Icon style={{ margin: 10 }} name="search" />
             <Input
-              placeholder="Search By Products..."
+              placeholder={t("other:searchplaceholder")}
               onChangeText={e => Store.changeDoctorValue(e)}
             />
           </Item>
@@ -272,16 +272,16 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20
   },
-  fourthText: {
-    fontSize: 16,
-    fontFamily: "GTWalsheim-Medium",
-    color: "#919191",
-    paddingLeft: 5
-  },
-  iconsStyle: {
-    width: 28,
-    height: 28
-  },
+  // fourthText: {
+  //   fontSize: 16,
+  //   fontFamily: "GTWalsheim-Medium",
+  //   color: "#919191",
+  //   paddingLeft: 5
+  // },
+  // iconsStyle: {
+  //   width: 28,
+  //   height: 28
+  // },
   bookingButtonCardItem: {
     alignSelf: "center",
     alignContent: "center",

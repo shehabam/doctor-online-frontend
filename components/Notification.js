@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+import { Alert } from "react-native";
 import Store from "../stores/store";
 import FooterApp from "./footer";
 import { Theme } from "./Theme";
@@ -147,11 +148,11 @@ class Notification extends Component {
 export default withNamespaces(["more", "common"], { wait: true })(Notification);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 30,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    paddingHorizontal: 10
-  }
+  // container: {
+  //   flex: 1,
+  //   paddingTop: 30,
+  //   backgroundColor: "#fff",
+  //   justifyContent: "center",
+  //   paddingHorizontal: 10
+  // }
 });

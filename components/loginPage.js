@@ -79,7 +79,7 @@ class LoginPage extends Component {
               <Icon name="person" />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
-                placeholder="Username"
+                placeholder={t("other:username")}
                 autoCapitalize="none"
                 onChangeText={username => this.setState({ username })}
               />
@@ -91,7 +91,7 @@ class LoginPage extends Component {
               <Icon name="lock" />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
-                placeholder="Password"
+                placeholder={t("other:password")}
                 autoCapitalize="none"
                 secureTextEntry={true}
                 onChangeText={password => this.setState({ password })}
@@ -163,22 +163,22 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     borderWidth: 3
   },
-  outerCircle: {
-    borderRadius: 40,
-    // overflow: 'hidden',
-    borderColor: "white"
-    // width: 80,
-    // height: 80
-  },
-  innerCircle: {
-    borderRadius: 35,
-    borderColor: "white",
-    overflow: "hidden",
-    color: "white",
-    width: 70,
-    height: 70,
-    margin: 5
-  },
+  // outerCircle: {
+  //   borderRadius: 40,
+  //   // overflow: 'hidden',
+  //   borderColor: "white"
+  //   // width: 80,
+  //   // height: 80
+  // },
+  // innerCircle: {
+  //   borderRadius: 35,
+  //   borderColor: "white",
+  //   overflow: "hidden",
+  //   color: "white",
+  //   width: 70,
+  //   height: 70,
+  //   margin: 5
+  // },
   formBorder: {
     width: "80%",
     height: "100%",

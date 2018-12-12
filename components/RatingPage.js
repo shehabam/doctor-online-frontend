@@ -203,14 +203,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold"
   },
-  iconsStyle: {
-    width: 28,
-    height: 28,
-    justifyContent: "flex-start"
-  },
-  centerView: {
-    flex: 1
-  },
+  // iconsStyle: {
+  //   width: 28,
+  //   height: 28,
+  //   justifyContent: "flex-start"
+  // },
+  // centerView: {
+  //   flex: 1
+  // },
   textContainer: {
     flex: 1,
     justifyContent: "flex-end"

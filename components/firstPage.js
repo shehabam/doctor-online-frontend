@@ -120,9 +120,9 @@ const styles = StyleSheet.create({
   //   backgroundColor: "skyblue",
   //   flex: 1
   // },
-  headerRow: {
-    backgroundColor: "red"
-  },
+  // headerRow: {
+  //   backgroundColor: "red"
+  // },
   button: {
     // height: "70%",
     // width: '90%',
@@ -161,17 +161,17 @@ const styles = StyleSheet.create({
   needleIcon: {
     color: "#48C1F6"
   },
-  touchable: {
-    top: "850%",
-    justifyContent: "center",
-    alignContent: "center",
-    alignSelf: "center",
-    fontFamily: "GTWalsheim-Medium"
-  },
-  loginText: {
-    color: "white",
-    fontFamily: "GTWalsheim-Medium"
-  },
+  // touchable: {
+  //   top: "850%",
+  //   justifyContent: "center",
+  //   alignContent: "center",
+  //   alignSelf: "center",
+  //   fontFamily: "GTWalsheim-Medium"
+  // },
+  // loginText: {
+  //   color: "white",
+  //   fontFamily: "GTWalsheim-Medium"
+  // },
   bookTheBestTextRow: {
     justifyContent: "center",
     alignContent: "center",
@@ -192,14 +192,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     alignSelf: "center"
-  },
-  loginText: {
-    color: "black",
-    justifyContent: "center",
-    alignContent: "center",
-    alignSelf: "center",
-    fontFamily: "GTWalsheim-Medium"
   }
+  // loginText: {
+  //   color: "black",
+  //   justifyContent: "center",
+  //   alignContent: "center",
+  //   alignSelf: "center",
+  //   fontFamily: "GTWalsheim-Medium"
+  // }
 });
 //export default observer(FirstPage);
 export default withNamespaces(["first", "common"], { wait: true })(FirstPage);

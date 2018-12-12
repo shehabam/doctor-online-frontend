@@ -75,12 +75,14 @@ import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
 import Store from "../stores/store";
 import { observer } from "mobx-react";
 import DateTimePicker from "react-native-modal-datetime-picker";
+import { withNamespaces } from "react-i18next";
 
 class TimeDatePicker extends Component {
   componentDidMount() {
     let profileID = this.props.navigation.getParam("cat");
     Store.bringToProfile(profileID);
   }
+
   state = {
     isDateTimePickerVisible: false,
     mode: "time",
@@ -110,6 +112,8 @@ class TimeDatePicker extends Component {
   };
 
   render() {
+    const { t, i18n, navigation } = this.props;
+
     if (!Store.doctorProfile) {
       return (
         <View
@@ -121,7 +125,7 @@ class TimeDatePicker extends Component {
             justifyContent: "center"
           }}
         >
-          <Text style={{ alignSelf: "center" }}>Loading...!</Text>
+          <Text style={{ alignSelf: "center" }}>{t("other:loading")}</Text>
         </View>
       );
     }
@@ -144,7 +148,7 @@ class TimeDatePicker extends Component {
         </Container>
         <Container>
           <TouchableOpacity onPress={this._showDateTimePicker}>
-            <Text style={styles.secondText}>Show DatePicker</Text>
+            <Text style={styles.secondText}>{t("other:showdatepicker")}</Text>
 
             <DateTimePicker
               isVisible={this.state.isDateTimePickerVisible}
@@ -156,7 +160,7 @@ class TimeDatePicker extends Component {
         </Container>
         <Container>
           <Button onPress={() => this._reservation} full rounded>
-            <Text style={styles.firstText}>Confirm</Text>
+            <Text style={styles.firstText}>{t("other:confirm")}</Text>
           </Button>
         </Container>
       </View>
@@ -164,7 +168,10 @@ class TimeDatePicker extends Component {
   }
 }
 
-export default observer(TimeDatePicker);
+// export default observer(TimeDatePicker);
+export default withNamespaces(["other", "common"], { wait: true })(
+  TimeDatePicker
+);
 
 const styles = StyleSheet.create({
   DateTimePickerStyle: {
@@ -197,48 +204,48 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: "GTWalsheim-Medium",
     color: "#919191"
-  },
-  thirdText: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontSize: 16,
-    fontFamily: "GTWalsheim-Medium",
-    color: "#919191"
-  },
-  locationIcon: {
-    color: "#48C1F6"
-  },
-  fourthText: {
-    fontSize: 16,
-    fontFamily: "GTWalsheim-Medium",
-    color: "#919191",
-    paddingLeft: 5
-  },
-  iconsStyle: {
-    width: 28,
-    height: 28
-  },
-  bookingButtonCardItem: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    backgroundColor: "white"
-  },
-  bookingButton: {
-    // height: 30,
-    // width: 140,
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-  },
-  buttonText: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontSize: 14,
-    fontFamily: "GTWalsheim-Medium"
   }
+  // thirdText: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center",
+  //   fontSize: 16,
+  //   fontFamily: "GTWalsheim-Medium",
+  //   color: "#919191"
+  // },
+  // locationIcon: {
+  //   color: "#48C1F6"
+  // },
+  // fourthText: {
+  //   fontSize: 16,
+  //   fontFamily: "GTWalsheim-Medium",
+  //   color: "#919191",
+  //   paddingLeft: 5
+  // },
+  // iconsStyle: {
+  //   width: 28,
+  //   height: 28
+  // },
+  // bookingButtonCardItem: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center",
+  //   backgroundColor: "white"
+  // },
+  // bookingButton: {
+  //   // height: 30,
+  //   // width: 140,
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center"
+  // },
+  // buttonText: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center",
+  //   fontSize: 14,
+  //   fontFamily: "GTWalsheim-Medium"
+  // }
 });
 
 {

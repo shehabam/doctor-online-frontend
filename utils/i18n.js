@@ -88,11 +88,19 @@ i18n
           to: "To",
           googlemaps: "Google Map",
           visitors: "Visitors",
-          doctor: "Doctor",
           today: "Today",
           doctorprofile: "Doctor Profile",
           views: "Views",
-          speciality: "Choose by Speciality"
+          speciality: "Choose by Speciality",
+          username: "Username",
+          password: "Password",
+          firstname: "First Name",
+          lastname: "Last Name",
+          phonenumber: "Phone Number",
+          searchplaceholder: "Search By Products...",
+          loading: "loading...",
+          confirm: "Confirm",
+          showdatepicker: "Show Datepicker"
         }
       },
       ar: {
@@ -157,11 +165,19 @@ i18n
           to: "إلى",
           googlemaps: "خرائط جوجل",
           visitors: "الزائرين",
-          doctor: "طبيب",
           today: "اليوم",
           doctorprofile: "الملف الشخصي الطبيب",
           views: "الآراء",
-          speciality: "اختر من خلال التخصص"
+          speciality: "اختر من خلال التخصص",
+          username: "اسم المستخدم",
+          password: "كلمه السر",
+          firstname: "الاسم الاول",
+          lastname: "الكنية",
+          phonenumber: "رقم الهاتف",
+          searchplaceholder: "االبحث عن طريق المنتجات ...",
+          loading: "جار التحميل...",
+          confirm: "تؤكد",
+          showdatepicker: "إظهار منتقي التاريخ"
         }
       }
     },

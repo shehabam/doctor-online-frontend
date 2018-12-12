@@ -92,17 +92,17 @@ class FooterApp extends Component {
 export default withNamespaces(["more", "common"], { wait: true })(FooterApp);
 
 const styles = StyleSheet.create({
-  inputStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-    // fontSize: 22,
-    // height: 60,
-    // fontFamily: 'GTWalsheim-Medium',
-    // color: '#ffffff',
-    // backgroundColor: '#00bfff',
-    // flex: 1
-  },
+  // inputStyle: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center"
+  //   // fontSize: 22,
+  //   // height: 60,
+  //   // fontFamily: 'GTWalsheim-Medium',
+  //   // color: '#ffffff',
+  //   // backgroundColor: '#00bfff',
+  //   // flex: 1
+  // },
   ImageStyle: {
     alignSelf: "center",
     alignContent: "center",
@@ -118,11 +118,11 @@ const styles = StyleSheet.create({
     fontSize: 12
     // width: 22.5,
     // height: 22.5
-  },
-  cardBoxStyle: {
-    marginLeft: 7,
-    width: 190,
-    height: 150,
-    backgroundColor: "#00bfff"
   }
+  // cardBoxStyle: {
+  //   marginLeft: 7,
+  //   width: 190,
+  //   height: 150,
+  //   backgroundColor: "#00bfff"
+  // }
 });
