@@ -27,14 +27,16 @@ import {
 } from "react-native";
 import Store from "../stores/store";
 import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
+import { withNamespaces } from "react-i18next";
 
 class RatingPage extends Component {
-  static navigationOptions = {
-    title: "Rating Page",
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: screenProps.t("other:ratingpage"),
     headerStyle: {
       backgroundColor: "#00bfff"
     }
-  };
+  });
+
   constructor(props) {
     super(props);
     this.state = {
@@ -64,18 +66,21 @@ class RatingPage extends Component {
 
   confirmPressed(doctorID, rate, user) {
     Store.postRate(doctorID, rate, user);
-    alert(t("other:ratealert"));
+    alert("OK");
     this.props.navigation.goBack();
   }
 
   render() {
     // console.log(authStore.user.user_id)
+    const { t, i18n, navigation } = this.props;
+
     let doctorID = this.props.navigation.getParam("id");
     let iconName1;
     let iconName2;
     let iconName3;
     let iconName4;
     let iconName5;
+
     if (this.state.rate === 0) {
       iconName1 = "ios-star-outline";
       iconName2 = "ios-star-outline";
@@ -121,6 +126,7 @@ class RatingPage extends Component {
         </View>
       );
     }
+
     return (
       <Grid
         style={{
@@ -172,13 +178,11 @@ class RatingPage extends Component {
         <Row size={2} style={{ flex: 1, justifyContent: "center" }}>
           <Button
             style={styles.ConfirmButton}
-            onPress={() =>
-              this.confirmPressed(
-                doctorID,
-                this.state.rate,
-                authStore.user.user_id
-              )
-            }
+            onPress={() => {
+              Store.postRate(doctorID, this.state.rate, authStore.user.user_id);
+              alert(t("other:ratealert"));
+              this.props.navigation.goBack();
+            }}
           >
             <Text style={styles.ConfirmButtomText}>{t("other:confirm")}</Text>
           </Button>
@@ -188,7 +192,8 @@ class RatingPage extends Component {
   }
 }
 
-export default observer(RatingPage);
+//export default observer(RatingPage);
+export default withNamespaces(["other", "common"], { wait: true })(RatingPage);
 
 const styles = StyleSheet.create({
   text: {

@@ -102,7 +102,7 @@ i18n
           confirm: "Confirm",
           showdatepicker: "Show Datepicker",
           ratingpage: "Rating Page",
-          ratingvisiterror: "You Need To LogIn Or Register To Rate Any Dactor",
+          ratingvisiterror: "You Need To LogIn Or Register To Rate Any Doctor",
           ratingcontent: "How would you describe your visit to Doctor",
           ratealert: "your rate has been Submited"
         }
@@ -181,7 +181,11 @@ i18n
           searchplaceholder: "االبحث عن طريق المنتجات ...",
           loading: "جار التحميل...",
           confirm: "تؤكد",
-          showdatepicker: "إظهار منتقي التاريخ"
+          showdatepicker: "إظهار منتقي التاريخ",
+          ratingpage: "تصنيف الصفحة",
+          ratingvisiterror: "تحتاج إلى تسجيل الدخول أو التسجيل لمعدل أي طبيب",
+          ratingcontent: "كيف تصف زيارتك إلى الطبيب",
+          ratealert: "تم إرسال المعدل الخاص بك"
         }
       }
     },

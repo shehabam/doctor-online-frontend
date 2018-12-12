@@ -203,7 +203,9 @@ class EditProfile extends Component {
             <Icon type="EvilIcons" name="location" style={styles.locationIcon}>
               <Text
                 style={styles.locationText}
-                // onPress={() => LinkingIOS.openURL(Store.doctorProfile.google_maps) }
+                onPress={() =>
+                  LinkingIOS.openURL(Store.doctorProfile.google_maps)
+                }
               >
                 google maps
               </Text>
@@ -246,7 +248,7 @@ class EditProfile extends Component {
                   <Text style={styles.buttonText}>After Tommorow</Text>
                 </Button>
               </View>
-              >
+
               <View style={{ flexDirection: "row", justifyContent: "center" }}>
                 <Button rounded warning style={styles.bookingButton}>
                   <Text style={styles.buttonText}>Today</Text>
