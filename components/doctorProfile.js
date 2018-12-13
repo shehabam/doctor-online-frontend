@@ -309,7 +309,9 @@ class DoctorProfile extends Component {
                       onPress={() =>
                         this.props.navigation.navigate("TimeDatePicker", {
                           cat: profile.id,
-                          store: Store
+                          store: Store,
+                          day: day,
+                          month: month
                         })
                       }
                     >
@@ -331,7 +333,9 @@ class DoctorProfile extends Component {
                       onPress={() =>
                         this.props.navigation.navigate("TimeDatePicker", {
                           cat: profile.id,
-                          store: Store
+                          store: Store,
+                          day: day + 1,
+                          month: month
                         })
                       }
                     >
@@ -353,7 +357,9 @@ class DoctorProfile extends Component {
                       onPress={() =>
                         this.props.navigation.navigate("TimeDatePicker", {
                           cat: profile.id,
-                          store: Store
+                          store: Store,
+                          day: day + 2,
+                          month: month
                         })
                       }
                     >
@@ -362,89 +368,12 @@ class DoctorProfile extends Component {
                           style={[
                             styles.buttonText,
                             { color: "#fff", fontSize: 14, textAlign: "center" }
-                          ]}
-                        >
-                          {day}/{month}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-                <View style={styles.slide1}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignContent: "center",
-                      paddingHorizontal: 6
-                    }}
-                  >
-                    <TouchableOpacity
-                      rounded
-                      warning
-                      style={styles.bookingButton}
-                      onPress={() =>
-                        this.props.navigation.navigate("TimeDatePicker", {
-                          cat: profile.id,
-                          store: Store
-                        })
-                      }
-                    >
-                      <View style={styles.cardHeader}>
-                        <Text
-                          style={[
-                            styles.buttonText,
-                            { color: "#fff", fontSize: 14 }
-                          ]}
-                        >
-                          {day + 1}/{month}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      rounded
-                      warning
-                      style={styles.bookingButton}
-                      onPress={() =>
-                        this.props.navigation.navigate("TimeDatePicker", {
-                          cat: profile.id,
-                          store: Store
-                        })
-                      }
-                    >
-                      <View style={styles.cardHeader}>
-                        <Text
-                          style={[
-                            styles.buttonText,
-                            { color: "#fff", fontSize: 14 }
                           ]}
                         >
                           {day + 2}/{month}
                         </Text>
                       </View>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                      rounded
-                      warning
-                      style={styles.bookingButton}
-                      onPress={() =>
-                        this.props.navigation.navigate("TimeDatePicker", {
-                          cat: profile.id,
-                          store: Store
-                        })
-                      }
-                    >
-                      <View style={styles.cardHeader}>
-                        <Text
-                          style={[
-                            styles.buttonText,
-                            { color: "#fff", fontSize: 14, textAlign: "center" }
-                          ]}
-                        >
-                          {day + 3}/{month}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
                   </View>
                 </View>
                 <View style={styles.slide1}>
@@ -463,7 +392,33 @@ class DoctorProfile extends Component {
                       onPress={() =>
                         this.props.navigation.navigate("TimeDatePicker", {
                           cat: profile.id,
-                          store: Store
+                          store: Store,
+                          day: day + 3,
+                          month: month
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14 }
+                          ]}
+                        >
+                          {day + 3}/{month}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store,
+                          day: day + 4,
+                          month: month
                         })
                       }
                     >
@@ -485,29 +440,9 @@ class DoctorProfile extends Component {
                       onPress={() =>
                         this.props.navigation.navigate("TimeDatePicker", {
                           cat: profile.id,
-                          store: Store
-                        })
-                      }
-                    >
-                      <View style={styles.cardHeader}>
-                        <Text
-                          style={[
-                            styles.buttonText,
-                            { color: "#fff", fontSize: 14 }
-                          ]}
-                        >
-                          {day + 5}/{month}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      rounded
-                      warning
-                      style={styles.bookingButton}
-                      onPress={() =>
-                        this.props.navigation.navigate("TimeDatePicker", {
-                          cat: profile.id,
-                          store: Store
+                          store: Store,
+                          day: day + 5,
+                          month: month
                         })
                       }
                     >
@@ -518,7 +453,90 @@ class DoctorProfile extends Component {
                             { color: "#fff", fontSize: 14, textAlign: "center" }
                           ]}
                         >
-                          {day + 6}/{month}{" "}
+                          {day + 5}/{month}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={styles.slide1}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignContent: "center",
+                      paddingHorizontal: 6
+                    }}
+                  >
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store,
+                          day: day + 6,
+                          month: month
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14 }
+                          ]}
+                        >
+                          {day + 6}/{month}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store,
+                          day: day + 7,
+                          month: month
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14 }
+                          ]}
+                        >
+                          {day + 7}/{month}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      rounded
+                      warning
+                      style={styles.bookingButton}
+                      onPress={() =>
+                        this.props.navigation.navigate("TimeDatePicker", {
+                          cat: profile.id,
+                          store: Store,
+                          day: day + 8,
+                          month: month
+                        })
+                      }
+                    >
+                      <View style={styles.cardHeader}>
+                        <Text
+                          style={[
+                            styles.buttonText,
+                            { color: "#fff", fontSize: 14, textAlign: "center" }
+                          ]}
+                        >
+                          {day + 8}/{month}{" "}
                         </Text>
                       </View>
                     </TouchableOpacity>

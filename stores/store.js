@@ -263,6 +263,20 @@ class Store {
       .catch(err => console.error(err));
   }
 
+  postBook(date, available_time, id, userId) {
+    const bookdata = {
+      date: date,
+      available_time: available_time,
+      doctor: id,
+      patient: userId
+    };
+    console.log("bla 1 2 bookdata", bookdata);
+    axios
+      .post(BASEURL + `/create/schedeul/`, bookdata)
+      .then(response => console.log("bla bla bla response", response))
+      .catch(err => console.error(err));
+  }
+
   getUsers() {
     axios
       .get(BASEURL + "/users/")
