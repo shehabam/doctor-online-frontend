@@ -33,7 +33,7 @@ import { withNamespaces } from "react-i18next";
 
 class Edit extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
-    title: screenProps.t("edit:editprofile"),
+    title: screenProps.t("settings:editprofile"),
     headerStyle: {
       backgroundColor: "#00bfff"
     }

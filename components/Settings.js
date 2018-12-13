@@ -58,19 +58,19 @@ class Settings extends Component {
     }
   }
 
-  Edit() {
-    if (!authStore.isAuthenticated) {
-      <ListItem onPress={() => this.props.navigation.navigate("FirstPage")}>
-        <Left>
-          <Icon name="md-person" large style={{ color: "#00bfff" }} />
-          <Text>{t("settings:editprofile")}</Text>
-        </Left>
-        <Right>
-          <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-        </Right>
-      </ListItem>;
-    }
-  }
+  // Edit() {
+  //   if (authStore.isAuthenticated) {
+  //     <ListItem onPress={() => this.props.navigation.navigate("FirstPage")}>
+  //       <Left>
+  //         <Icon name="md-person" large style={{ color: "#00bfff" }} />
+  //         <Text>{t("settings:editprofile")}</Text>
+  //       </Left>
+  //       <Right>
+  //         <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
+  //       </Right>
+  //     </ListItem>;
+  //   }
+  // }
 
   render() {
     const { t, i18n, navigation } = this.props;
@@ -79,7 +79,7 @@ class Settings extends Component {
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <TouchableHighlight>
           <List>
-            {!authStore.isAuthenticated ? (
+            {authStore.isAuthenticated ? (
               <ListItem onPress={() => this.props.navigation.navigate("Edit")}>
                 <Left>
                   <Icon name="md-person" large style={{ color: "#00bfff" }} />
@@ -100,6 +100,31 @@ class Settings extends Component {
                 </Left>
               </ListItem>
             )}
+
+            {authStore.isAuthenticated ? (
+              <ListItem
+                onPress={() => this.props.navigation.navigate("Schedule")}
+              >
+                <Left>
+                  <Icon name="md-globe" large style={{ color: "#00bfff" }} />
+                  <Text>Schedule</Text>
+                </Left>
+                <Right>
+                  <Icon
+                    name="arrow-forward"
+                    large
+                    style={{ color: "#00bfff" }}
+                  />
+                </Right>
+              </ListItem>
+            ) : (
+              <ListItem>
+                <Left>
+                  <Text note>{t("settings:schedule")}</Text>
+                </Left>
+              </ListItem>
+            )}
+
             <ListItem>
               <Left>
                 <Icon name="md-globe" large style={{ color: "#00bfff" }} />

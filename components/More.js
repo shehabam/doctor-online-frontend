@@ -47,7 +47,6 @@ class More extends Component {
   });
 
   render() {
-    console.log(this.props.onLogoutPress);
     const { t, i18n, navigation } = this.props;
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -64,6 +63,7 @@ class More extends Component {
                 <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
               </Right>
             </ListItem>
+
             <ListItem>
               <Left>
                 <Icon name="ios-call" large style={{ color: "#00bfff" }} />
