@@ -107,6 +107,23 @@ i18n
           ratingvisiterror: "You Need To LogIn Or Register To Rate Any Doctor",
           ratingcontent: "How would you describe your visit to Doctor",
           ratealert: "your rate has been Submited"
+        },
+        edit: {
+          waitingtime: "waiting_time",
+          enterdate: "please enter HH:MM:SS",
+          enterint: "please enter an integer",
+          enterlink: "please enter a link",
+          fees: "fees",
+          openingfile: "opening_file",
+          block: "block",
+          street: "street",
+          building: "building",
+          floor: "floor",
+          googlemaps: "google_maps",
+          description: "description",
+          service: "service",
+          confirm: "CONFIRM",
+          nothing: "Nothing is here"
         }
       },
       ar: {
@@ -188,8 +205,25 @@ i18n
           ratingvisiterror: "تحتاج إلى تسجيل الدخول أو التسجيل لمعدل أي طبيب",
           ratingcontent: "كيف تصف زيارتك إلى الطبيب",
           ratealert: "تم إرسال المعدل الخاص بك",
-          tomorrow: "Tomorrow",
-          aftertomorrow: "After tomorrow"
+          tomorrow: "غدا",
+          aftertomorrow: "بعد غد"
+        },
+        edit: {
+          waitingtime: "وقت الانتظار",
+          enterdate: "الرجاء إدخال HH: MM: SS",
+          enterint: "يرجى إدخال عدد صحيح",
+          fees: "رسوم",
+          openingfile: "فتح الملف",
+          block: "منع",
+          street: "شارع",
+          building: "بناء",
+          floor: "أرضية",
+          googlemaps: "خرائط جوجل",
+          description: "وصف",
+          service: "الخدمات",
+          confirm: "تؤكد",
+          enterlink: "يرجى إدخال رابط",
+          nothing: "لا شيء هنا"
         }
       }
     },

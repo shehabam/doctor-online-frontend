@@ -29,6 +29,7 @@ import Store from "../stores/store";
 import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
 import FooterApp from "./footer";
 import Swiper from "react-native-swiper";
+import { withNamespaces } from "react-i18next";
 
 class EditProfile extends Component {
   static navigationOptions = {
@@ -52,6 +53,8 @@ class EditProfile extends Component {
   }
 
   render() {
+    const { t, i18n, navigation } = this.props;
+
     const name1 = this.props.navigation.getParam("firstName");
     // const name = Store.doctorProfile.user;
     // const { votes, value } = this.props;
@@ -332,7 +335,8 @@ class EditProfile extends Component {
   }
 }
 
-export default observer(EditProfile);
+// export default observer(EditProfile);
+export default withNamespaces(["other", "common"], { wait: true })(EditProfile);
 
 const styles = StyleSheet.create({
   wrapper: {

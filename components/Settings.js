@@ -59,11 +59,11 @@ class Settings extends Component {
   }
 
   Edit() {
-    if (authStore.isAuthenticated) {
+    if (!authStore.isAuthenticated) {
       <ListItem onPress={() => this.props.navigation.navigate("FirstPage")}>
         <Left>
           <Icon name="md-person" large style={{ color: "#00bfff" }} />
-          <Text>{t("more:editmyprofile")}</Text>
+          <Text>{t("settings:editprofile")}</Text>
         </Left>
         <Right>
           <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
@@ -79,11 +79,11 @@ class Settings extends Component {
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <TouchableHighlight>
           <List>
-            {authStore.isAuthenticated ? (
+            {!authStore.isAuthenticated ? (
               <ListItem onPress={() => this.props.navigation.navigate("Edit")}>
                 <Left>
                   <Icon name="md-person" large style={{ color: "#00bfff" }} />
-                  <Text>{t("settings:editmyprofile")}</Text>
+                  <Text>{t("settings:editprofile")}</Text>
                 </Left>
                 <Right>
                   <Icon
