@@ -116,7 +116,10 @@ class TimeDatePicker extends Component {
     Store.getAppointments();
 
     for (let i = 0; i < scheduledata.length; i++) {
-      if (day_i == scheduledata[i].date.slice(-2)) {
+      if (
+        day_i == scheduledata[i].date.slice(-2) &&
+        Store.doctorProfile.id == scheduledata[i].doctor
+      ) {
         switch (scheduledata[i].available_time) {
           case "9:00 AM":
             booked_time.push(1);
