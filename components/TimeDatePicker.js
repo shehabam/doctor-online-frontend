@@ -87,7 +87,7 @@ import authStore from "../stores/authStore";
 let deviceWidth = Dimensions.get("window").width;
 let scheduledata;
 
-let booked_time = [1, 2, 11, 25, 31];
+let booked_time = [];
 
 class TimeDatePicker extends Component {
   constructor() {
@@ -103,8 +103,9 @@ class TimeDatePicker extends Component {
   }
 
   componentDidMount() {
+    booked_time = [];
     let profileID = this.props.navigation.getParam("cat");
-
+    let day_i = this.props.navigation.getParam("day");
     this.setState({
       auth_user: authStore.isAuthenticated,
       day: this.props.navigation.getParam("day"),
@@ -113,7 +114,134 @@ class TimeDatePicker extends Component {
 
     Store.bringToProfile(profileID);
     Store.getAppointments();
-    booked_time.push(3);
+
+    for (let i = 0; i < scheduledata.length; i++) {
+      if (day_i == scheduledata[i].date.slice(-2)) {
+        switch (scheduledata[i].available_time) {
+          case "9:00 AM":
+            booked_time.push(1);
+            break;
+          case "9:20 AM":
+            booked_time.push(2);
+            break;
+          case "9:40 AM":
+            booked_time.push(3);
+            break;
+
+          case "10:00 AM":
+            booked_time.push(4);
+            break;
+          case "10:20 AM":
+            booked_time.push(5);
+            break;
+          case "10:40 AM":
+            booked_time.push(6);
+            break;
+
+          case "11:00 AM":
+            booked_time.push(7);
+            break;
+          case "11:20 AM":
+            booked_time.push(8);
+            break;
+          case "11:40 AM":
+            booked_time.push(9);
+            break;
+
+          case "12:00 AM":
+            booked_time.push(10);
+            break;
+          case "12:20 AM":
+            booked_time.push(11);
+            break;
+          case "12:40 AM":
+            booked_time.push(12);
+            break;
+
+          case "1:00 PM":
+            booked_time.push(13);
+            break;
+          case "1:20 PM":
+            booked_time.push(14);
+            break;
+          case "1:40 PM":
+            booked_time.push(15);
+            break;
+
+          case "2:00 PM":
+            booked_time.push(16);
+            break;
+          case "2:20 PM":
+            booked_time.push(17);
+            break;
+          case "2:40 PM":
+            booked_time.push(18);
+            break;
+
+          case "3:00 PM":
+            booked_time.push(19);
+            break;
+          case "3:20 PM":
+            booked_time.push(20);
+            break;
+          case "3:40 PM":
+            booked_time.push(21);
+            break;
+
+          case "4:00 PM":
+            booked_time.push(22);
+            break;
+          case "4:20 PM":
+            booked_time.push(23);
+            break;
+          case "4:40 PM":
+            booked_time.push(24);
+            break;
+
+          case "5:00 PM":
+            booked_time.push(25);
+            break;
+          case "5:20 PM":
+            booked_time.push(26);
+            break;
+          case "5:40 PM":
+            booked_time.push(27);
+            break;
+
+          case "6:00 PM":
+            booked_time.push(28);
+            break;
+          case "6:20 PM":
+            booked_time.push(29);
+            break;
+          case "6:40 PM":
+            booked_time.push(30);
+            break;
+
+          case "7:00 PM":
+            booked_time.push(31);
+            break;
+          case "7:20 PM":
+            booked_time.push(32);
+            break;
+          case "7:40 PM":
+            booked_time.push(33);
+            break;
+
+          case "8:00 PM":
+            booked_time.push(34);
+            break;
+          case "8:20 PM":
+            booked_time.push(35);
+            break;
+          case "8:40 PM":
+            booked_time.push(36);
+            break;
+          default:
+            break;
+        }
+      }
+    }
   }
 
   _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
@@ -195,17 +323,6 @@ class TimeDatePicker extends Component {
         </Card>
 
         <ScrollView>
-          {scheduledata.map(item => (
-            <View style={styles.itemView} key={item.id}>
-              {day == item.date.slice(-2) ? (
-                <View>
-                  <Text>{item.date}</Text>
-                  <Text>{item.available_time}</Text>
-                </View>
-              ) : null}
-            </View>
-          ))}
-
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="9:00 AM"
@@ -469,14 +586,14 @@ class TimeDatePicker extends Component {
             />
             <TimeButton
               time="8:20 PM"
-              color={booked_time.includes(36) ? "booked" : null}
+              color={booked_time.includes(35) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="8:40 PM"
-              color={booked_time.includes(37) ? "booked" : null}
+              color={booked_time.includes(36) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
