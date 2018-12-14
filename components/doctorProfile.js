@@ -179,7 +179,7 @@ class DoctorProfile extends Component {
               {to(filledStars).map(key => (
                 <Icon
                   name="ios-star"
-                  style={{ color: "yellow" }}
+                  style={{ color: "#FFD700" }}
                   {...{ key, size }}
                 />
               ))}
@@ -187,7 +187,7 @@ class DoctorProfile extends Component {
               {halfStar && (
                 <Icon
                   name="ios-star-half"
-                  style={{ color: "yellow" }}
+                  style={{ color: "#FFD700" }}
                   {...{ size }}
                 />
               )}
@@ -195,7 +195,7 @@ class DoctorProfile extends Component {
               {to(emptyStars).map(key => (
                 <Icon
                   name="ios-star-outline"
-                  style={{ color: "yellow" }}
+                  style={{ color: "#FFD700" }}
                   {...{
                     key,
                     size
@@ -217,7 +217,7 @@ class DoctorProfile extends Component {
               </Text>
 
               <Text style={[styles.doctorName]}>
-                                                Doctor:{" "}
+                Doctor:
                 {profile.user.first_name} {profile.user.last_name}
               </Text>
             </View>
@@ -227,8 +227,8 @@ class DoctorProfile extends Component {
                 top: -45,
                 alignSelf: "center",
                 alignContent: "center",
-                justifyContent: "center",
-                flexDirection: "row"
+                justifyContent: "center"
+                // flexDirection: "row"
               }}
             >
               <Text style={[styles.doctordesc1]}>{profile.description}</Text>
@@ -259,24 +259,20 @@ class DoctorProfile extends Component {
               }
             }}
           >
-            <Left>
-              <Icon
-                type="EvilIcons"
-                name="location"
-                style={styles.locationIcon}
+            {/* <Left> */}
+            <Icon type="EvilIcons" name="location" style={styles.locationIcon}>
+              <Text
+                style={styles.locationText}
+                onPress={() => LinkingIOS.openURL(profile.google_maps)}
               >
-                <Text
-                  style={styles.locationText}
-                  onPress={() => LinkingIOS.openURL(profile.google_maps)}
-                >
-                                                  google maps
-                </Text>
-              </Icon>
-            </Left>
+                google maps
+              </Text>
+            </Icon>
+            {/* </Left> */}
 
             <Text style={styles.BookingnowStyle}>
-                                          Book now and you will recieve full
-              address details and clinic number
+              Book now and you will recieve full address details and clinic
+              number
             </Text>
 
             <View

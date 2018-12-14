@@ -190,7 +190,7 @@ const BottomTab = createBottomTabNavigator(
 
 const SuperNav = createStackNavigator(
   {
-    Anime: AnimeTab,
+    // Anime: AnimeTab,
     //  RatingPage: RatingPage,
     BottomTab: BottomTab
   },
