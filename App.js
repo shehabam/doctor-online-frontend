@@ -12,7 +12,7 @@ import More from "./components/More";
 import TimeDatePicker from "./components/TimeDatePicker";
 import Settings from "./components/Settings";
 import Notification from "./components/Notification";
-// import Schedule from "./components/Schedule";
+import Schedule from "./components/Schedule";
 
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Area from "./components/Area";
@@ -141,7 +141,7 @@ const MoreTab = createStackNavigator(
     Settings: Settings,
     Notification: Notification,
     EditProfile: EditProfile,
-    // Schedule: Schedule,
+    Schedule: Schedule,
     Edit: Edit
   },
   {}

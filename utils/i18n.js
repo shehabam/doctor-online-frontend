@@ -41,7 +41,8 @@ i18n
           editprofile: "Edit my Profile",
           loginedityourprofile: "LogIn to Edit your profile",
           changemycountry: "Change my Country",
-          changelanguage: "Change Language"
+          changelanguage: "Change Language",
+          schedule: "Schedule"
         },
         offer: {
           title: "Offers",
@@ -106,7 +107,8 @@ i18n
           ratingpage: "Rating Page",
           ratingvisiterror: "You Need To LogIn Or Register To Rate Any Doctor",
           ratingcontent: "How would you describe your visit to Doctor",
-          ratealert: "your rate has been Submited"
+          ratealert: "your rate has been Submited",
+          book: "Book"
         },
         edit: {
           waitingtime: "waiting_time",
@@ -123,7 +125,20 @@ i18n
           description: "description",
           service: "service",
           confirm: "CONFIRM",
-          nothing: "Nothing is here"
+          nothing: "Nothing is here",
+          yourreservationis: "Your Reservation is",
+          reservationday: "Reservation Day",
+          bookedsuccess: "Booked Successfully!",
+          pleaselogin: "Please login",
+          schedule: "Schedule"
+        },
+        book: {
+          patientname: "Patient Name",
+          date: "Date",
+          reservationtime: "Reservation Time",
+          doctor: "Doctor",
+          yourname: "Your Name",
+          booked: "Book Schedule"
         }
       },
       ar: {
@@ -141,7 +156,8 @@ i18n
           editprofile: "تعديل ملفي الشخصي",
           loginedityourprofile: "تسجيل الدخول لتعديل ملف التعريف الخاص بك",
           changemycountry: "تغيير بلدي",
-          changelanguage: "غير اللغة"
+          changelanguage: "غير اللغة",
+          schedule: "جدول"
         },
         offer: {
           title: "عروض",
@@ -206,7 +222,13 @@ i18n
           ratingcontent: "كيف تصف زيارتك إلى الطبيب",
           ratealert: "تم إرسال المعدل الخاص بك",
           tomorrow: "غدا",
-          aftertomorrow: "بعد غد"
+          aftertomorrow: "بعد غد",
+          book: "كتاب",
+          yourreservationis: "الحجز الخاص بك هو",
+          reservationday: "يوم الحجز",
+          bookedsuccess: "تم الحجز بنجاح!",
+          pleaselogin: "الرجاء تسجيل الدخول",
+          schedule: "جدول"
         },
         edit: {
           waitingtime: "وقت الانتظار",
@@ -224,6 +246,14 @@ i18n
           confirm: "تؤكد",
           enterlink: "يرجى إدخال رابط",
           nothing: "لا شيء هنا"
+        },
+        book: {
+          patientname: "اسم المريض",
+          date: "تاريخ",
+          reservationtime: "وقت الحجز",
+          doctor: "طبيب",
+          yourname: "اسمك",
+          booked: "جدول الكتاب"
         }
       }
     },

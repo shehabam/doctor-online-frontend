@@ -78,7 +78,11 @@ class LoginPage extends Component {
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="person" />
               <Input
-                style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                style={{
+                  fontFamily: "GTWalsheim-Medium",
+                  fontSize: 20,
+                  color: "#fff"
+                }}
                 placeholder={t("other:username")}
                 autoCapitalize="none"
                 onChangeText={username => this.setState({ username })}
@@ -90,7 +94,11 @@ class LoginPage extends Component {
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="lock" />
               <Input
-                style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                style={{
+                  fontFamily: "GTWalsheim-Medium",
+                  fontSize: 20,
+                  color: "#fff"
+                }}
                 placeholder={t("other:password")}
                 autoCapitalize="none"
                 secureTextEntry={true}

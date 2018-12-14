@@ -24,6 +24,7 @@ import {
   Image,
   ScrollView
 } from "react-native";
+import { withNamespaces } from "react-i18next";
 
 class DoctorList extends Component {
   goTo() {
@@ -31,8 +32,8 @@ class DoctorList extends Component {
     // this.props.navigation.navigate("DoctorProfile")
   }
 
-  static navigationOptions = {
-    title: "Choose Your Doctor",
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: screenProps.t("other:chooseyourdoctor"),
     headerTintColor: "white",
     headerStyle: {
       backgroundColor: "#00bfff"
@@ -50,7 +51,7 @@ class DoctorList extends Component {
         />
       </Button>
     )
-  };
+  });
 
   componentDidMount() {
     const profileID = this.props.navigation.getParam("SpeId");
@@ -58,6 +59,8 @@ class DoctorList extends Component {
   }
 
   render() {
+    const { t, i18n, navigation } = this.props;
+
     const to = (index: number): number[] => {
       const numbers: number[] = [];
       for (let i = 0; i < index; i += 1) {
@@ -100,7 +103,8 @@ class DoctorList extends Component {
                     source={{ uri: list.img }}
                   />
                   <Text style={styles.firstText}>
-                    Doctor {list.user.first_name} {list.user.last_name}
+                    {t("other:doctor")} {list.user.first_name}{" "}
+                    {list.user.last_name}
                   </Text>
                   <Text note style={styles.secondText}>
                     {list.description}{" "}
@@ -114,11 +118,9 @@ class DoctorList extends Component {
                 />
                 <Text note style={styles.thirdText}>
                   {" "}
-                  Block:
-                  {list.block} street:
-                  {list.street} Building:
-                  {list.building} Floor:
-                  {list.floor}{" "}
+                  {t("other:block")}:{list.block} {t("other:street")}:
+                  {list.street} {t("other:building")}:{list.building}{" "}
+                  {t("other:floor")}:{list.floor}{" "}
                 </Text>
               </CardItem>
               <CardItem style={styles.bookingButtonCardItem}>
@@ -127,7 +129,7 @@ class DoctorList extends Component {
                   style={{ height: 20, width: 20 }}
                 />
                 <Text note style={styles.thirdText}>
-                  Profession: {list.profession}{" "}
+                  {t("other:profession")}: {list.profession}{" "}
                 </Text>
               </CardItem>
               <CardItem style={styles.bookingButtonCardItem}>
@@ -136,7 +138,7 @@ class DoctorList extends Component {
                   style={{ height: 20, width: 20 }}
                 />
                 <Text note style={styles.thirdText}>
-                  Fees: {list.fees} K.D
+                  {t("other:fees")}: {list.fees} K.D
                 </Text>
               </CardItem>
               <CardItem style={styles.bookingButtonCardItem}>
@@ -145,7 +147,7 @@ class DoctorList extends Component {
                   style={{ height: 20, width: 20 }}
                 />
                 <Text note style={styles.thirdText}>
-                  waiting Time: {list.waiting_time}{" "}
+                  {t("other:waitingtime")}: {list.waiting_time}{" "}
                 </Text>
               </CardItem>
               <View
@@ -186,7 +188,7 @@ class DoctorList extends Component {
                   }
                   style={styles.text}
                 >
-                  {list.rating_set.length} votes
+                  {list.rating_set.length} {t("other:votes")}
                 </Text>
               </View>
               <CardItem style={styles.bookingButtonCardItem}>
@@ -202,7 +204,7 @@ class DoctorList extends Component {
                     })
                   }
                 >
-                  <Text style={styles.buttonText}>Book </Text>
+                  <Text style={styles.buttonText}>{t("other:book")} </Text>
                 </Button>
               </CardItem>
             </Content>
@@ -221,7 +223,8 @@ class DoctorList extends Component {
   }
 }
 
-export default observer(DoctorList);
+// export default observer(DoctorList);
+export default withNamespaces(["other", "common"], { wait: true })(DoctorList);
 
 const styles = StyleSheet.create({
   thumbnailStyle: {

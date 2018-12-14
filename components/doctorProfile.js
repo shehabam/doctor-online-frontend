@@ -721,14 +721,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   bookingButton: {
-    width: "28%",
+    width: "22%",
     alignItems: "center",
     justifyContent: "center",
-    margin: 10,
+    margin: 13,
     borderColor: "#ddd",
     borderWidth: 1,
     borderRadius: 20,
-    height: 40
+    height: 35
   },
   // ymenysarButtons: {
   //   color: "#48C1F6"
