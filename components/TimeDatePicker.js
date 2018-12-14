@@ -85,6 +85,9 @@ import { withNamespaces } from "react-i18next";
 import authStore from "../stores/authStore";
 
 let deviceWidth = Dimensions.get("window").width;
+let scheduledata;
+
+let booked_time = [1, 2, 11, 25, 31];
 
 class TimeDatePicker extends Component {
   constructor() {
@@ -95,11 +98,8 @@ class TimeDatePicker extends Component {
       auth_user: "",
       isDateTimePickerVisible: false,
       mode: "time",
-      res: "",
-      booked_time: [1, 2, 11, 25, 31],
-      ok: true
+      res: ""
     };
-    this.filterData = this.filterData.bind(this);
   }
 
   componentDidMount() {
@@ -113,6 +113,7 @@ class TimeDatePicker extends Component {
 
     Store.bringToProfile(profileID);
     Store.getAppointments();
+    booked_time.push(3);
   }
 
   _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
@@ -138,19 +139,11 @@ class TimeDatePicker extends Component {
     this.setState({ res: SelectedDate });
   };
 
-  filterData() {
-    this.setState({ ok: false });
-  }
-
   render() {
     const { t, i18n, navigation } = this.props;
-    const { day, month, auth_user, booked_time } = this.state;
+    const { day, month, auth_user } = this.state;
 
-    let scheduledata = Store.AppointmentsList;
-    console.log(
-      "~~~booked_time~~~~~~~booked_time~~~booked_time~~~~~~~~~~",
-      booked_time
-    );
+    scheduledata = Store.AppointmentsList;
 
     if (!Store.doctorProfile) {
       return (
@@ -167,16 +160,6 @@ class TimeDatePicker extends Component {
         </View>
       );
     }
-
-    // {
-    //   scheduledata.map(item =>
-
-    //       {
-    //         day == item.date.slice(-2)
-    //           ?  this.setState({booked_time:booked_time.concat(item.available_time)})
-    //           :  null
-    //       }
-    //   )}
 
     return (
       <View style={styles.DateTimePickerStyle}>
@@ -218,8 +201,6 @@ class TimeDatePicker extends Component {
                 <View>
                   <Text>{item.date}</Text>
                   <Text>{item.available_time}</Text>
-                  {/* {this.setState({booked_time:booked_time.concat(item.available_time)})} */}
-                  {this.filterData}
                 </View>
               ) : null}
             </View>
@@ -505,7 +486,6 @@ class TimeDatePicker extends Component {
         {/* <Container>
           <TouchableOpacity onPress={this._showDateTimePicker}>
             <Text style={styles.secondText}>{t("other:showdatepicker")}</Text>
-
             <DateTimePicker
               isVisible={this.state.isDateTimePickerVisible}
               mode={this.state.mode}
@@ -514,17 +494,14 @@ class TimeDatePicker extends Component {
             />
           </TouchableOpacity>
         </Container>
-
         {this.state.res ? (
           <Container>
             <Text style={{ textAlign: "center", fontSize: 18 }}>
               Available Time
             </Text>
-
             <Text style={{ textAlign: "center", marginBottom: 10 }}>
               {this.state.res}
             </Text>
-
             <Button onPress={() => this._reservation} full rounded>
               <Text style={styles.firstText}>{t("other:confirm")}</Text>
             </Button>
@@ -658,7 +635,6 @@ const styles = StyleSheet.create({
 {
   /* <TouchableOpacity onPress={this._showTimeInTimePicker}>
 						<Text style={styles.secondText}>Show TimePicker</Text>
-
 						<DateTimePicker
 							isVisible={this.state.isDateTimePickerVisible}
 							mode={this.state.mode}
