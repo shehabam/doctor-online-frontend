@@ -87,11 +87,20 @@ import authStore from "../stores/authStore";
 let deviceWidth = Dimensions.get("window").width;
 
 class TimeDatePicker extends Component {
-  state = {
-    day: "",
-    month: "",
-    auth_user: ""
-  };
+  constructor() {
+    super();
+    this.state = {
+      day: "",
+      month: "",
+      auth_user: "",
+      isDateTimePickerVisible: false,
+      mode: "time",
+      res: "",
+      booked_time: [1, 2, 11, 25, 31],
+      ok: true
+    };
+    this.filterData = this.filterData.bind(this);
+  }
 
   componentDidMount() {
     let profileID = this.props.navigation.getParam("cat");
@@ -105,12 +114,6 @@ class TimeDatePicker extends Component {
     Store.bringToProfile(profileID);
     Store.getAppointments();
   }
-
-  state = {
-    isDateTimePickerVisible: false,
-    mode: "time",
-    res: ""
-  };
 
   _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
@@ -135,12 +138,19 @@ class TimeDatePicker extends Component {
     this.setState({ res: SelectedDate });
   };
 
+  filterData() {
+    this.setState({ ok: false });
+  }
+
   render() {
     const { t, i18n, navigation } = this.props;
-    const { day, month, auth_user } = this.state;
+    const { day, month, auth_user, booked_time } = this.state;
 
     let scheduledata = Store.AppointmentsList;
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~", scheduledata);
+    console.log(
+      "~~~booked_time~~~~~~~booked_time~~~booked_time~~~~~~~~~~",
+      booked_time
+    );
 
     if (!Store.doctorProfile) {
       return (
@@ -157,6 +167,17 @@ class TimeDatePicker extends Component {
         </View>
       );
     }
+
+    // {
+    //   scheduledata.map(item =>
+
+    //       {
+    //         day == item.date.slice(-2)
+    //           ?  this.setState({booked_time:booked_time.concat(item.available_time)})
+    //           :  null
+    //       }
+    //   )}
+
     return (
       <View style={styles.DateTimePickerStyle}>
         <Card
@@ -191,21 +212,37 @@ class TimeDatePicker extends Component {
         </Card>
 
         <ScrollView>
+          {scheduledata.map(item => (
+            <View style={styles.itemView} key={item.id}>
+              {day == item.date.slice(-2) ? (
+                <View>
+                  <Text>{item.date}</Text>
+                  <Text>{item.available_time}</Text>
+                  {/* {this.setState({booked_time:booked_time.concat(item.available_time)})} */}
+                  {this.filterData}
+                </View>
+              ) : null}
+            </View>
+          ))}
+
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="9:00 AM"
               auth_user={auth_user}
+              color={booked_time.includes(1) ? "booked" : null}
               day={day}
               month={month}
             />
             <TimeButton
               time="9:20 AM"
               auth_user={auth_user}
+              color={booked_time.includes(2) ? "booked" : null}
               day={day}
               month={month}
             />
             <TimeButton
               time="9:40 AM"
+              color={booked_time.includes(3) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
@@ -214,18 +251,21 @@ class TimeDatePicker extends Component {
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="10:00 AM"
+              color={booked_time.includes(4) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="10:20 AM"
+              color={booked_time.includes(5) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="10:40 AM"
+              color={booked_time.includes(6) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
@@ -234,18 +274,21 @@ class TimeDatePicker extends Component {
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="11:00 AM"
+              color={booked_time.includes(7) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="11:20 AM"
+              color={booked_time.includes(8) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="11:40 AM"
+              color={booked_time.includes(9) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
@@ -254,18 +297,21 @@ class TimeDatePicker extends Component {
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="12:00 AM"
+              color={booked_time.includes(10) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="12:20 AM"
+              color={booked_time.includes(11) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="12:40 AM"
+              color={booked_time.includes(12) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
@@ -274,18 +320,21 @@ class TimeDatePicker extends Component {
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="1:00 PM"
+              color={booked_time.includes(13) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="1:20 PM"
+              color={booked_time.includes(14) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="1:40 PM"
+              color={booked_time.includes(15) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
@@ -294,18 +343,21 @@ class TimeDatePicker extends Component {
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="2:00 PM"
+              color={booked_time.includes(16) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="2:20 PM"
+              color={booked_time.includes(17) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="2:40 PM"
+              color={booked_time.includes(18) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
@@ -314,18 +366,21 @@ class TimeDatePicker extends Component {
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="3:00 PM"
+              color={booked_time.includes(19) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="3:20 PM"
+              color={booked_time.includes(20) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="3:40 PM"
+              color={booked_time.includes(21) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
@@ -334,18 +389,21 @@ class TimeDatePicker extends Component {
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="4:00 PM"
+              color={booked_time.includes(22) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="4:20 PM"
+              color={booked_time.includes(23) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="4:40 PM"
+              color={booked_time.includes(24) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
@@ -354,12 +412,14 @@ class TimeDatePicker extends Component {
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="5:00 PM"
+              color={booked_time.includes(25) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="5:20 PM"
+              color={booked_time.includes(26) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
@@ -367,6 +427,7 @@ class TimeDatePicker extends Component {
             <TimeButton
               time="5:40 PM"
               auth_user={auth_user}
+              color={booked_time.includes(27) ? "booked" : null}
               day={day}
               month={month}
             />
@@ -374,19 +435,21 @@ class TimeDatePicker extends Component {
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="6:00 PM"
-              color="green"
+              color={booked_time.includes(28) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="6:20 PM"
+              color={booked_time.includes(29) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="6:40 PM"
+              color={booked_time.includes(30) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
@@ -395,18 +458,21 @@ class TimeDatePicker extends Component {
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="7:00 PM"
+              color={booked_time.includes(31) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="7:20 PM"
+              color={booked_time.includes(32) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="7:40 PM"
+              color={booked_time.includes(33) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
@@ -415,18 +481,21 @@ class TimeDatePicker extends Component {
           <View style={{ flexDirection: "row" }}>
             <TimeButton
               time="8:00 PM"
+              color={booked_time.includes(34) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="8:20 PM"
+              color={booked_time.includes(36) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}
             />
             <TimeButton
               time="8:40 PM"
+              color={booked_time.includes(37) ? "booked" : null}
               auth_user={auth_user}
               day={day}
               month={month}

@@ -257,6 +257,9 @@ class Store {
       doctor: id,
       user: userId
     };
+
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", userData);
+
     axios
       .post(BASEURL + `/make/rating/`, userData)
       .then(() => console.log("bla bla bla"))
