@@ -138,7 +138,8 @@ i18n
           reservationtime: "Reservation Time",
           doctor: "Doctor",
           yourname: "Your Name",
-          booked: "Book Schedule"
+          booked: "Book Schedule",
+          doctorname: "Doctor Name"
         }
       },
       ar: {
@@ -253,7 +254,8 @@ i18n
           reservationtime: "وقت الحجز",
           doctor: "طبيب",
           yourname: "اسمك",
-          booked: "جدول الكتاب"
+          booked: "جدول الكتاب",
+          doctorname: "اسم الطبيب"
         }
       }
     },

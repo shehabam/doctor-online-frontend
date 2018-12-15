@@ -1,36 +1,23 @@
 import React, { Component } from "react";
-import { observer } from "mobx-react";
 import {
   Container,
   Header,
   Content,
   Button,
   Text,
-  CustomIcon,
-  Icon,
-  View,
-  Card,
-  CardItem,
-  Body,
-  Thumbnail,
-  Right,
-  Left,
-  Footer
+  Row,
+  View
 } from "native-base";
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { StyleSheet, ScrollView } from "react-native";
+import Store from "../stores/store";
+import { withNamespaces } from "react-i18next";
 import authStore from "../stores/authStore";
 
-import {
-  StyleSheet,
-  TouchableHighlight,
-  Image,
-  AppRegistry
-} from "react-native";
-import Store from "../stores/store";
-import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
-import { withNamespaces } from "react-i18next";
-
 class AppointmentPage extends Component {
+  state = {
+    authenticated: false
+  };
+
   static navigationOptions = ({ navigation, screenProps }) => ({
     title: screenProps.t("appointment:title"),
     headerStyle: {
@@ -38,93 +25,80 @@ class AppointmentPage extends Component {
     }
   });
 
-  componentDidMount() {
-    if (authStore.isAuthenticated) {
-      const userID = authStore.user;
-    } else {
-      console.log("login");
-    }
-  }
-
   render() {
     const { t, i18n, navigation } = this.props;
 
-    // const userUsername = Store.findUser(authStore.user.username)
-    const checkSchedule = Store.findSchedule(Store.Bla());
+    if (!Store.filteredDoctors) return <View style={styles.thumbnailStyle} />;
+    let listOfcities = Store.AppointmentsList;
+    doctorlists = Store.doctorList;
 
-    console.log(checkSchedule);
     if (!authStore.isAuthenticated) {
       return (
         <View
-          style={{
-            backgroundColor: "white",
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <Text>{t("appointment:content")}</Text>
+          <Text>{t("other:ratingvisiterror")}</Text>
         </View>
       );
     }
 
-    let dis = checkSchedule.map(Appointment => {
-      return (
-        <Grid
-          key={Appointment.id}
-          style={{
-            backgroundColor: "white"
-          }}
-        >
-          <Card style={{ width: "100%" }}>
-            <CardItem>
-              <Col>
-                <Text style={styles.textCall}>{t("appointment:topic")}: </Text>
-                <Text style={styles.text}>{Appointment.date}</Text>
-                <Text style={styles.textCall}>
-                  {t("appointment:from")}:
-                </Text>{" "}
-                <Text style={styles.text}>{Appointment._from}</Text>
-                <Text style={styles.textCall}>{t("appointment:to")} </Text>{" "}
-                <Text style={styles.text}>{Appointment.to}</Text>
-                {/* <Text>with Doctor: {Appointment.doctor}</Text> */}
-              </Col>
-            </CardItem>
-            <CardItem>
-              <Right>
-                <Button
-                  onPress={() => Store.deleteAppointment(Appointment.id)}
-                  transparent
-                >
-                  <Text style={styles.text}>{t("appointment:done")}</Text>
-                </Button>
-              </Right>
-            </CardItem>
-          </Card>
-        </Grid>
-      );
-    });
-
     return (
-      <View style={{ backgroundColor: "white", flex: 1 }}>
-        <ScrollView>{dis}</ScrollView>
+      <View style={styles.container}>
+        <ScrollView style={{ marginTop: 2 }}>
+          {listOfcities.map(item => (
+            <View style={styles.itemView} key={item.id}>
+              {authStore.user.username == item.patient.username ? (
+                <View style={{ width: "97%", margin: 5, marginVertical: 20 }}>
+                  <View style={styles.item}>
+                    <Text>{t("book:doctorname")}</Text>
+                    <Text note>{item.patient.username}</Text>
+                  </View>
+
+                  <View style={styles.item}>
+                    <Text>{t("book:date")}</Text>
+                    <Text note>{item.date}</Text>
+                  </View>
+
+                  <View style={styles.item}>
+                    <Text>{t("book:reservationtime")}</Text>
+                    <Text note>{item.available_time}</Text>
+                  </View>
+                </View>
+              ) : null}
+            </View>
+          ))}
+        </ScrollView>
       </View>
     );
   }
 }
 
-//export default observer(AppointmentPage);
-export default withNamespaces(["appointment", "common"], { wait: true })(
+export default withNamespaces(["book", "appointment", "other"], { wait: true })(
   AppointmentPage
 );
 
 const styles = StyleSheet.create({
-  text: {
-    color: "#00bfff",
-    fontSize: 20
+  container: {
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1
   },
-  textCall: {
-    fontWeight: "bold",
-    fontSize: 20
+  item: {
+    borderColor: "#ddd",
+    borderRadius: 10,
+    borderWidth: 1,
+    margin: 5,
+    padding: 4
+  },
+  thumbnailStyle: {
+    alignContent: "center",
+    justifyContent: "center"
+  },
+  itemView: {
+    width: "100%",
+    borderColor: "#ddd",
+    borderWidth: 1,
+    flexDirection: "row"
   }
 });
