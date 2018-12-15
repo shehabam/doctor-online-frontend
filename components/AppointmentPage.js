@@ -37,7 +37,7 @@ class AppointmentPage extends Component {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <Text>{t("other:ratingvisiterror")}</Text>
+          <Text>{t("edit:pleaselogin")}</Text>
         </View>
       );
     }
@@ -73,9 +73,9 @@ class AppointmentPage extends Component {
   }
 }
 
-export default withNamespaces(["book", "appointment", "other"], { wait: true })(
-  AppointmentPage
-);
+export default withNamespaces(["book", "appointment", "other", "edit"], {
+  wait: true
+})(AppointmentPage);
 
 const styles = StyleSheet.create({
   container: {
