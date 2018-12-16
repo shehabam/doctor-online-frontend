@@ -22,18 +22,22 @@ import {
   StyleSheet,
   TouchableHighlight,
   Image,
-  AppRegistry
+  AppRegistry,
+  ScrollView,
+  TouchableOpacity
 } from "react-native";
 import Store from "../stores/store";
-import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
+import { scrollViewHorizontal } from "react-native-gesture-handler";
+import { withNamespaces } from "react-i18next";
+import Swiper from "react-native-swiper";
 
 class DoctorProfile extends Component {
-  static navigationOptions = {
-    title: "Doctor Profile",
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: screenProps.t("other:doctorprofile"),
     headerStyle: {
       backgroundColor: "#00bfff"
     }
-  };
+  });
 
   likeSwitch = false;
   HeaderMaxHeight = 40;
@@ -68,6 +72,11 @@ class DoctorProfile extends Component {
   }
 
   render() {
+    const { t, i18n, navigation } = this.props;
+
+    const month = new Date().getMonth() + 1;
+    const day = new Date().getDate();
+
     const profileID = this.props.navigation.getParam("cat");
     const profile = Store.bringToProfile(profileID);
     const value = Store.StarRating();
@@ -87,15 +96,17 @@ class DoctorProfile extends Component {
       return <View />;
     }
     return (
+      // <ScrollView style={{flex:1, backgroundColor:"white"}}>
       <Grid
         style={{
           backgroundColor: "orange",
           position: "relative",
+          flex: 1,
           zIndex: 1
         }}
       >
         <Row
-          size={0.75}
+          size={0.5}
           style={{
             backgroundColor: "white"
           }}
@@ -114,7 +125,7 @@ class DoctorProfile extends Component {
         </Row>
 
         <Row
-          size={3}
+          size={3.25}
           style={{
             backgroundColor: "white"
           }}
@@ -142,7 +153,9 @@ class DoctorProfile extends Component {
               {this.chnageHeart(profile.id)}
             </Button>
 
-            <Text style={styles.userViewsText}>Views {profile.viewers}</Text>
+            <Text style={styles.userViewsText}>
+              {t("other:views")} {profile.viewers}
+            </Text>
 
             <View
               style={{
@@ -213,12 +226,13 @@ class DoctorProfile extends Component {
               }}
             >
               <Text style={[styles.visitorsText]}>
-                From {profile.rating_set.length} Visitors
+                {t("other:from")} {profile.rating_set.length}{" "}
+                {t("other:visitors")}
               </Text>
 
               <Text style={[styles.doctorName]}>
-                Doctor:
-                {profile.user.first_name} {profile.user.last_name}
+                {t("other:doctor")}: {profile.user.first_name}{" "}
+                {profile.user.last_name}
               </Text>
             </View>
 
@@ -227,8 +241,8 @@ class DoctorProfile extends Component {
                 top: -45,
                 alignSelf: "center",
                 alignContent: "center",
-                justifyContent: "center"
-                // flexDirection: "row"
+                justifyContent: "center",
+                flexDirection: "row"
               }}
             >
               <Text style={[styles.doctordesc1]}>{profile.description}</Text>
@@ -237,7 +251,7 @@ class DoctorProfile extends Component {
         </Row>
 
         <Row
-          size={3.5}
+          size={3.75}
           style={{
             backgroundColor: "white"
           }}
@@ -259,49 +273,282 @@ class DoctorProfile extends Component {
               }
             }}
           >
-            {/* <Left> */}
-            <Icon type="EvilIcons" name="location" style={styles.locationIcon}>
-              <Text
-                style={styles.locationText}
-                onPress={() => LinkingIOS.openURL(profile.google_maps)}
+            <Left>
+              <Icon
+                type="EvilIcons"
+                name="location"
+                style={styles.locationIcon}
               >
-                google maps
-              </Text>
-            </Icon>
-            {/* </Left> */}
+                <Text
+                  style={styles.locationText}
+                  // onPress={() => LinkingIOS.openURL(profile.google_maps)}
+                >
+                  {t("other:googlemaps")}
+                </Text>
+              </Icon>
+            </Left>
 
             <Text style={styles.BookingnowStyle}>
-              Book now and you will recieve full address details and clinic
-              number
+              {" "}
+              {t("other:bookdescription")}
             </Text>
 
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignContent: "center",
-                alignSelf: "center"
-              }}
-            >
-              <Button
-                rounded
-                warning
-                style={styles.bookingButton}
-                onPress={() =>
-                  this.props.navigation.navigate("TimeDatePicker", {
-                    cat: profile.id,
-                    store: Store
-                  })
-                } // onPress={() => this.props.navigation.navigate('TimeDatePicker')}
-              >
-                <Text style={styles.buttonText}>Today</Text>
-              </Button>
-            </View>
+            <Swiper style={styles.wrapper} showsButtons={true}>
+              <View style={styles.slide1}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignContent: "center",
+                    paddingHorizontal: 6
+                  }}
+                >
+                  <TouchableOpacity
+                    rounded
+                    warning
+                    style={styles.bookingButton}
+                    onPress={() =>
+                      this.props.navigation.navigate("TimeDatePicker", {
+                        cat: profile.id,
+                        store: Store,
+                        day: day,
+                        month: month
+                      })
+                    }
+                  >
+                    <View style={styles.cardHeader}>
+                      <Text
+                        style={[
+                          styles.buttonText,
+                          { color: "#fff", fontSize: 14 }
+                        ]}
+                      >
+                        {t("other:today")}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    rounded
+                    warning
+                    style={styles.bookingButton}
+                    onPress={() =>
+                      this.props.navigation.navigate("TimeDatePicker", {
+                        cat: profile.id,
+                        store: Store,
+                        day: day + 1,
+                        month: month
+                      })
+                    }
+                  >
+                    <View style={styles.cardHeader}>
+                      <Text
+                        style={[
+                          styles.buttonText,
+                          { color: "#fff", fontSize: 14 }
+                        ]}
+                      >
+                        {t("other:tomorrow")}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    rounded
+                    warning
+                    style={styles.bookingButton}
+                    onPress={() =>
+                      this.props.navigation.navigate("TimeDatePicker", {
+                        cat: profile.id,
+                        store: Store,
+                        day: day + 2,
+                        month: month
+                      })
+                    }
+                  >
+                    <View style={styles.cardHeader}>
+                      <Text
+                        style={[
+                          styles.buttonText,
+                          { color: "#fff", fontSize: 14, textAlign: "center" }
+                        ]}
+                      >
+                        {day + 2}/{month}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.slide1}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignContent: "center",
+                    paddingHorizontal: 6
+                  }}
+                >
+                  <TouchableOpacity
+                    rounded
+                    warning
+                    style={styles.bookingButton}
+                    onPress={() =>
+                      this.props.navigation.navigate("TimeDatePicker", {
+                        cat: profile.id,
+                        store: Store,
+                        day: day + 3,
+                        month: month
+                      })
+                    }
+                  >
+                    <View style={styles.cardHeader}>
+                      <Text
+                        style={[
+                          styles.buttonText,
+                          { color: "#fff", fontSize: 14 }
+                        ]}
+                      >
+                        {day + 3}/{month}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    rounded
+                    warning
+                    style={styles.bookingButton}
+                    onPress={() =>
+                      this.props.navigation.navigate("TimeDatePicker", {
+                        cat: profile.id,
+                        store: Store,
+                        day: day + 4,
+                        month: month
+                      })
+                    }
+                  >
+                    <View style={styles.cardHeader}>
+                      <Text
+                        style={[
+                          styles.buttonText,
+                          { color: "#fff", fontSize: 14 }
+                        ]}
+                      >
+                        {day + 4}/{month}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    rounded
+                    warning
+                    style={styles.bookingButton}
+                    onPress={() =>
+                      this.props.navigation.navigate("TimeDatePicker", {
+                        cat: profile.id,
+                        store: Store,
+                        day: day + 5,
+                        month: month
+                      })
+                    }
+                  >
+                    <View style={styles.cardHeader}>
+                      <Text
+                        style={[
+                          styles.buttonText,
+                          { color: "#fff", fontSize: 14, textAlign: "center" }
+                        ]}
+                      >
+                        {day + 5}/{month}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.slide1}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignContent: "center",
+                    paddingHorizontal: 6
+                  }}
+                >
+                  <TouchableOpacity
+                    rounded
+                    warning
+                    style={styles.bookingButton}
+                    onPress={() =>
+                      this.props.navigation.navigate("TimeDatePicker", {
+                        cat: profile.id,
+                        store: Store,
+                        day: day + 6,
+                        month: month
+                      })
+                    }
+                  >
+                    <View style={styles.cardHeader}>
+                      <Text
+                        style={[
+                          styles.buttonText,
+                          { color: "#fff", fontSize: 14 }
+                        ]}
+                      >
+                        {day + 6}/{month}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    rounded
+                    warning
+                    style={styles.bookingButton}
+                    onPress={() =>
+                      this.props.navigation.navigate("TimeDatePicker", {
+                        cat: profile.id,
+                        store: Store,
+                        day: day + 7,
+                        month: month
+                      })
+                    }
+                  >
+                    <View style={styles.cardHeader}>
+                      <Text
+                        style={[
+                          styles.buttonText,
+                          { color: "#fff", fontSize: 14 }
+                        ]}
+                      >
+                        {day + 7}/{month}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    rounded
+                    warning
+                    style={styles.bookingButton}
+                    onPress={() =>
+                      this.props.navigation.navigate("TimeDatePicker", {
+                        cat: profile.id,
+                        store: Store,
+                        day: day + 8,
+                        month: month
+                      })
+                    }
+                  >
+                    <View style={styles.cardHeader}>
+                      <Text
+                        style={[
+                          styles.buttonText,
+                          { color: "#fff", fontSize: 14, textAlign: "center" }
+                        ]}
+                      >
+                        {day + 8}/{month}{" "}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Swiper>
           </View>
         </Row>
 
         <Row
-          size={1.25}
+          size={1.5}
           style={{
             backgroundColor: "white"
           }}
@@ -323,14 +570,16 @@ class DoctorProfile extends Component {
               }
             }}
           >
-            <Row>
+            <Row size={1}>
               <Col style={{ marginTop: 20 }}>
                 <Icon
                   type="EvilIcons"
                   name="location"
                   style={styles.locationIcon}
                 >
-                  <Text style={styles.thirdText}>Fees: {profile.fees} KD</Text>
+                  <Text style={styles.thirdText}>
+                    {t("other:fees")}: {profile.fees} KD
+                  </Text>
                 </Icon>
               </Col>
 
@@ -338,7 +587,7 @@ class DoctorProfile extends Component {
                 <Right>
                   <Icon type="Feather" name="clock" style={styles.clockIcon}>
                     <Text style={styles.thirdText}>
-                      Waiting Time: {profile.waiting_time}
+                      {t("other:waitingtime")}: {profile.waiting_time}
                     </Text>
                   </Icon>
                 </Right>
@@ -346,39 +595,58 @@ class DoctorProfile extends Component {
             </Row>
           </View>
         </Row>
-        {/*                 <Row size={0.7} style={{
-                    backgroundColor: 'black',}}/> */}
       </Grid>
+      // </ScrollView>
     );
   }
 }
 
-export default observer(DoctorProfile);
+//export default observer(DoctorProfile);
+export default withNamespaces(["other", "common"], { wait: true })(
+  DoctorProfile
+);
 
 const styles = StyleSheet.create({
-  wrapper: {
-    marginTop: 80
+  card: {
+    borderRadius: 6,
+    height: 100,
+    width: "20%"
   },
-  slide1: {
-    justifyContent: "center",
+  cardHeader: {
+    backgroundColor: "#ff7000",
+    flex: 1,
+    borderRadius: 20,
+    borderRadius: 20,
     alignItems: "center",
-    backgroundColor: "#9DD6EB"
-  },
-  slide2: {
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#97CAE5"
+    width: "100%"
   },
-  slide3: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#92BBD9"
+  buttonText: {
+    fontSize: 11
   },
-  text: {
-    color: "#000",
-    fontSize: 20,
-    fontWeight: "bold"
-  },
+  // wrapper: {
+  //   marginTop: 80
+  // },
+  // slide1: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#9DD6EB"
+  // },
+  // slide2: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#97CAE5"
+  // },
+  // slide3: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#92BBD9"
+  // },
+  // text: {
+  //   color: "#000",
+  //   fontSize: 20,
+  //   fontWeight: "bold"
+  // },
   thumbnailStyle: {
     alignSelf: "center",
     alignContent: "center",
@@ -391,11 +659,11 @@ const styles = StyleSheet.create({
     color: "#919191",
     paddingTop: 5
   },
-  iconsStyle: {
-    width: 28,
-    height: 28,
-    justifyContent: "flex-start"
-  },
+  // iconsStyle: {
+  //   width: 28,
+  //   height: 28,
+  //   justifyContent: "flex-start"
+  // },
   visitorsText: {
     alignSelf: "center",
     alignContent: "center",
@@ -404,16 +672,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#919191"
   },
-  textContainer: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-  },
-  startStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-  },
+  // textContainer: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center"
+  // },
+  // startStyle: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center"
+  // },
   doctorName: {
     alignSelf: "center",
     alignContent: "center",
@@ -452,35 +720,62 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   bookingButton: {
-    width: "25%",
-    alignSelf: "center",
-    alignContent: "center",
+    width: "28%",
+    alignItems: "center",
     justifyContent: "center",
-    margin: 5
+    margin: 10,
+    borderColor: "#ddd",
+    borderWidth: 1,
+    borderRadius: 20,
+    height: 40
   },
-  ymenysarButtons: {
-    color: "#48C1F6"
-  },
+  // ymenysarButtons: {
+  //   color: "#48C1F6"
+  // },
   thirdText: {
     fontSize: 16,
     fontFamily: "GTWalsheim-Medium",
     color: "#919191"
   },
-  locationIcon: {
-    color: "#48C1F6",
-    fontSize: 38
-  },
-  cardStyle: {
-    shadowColor: "rgba(0,0,0,0.7)",
-    shadowRadius: 4,
-    shadowOpacity: 0.7,
-    shadowOffset: {
-      height: 2,
-      width: 0
-    }
-  },
+  // locationIcon: {
+  //   color: "#48C1F6",
+  //   fontSize: 38
+  // },
+  // cardStyle: {
+  //   shadowColor: "rgba(0,0,0,0.7)",
+  //   shadowRadius: 4,
+  //   shadowOpacity: 0.7,
+  //   shadowOffset: {
+  //     height: 2,
+  //     width: 0
+  //   }
+  // },
   clockIcon: {
     color: "#48C1F6",
     fontSize: 30
+  },
+  wrapper: {
+    height: 130,
+    flex: 1
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  text: {
+    color: "#fff",
+    fontSize: 30,
+    fontWeight: "bold"
   }
 });

@@ -15,7 +15,7 @@ import { StyleSheet, TouchableHighlight, Image } from "react-native";
 class anime1 extends Component {
   componentDidMount() {
     this.timeoutHandle = setTimeout(() => {
-      this.props.navigation.navigate("anime");
+      this.props.navigation.navigate("FirstPage");
     }, 3000);
   }
 

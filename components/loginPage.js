@@ -16,13 +16,13 @@ import {
   Input
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { SocialIcon } from "react-native-elements";
 import {
   StyleSheet,
   TouchableHighlight,
   Image,
   ImageBackground
 } from "react-native";
+import { withNamespaces } from "react-i18next";
 
 class LoginPage extends Component {
   static navigationOptions = {
@@ -47,6 +47,8 @@ class LoginPage extends Component {
     // if (authStore.isAuthenticated) {
     //   this.props.navigation.navigate("FirstPage");
     // }
+    const { t, i18n, navigation } = this.props;
+
     return (
       <ImageBackground
         source={require("../assets/Rectangle.png")}
@@ -77,7 +79,7 @@ class LoginPage extends Component {
               <Icon name="person" />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
-                placeholder="Username"
+                placeholder={t("other:username")}
                 autoCapitalize="none"
                 onChangeText={username => this.setState({ username })}
               />
@@ -89,7 +91,7 @@ class LoginPage extends Component {
               <Icon name="lock" />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
-                placeholder="Password"
+                placeholder={t("other:password")}
                 autoCapitalize="none"
                 secureTextEntry={true}
                 onChangeText={password => this.setState({ password })}
@@ -106,12 +108,13 @@ class LoginPage extends Component {
                 this.loginButton(this.state.username, this.state.password)
               }
             >
-              <Text style={styles.TextStyle}>Login</Text>
+              <Text style={styles.TextStyle}>{t("first:login")}</Text>
             </Button>
           </Row>
           <Row size={0.5} style={[styles.Row]}>
             <Text style={{ color: "white" }}>
-              ───────── <Text style={{ color: "white" }}>Or</Text> ─────────
+              ───────── <Text style={{ color: "white" }}>{t("other:or")}</Text>{" "}
+              ─────────
             </Text>
             {/* <Hr /> */}
           </Row>
@@ -124,7 +127,7 @@ class LoginPage extends Component {
               onPress={() => this.props.navigation.navigate("RegisterPage")}
               // authStore.registerUser(this.state.username, this.state.password)
             >
-              <Text style={styles.TextStyle}>Register</Text>
+              <Text style={styles.TextStyle}>{t("other:register")}</Text>
             </Button>
           </Row>
         </Grid>
@@ -133,7 +136,8 @@ class LoginPage extends Component {
   }
 }
 
-export default observer(LoginPage);
+//export default observer(LoginPage);
+export default withNamespaces(["other", "common"], { wait: true })(LoginPage);
 
 const styles = StyleSheet.create({
   Row: {
@@ -159,22 +163,22 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     borderWidth: 3
   },
-  outerCircle: {
-    borderRadius: 40,
-    // overflow: 'hidden',
-    borderColor: "white"
-    // width: 80,
-    // height: 80
-  },
-  innerCircle: {
-    borderRadius: 35,
-    borderColor: "white",
-    overflow: "hidden",
-    color: "white",
-    width: 70,
-    height: 70,
-    margin: 5
-  },
+  // outerCircle: {
+  //   borderRadius: 40,
+  //   // overflow: 'hidden',
+  //   borderColor: "white"
+  //   // width: 80,
+  //   // height: 80
+  // },
+  // innerCircle: {
+  //   borderRadius: 35,
+  //   borderColor: "white",
+  //   overflow: "hidden",
+  //   color: "white",
+  //   width: 70,
+  //   height: 70,
+  //   margin: 5
+  // },
   formBorder: {
     width: "80%",
     height: "100%",

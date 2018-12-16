@@ -11,6 +11,9 @@ import DoctorList from "./components/doctorList";
 import More from "./components/More";
 import TimeDatePicker from "./components/TimeDatePicker";
 import Settings from "./components/Settings";
+import Notification from "./components/Notification";
+// import Schedule from "./components/Schedule";
+
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Area from "./components/Area";
 import Edit from "./components/Edit";
@@ -30,6 +33,15 @@ import AppointmentPage from "./components/AppointmentPage";
 import Filter from "./components/Filter";
 import RegisterPage from "./components/RegisterPage";
 import RatingPage from "./components/RatingPage";
+import { withNamespaces } from "react-i18next";
+import i18n from "./utils/i18n";
+let iconName;
+
+const WrappedStack = ({ t }) => <SuperNav screenProps={{ t }} />;
+const ReloadAppOnLanguageChange = withNamespaces("common", {
+  bindI18n: "languageChanged",
+  bindStore: false
+})(WrappedStack);
 
 class App extends Component {
   constructor(props) {
@@ -44,7 +56,8 @@ class App extends Component {
         "GTWalsheim-Black": require("./assets/fonts/GT-Walsheim-Black.ttf"),
         Roboto: require("native-base/Fonts/Roboto.ttf"),
         Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-        Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
+        Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf"),
+        Arial: require("native-base/Fonts/Roboto.ttf")
       });
       this.setState({ fontLoaded: true });
     } catch (error) {
@@ -56,7 +69,7 @@ class App extends Component {
       console.log("fonts loaded: ", this.state.fontLoaded);
       return (
         <Container>
-          <SuperNav />
+          <ReloadAppOnLanguageChange />
           {/* <RelodAppOnLanguageChange  /> */}
         </Container>
       );
@@ -72,14 +85,14 @@ class App extends Component {
 
 const AnimeTab = createStackNavigator(
   {
+    anime: anime,
     anime1: {
       screen: anime1,
       navigationOptions: {
         header: null
       },
       hideTabBar: true
-    },
-    anime: anime
+    }
   },
   {}
 );
@@ -126,7 +139,9 @@ const MoreTab = createStackNavigator(
   {
     More: More,
     Settings: Settings,
+    Notification: Notification,
     EditProfile: EditProfile,
+    // Schedule: Schedule,
     Edit: Edit
   },
   {}
@@ -146,17 +161,32 @@ const OffersTab = createStackNavigator(
 
 const BottomTab = createBottomTabNavigator(
   {
-    Home: FirstPageTab,
-    Appointment: AppointmentTab,
-    Offers: OffersTab,
-    More: MoreTab
+    Home: {
+      screen: FirstPageTab
+    },
+    Appointment: {
+      screen: AppointmentTab
+    },
+    Offers: {
+      screen: OffersTab
+    },
+    More: {
+      screen: MoreTab
+    }
   },
   {
     initialRouteName: "Home",
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: ({ navigation, screenProps }) => ({
+      title:
+        navigation.state.routeName === "Home"
+          ? screenProps.t("other:home")
+          : navigation.state.routeName === "Appointment"
+            ? screenProps.t("other:appointment")
+            : navigation.state.routeName === "Offers"
+              ? screenProps.t("other:offers")
+              : screenProps.t("other:more"),
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
-        let iconName;
         if (routeName === "Home") {
           iconName = "search";
         } else if (routeName === "Appointment") {

@@ -25,12 +25,12 @@ import { ScrollView } from "react-native-gesture-handler";
 import GridView from "react-native-super-grid";
 
 class SpecialityPage extends Component {
-  static navigationOptions = {
-    title: "Choose by Speciality",
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: screenProps.t("other:speciality"),
     headerStyle: {
       backgroundColor: "#00bfff"
     }
-  };
+  });
 
   componentDidMount() {
     const profileID = this.props.navigation.getParam("AreaName");
@@ -166,14 +166,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#00bfff",
     flex: 1
   },
-  ImageStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    height: 60,
-    backgroundColor: "#00bfff",
-    flex: 1
-  },
+  // ImageStyle: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center",
+  //   height: 60,
+  //   backgroundColor: "#00bfff",
+  //   flex: 1
+  // },
   cardBoxStyle: {
     // marginLeft: 7,
     // width: 190,

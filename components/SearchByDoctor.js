@@ -37,17 +37,19 @@ import {
 } from "react-native";
 import CollapsingToolbar from "react-native-collapse-view";
 import authStore from "../stores/authStore";
+import { withNamespaces } from "react-i18next";
 
 class SearchByDoctor extends Component {
   get goTo() {
     return this.props.navigation.navigate("Area");
   }
 
-  static navigationOptions = {
-    title: "Choose Your Doctor",
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: screenProps.t("other:chooseyourdoctor"),
     headerStyle: {
       backgroundColor: "#00bfff"
     },
+
     headerRight: (
       <Button
         transparent
@@ -62,9 +64,10 @@ class SearchByDoctor extends Component {
         />
       </Button>
     )
-  };
+  });
 
   render() {
+    const { t, i18n, navigation } = this.props;
     const to = (index: number): number[] => {
       const numbers: number[] = [];
       for (let i = 0; i < index; i += 1) {
@@ -102,7 +105,8 @@ class SearchByDoctor extends Component {
                     source={{ uri: list.img }}
                   />
                   <Text style={styles.firstText}>
-                    Doctor {list.user.first_name} {list.user.last_name}
+                    {t("other:doctor")} {list.user.first_name}{" "}
+                    {list.user.last_name}
                   </Text>
                   <Text note style={styles.secondText}>
                     {list.description}{" "}
@@ -116,11 +120,9 @@ class SearchByDoctor extends Component {
                 />
                 <Text note style={styles.thirdText}>
                   {" "}
-                  Block:
-                  {list.block} street:
-                  {list.street} Building:
-                  {list.building} Floor:
-                  {list.floor}{" "}
+                  {t("other:block")}:{list.block} {t("other:street")}:
+                  {list.street} {t("other:building")}:{list.building}{" "}
+                  {t("other:floor")}:{list.floor}{" "}
                 </Text>
               </CardItem>
               <CardItem style={styles.bookingButtonCardItem}>
@@ -129,7 +131,7 @@ class SearchByDoctor extends Component {
                   style={{ height: 20, width: 20 }}
                 />
                 <Text note style={styles.thirdText}>
-                  Profession: {list.profession}{" "}
+                  {t("other:profession")}: {list.profession}{" "}
                 </Text>
               </CardItem>
               <CardItem style={styles.bookingButtonCardItem}>
@@ -147,7 +149,7 @@ class SearchByDoctor extends Component {
                   style={{ height: 20, width: 20 }}
                 />
                 <Text note style={styles.thirdText}>
-                  waiting Time: {list.waiting_time}{" "}
+                  {t("other:waitingtime")}: {list.waiting_time}{" "}
                 </Text>
               </CardItem>
               <View
@@ -188,7 +190,7 @@ class SearchByDoctor extends Component {
                   }
                   style={styles.text}
                 >
-                  {list.rating_set.length} votes
+                  {list.rating_set.length} {t("other:votes")}
                 </Text>
               </View>
               <CardItem style={styles.bookingButtonCardItem}>
@@ -204,7 +206,7 @@ class SearchByDoctor extends Component {
                     })
                   }
                 >
-                  <Text style={styles.buttonText}>Book </Text>
+                  <Text style={styles.buttonText}>{t("other:book")} </Text>
                 </Button>
               </CardItem>
             </Content>
@@ -219,7 +221,7 @@ class SearchByDoctor extends Component {
           <Item style={{ margin: 10 }}>
             <Icon style={{ margin: 10 }} name="search" />
             <Input
-              placeholder="Search By Products..."
+              placeholder={t("other:searchplaceholder")}
               onChangeText={e => Store.changeDoctorValue(e)}
             />
           </Item>
@@ -232,7 +234,9 @@ class SearchByDoctor extends Component {
   }
 }
 
-export default observer(SearchByDoctor);
+export default withNamespaces(["other", "common"], { wait: true })(
+  SearchByDoctor
+);
 
 const styles = StyleSheet.create({
   thumbnailStyle: {
@@ -268,16 +272,16 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20
   },
-  fourthText: {
-    fontSize: 16,
-    fontFamily: "GTWalsheim-Medium",
-    color: "#919191",
-    paddingLeft: 5
-  },
-  iconsStyle: {
-    width: 28,
-    height: 28
-  },
+  // fourthText: {
+  //   fontSize: 16,
+  //   fontFamily: "GTWalsheim-Medium",
+  //   color: "#919191",
+  //   paddingLeft: 5
+  // },
+  // iconsStyle: {
+  //   width: 28,
+  //   height: 28
+  // },
   bookingButtonCardItem: {
     alignSelf: "center",
     alignContent: "center",

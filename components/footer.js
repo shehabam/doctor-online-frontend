@@ -12,12 +12,12 @@ import {
   Left
 } from "native-base";
 import { StyleSheet, TouchableHighlight, Image } from "react-native";
-
-import { Col, Row, Grid } from "react-native-easy-grid";
-import { colors } from "react-native-elements";
+import { withNamespaces } from "react-i18next";
 
 class FooterApp extends Component {
   render() {
+    const { t, i18n, navigation } = this.props;
+
     return (
       <TouchableHighlight>
         <Footer>
@@ -29,32 +29,32 @@ class FooterApp extends Component {
               <Image
                 source={require("../assets/SearchForFooter.png")}
                 style={styles.ImageStyle}
-                name="Search"
+                name={t("other:search")}
               />
-              <Text style={styles.TextStyle}>Search</Text>
+              <Text style={styles.TextStyle}>{t("other:search")}</Text>
             </Button>
             <Button vertical>
               <Image
                 source={require("../assets/appointment.png")}
                 style={styles.ImageStyle}
-                name="appointment"
+                name={t("appointment:title")}
               />
-              <Text style={styles.TextStyle}>appointment</Text>
+              <Text style={styles.TextStyle}>{t("appointment:title")}</Text>
             </Button>
             <Button vertical active>
               <Image
                 source={require("../assets/offers.png")}
                 style={styles.ImageStyle}
-                name="Offers"
+                name={t("offer:title")}
               />
-              <Text style={styles.TextStyle}>Offers</Text>
+              <Text style={styles.TextStyle}>{t("offer:title")}</Text>
             </Button>
             <Button
               vertical
               onPress={() => this.props.navigation.navigate("More")}
             >
               <Icon name="ios-more" />
-              <Text style={styles.TextStyle}>More</Text>
+              <Text style={styles.TextStyle}>{t("more:title")}</Text>
             </Button>
           </FooterTab>
         </Footer>
@@ -88,20 +88,21 @@ class FooterApp extends Component {
   }
 }
 
-export default FooterApp;
+//export default FooterApp;
+export default withNamespaces(["more", "common"], { wait: true })(FooterApp);
 
 const styles = StyleSheet.create({
-  inputStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-    // fontSize: 22,
-    // height: 60,
-    // fontFamily: 'GTWalsheim-Medium',
-    // color: '#ffffff',
-    // backgroundColor: '#00bfff',
-    // flex: 1
-  },
+  // inputStyle: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center"
+  //   // fontSize: 22,
+  //   // height: 60,
+  //   // fontFamily: 'GTWalsheim-Medium',
+  //   // color: '#ffffff',
+  //   // backgroundColor: '#00bfff',
+  //   // flex: 1
+  // },
   ImageStyle: {
     alignSelf: "center",
     alignContent: "center",
@@ -117,11 +118,11 @@ const styles = StyleSheet.create({
     fontSize: 12
     // width: 22.5,
     // height: 22.5
-  },
-  cardBoxStyle: {
-    marginLeft: 7,
-    width: 190,
-    height: 150,
-    backgroundColor: "#00bfff"
   }
+  // cardBoxStyle: {
+  //   marginLeft: 7,
+  //   width: 190,
+  //   height: 150,
+  //   backgroundColor: "#00bfff"
+  // }
 });

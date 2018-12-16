@@ -94,7 +94,7 @@ const CookieTab = createStackNavigator(
   }
 );
 const ProfileTab = createStackNavigator({
-  Profile: ProfileScreen
+  // Profile: ProfileScreen
 });
 const BottomTab = createBottomTabNavigator(
   {

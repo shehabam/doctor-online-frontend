@@ -14,6 +14,9 @@ import {
   Item,
   Input
 } from "native-base";
+
+const BASEURL = "http://207.154.246.97";
+
 class Store {
   constructor() {
     this.doctorList = [];
@@ -51,7 +54,7 @@ class Store {
   getDoctors() {
     axios
       // http://207.154.246.97/
-      .get("http://207.154.246.97/doctor/list")
+      .get(BASEURL + "/doctor/list")
       .then(res => res.data)
       .then(doctors => {
         this.doctorList = doctors;
@@ -63,7 +66,7 @@ class Store {
   } //for bringing Cities only
   getCities() {
     axios
-      .get("http://207.154.246.97/cities/")
+      .get(BASEURL + "/cities/")
       .then(res => res.data)
       .then(cities => {
         this.city = cities;
@@ -72,8 +75,9 @@ class Store {
   } //for bringing Area only
   getAreas() {
     axios
-      .get("http://207.154.246.97/area/")
+      .get(BASEURL + "/area/")
       .then(res => res.data)
+
       .then(Areas => {
         this.Area = Areas;
       })
@@ -82,7 +86,7 @@ class Store {
   } //for bringing Speciality only
   getSpeciality() {
     axios
-      .get("http://207.154.246.97/speciality/")
+      .get(BASEURL + "/speciality/")
       .then(res => res.data)
       .then(Speciality => {
         this.Speciality = Speciality.slice().sort();
@@ -93,7 +97,7 @@ class Store {
 
   getRating() {
     axios
-      .get("http://207.154.246.97/rating/")
+      .get(BASEURL + "/rating/")
       .then(res => res.data)
       .then(rates => {
         this.RatingList = rates;
@@ -106,7 +110,7 @@ class Store {
     this.doctorProfile = productInCat;
 
     axios
-      .post(`http://207.154.246.97/doctor/views/` + id)
+      .post(BASEURL + `/doctor/views/` + id)
       .then(() => console.log("bla bla bla"))
       .catch(err => console.error(err));
 
@@ -139,14 +143,14 @@ class Store {
       floor: floor
     };
     axios
-      .put(`http://207.154.246.97/update/profile/` + id, userData)
+      .put(BASEURL + `/update/profile/` + id, userData)
       .then(res => res.data)
       .catch(() => console.log("You Failed"));
   }
 
   getEditProfile(id) {
     axios
-      .get(`http://207.154.246.97/update/profile/` + id)
+      .get(BASEURL + `/update/profile/` + id)
       .then(res => res.data)
       .then(rates => {
         this.editProf = rates;
@@ -253,15 +257,32 @@ class Store {
       doctor: id,
       user: userId
     };
+
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", userData);
+
     axios
-      .post(`http://207.154.246.97/make/rating/`, userData)
+      .post(BASEURL + `/make/rating/`, userData)
       .then(() => console.log("bla bla bla"))
+      .catch(err => console.error(err));
+  }
+
+  postBook(date, available_time, id, userId) {
+    const bookdata = {
+      date: date,
+      available_time: available_time,
+      doctor: id,
+      patient: userId
+    };
+    console.log("bla 1 2 bookdata", bookdata);
+    axios
+      .post(BASEURL + `/create/schedeul/`, bookdata)
+      .then(response => console.log("bla bla bla response", response))
       .catch(err => console.error(err));
   }
 
   getUsers() {
     axios
-      .get("http://207.154.246.97/users/")
+      .get(BASEURL + "/users/")
       .then(res => res.data)
       .then(users => {
         this.users = users;
@@ -271,7 +292,7 @@ class Store {
 
   getAppointments() {
     axios
-      .get("http://207.154.246.97/doctor/schedeul")
+      .get(BASEURL + "/doctor/schedeul")
       .then(res => res.data)
       .then(Appointment => {
         this.AppointmentsList = Appointment;
@@ -316,7 +337,7 @@ class Store {
     // axios.delete(`http://207.154.246.97/doctor/schedeul` + id)
     // this.AppointmentsList.splice(id, 1);
     axios
-      .delete(`http://207.154.246.97/doctor/schedeul`, id)
+      .delete(BASEURL + `/doctor/schedeul`, id)
       .then(res => res.data)
       .then(Appointment => {
         this.AppointmentsList = Appointment;
@@ -376,10 +397,12 @@ decorate(Store, {
   getUsers: action,
   findSchedule: action,
   userName: observable,
-  deleteAppointment: action
+  deleteAppointment: action,
+  Bla: action
 });
 
 const store = new Store();
+
 store.getDoctors();
 store.getCities();
 store.getSpeciality();

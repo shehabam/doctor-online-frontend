@@ -16,13 +16,13 @@ import {
   Input
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { SocialIcon } from "react-native-elements";
 import {
   StyleSheet,
   TouchableHighlight,
   Image,
   ImageBackground
 } from "react-native";
+import { withNamespaces } from "react-i18next";
 
 class RegisterPage extends Component {
   static navigationOptions = {
@@ -40,6 +40,8 @@ class RegisterPage extends Component {
     };
   }
   render() {
+    const { t, i18n, navigation } = this.props;
+
     if (authStore.isAuthenticated) {
       this.props.navigation.navigate("FirstPage");
     }
@@ -72,7 +74,7 @@ class RegisterPage extends Component {
               <Icon name="person" style={{ color: "white" }} />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
-                placeholder="First Name"
+                placeholder={t("other:firstname")}
                 autoCapitalize="none"
                 onChangeText={firstName => this.setState({ firstName })}
               />
@@ -84,7 +86,7 @@ class RegisterPage extends Component {
               <Icon name="person" style={{ color: "white" }} />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
-                placeholder="Last Name"
+                placeholder={t("other:lastname")}
                 autoCapitalize="none"
                 onChangeText={lastName => this.setState({ lastName })}
               />
@@ -96,7 +98,7 @@ class RegisterPage extends Component {
               <Icon name="person" style={{ color: "white" }} />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
-                placeholder="Username"
+                placeholder={t("other:username")}
                 autoCapitalize="none"
                 onChangeText={username => this.setState({ username })}
               />
@@ -108,7 +110,7 @@ class RegisterPage extends Component {
               <Icon name="call" style={{ color: "white" }} />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
-                placeholder="Phone Number"
+                placeholder={t("other:phonenumber")}
                 autoCapitalize="none"
                 onChangeText={phoneNumber => this.setState({ phoneNumber })}
               />
@@ -120,7 +122,7 @@ class RegisterPage extends Component {
               <Icon name="lock" style={{ color: "white" }} />
               <Input
                 style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
-                placeholder="Password"
+                placeholder={t("other:password")}
                 autoCapitalize="none"
                 secureTextEntry={true}
                 onChangeText={password => this.setState({ password })}
@@ -161,7 +163,7 @@ class RegisterPage extends Component {
                 )
               }
             >
-              <Text style={styles.TextStyle}>Register</Text>
+              <Text style={styles.TextStyle}>{t("other:register")}</Text>
             </Button>
           </Row>
         </Grid>
@@ -170,7 +172,9 @@ class RegisterPage extends Component {
   }
 }
 
-export default observer(RegisterPage);
+export default withNamespaces(["other", "common"], { wait: true })(
+  RegisterPage
+);
 
 const styles = StyleSheet.create({
   Row: {
@@ -189,22 +193,22 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     borderWidth: 3
   },
-  outerCircle: {
-    borderRadius: 40,
-    // overflow: 'hidden',
-    borderColor: "white"
-    // width: 80,
-    // height: 80
-  },
-  innerCircle: {
-    borderRadius: 35,
-    borderColor: "white",
-    overflow: "hidden",
-    color: "white",
-    width: 70,
-    height: 70,
-    margin: 5
-  },
+  // outerCircle: {
+  //   borderRadius: 40,
+  //   // overflow: 'hidden',
+  //   borderColor: "white"
+  //   // width: 80,
+  //   // height: 80
+  // },
+  // innerCircle: {
+  //   borderRadius: 35,
+  //   borderColor: "white",
+  //   overflow: "hidden",
+  //   color: "white",
+  //   width: 70,
+  //   height: 70,
+  //   margin: 5
+  // },
   formBorder: {
     width: "80%",
     height: "100%",

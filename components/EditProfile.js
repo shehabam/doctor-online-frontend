@@ -29,6 +29,7 @@ import Store from "../stores/store";
 import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
 import FooterApp from "./footer";
 import Swiper from "react-native-swiper";
+import { withNamespaces } from "react-i18next";
 
 class EditProfile extends Component {
   static navigationOptions = {
@@ -52,6 +53,8 @@ class EditProfile extends Component {
   }
 
   render() {
+    const { t, i18n, navigation } = this.props;
+
     const name1 = this.props.navigation.getParam("firstName");
     // const name = Store.doctorProfile.user;
     // const { votes, value } = this.props;
@@ -248,7 +251,7 @@ class EditProfile extends Component {
                   <Text style={styles.buttonText}>After Tommorow</Text>
                 </Button>
               </View>
-              >
+
               <View style={{ flexDirection: "row", justifyContent: "center" }}>
                 <Button rounded warning style={styles.bookingButton}>
                   <Text style={styles.buttonText}>Today</Text>
@@ -332,32 +335,33 @@ class EditProfile extends Component {
   }
 }
 
-export default observer(EditProfile);
+// export default observer(EditProfile);
+export default withNamespaces(["other", "common"], { wait: true })(EditProfile);
 
 const styles = StyleSheet.create({
   wrapper: {
     marginTop: 80
   },
-  slide1: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#9DD6EB"
-  },
-  slide2: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#97CAE5"
-  },
-  slide3: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#92BBD9"
-  },
-  text: {
-    color: "#000",
-    fontSize: 20,
-    fontWeight: "bold"
-  },
+  // slide1: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#9DD6EB"
+  // },
+  // slide2: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#97CAE5"
+  // },
+  // slide3: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   backgroundColor: "#92BBD9"
+  // },
+  // text: {
+  //   color: "#000",
+  //   fontSize: 20,
+  //   fontWeight: "bold"
+  // },
   thumbnailStyle: {
     alignSelf: "center",
     alignContent: "center",
@@ -366,35 +370,35 @@ const styles = StyleSheet.create({
     // height: 40,
     position: "absolute"
   },
-  userViewsText: {
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 10,
-    color: "#919191",
-    paddingTop: 5
-  },
-  iconsStyle: {
-    width: 28,
-    height: 28,
-    justifyContent: "flex-start"
-  },
-  visitorsText: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 12,
-    color: "#919191"
-  },
-  textContainer: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-  },
-  startStyle: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center"
-  },
+  // userViewsText: {
+  //   fontFamily: "GTWalsheim-Medium",
+  //   fontSize: 10,
+  //   color: "#919191",
+  //   paddingTop: 5
+  // },
+  // iconsStyle: {
+  //   width: 28,
+  //   height: 28,
+  //   justifyContent: "flex-start"
+  // },
+  // visitorsText: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center",
+  //   fontFamily: "GTWalsheim-Medium",
+  //   fontSize: 12,
+  //   color: "#919191"
+  // },
+  // textContainer: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center"
+  // },
+  // startStyle: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center"
+  // },
   doctorName: {
     alignSelf: "center",
     alignContent: "center",
@@ -403,14 +407,14 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#605F5F"
   },
-  doctordesc1: {
-    alignSelf: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    fontFamily: "GTWalsheim-Medium",
-    fontSize: 13,
-    color: "#919191"
-  },
+  // doctordesc1: {
+  //   alignSelf: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center",
+  //   fontFamily: "GTWalsheim-Medium",
+  //   fontSize: 13,
+  //   color: "#919191"
+  // },
   locationIcon: {
     color: "#48C1F6",
     paddingTop: 15
@@ -439,27 +443,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     margin: 5
   },
-  ymenysarButtons: {
-    color: "#48C1F6"
-  },
-  thirdText: {
-    fontSize: 16,
-    fontFamily: "GTWalsheim-Medium",
-    color: "#919191"
-  },
-  locationIcon: {
-    color: "#48C1F6",
-    fontSize: 38
-  },
-  cardStyle: {
-    shadowColor: "rgba(0,0,0,0.7)",
-    shadowRadius: 4,
-    shadowOpacity: 0.7,
-    shadowOffset: {
-      height: 2,
-      width: 0
-    }
-  },
+  // ymenysarButtons: {
+  //   color: "#48C1F6"
+  // },
+  // thirdText: {
+  //   fontSize: 16,
+  //   fontFamily: "GTWalsheim-Medium",
+  //   color: "#919191"
+  // },
+  // locationIcon: {
+  //   color: "#48C1F6",
+  //   fontSize: 38
+  // },
+  // cardStyle: {
+  //   shadowColor: "rgba(0,0,0,0.7)",
+  //   shadowRadius: 4,
+  //   shadowOpacity: 0.7,
+  //   shadowOffset: {
+  //     height: 2,
+  //     width: 0
+  //   }
+  // },
   clockIcon: {
     color: "#48C1F6",
     fontSize: 30

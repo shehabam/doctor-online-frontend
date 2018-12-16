@@ -27,14 +27,16 @@ import {
 } from "react-native";
 import Store from "../stores/store";
 import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
+import { withNamespaces } from "react-i18next";
 
 class RatingPage extends Component {
-  static navigationOptions = {
-    title: "Rating Page",
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: screenProps.t("other:ratingpage"),
     headerStyle: {
       backgroundColor: "#00bfff"
     }
-  };
+  });
+
   constructor(props) {
     super(props);
     this.state = {
@@ -64,18 +66,21 @@ class RatingPage extends Component {
 
   confirmPressed(doctorID, rate, user) {
     Store.postRate(doctorID, rate, user);
-    alert("your rate has been Submited");
+    alert("OK");
     this.props.navigation.goBack();
   }
 
   render() {
     // console.log(authStore.user.user_id)
+    const { t, i18n, navigation } = this.props;
+
     let doctorID = this.props.navigation.getParam("id");
     let iconName1;
     let iconName2;
     let iconName3;
     let iconName4;
     let iconName5;
+
     if (this.state.rate === 0) {
       iconName1 = "ios-star-outline";
       iconName2 = "ios-star-outline";
@@ -117,10 +122,11 @@ class RatingPage extends Component {
     if (!authStore.isAuthenticated) {
       return (
         <View style={styles.notlogin}>
-          <Text>You Need To LogIn Or Register To Rate Any Dactor</Text>
+          <Text>{t("other:ratingvisiterror")}</Text>
         </View>
       );
     }
+
     return (
       <Grid
         style={{
@@ -129,9 +135,7 @@ class RatingPage extends Component {
       >
         <Row size={4} style={{ flex: 1, justifyContent: "center" }}>
           <View style={styles.textContainer}>
-            <Text style={styles.text}>
-              How would you describe your visit to Doctor:
-            </Text>
+            <Text style={styles.text}>{t("other:ratingcontent")}:</Text>
           </View>
         </Row>
         <Row size={4} style={{ flex: 1, justifyContent: "center" }}>
@@ -174,15 +178,13 @@ class RatingPage extends Component {
         <Row size={2} style={{ flex: 1, justifyContent: "center" }}>
           <Button
             style={styles.ConfirmButton}
-            onPress={() =>
-              this.confirmPressed(
-                doctorID,
-                this.state.rate,
-                authStore.user.user_id
-              )
-            }
+            onPress={() => {
+              Store.postRate(doctorID, this.state.rate, authStore.user.user_id);
+              alert(t("other:ratealert"));
+              this.props.navigation.goBack();
+            }}
           >
-            <Text style={styles.ConfirmButtomText}>Confirm</Text>
+            <Text style={styles.ConfirmButtomText}>{t("other:confirm")}</Text>
           </Button>
         </Row>
       </Grid>
@@ -190,7 +192,8 @@ class RatingPage extends Component {
   }
 }
 
-export default observer(RatingPage);
+//export default observer(RatingPage);
+export default withNamespaces(["other", "common"], { wait: true })(RatingPage);
 
 const styles = StyleSheet.create({
   text: {
@@ -203,14 +206,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold"
   },
-  iconsStyle: {
-    width: 28,
-    height: 28,
-    justifyContent: "flex-start"
-  },
-  centerView: {
-    flex: 1
-  },
+  // iconsStyle: {
+  //   width: 28,
+  //   height: 28,
+  //   justifyContent: "flex-start"
+  // },
+  // centerView: {
+  //   flex: 1
+  // },
   textContainer: {
     flex: 1,
     justifyContent: "flex-end"
