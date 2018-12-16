@@ -12,45 +12,48 @@ import { StyleSheet, ScrollView } from "react-native";
 import Store from "../stores/store";
 import { withNamespaces } from "react-i18next";
 import authStore from "../stores/authStore";
+let doctorlists;
 
-class AppointmentPage extends Component {
+class Schedule extends Component {
   state = {
-    authenticated: false
+    doctor_id: ""
   };
 
   static navigationOptions = ({ navigation, screenProps }) => ({
-    title: screenProps.t("appointment:title"),
+    title: screenProps.t("book:booked"),
     headerStyle: {
       backgroundColor: "#00bfff"
     }
   });
 
+  componentDidMount() {
+    for (let i = 0; i < doctorlists.length; i++) {
+      if (authStore.user.username == doctorlists[i].user.username) {
+        this.setState({
+          doctor_id: doctorlists[i].id
+        });
+      }
+    }
+  }
+
   render() {
     const { t, i18n, navigation } = this.props;
+
+    const { doctor_id } = this.state;
 
     if (!Store.filteredDoctors) return <View style={styles.thumbnailStyle} />;
     let listOfcities = Store.AppointmentsList;
     doctorlists = Store.doctorList;
-
-    if (!authStore.isAuthenticated) {
-      return (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <Text>{t("edit:pleaselogin")}</Text>
-        </View>
-      );
-    }
 
     return (
       <View style={styles.container}>
         <ScrollView style={{ marginTop: 2 }}>
           {listOfcities.map(item => (
             <View style={styles.itemView} key={item.id}>
-              {authStore.user.username == item.patient.username ? (
+              {doctor_id == item.doctor ? (
                 <View style={{ width: "97%", margin: 5, marginVertical: 20 }}>
                   <View style={styles.item}>
-                    <Text>{t("book:doctorname")}</Text>
+                    <Text>{t("book:patientname")}</Text>
                     <Text note>{item.patient.username}</Text>
                   </View>
 
@@ -73,9 +76,7 @@ class AppointmentPage extends Component {
   }
 }
 
-export default withNamespaces(["book", "appointment", "other", "edit"], {
-  wait: true
-})(observer(AppointmentPage));
+export default withNamespaces(["book", "common"], { wait: true })(Schedule);
 
 const styles = StyleSheet.create({
   container: {

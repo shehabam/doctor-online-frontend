@@ -107,7 +107,7 @@ class Settings extends Component {
               >
                 <Left>
                   <Icon name="md-globe" large style={{ color: "#00bfff" }} />
-                  <Text>Schedule</Text>
+                  <Text>{t("settings:schedule")}</Text>
                 </Left>
                 <Right>
                   <Icon
@@ -160,7 +160,9 @@ class Settings extends Component {
 }
 
 // export default observer(Settings);
-export default withNamespaces(["settings", "common"], { wait: true })(Settings);
+export default withNamespaces(["settings", "common", "other"], { wait: true })(
+  Settings
+);
 
 const styles = StyleSheet.create({
   // container: {

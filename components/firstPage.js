@@ -90,7 +90,9 @@ class FirstPage extends Component {
                 style={styles.button}
                 onPress={() => this.props.navigation.navigate("LoginPage")}
               >
-                <Text style={styles.text}>{t("first:login")}</Text>
+                <Text style={[styles.text, { marginTop: 1 }]}>
+                  {t("first:login")}
+                </Text>
               </Button>
             </TouchableHighlight>
           </Row>
@@ -153,12 +155,14 @@ const styles = StyleSheet.create({
   text: {
     color: "#54BEED",
     justifyContent: "center",
-    alignContent: "center",
-    fontSize: 22,
+    alignItems: "center",
+    fontSize: 18,
+    marginTop: -5,
     fontFamily: "GTWalsheim-Medium"
   },
   needleIcon: {
-    color: "#48C1F6"
+    color: "#48C1F6",
+    marginTop: 5
   },
   // touchable: {
   //   top: "850%",

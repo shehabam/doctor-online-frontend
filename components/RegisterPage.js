@@ -73,7 +73,11 @@ class RegisterPage extends Component {
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="person" style={{ color: "white" }} />
               <Input
-                style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                style={{
+                  fontFamily: "GTWalsheim-Medium",
+                  fontSize: 20,
+                  color: "#fff"
+                }}
                 placeholder={t("other:firstname")}
                 autoCapitalize="none"
                 onChangeText={firstName => this.setState({ firstName })}
@@ -85,7 +89,11 @@ class RegisterPage extends Component {
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="person" style={{ color: "white" }} />
               <Input
-                style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                style={{
+                  fontFamily: "GTWalsheim-Medium",
+                  fontSize: 20,
+                  color: "#fff"
+                }}
                 placeholder={t("other:lastname")}
                 autoCapitalize="none"
                 onChangeText={lastName => this.setState({ lastName })}
@@ -97,7 +105,11 @@ class RegisterPage extends Component {
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="person" style={{ color: "white" }} />
               <Input
-                style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                style={{
+                  fontFamily: "GTWalsheim-Medium",
+                  fontSize: 20,
+                  color: "#fff"
+                }}
                 placeholder={t("other:username")}
                 autoCapitalize="none"
                 onChangeText={username => this.setState({ username })}
@@ -109,7 +121,11 @@ class RegisterPage extends Component {
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="call" style={{ color: "white" }} />
               <Input
-                style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                style={{
+                  fontFamily: "GTWalsheim-Medium",
+                  fontSize: 20,
+                  color: "#fff"
+                }}
                 placeholder={t("other:phonenumber")}
                 autoCapitalize="none"
                 onChangeText={phoneNumber => this.setState({ phoneNumber })}
@@ -121,7 +137,11 @@ class RegisterPage extends Component {
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="lock" style={{ color: "white" }} />
               <Input
-                style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+                style={{
+                  fontFamily: "GTWalsheim-Medium",
+                  fontSize: 20,
+                  color: "#fff"
+                }}
                 placeholder={t("other:password")}
                 autoCapitalize="none"
                 secureTextEntry={true}
