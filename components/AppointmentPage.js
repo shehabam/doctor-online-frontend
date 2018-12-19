@@ -8,6 +8,8 @@ import {
   Row,
   View
 } from "native-base";
+import { observer } from "mobx-react";
+
 import { StyleSheet, ScrollView } from "react-native";
 import Store from "../stores/store";
 import { withNamespaces } from "react-i18next";

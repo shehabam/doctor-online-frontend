@@ -24,12 +24,15 @@ import {
   Image,
   AppRegistry,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from "react-native";
 import Store from "../stores/store";
 import { scrollViewHorizontal } from "react-native-gesture-handler";
 import { withNamespaces } from "react-i18next";
 import Swiper from "react-native-swiper";
+
+const deviceWidth = Dimensions.get("window").width;
 
 class DoctorProfile extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
@@ -293,7 +296,11 @@ class DoctorProfile extends Component {
               {t("other:bookdescription")}
             </Text>
 
-            <Swiper style={styles.wrapper} showsButtons={true}>
+            <Swiper
+              containerStyle={{ width: deviceWidth }}
+              style={styles.wrapper}
+              showsButtons={true}
+            >
               <View style={styles.slide1}>
                 <View
                   style={{
