@@ -297,8 +297,7 @@ class DoctorProfile extends Component {
             </Text>
 
             <Swiper
-              containerStyle={{ width: deviceWidth }}
-              style={styles.wrapper}
+              containerStyle={{ width: deviceWidth, height: "100%" }}
               showsButtons={true}
             >
               <View style={styles.slide1}>
@@ -761,10 +760,7 @@ const styles = StyleSheet.create({
     color: "#48C1F6",
     fontSize: 30
   },
-  wrapper: {
-    height: 130,
-    flex: 1
-  },
+
   slide1: {
     flex: 1,
     justifyContent: "center",
