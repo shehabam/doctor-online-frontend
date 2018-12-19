@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { observer } from "mobx-react";
+// import { observer } from "mobx-react";
 
 import {
   Container,
@@ -30,14 +30,9 @@ class AppointmentPage extends Component {
   });
 
   render() {
-    console.log(Store.AppointmentsList);
+    // console.log(Store.AppointmentsList);
     const { t, i18n, navigation } = this.props;
-
-    // console.log(Store.AppointmentsList)
-    console.log(authStore.user.user_id);
-
     if (!Store.doctorList) return <View style={styles.thumbnailStyle} />;
-    let listOfcities = Store.findSchedule(authStore.user.username);
 
     if (!authStore.isAuthenticated) {
       return (
@@ -52,9 +47,8 @@ class AppointmentPage extends Component {
           <Text>{t("edit:pleaselogin")}</Text>
         </View>
       );
-    } else {
-      let y;
     }
+    let listOfcities = Store.findSchedule(authStore.user.username);
 
     return (
       <View style={styles.container}>
