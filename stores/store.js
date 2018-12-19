@@ -50,6 +50,7 @@ class Store {
     this.userDoctor = [];
     this.users = [];
     this.userName = "";
+    this.filterappointment = [];
   } //for bringing Doctors only
   getDoctors() {
     axios
@@ -315,10 +316,10 @@ class Store {
 
   findSchedule(user) {
     if (!authStore.isAuthenticated) {
-      const filterappointment = null;
+      filterappointment = null;
       return;
     }
-    const filterappointment = this.AppointmentsList.filter(
+    filterappointment = this.AppointmentsList.filter(
       item => item.patient.username === user
     );
     return filterappointment;
@@ -398,7 +399,8 @@ decorate(Store, {
   findSchedule: action,
   userName: observable,
   deleteAppointment: action,
-  Bla: action
+  Bla: action,
+  filterappointment: observable
 });
 
 const store = new Store();

@@ -48,22 +48,22 @@ class SearchByDoctor extends Component {
     title: screenProps.t("other:chooseyourdoctor"),
     headerStyle: {
       backgroundColor: "#00bfff"
-    },
+    }
 
-    headerRight: (
-      <Button
-        transparent
-        onPress={() => {
-          this.goTo;
-        }}
-      >
-        <Image
-          large
-          source={require("../assets/filter.png")}
-          style={{ height: 25, width: 25, marginRight: 10 }}
-        />
-      </Button>
-    )
+    // headerRight: (
+    //   <Button
+    //     transparent
+    //     onPress={() => {
+    //       this.goTo;
+    //     }}
+    //   >
+    //     <Image
+    //       large
+    //       source={require("../assets/filter.png")}
+    //       style={{ height: 25, width: 25, marginRight: 10 }}
+    //     />
+    //   </Button>
+    // )
   });
 
   render() {

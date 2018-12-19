@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { observer } from "mobx-react";
+
 import {
   Container,
   Header,
@@ -26,45 +28,63 @@ class AppointmentPage extends Component {
   });
 
   render() {
+    console.log(Store.AppointmentsList);
     const { t, i18n, navigation } = this.props;
 
-    if (!Store.filteredDoctors) return <View style={styles.thumbnailStyle} />;
-    let listOfcities = Store.AppointmentsList;
-    doctorlists = Store.doctorList;
+    // console.log(Store.AppointmentsList)
+    console.log(authStore.user.user_id);
+
+    if (!Store.doctorList) return <View style={styles.thumbnailStyle} />;
+    let listOfcities = Store.findSchedule(authStore.user.username);
 
     if (!authStore.isAuthenticated) {
       return (
         <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "white"
+          }}
         >
           <Text>{t("edit:pleaselogin")}</Text>
         </View>
       );
+    } else {
+      let y;
     }
 
     return (
       <View style={styles.container}>
-        <ScrollView style={{ marginTop: 2 }}>
+        <ScrollView style={{ marginTop: 2, backgroundColor: "white" }}>
           {listOfcities.map(item => (
             <View style={styles.itemView} key={item.id}>
-              {authStore.user.username == item.patient.username ? (
-                <View style={{ width: "97%", margin: 5, marginVertical: 20 }}>
-                  <View style={styles.item}>
-                    <Text>{t("book:doctorname")}</Text>
-                    <Text note>{item.patient.username}</Text>
-                  </View>
-
-                  <View style={styles.item}>
-                    <Text>{t("book:date")}</Text>
-                    <Text note>{item.date}</Text>
-                  </View>
-
-                  <View style={styles.item}>
-                    <Text>{t("book:reservationtime")}</Text>
-                    <Text note>{item.available_time}</Text>
-                  </View>
+              {/* {authStore.user.username == item.patient.username ? ( */}
+              <View
+                style={{
+                  width: "97%",
+                  margin: 5,
+                  marginVertical: 20,
+                  backgroundColor: "white"
+                }}
+              >
+                <View style={styles.item}>
+                  <Text>{t("book:patientname")}</Text>
+                  <Text note>{item.patient.username}</Text>
                 </View>
-              ) : null}
+
+                <View style={styles.item}>
+                  <Text>{t("book:date")}</Text>
+                  <Text note>{item.date}</Text>
+                </View>
+
+                <View style={styles.item}>
+                  <Text>{t("book:reservationtime")}</Text>
+                  <Text note>{item.available_time}</Text>
+                </View>
+              </View>
+
+              {/* ) :null} */}
             </View>
           ))}
         </ScrollView>
@@ -79,12 +99,13 @@ export default withNamespaces(["book", "appointment", "other", "edit"], {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     flex: 1
   },
   item: {
+    backgroundColor: "white",
     borderColor: "#ddd",
     borderRadius: 10,
     borderWidth: 1,
@@ -96,6 +117,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   itemView: {
+    backgroundColor: "white",
     width: "100%",
     borderColor: "#ddd",
     borderWidth: 1,

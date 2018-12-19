@@ -37,20 +37,20 @@ class DoctorList extends Component {
     headerTintColor: "white",
     headerStyle: {
       backgroundColor: "#00bfff"
-    },
-    headerRight: (
-      <Button
-        onPress={() => this.goTo()}
-        // alert("This is a button!")}
-        style={{ backgroundColor: "#00bfff", height: 35 }}
-      >
-        <Image
-          large
-          source={require("../assets/filter.png")}
-          style={{ height: 25, width: 25, marginRight: 10 }}
-        />
-      </Button>
-    )
+    }
+    // headerRight: (
+    //   <Button
+    //     onPress={() => this.goTo()}
+    //     // alert("This is a button!")}
+    //     style={{ backgroundColor: "#00bfff", height: 35 }}
+    //   >
+    //     <Image
+    //       large
+    //       source={require("../assets/filter.png")}
+    //       style={{ height: 25, width: 25, marginRight: 10 }}
+    //     />
+    //   </Button>
+    // )
   });
 
   componentDidMount() {
