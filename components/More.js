@@ -25,7 +25,6 @@ import {
   Right,
   Left
 } from "native-base";
-import FooterApp from "./footer";
 import { withNamespaces } from "react-i18next";
 
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -115,11 +114,9 @@ class More extends Component {
             </ListItem>
           </List>
         </TouchableHighlight>
-        {/* <FooterApp /> */}
       </View>
     );
   }
 }
 
-// export default observer(More);
 export default withNamespaces(["more", "common"], { wait: true })(More);

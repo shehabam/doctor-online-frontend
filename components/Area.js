@@ -3,7 +3,6 @@ import { observer } from "mobx-react";
 import Store from "../stores/store";
 import { Col, Row, Grid } from "react-native-easy-grid";
 // import BottomTab from './BottomTab';
-import BottomStack from "./BottomTab";
 import {
   Container,
   Header,
@@ -23,7 +22,6 @@ import {
 } from "native-base";
 // import { Col, Row, Grid } from "react-native-easy-grid";
 import { StyleSheet, TouchableHighlight, ScrollView } from "react-native";
-import FooterApp from "./footer";
 
 class Area extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
@@ -92,8 +90,6 @@ class Area extends Component {
         <ScrollView style={{ backgroundColor: "white" }}>
           {listOfcities}
         </ScrollView>
-        {/* <FooterApp /> */}
-        {/* <BottomStack /> */}
       </View>
     );
   }

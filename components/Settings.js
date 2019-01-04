@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 import Store from "../stores/store";
-import FooterApp from "./footer";
 import { Theme } from "./Theme";
 import { withNamespaces } from "react-i18next";
 

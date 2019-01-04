@@ -16,7 +16,9 @@ import {
   Right,
   Left,
   Footer
+  // Swiper
 } from "native-base";
+// import SwiperFlatList from 'react-native-swiper-flatlist';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import {
   StyleSheet,
@@ -297,14 +299,13 @@ class DoctorProfile extends Component {
             </Text>
 
             <Swiper
-              containerStyle={{ width: deviceWidth, height: "100%" }}
+              Style={{ width: deviceWidth, height: "100%" }}
               showsButtons={true}
             >
               <View style={styles.slide1}>
                 <View
                   style={{
                     flexDirection: "row",
-                    justifyContent: "space-between",
                     alignContent: "center",
                     paddingHorizontal: 6
                   }}
@@ -607,9 +608,8 @@ class DoctorProfile extends Component {
   }
 }
 
-//export default observer(DoctorProfile);
 export default withNamespaces(["other", "common"], { wait: true })(
-  DoctorProfile
+  observer(DoctorProfile)
 );
 
 const styles = StyleSheet.create({

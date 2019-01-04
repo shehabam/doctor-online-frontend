@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { Alert } from "react-native";
 import Store from "../stores/store";
-import FooterApp from "./footer";
 import { Theme } from "./Theme";
 import { withNamespaces } from "react-i18next";
 import { Permissions, Notifications } from "expo";

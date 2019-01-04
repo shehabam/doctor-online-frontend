@@ -3,8 +3,6 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Root, Container, Icon } from "native-base";
 import FirstPage from "./components/firstPage";
-// import BottomTab from './components/BottomTab';
-import BottomStack from "./components/BottomTab";
 import LoginPage from "./components/loginPage";
 import SearchByDoctor from "./components/SearchByDoctor";
 import DoctorList from "./components/doctorList";
@@ -19,9 +17,7 @@ import Area from "./components/Area";
 import Edit from "./components/Edit";
 import anime from "./components/animation";
 import anime1 from "./components/animation1";
-import FooterApp from "./components/footer";
 import SpecialityPage from "./components/specialityPage";
-import HomeScreen from "./components/HomeScreen";
 import {
   createStackNavigator,
   createBottomTabNavigator
@@ -220,7 +216,7 @@ const BottomTab = createBottomTabNavigator(
 
 const SuperNav = createStackNavigator(
   {
-    Anime: AnimeTab,
+    // Anime: AnimeTab,
     //  RatingPage: RatingPage,
     BottomTab: BottomTab
   },

@@ -27,7 +27,6 @@ import {
 } from "react-native";
 import Store from "../stores/store";
 import { ScrollView, scrollViewHorizontal } from "react-native-gesture-handler";
-import FooterApp from "./footer";
 import Swiper from "react-native-swiper";
 import { withNamespaces } from "react-i18next";
 
