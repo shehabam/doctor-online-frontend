@@ -15,6 +15,7 @@ import {
   Item,
   Input
 } from "native-base";
+import {TextInput} from "react-native";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import {
   StyleSheet,
@@ -77,11 +78,13 @@ class LoginPage extends Component {
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="person" />
-              <Input
+              <TextInput
                 style={{
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
-                  color: "#fff"
+                  color: "#fff",
+                  width: 200,
+                  height: 40
                 }}
                 placeholder={t("other:username")}
                 autoCapitalize="none"
@@ -93,11 +96,13 @@ class LoginPage extends Component {
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="lock" />
-              <Input
+              <TextInput
                 style={{
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
-                  color: "#fff"
+                  color: "#fff",
+                  width: 200,
+                  height: 40
                 }}
                 placeholder={t("other:password")}
                 autoCapitalize="none"

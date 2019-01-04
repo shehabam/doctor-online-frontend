@@ -49,6 +49,7 @@ class Store {
     this.userPatient = [];
     this.userDoctor = [];
     this.users = [];
+    this.fullusers = [];
     this.userName = "";
     this.filterappointment = [];
   } //for bringing Doctors only
@@ -291,6 +292,16 @@ class Store {
       .catch(err => console.error(err));
   }
 
+  getAllUsersProfile() {
+    axios
+      .get(BASEURL + "/users/profiles")
+      .then(res => res.data)
+      .then(users => {
+        this.fullusers = users;
+      })
+      .catch(err => console.error(err));
+  }
+
   getAppointments() {
     axios
       .get(BASEURL + "/doctor/schedeul")
@@ -304,7 +315,13 @@ class Store {
   findDoctorInUsers(theUser) {
     const user = this.doctorList.find(item => item.id === theUser);
     this.userDoctor = user;
-    return userDoctor;
+    return this.userDoctor;
+  }
+  
+  findDoctorByUsername(username) {
+    const user = this.doctorList.find(item => item.user.username === username);
+    this.userDoctor = user;
+    return this.userDoctor;
   }
 
   findUser(theUser) {
@@ -319,9 +336,51 @@ class Store {
       filterappointment = null;
       return;
     }
-    filterappointment = this.AppointmentsList.filter(
+
+    let alist = this.AppointmentsList.filter(
+      item => item.patient !== null
+    );
+
+    filterappointment = alist.filter(
       item => item.patient.username === user
     );
+    return filterappointment;
+  }
+
+  findScheduleById(id) {
+    if (!authStore.isAuthenticated) {
+      filterappointment = null;
+      return;
+    }
+
+    filterappointment = this.AppointmentsList.filter(
+      item => item.id === id
+    );
+    return filterappointment;
+  }
+
+
+  /**
+   * find schedule list by doctor Id
+   * @author: JingWei Chen
+   * @created: 1/3/2019
+   */
+  findScheduleByDoctorId(user,year,month,day) {
+    
+    filterappointment = this.AppointmentsList.filter(
+      item => item.doctor === user
+    );
+    let result = [];
+    if (year && month && day) {
+      for (let i in filterappointment) {
+        let d = filterappointment[i].date.replace(' ', '');
+        let dary = d.split('-');
+        if (dary[0] == year && dary[1] == month && dary[2] == day) {
+          result.push(filterappointment[i]);
+        }
+      }
+      return result;
+    }
     return filterappointment;
   }
 
@@ -338,7 +397,7 @@ class Store {
     // axios.delete(`http://207.154.246.97/doctor/schedeul` + id)
     // this.AppointmentsList.splice(id, 1);
     axios
-      .delete(BASEURL + `/doctor/schedeul`, id)
+      .delete(BASEURL + `/update/schedeul/` + id)
       .then(res => res.data)
       .then(Appointment => {
         this.AppointmentsList = Appointment;
@@ -396,6 +455,7 @@ decorate(Store, {
   userDoctor: observable,
   users: observable,
   getUsers: action,
+  getAllUsersProfile: action,
   findSchedule: action,
   userName: observable,
   deleteAppointment: action,
@@ -411,6 +471,7 @@ store.getSpeciality();
 store.getAreas();
 store.getAppointments();
 store.getUsers();
+store.getAllUsersProfile();
 
 export default store;
 
