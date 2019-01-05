@@ -49,10 +49,10 @@ class AppointmentManage extends Component {
     this.state = {
       language: this.props.i18n.language,
       modalVisible: false,
-      chosenDate: new Date(),
+      chosenDate: (Platform.OS == 'ios' ? new Date() : ''),
       isDatePickerVisible: false,
       isTimePickerVisible: false,
-      chosenTime: new Date(),
+      chosenTime: (Platform.OS == 'ios' ? new Date() : ''),
       showOverlay: false,
       patient: '',
       clickedScheduleId: '',
@@ -69,8 +69,13 @@ class AppointmentManage extends Component {
   });
 
   addApponitment(visible) {
-    this.setState({chosenDate: ''});
-    this.setState({chosenTime: ''});
+    if (Platform.OS == 'ios') {
+      this.setState({chosenDate: new Date()});
+      this.setState({chosenTime: new Date()});
+    } else {
+      this.setState({chosenDate: ''});
+      this.setState({chosenTime: ''});
+    }
     this.setState({patient: ''});
     this.setState({modalVisible: visible});
   }
@@ -123,8 +128,13 @@ class AppointmentManage extends Component {
   editApponitment = () => {
     this.setState({showOverlay: false});
     let schdule = Store.findScheduleById(this.state.clickedScheduleId)[0];
-    this.setState({chosenDate: schdule.date});
-    this.setState({chosenTime: schdule.available_time});
+    if (Platform.OS == 'ios') {
+      this.setState({chosenDate: new Date(schdule.date)});
+      this.setState({chosenTime: new Date(schdule.available_time)});
+    } else {
+      this.setState({chosenDate: schdule.date});
+      this.setState({chosenTime: schdule.available_time});
+    }
     let userinfo = Store.findUser(schdule.patient.username);
     this.setState({patient: userinfo.id});
     this.addApponitment(!this.state.modalVisible);
