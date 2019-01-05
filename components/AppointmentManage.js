@@ -276,9 +276,9 @@ class AppointmentManage extends Component {
                     selectedValue={this.state.patient}
                     style={{ height: 50 }}
                     onValueChange={(itemValue, itemIndex) => this.setState({patient: itemValue})}>
-                    <PickerItemIOS label='----------' value='0' key='0' />
+                    <PickerIOS.Item label='----------' value='0' key='0' />
                     {Store.fullusers.map((item, i) => (
-                        <PickerItemIOS label={item.user.username} value={item.id} key={i} />
+                        <PickerIOS.Item label={item.user.username} value={item.id} key={i} />
                       ))}
                   </PickerIOS>
                 ): (
