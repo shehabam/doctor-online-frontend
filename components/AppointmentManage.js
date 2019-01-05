@@ -32,6 +32,7 @@ import {
   TextInput,
   Picker,
   PickerIOS,
+  DatePickerIOS,
   Modal
 } from "react-native";
 
