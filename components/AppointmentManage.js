@@ -24,12 +24,14 @@ import {
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import {
+  Platform,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
   Image,
   TextInput,
   Picker,
+  PickerIOS,
   Modal
 } from "react-native";
 
@@ -267,8 +269,19 @@ class AppointmentManage extends Component {
           <View style={{marginTop: 30}}>
             <View style={{flex: 1, flexDirection: 'column',alignItems: 'stretch',padding: 30 }}>
               <Text style={{fontSize: 20}}>New Appointment</Text>
-              <View style={{height: 50,marginTop: 30}}>
+              <View style={{height: 50}}>
                 <Text style={{fontSize: 20}}>Patient Name: </Text>
+                {Platform.OS === 'ios'? (
+                  <PickerIOS
+                    selectedValue={this.state.patient}
+                    style={{ height: 50 }}
+                    onValueChange={(itemValue, itemIndex) => this.setState({patient: itemValue})}>
+                    <PickerItemIOS label='----------' value='0' key='0' />
+                    {Store.fullusers.map((item, i) => (
+                        <PickerItemIOS label={item.user.username} value={item.id} key={i} />
+                      ))}
+                  </PickerIOS>
+                ): (
                 <Picker
                   selectedValue={this.state.patient}
                   style={{ height: 50 }}
@@ -278,6 +291,8 @@ class AppointmentManage extends Component {
                     <Picker.Item label={item.user.username} value={item.id} key={i} />
                   ))}
                 </Picker>
+                )}
+                
               </View>
               <View style={{height: 50,marginTop: 30}}>
                 <Text style={{fontSize: 20}}>Date: </Text>
@@ -293,12 +308,18 @@ class AppointmentManage extends Component {
                   onFocus={this._showDatePicker}
                   value={this.state.chosenDate}
                 />
-                <DateTimePicker
-                  isVisible={this.state.isDatePickerVisible}
-                  onConfirm={this._handleDatePicked}
-                  onCancel={this._hideDatePicker}
-                  datePickerModeAndroid="spinner"
-                />
+                {Platform.OS === 'ios'? (
+                  <DatePickerIOS
+                    date={this.state.chosenDate}
+                    onDateChange={this._handleDatePicked}
+                  />
+                  ) : (<DateTimePicker
+                    isVisible={this.state.isDatePickerVisible}
+                    onConfirm={this._handleDatePicked}
+                    onCancel={this._hideDatePicker}
+                    datePickerModeAndroid="spinner"
+                  />
+                  )}
               </View>
               <View style={{height: 50,marginTop: 30}}>
                 <Text style={{fontSize: 20}}>ReservationTime: </Text>
@@ -314,13 +335,20 @@ class AppointmentManage extends Component {
                   onFocus={this._showTimePicker}
                   value={this.state.chosenTime}
                 />
-                <DateTimePicker
-                  isVisible={this.state.isTimePickerVisible}
-                  onConfirm={this._handleTimePicked}
-                  onCancel={this._hideTimePicker}
-                  mode="time"
-                  datePickerModeAndroid="spinner"
-                />
+                {Platform.OS === 'ios'? (
+                    <DatePickerIOS
+                      mode="time"
+                      date={this.state.chosenDate}
+                      onDateChange={this._handleDatePicked}
+                    />
+                  ) : (
+                  <DateTimePicker
+                    isVisible={this.state.isTimePickerVisible}
+                    onConfirm={this._handleTimePicked}
+                    onCancel={this._hideTimePicker}
+                    mode="time"
+                    datePickerModeAndroid="spinner"
+                  />)}
               </View>
               <View style={{ height: 50,marginTop:30,flex: 1, flexDirection: 'row',alignItems: 'center' }}>
                 <Button
