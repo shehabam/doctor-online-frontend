@@ -49,10 +49,10 @@ class AppointmentManage extends Component {
     this.state = {
       language: this.props.i18n.language,
       modalVisible: false,
-      chosenDate: '',
+      chosenDate: new Date(),
       isDatePickerVisible: false,
       isTimePickerVisible: false,
-      chosenTime: '',
+      chosenTime: new Date(),
       showOverlay: false,
       patient: '',
       clickedScheduleId: '',
