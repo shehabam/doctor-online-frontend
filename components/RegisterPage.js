@@ -15,12 +15,14 @@ import {
   Item,
   Input
 } from "native-base";
+
 import { Col, Row, Grid } from "react-native-easy-grid";
 import {
   StyleSheet,
   TouchableHighlight,
   Image,
-  ImageBackground
+  ImageBackground,
+  TextInput
 } from "react-native";
 import { withNamespaces } from "react-i18next";
 
@@ -72,11 +74,13 @@ class RegisterPage extends Component {
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="person" style={{ color: "white" }} />
-              <Input
+              <TextInput
                 style={{
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
-                  color: "#fff"
+                  color: "#fff",
+                  width: 200,
+                  height: 40
                 }}
                 placeholder={t("other:firstname")}
                 autoCapitalize="none"
@@ -88,11 +92,13 @@ class RegisterPage extends Component {
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="person" style={{ color: "white" }} />
-              <Input
+              <TextInput
                 style={{
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
-                  color: "#fff"
+                  color: "#fff",
+                  width: 200,
+                  height: 40
                 }}
                 placeholder={t("other:lastname")}
                 autoCapitalize="none"
@@ -104,11 +110,13 @@ class RegisterPage extends Component {
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="person" style={{ color: "white" }} />
-              <Input
+              <TextInput
                 style={{
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
-                  color: "#fff"
+                  color: "#fff",
+                  width: 200,
+                  height: 40
                 }}
                 placeholder={t("other:username")}
                 autoCapitalize="none"
@@ -120,11 +128,31 @@ class RegisterPage extends Component {
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="call" style={{ color: "white" }} />
-              <Input
+              <TextInput
                 style={{
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
-                  color: "#fff"
+                  color: "#fff",
+                  width: 200,
+                  height: 40
+                }}
+                placeholder="someone@gmail.com"
+                autoCapitalize="none"
+                onChangeText={emailAddress => this.setState({ emailAddress })}
+              />
+            </Button>
+          </Row>
+          <Row size={0.1} style={[styles.Row]} />
+          <Row size={0.65} style={[styles.Row]}>
+            <Button rounded transparent style={styles.formBorder}>
+              <Icon name="call" style={{ color: "white" }} />
+              <TextInput
+                style={{
+                  fontFamily: "GTWalsheim-Medium",
+                  fontSize: 20,
+                  color: "#fff",
+                  width: 200,
+                  height: 40
                 }}
                 placeholder={t("other:phonenumber")}
                 autoCapitalize="none"
@@ -136,11 +164,13 @@ class RegisterPage extends Component {
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="lock" style={{ color: "white" }} />
-              <Input
+              <TextInput
                 style={{
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
-                  color: "#fff"
+                  color: "#fff",
+                  width: 200,
+                  height: 40
                 }}
                 placeholder={t("other:password")}
                 autoCapitalize="none"

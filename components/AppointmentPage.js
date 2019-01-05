@@ -65,7 +65,9 @@ class AppointmentPage extends Component {
               >
                 <View style={styles.item}>
                   <Text>{t("book:patientname")}</Text>
-                  <Text note>{item.patient.username}</Text>
+                  <Text note>
+                    {item.patient ? item.patient.username : "No patient"}
+                  </Text>
                 </View>
 
                 <View style={styles.item}>

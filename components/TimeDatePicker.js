@@ -78,6 +78,8 @@ import {
   Dimensions,
   ScrollView
 } from "react-native";
+
+import GridView from "react-native-super-grid";
 import Store from "../stores/store";
 import { observer } from "mobx-react";
 import DateTimePicker from "react-native-modal-datetime-picker";
@@ -280,7 +282,6 @@ class TimeDatePicker extends Component {
   render() {
     const { t, i18n, navigation } = this.props;
     const { day, month, auth_user } = this.state;
-
     scheduledata = Store.AppointmentsList;
 
     if (!Store.doctorProfile) {
@@ -298,7 +299,13 @@ class TimeDatePicker extends Component {
         </View>
       );
     }
-
+    let year = new Date().getFullYear();
+    let schedulelist = Store.findScheduleByDoctorId(
+      Store.doctorProfile.id,
+      year,
+      month,
+      day
+    );
     return (
       <View style={styles.DateTimePickerStyle}>
         <Card
@@ -336,344 +343,26 @@ class TimeDatePicker extends Component {
           )} */}
         </Card>
 
-        <ScrollView>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="9:00 AM"
-              auth_user={auth_user}
-              color={booked_time.includes(1) ? "booked" : null}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="9:20 AM"
-              auth_user={auth_user}
-              color={booked_time.includes(2) ? "booked" : null}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="9:40 AM"
-              color={booked_time.includes(3) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="10:00 AM"
-              color={booked_time.includes(4) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="10:20 AM"
-              color={booked_time.includes(5) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="10:40 AM"
-              color={booked_time.includes(6) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="11:00 AM"
-              color={booked_time.includes(7) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="11:20 AM"
-              color={booked_time.includes(8) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="11:40 AM"
-              color={booked_time.includes(9) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="12:00 AM"
-              color={booked_time.includes(10) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="12:20 AM"
-              color={booked_time.includes(11) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="12:40 AM"
-              color={booked_time.includes(12) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="1:00 PM"
-              color={booked_time.includes(13) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="1:20 PM"
-              color={booked_time.includes(14) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="1:40 PM"
-              color={booked_time.includes(15) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="2:00 PM"
-              color={booked_time.includes(16) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="2:20 PM"
-              color={booked_time.includes(17) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="2:40 PM"
-              color={booked_time.includes(18) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="3:00 PM"
-              color={booked_time.includes(19) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="3:20 PM"
-              color={booked_time.includes(20) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="3:40 PM"
-              color={booked_time.includes(21) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="4:00 PM"
-              color={booked_time.includes(22) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="4:20 PM"
-              color={booked_time.includes(23) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="4:40 PM"
-              color={booked_time.includes(24) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="5:00 PM"
-              color={booked_time.includes(25) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="5:20 PM"
-              color={booked_time.includes(26) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="5:40 PM"
-              auth_user={auth_user}
-              color={booked_time.includes(27) ? "booked" : null}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="6:00 PM"
-              color={booked_time.includes(28) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="6:20 PM"
-              color={booked_time.includes(29) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="6:40 PM"
-              color={booked_time.includes(30) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="7:00 PM"
-              color={booked_time.includes(31) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="7:20 PM"
-              color={booked_time.includes(32) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="7:40 PM"
-              color={booked_time.includes(33) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <TimeButton
-              time="8:00 PM"
-              color={booked_time.includes(34) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="8:20 PM"
-              color={booked_time.includes(35) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-            <TimeButton
-              time="8:40 PM"
-              color={booked_time.includes(36) ? "booked" : null}
-              auth_user={auth_user}
-              day={day}
-              month={month}
-              t={t}
-            />
-          </View>
+        <ScrollView
+          style={{ marginTop: 2, backgroundColor: "white", width: "100%" }}
+        >
+          <GridView
+            style={{ backgroundColor: "white", flex: 1 }}
+            itemDimension={100}
+            items={schedulelist}
+            renderItem={item => (
+              <TimeButton
+                time={item.available_time}
+                auth_user={auth_user}
+                color={item.patient ? "booked" : null}
+                day={day}
+                month={month}
+                t={t}
+                date={item.date}
+              />
+            )}
+          />
         </ScrollView>
-        {/* <Container>
-          <TouchableOpacity onPress={this._showDateTimePicker}>
-            <Text style={styles.secondText}>{t("other:showdatepicker")}</Text>
-            <DateTimePicker
-              isVisible={this.state.isDateTimePickerVisible}
-              mode={this.state.mode}
-              onConfirm={this._handleDatePicked}
-              onCancel={this._hideDateTimePicker}
-            />
-          </TouchableOpacity>
-        </Container>
-        {this.state.res ? (
-          <Container>
-            <Text style={{ textAlign: "center", fontSize: 18 }}>
-              Available Time
-            </Text>
-            <Text style={{ textAlign: "center", marginBottom: 10 }}>
-              {this.state.res}
-            </Text>
-            <Button onPress={() => this._reservation} full rounded>
-              <Text style={styles.firstText}>{t("other:confirm")}</Text>
-            </Button>
-          </Container>
-        ) : null} */}
       </View>
     );
   }
@@ -686,19 +375,21 @@ export default withNamespaces(["other", "common"], { wait: true })(
 
 class TimeButton extends Component {
   render() {
-    const { time, color, month, day, auth_user, t } = this.props;
+    const { time, color, month, day, auth_user, t, date } = this.props;
 
     return (
       <TouchableOpacity
         onPress={() => {
           auth_user
-            ? (Store.postBook(
-                month + " - " + day,
-                time,
-                Store.doctorProfile.id,
-                authStore.user.user_id
-              ),
-              alert(t("other:bookedsuccess")))
+            ? !color
+              ? (Store.postBook(
+                  date,
+                  time,
+                  Store.doctorProfile.id,
+                  authStore.user.user_id
+                ),
+                alert(t("other:bookedsuccess")))
+              : alert("Already exist patient!")
             : alert(t("other:pleaselogin"));
         }}
         style={[styles.time, { backgroundColor: color ? "grey" : "#026fc9" }]}
@@ -715,8 +406,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#026fc9",
     borderRadius: 10,
     justifyContent: "center",
-    width: deviceWidth / 3.6,
     margin: 5,
+    flex: 0.3,
     alignItems: "center"
   },
   texttime: {
@@ -755,58 +446,31 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: "GTWalsheim-Medium",
     color: "#919191"
+  },
+  container: {
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1
+  },
+  item: {
+    backgroundColor: "white",
+    borderColor: "#ddd",
+    borderRadius: 10,
+    borderWidth: 1,
+    margin: 5,
+    padding: 4,
+    width: "100%"
+  },
+  thumbnailStyle: {
+    alignContent: "center",
+    justifyContent: "center"
+  },
+  itemView: {
+    backgroundColor: "white",
+    width: "100%",
+    borderColor: "#ddd",
+    borderWidth: 1,
+    flexDirection: "row"
   }
-  // thirdText: {
-  //   alignSelf: "center",
-  //   alignContent: "center",
-  //   justifyContent: "center",
-  //   fontSize: 16,
-  //   fontFamily: "GTWalsheim-Medium",
-  //   color: "#919191"
-  // },
-  // locationIcon: {
-  //   color: "#48C1F6"
-  // },
-  // fourthText: {
-  //   fontSize: 16,
-  //   fontFamily: "GTWalsheim-Medium",
-  //   color: "#919191",
-  //   paddingLeft: 5
-  // },
-  // iconsStyle: {
-  //   width: 28,
-  //   height: 28
-  // },
-  // bookingButtonCardItem: {
-  //   alignSelf: "center",
-  //   alignContent: "center",
-  //   justifyContent: "center",
-  //   backgroundColor: "white"
-  // },
-  // bookingButton: {
-  //   // height: 30,
-  //   // width: 140,
-  //   alignSelf: "center",
-  //   alignContent: "center",
-  //   justifyContent: "center"
-  // },
-  // buttonText: {
-  //   alignSelf: "center",
-  //   alignContent: "center",
-  //   justifyContent: "center",
-  //   fontSize: 14,
-  //   fontFamily: "GTWalsheim-Medium"
-  // }
 });
-
-{
-  /* <TouchableOpacity onPress={this._showTimeInTimePicker}>
-						<Text style={styles.secondText}>Show TimePicker</Text>
-						<DateTimePicker
-							isVisible={this.state.isDateTimePickerVisible}
-							mode={this.state.mode}
-							onConfirm={this._handleTimePicked}
-							onCancel={this._hideDateTimePicker}
-						/>
-					</TouchableOpacity> */
-}

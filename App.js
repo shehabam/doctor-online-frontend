@@ -9,6 +9,7 @@ import DoctorList from "./components/doctorList";
 import More from "./components/More";
 import TimeDatePicker from "./components/TimeDatePicker";
 import Settings from "./components/Settings";
+import AppointmentManage from "./components/AppointmentManage";
 import Notification from "./components/Notification";
 import Schedule from "./components/Schedule";
 
@@ -135,6 +136,7 @@ const MoreTab = createStackNavigator(
   {
     More: More,
     Settings: Settings,
+    AppointmentManage: AppointmentManage,
     Notification: Notification,
     EditProfile: EditProfile,
     Schedule: Schedule,

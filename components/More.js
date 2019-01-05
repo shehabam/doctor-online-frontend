@@ -47,10 +47,38 @@ class More extends Component {
 
   render() {
     const { t, i18n, navigation } = this.props;
+    let isDoctor = "";
+    if (authStore.isAuthenticated) {
+      isDoctor = Store.findDoctorInUsers(authStore.user.user_id);
+      if (authStore.user.username == "admin") {
+        isDoctor = authStore.user.user_id;
+      }
+    }
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <TouchableHighlight>
           <List>
+            {isDoctor ? (
+              <ListItem
+                onPress={() =>
+                  this.props.navigation.navigate("AppointmentManage")
+                }
+              >
+                <Left>
+                  <Icon name="md-settings" large style={{ color: "#00bfff" }} />
+                  <Text>Appointment Manage</Text>
+                </Left>
+                <Right>
+                  <Icon
+                    name="arrow-forward"
+                    large
+                    style={{ color: "#00bfff" }}
+                  />
+                </Right>
+              </ListItem>
+            ) : (
+              <Text />
+            )}
             <ListItem
               onPress={() => this.props.navigation.navigate("Settings")}
             >
