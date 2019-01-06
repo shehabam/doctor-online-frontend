@@ -285,7 +285,7 @@ class AppointmentManage extends Component {
           }}>
           <View style={{marginTop: 30}}>
             <View style={{flex: 1, flexDirection: 'column',alignItems: 'stretch',padding: 30 }}>
-              <Text style={{fontSize: 20}}>New Appointment</Text>
+              <View style={{height: 50}}><Text style={{fontSize: 20}}>New Appointment</Text></View>
               <View style={{height: 50}}>
                 <Text style={{fontSize: 20}}>Patient Name: </Text>
                 {Platform.OS === 'ios'? (
