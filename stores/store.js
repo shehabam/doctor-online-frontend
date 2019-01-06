@@ -392,7 +392,7 @@ class Store {
       .delete(BASEURL + `/update/schedeul/` + id)
       .then(res => res.data)
       .then(Appointment => {
-        this.AppointmentsList = Appointment;
+        this.getAppointments();
       })
       .catch(err => console.error(err));
   }
