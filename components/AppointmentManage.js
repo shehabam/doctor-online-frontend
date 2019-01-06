@@ -83,7 +83,15 @@ class AppointmentManage extends Component {
   saveAppointment() {
     let d = Store.findDoctorByUsername(authStore.user.username);
     // console.log(authStore);
-    Store.postBook(this.state.chosenDate, this.state.chosenTime, d.id, this.state.patient);
+    if (Platform.OS == 'android0') {
+      Store.postBook(this.state.chosenDate, this.state.chosenTime, d.id, this.state.patient);
+    } else {
+      let dateobj = new Date(this.state.chosenDate);
+      let dateval = dateobj.getFullYear() + '-' + (dateobj.getMonth() + 1) + '-' + dateobj.getDate();
+      let timeobj = new Date(this.state.chosenTime);
+      let timeval = timeobj.getHours() + ':' +timeobj.getMinutes();
+      Store.postBook(dateval, timeval, d.id, this.state.patient);
+    }
   }
 
   _showDatePicker = () => this.setState({ isDatePickerVisible: true });
@@ -91,10 +99,14 @@ class AppointmentManage extends Component {
   _hideDatePicker = () => this.setState({ isDatePickerVisible: false });
 
   _handleDatePicked = (date) => {
-    let dateObj = new Date(date);
-    let dateval = dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1) + '-' + dateObj.getDate();
-    this.setState({ chosenDate: dateval });
-    this._hideDatePicker();
+    if (Platform.OS == 'android') {
+      let dateObj = new Date(date);
+      let dateval = dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1) + '-' + dateObj.getDate();
+      this.setState({ chosenDate: dateval });
+      this._hideDatePicker();
+    } else {
+      this.setState({ chosenDate: date });
+    }
   };
 
   _showSelectDatePicker = () => this.setState({ isSelectDatePickerVisible: true });
@@ -113,10 +125,14 @@ class AppointmentManage extends Component {
   _hideTimePicker = () => this.setState({ isTimePickerVisible: false });
 
   _handleTimePicked = (time) => {
-    let dateObj = new Date(time);
-    let timeval = dateObj.getHours() + ':' + dateObj.getMinutes();
-    this.setState({ chosenTime: timeval });
-    this._hideTimePicker();
+    if (Platform.OS == 'android') {
+      let dateObj = new Date(time);
+      let timeval = dateObj.getHours() + ':' + dateObj.getMinutes();
+      this.setState({ chosenTime: timeval });
+      this._hideTimePicker();
+    } else {
+      this.setState({ chosenTime: time });
+    }
   };
 
   onOverlayClose = () => this.setState({ showOverlay: false});
