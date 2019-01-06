@@ -32,7 +32,6 @@ import {
   TextInput,
   Picker,
   PickerIOS,
-  DatePickerIOS,
   Modal
 } from "react-native";
 
@@ -125,14 +124,10 @@ class AppointmentManage extends Component {
   _hideTimePicker = () => this.setState({ isTimePickerVisible: false });
 
   _handleTimePicked = (time) => {
-    if (Platform.OS == 'android') {
       let dateObj = new Date(time);
       let timeval = dateObj.getHours() + ':' + dateObj.getMinutes();
       this.setState({ chosenTime: timeval });
       this._hideTimePicker();
-    } else {
-      this.setState({ chosenTime: time });
-    }
   };
 
   onOverlayClose = () => this.setState({ showOverlay: false});
@@ -144,13 +139,8 @@ class AppointmentManage extends Component {
   editApponitment = () => {
     this.setState({showOverlay: false});
     let schdule = Store.findScheduleById(this.state.clickedScheduleId)[0];
-    if (Platform.OS == 'ios') {
-      this.setState({chosenDate: new Date(schdule.date)});
-      this.setState({chosenTime: new Date(schdule.available_time)});
-    } else {
-      this.setState({chosenDate: schdule.date});
-      this.setState({chosenTime: schdule.available_time});
-    }
+    this.setState({chosenDate: schdule.date});
+    this.setState({chosenTime: schdule.available_time});
     let userinfo = Store.findUser(schdule.patient.username);
     this.setState({patient: userinfo.id});
     this.addApponitment(!this.state.modalVisible);
@@ -335,18 +325,12 @@ class AppointmentManage extends Component {
                   onFocus={this._showDatePicker}
                   value={this.state.chosenDate}
                 />
-                {Platform.OS === 'ios'? (
-                  <DatePickerIOS
-                    date={this.state.chosenDate}
-                    onDateChange={this._handleDatePicked}
-                  />
-                  ) : (<DateTimePicker
+                <DateTimePicker
                     isVisible={this.state.isDatePickerVisible}
                     onConfirm={this._handleDatePicked}
                     onCancel={this._hideDatePicker}
                     datePickerModeAndroid="spinner"
                   />
-                  )}
               </View>
               <View style={{height: 50,marginTop: 30}}>
                 <Text style={{fontSize: 20}}>ReservationTime: </Text>
@@ -362,20 +346,13 @@ class AppointmentManage extends Component {
                   onFocus={this._showTimePicker}
                   value={this.state.chosenTime}
                 />
-                {Platform.OS === 'ios'? (
-                    <DatePickerIOS
-                      mode="time"
-                      date={this.state.chosenDate}
-                      onDateChange={this._handleDatePicked}
-                    />
-                  ) : (
-                  <DateTimePicker
+                <DateTimePicker
                     isVisible={this.state.isTimePickerVisible}
                     onConfirm={this._handleTimePicked}
                     onCancel={this._hideTimePicker}
                     mode="time"
                     datePickerModeAndroid="spinner"
-                  />)}
+                  />
               </View>
               <View style={{ height: 50,marginTop:30,flex: 1, flexDirection: 'row',alignItems: 'center' }}>
                 <Button
