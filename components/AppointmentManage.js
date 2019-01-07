@@ -328,12 +328,12 @@ class AppointmentManage extends Component {
               <View style={{ height: 50 }}>
                 <Text style={{ fontSize: 20 }}>New Appointment</Text>
               </View>
-              <View style={{ height: 50 }}>
+              <View style={{ height: 300 }}>
                 <Text style={{ fontSize: 20 }}>Patient Name: </Text>
                 {Platform.OS === "ios" ? (
                   <PickerIOS
                     selectedValue={this.state.patient}
-                    style={{ height: 50 }}
+                    style={{ height: 300 }}
                     onValueChange={(itemValue, itemIndex) =>
                       this.setState({ patient: itemValue })
                     }
