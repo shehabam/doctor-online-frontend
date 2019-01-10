@@ -49,10 +49,10 @@ class AppointmentManage extends Component {
     this.state = {
       language: this.props.i18n.language,
       modalVisible: false,
-      chosenDate: Platform.OS == "ios" ? new Date() : "",
+      chosenDate: "",
       isDatePickerVisible: false,
       isTimePickerVisible: false,
-      chosenTime: Platform.OS == "ios" ? new Date() : "",
+      chosenTime: "",
       showOverlay: false,
       patient: "",
       clickedScheduleId: "",
@@ -74,13 +74,8 @@ class AppointmentManage extends Component {
   });
 
   addApponitment(visible) {
-    if (Platform.OS == "ios") {
-      this.setState({ chosenDate: new Date() });
-      this.setState({ chosenTime: new Date() });
-    } else {
-      this.setState({ chosenDate: "" });
-      this.setState({ chosenTime: "" });
-    }
+    this.setState({ chosenDate: "" });
+    this.setState({ chosenTime: "" });
     this.setState({ patient: "" });
     this.setState({ modalVisible: visible });
   }
@@ -88,25 +83,12 @@ class AppointmentManage extends Component {
   saveAppointment() {
     let d = Store.findDoctorByUsername(authStore.user.username);
     // console.log(authStore);
-    if (Platform.OS == "android0") {
-      Store.postBook(
-        this.state.chosenDate,
-        this.state.chosenTime,
-        d.id,
-        this.state.patient
-      );
-    } else {
-      let dateobj = new Date(this.state.chosenDate);
-      let dateval =
-        dateobj.getFullYear() +
-        "-" +
-        (dateobj.getMonth() + 1) +
-        "-" +
-        dateobj.getDate();
-      let timeobj = new Date(this.state.chosenTime);
-      let timeval = timeobj.getHours() + ":" + timeobj.getMinutes();
-      Store.postBook(dateval, timeval, d.id, this.state.patient);
-    }
+    Store.postBook(
+      this.state.chosenDate,
+      this.state.chosenTime,
+      d.id,
+      this.state.patient
+    );
   }
 
   _showDatePicker = () => this.setState({ isDatePickerVisible: true });
@@ -114,19 +96,15 @@ class AppointmentManage extends Component {
   _hideDatePicker = () => this.setState({ isDatePickerVisible: false });
 
   _handleDatePicked = date => {
-    if (Platform.OS == "android") {
-      let dateObj = new Date(date);
-      let dateval =
-        dateObj.getFullYear() +
-        "-" +
-        (dateObj.getMonth() + 1) +
-        "-" +
-        dateObj.getDate();
-      this.setState({ chosenDate: dateval });
-      this._hideDatePicker();
-    } else {
-      this.setState({ chosenDate: date });
-    }
+    let dateObj = new Date(date);
+    let dateval =
+      dateObj.getFullYear() +
+      "-" +
+      (dateObj.getMonth() + 1) +
+      "-" +
+      dateObj.getDate();
+    this.setState({ chosenDate: dateval });
+    this._hideDatePicker();
   };
 
   _showSelectDatePicker = () =>
@@ -240,27 +218,7 @@ class AppointmentManage extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <View style={{ flexDirection: "row" }}>
-          <View style={{ width: 100, flex: 0.4, height: 50 }}>
-            <TextInput
-              style={{
-                fontFamily: "GTWalsheim-Medium",
-                fontSize: 20,
-                color: "grey",
-                height: 40,
-                paddingLeft: 12
-              }}
-              placeholder="Date"
-              autoCapitalize="none"
-              onFocus={this._showSelectDatePicker}
-              value={this.state.selectDate}
-            />
-            <DateTimePicker
-              isVisible={this.state.isSelectDatePickerVisible}
-              onConfirm={this._handleSelectDatePicked}
-              onCancel={this._hideSelectDatePicker}
-              datePickerModeAndroid="spinner"
-            />
-          </View>
+          <View style={{ width: 100, flex: 0.4, height: 50 }} />
           <View style={{ flex: 0.5, height: 50 }}>
             <Button
               title="Learn More"
