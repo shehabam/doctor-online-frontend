@@ -282,7 +282,7 @@ class Store {
     console.log("bla 1 2 bookdata", bookdata);
     axios
       .post(BASEURL + `/create/schedeul/`, bookdata)
-      .then(response => console.log("bla bla bla response", response))
+      .then(response => this.getAppointments())
       .catch(err => console.error(err));
   }
 
@@ -366,6 +366,7 @@ class Store {
     filterappointment = this.AppointmentsList.filter(
       item => item.doctor === user
     );
+    console.log(user);
     let result = [];
     if (year && month && day) {
       for (let i in filterappointment) {
