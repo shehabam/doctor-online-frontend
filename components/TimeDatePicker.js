@@ -370,7 +370,7 @@ class TimeDatePicker extends Component {
 
 // export default observer(TimeDatePicker);
 export default withNamespaces(["other", "common"], { wait: true })(
-  TimeDatePicker
+  observer(TimeDatePicker)
 );
 
 class TimeButton extends Component {
