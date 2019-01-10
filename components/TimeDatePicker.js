@@ -359,6 +359,7 @@ class TimeDatePicker extends Component {
                 month={month}
                 t={t}
                 date={item.date}
+                id={item.id}
               />
             )}
           />
@@ -375,7 +376,7 @@ export default withNamespaces(["other", "common"], { wait: true })(
 
 class TimeButton extends Component {
   render() {
-    const { time, color, month, day, auth_user, t, date } = this.props;
+    const { time, color, month, day, auth_user, t, date,id } = this.props;
 
     return (
       <TouchableOpacity
@@ -387,8 +388,7 @@ class TimeButton extends Component {
                   time,
                   Store.doctorProfile.id,
                   authStore.user.user_id
-                ),
-                alert(t("other:bookedsuccess")))
+                ),Store.deleteAppointment(id),alert(t("other:bookedsuccess")))
               : alert("Already exist patient!")
             : alert(t("other:pleaselogin"));
         }}
