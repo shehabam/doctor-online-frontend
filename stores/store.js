@@ -366,7 +366,6 @@ class Store {
     filterappointment = this.AppointmentsList.filter(
       item => item.doctor === user
     );
-    console.log(user);
     let result = [];
     if (year && month && day) {
       for (let i in filterappointment) {

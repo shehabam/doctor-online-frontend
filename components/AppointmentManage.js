@@ -64,7 +64,8 @@ class AppointmentManage extends Component {
         today.getDate(),
       isSelectDatePickerVisible: false,
       scheduledata: [],
-      Appointment: []
+      Appointment: [],
+      update: 0
     };
   }
   static navigationOptions = ({ navigation, screenProps }) => ({
@@ -96,6 +97,10 @@ class AppointmentManage extends Component {
       d.id,
       this.state.patient
     );
+    if (this.state.update > 0) {
+      Store.deleteAppointment(this.state.update);
+      this.setState({update: 0});
+    }
     this.setState({ modalVisible: false });
   }
 
@@ -155,9 +160,12 @@ class AppointmentManage extends Component {
     let schdule = Store.findScheduleById(this.state.clickedScheduleId)[0];
     this.setState({ chosenDate: schdule.date });
     this.setState({ chosenTime: schdule.available_time });
-    let userinfo = Store.findUser(schdule.patient.username);
-    this.setState({ patient: userinfo.id });
-    this.addApponitment(!this.state.modalVisible);
+    if(schdule.patient) {
+      let userinfo = Store.findUser(schdule.patient.username);
+      this.setState({ patient: userinfo.id });
+    }
+    this.setState({ modalVisible: true });
+    this.setState({ update: schdule.id });
   };
 
   deleteApponitment = () => {
