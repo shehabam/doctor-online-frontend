@@ -63,7 +63,8 @@ class AppointmentManage extends Component {
         "-" +
         today.getDate(),
       isSelectDatePickerVisible: false,
-      scheduledata: []
+      scheduledata: [],
+      Appointment: []
     };
   }
   static navigationOptions = ({ navigation, screenProps }) => ({
@@ -82,13 +83,20 @@ class AppointmentManage extends Component {
 
   saveAppointment() {
     let d = Store.findDoctorByUsername(authStore.user.username);
-    // console.log(authStore);
+    Store.AppointmentsList.push({
+      "id": new Date().getTime(),
+      "doctor": d.id,
+      "patient": this.state.patient,
+      "date": this.state.chosonDate,
+      "available_time": this.state.chosenTime
+    });
     Store.postBook(
       this.state.chosenDate,
       this.state.chosenTime,
       d.id,
       this.state.patient
     );
+    this.setState({ modalVisible: false });
   }
 
   _showDatePicker = () => this.setState({ isDatePickerVisible: true });
@@ -213,8 +221,8 @@ class AppointmentManage extends Component {
         </View>
       );
     }
-    let schedulelist = Store.findScheduleByDoctorId(doctoruser.id);
-
+    let d = Store.findDoctorByUsername(authStore.user.username);
+    this.state.Appointment = Store.findScheduleByDoctorId(d.id);
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <View style={{ flexDirection: "row" }}>
@@ -404,7 +412,7 @@ class AppointmentManage extends Component {
         </Modal>
 
         <ScrollView style={{ marginTop: 2, backgroundColor: "white" }}>
-          {schedulelist.map(item => (
+          {this.state.Appointment.map(item => (
             <View style={styles.itemView} key={item.id}>
               <TouchableOpacity
                 onPress={() => this.showOverlay(item.id)}
