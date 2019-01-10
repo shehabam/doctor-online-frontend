@@ -199,7 +199,7 @@ class AppointmentManage extends Component {
       );
     }
     let doctoruser = Store.findDoctorInUsers(authStore.user.user_id);
-    if (!doctoruser) {
+    if (!doctoruser || authStore.user.username != "admin") {
       return (
         <View
           style={{
@@ -286,7 +286,11 @@ class AppointmentManage extends Component {
               <View style={{ height: 50 }}>
                 <Text style={{ fontSize: 20 }}>New Appointment</Text>
               </View>
-              <View style={{ height: 300 }}>
+              <View
+                style={
+                  Platform.OS == "android" ? { height: 50 } : { height: 300 }
+                }
+              >
                 <Text style={{ fontSize: 20 }}>Patient Name: </Text>
                 {Platform.OS === "ios" ? (
                   <PickerIOS

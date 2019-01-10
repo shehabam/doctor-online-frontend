@@ -224,7 +224,9 @@ class DoctorList extends Component {
 }
 
 // export default observer(DoctorList);
-export default withNamespaces(["other", "common"], { wait: true })(DoctorList);
+export default withNamespaces(["other", "common"], { wait: true })(
+  observer(DoctorList)
+);
 
 const styles = StyleSheet.create({
   thumbnailStyle: {

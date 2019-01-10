@@ -234,7 +234,7 @@ class SearchByDoctor extends Component {
 }
 
 export default withNamespaces(["other", "common"], { wait: true })(
-  SearchByDoctor
+  observer(SearchByDoctor)
 );
 
 const styles = StyleSheet.create({

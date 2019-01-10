@@ -52,7 +52,9 @@ class Store {
     this.fullusers = [];
     this.userName = "";
     this.filterappointment = [];
-  } //for bringing Doctors only
+  }
+
+  //for bringing Doctors only
   getDoctors() {
     axios
       // http://207.154.246.97/
@@ -65,7 +67,9 @@ class Store {
         this.itemList = doctors.reduce((a, b) => a.concat(b.items), []);
       })
       .catch(err => console.error(err));
-  } //for bringing Cities only
+  }
+
+  //for bringing Cities only
   getCities() {
     axios
       .get(BASEURL + "/cities/")
