@@ -166,18 +166,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#00bfff",
     flex: 1
   },
-  // ImageStyle: {
-  //   alignSelf: "center",
-  //   alignContent: "center",
-  //   justifyContent: "center",
-  //   height: 60,
-  //   backgroundColor: "#00bfff",
-  //   flex: 1
-  // },
   cardBoxStyle: {
-    // marginLeft: 7,
-    // width: 190,
-    // height: 150,
     backgroundColor: "#00bfff"
   }
 });
