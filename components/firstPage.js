@@ -32,59 +32,58 @@ class FirstPage extends Component {
   };
   render() {
     const { t, i18n, navigation } = this.props;
-    if (!authStore.isAuthenticated) {
-      return (
-        // rgba(153, 204, 255, .6)
-        <ImageBackground
-          source={require("../assets/doc.png")}
-          style={{ flex: 1, width: "100%", height: "100%" }}
-        >
-          <Grid>
-            <Row size={1} />
-            <Row size={2.5}>
-              <Image
-                source={require("../assets/LogoWhite.png")}
-                style={styles.ImageStyle}
-              />
-            </Row>
-            <Row size={0.5} style={styles.bookTheBestTextRow}>
-              <Text style={styles.bookTheBestText}>
-                {t("first:description")}
+
+    return (
+      // rgba(153, 204, 255, .6)
+      <ImageBackground
+        source={require("../assets/doc.png")}
+        style={{ flex: 1, width: "100%", height: "100%" }}
+      >
+        <Grid>
+          <Row size={1} />
+          <Row size={2.5}>
+            <Image
+              source={require("../assets/LogoWhite.png")}
+              style={styles.ImageStyle}
+            />
+          </Row>
+          <Row size={0.5} style={styles.bookTheBestTextRow}>
+            <Text style={styles.bookTheBestText}>{t("first:description")}</Text>
+          </Row>
+          <Row size={0.5} />
+          <Row size={1.5} style={styles.buttonRow}>
+            <Button
+              rounded
+              style={styles.button}
+              onPress={() => this.props.navigation.navigate("Area")}
+            >
+              <Text style={styles.text}>
+                <Icon
+                  type="MaterialCommunityIcons"
+                  name="needle"
+                  style={styles.needleIcon}
+                />
+                {t("first:input1")}
               </Text>
-            </Row>
-            <Row size={0.5} />
-            <Row size={1.5} style={styles.buttonRow}>
-              <Button
-                rounded
-                style={styles.button}
-                onPress={() => this.props.navigation.navigate("Area")}
-              >
-                <Text style={styles.text}>
-                  <Icon
-                    type="MaterialCommunityIcons"
-                    name="needle"
-                    style={styles.needleIcon}
-                  />
-                  {t("first:input1")}
-                </Text>
-              </Button>
-            </Row>
-            <Row size={1.5} style={styles.buttonRow}>
-              <Button
-                rounded
-                style={styles.button}
-                onPress={() => this.props.navigation.navigate("SearchByDoctor")}
-              >
-                <Text style={styles.text}>
-                  <Icon
-                    type="MaterialCommunityIcons"
-                    name="magnify"
-                    style={styles.needleIcon}
-                  />
-                  {t("first:input2")}
-                </Text>
-              </Button>
-            </Row>
+            </Button>
+          </Row>
+          <Row size={1.5} style={styles.buttonRow}>
+            <Button
+              rounded
+              style={styles.button}
+              onPress={() => this.props.navigation.navigate("SearchByDoctor")}
+            >
+              <Text style={styles.text}>
+                <Icon
+                  type="MaterialCommunityIcons"
+                  name="magnify"
+                  style={styles.needleIcon}
+                />
+                {t("first:input2")}
+              </Text>
+            </Button>
+          </Row>
+          {!authStore.isAuthenticated ? (
             <Row size={2} style={styles.touchableTextRow}>
               <TouchableHighlight>
                 <Button
@@ -98,8 +97,11 @@ class FirstPage extends Component {
                 </Button>
               </TouchableHighlight>
             </Row>
+          ) : (
+            pass
+          )}
 
-            {/* <Button rounded style={styles.button}>
+          {/* <Button rounded style={styles.button}>
             <Text style={styles.text}>
               <Icon
                 type="MaterialCommunityIcons"
@@ -112,66 +114,66 @@ class FirstPage extends Component {
           <TouchableHighlight style={styles.touchable}>
             <Text style={styles.loginText}>Login</Text>
           </TouchableHighlight> */}
-          </Grid>
-        </ImageBackground>
-      );
-    } else {
-      return (
-        // rgba(153, 204, 255, .6)
-        <ImageBackground
-          source={require("../assets/doc.png")}
-          style={{ flex: 1, width: "100%", height: "100%" }}
-        >
-          <Grid>
-            <Row size={1} />
-            <Row size={2.5}>
-              <Image
-                source={require("../assets/LogoWhite.png")}
-                style={styles.ImageStyle}
-              />
-            </Row>
-            <Row size={0.5} style={styles.bookTheBestTextRow}>
-              <Text style={styles.bookTheBestText}>
-                {t("first:description")}
-              </Text>
-            </Row>
-            <Row size={0.5} />
-            <Row size={1.5} style={styles.buttonRow}>
-              <Button
-                rounded
-                style={styles.button}
-                onPress={() => this.props.navigation.navigate("Area")}
-              >
-                <Text style={styles.text}>
-                  <Icon
-                    type="MaterialCommunityIcons"
-                    name="needle"
-                    style={styles.needleIcon}
-                  />
-                  {t("first:input1")}
-                </Text>
-              </Button>
-            </Row>
-            <Row size={1.5} style={styles.buttonRow}>
-              <Button
-                rounded
-                style={styles.button}
-                onPress={() => this.props.navigation.navigate("SearchByDoctor")}
-              >
-                <Text style={styles.text}>
-                  <Icon
-                    type="MaterialCommunityIcons"
-                    name="magnify"
-                    style={styles.needleIcon}
-                  />
-                  {t("first:input2")}
-                </Text>
-              </Button>
-            </Row>
-          </Grid>
-        </ImageBackground>
-      );
-    }
+        </Grid>
+      </ImageBackground>
+    );
+    // } else {
+    //   return (
+    //     // rgba(153, 204, 255, .6)
+    //     <ImageBackground
+    //       source={require("../assets/doc.png")}
+    //       style={{ flex: 1, width: "100%", height: "100%" }}
+    //     >
+    //       <Grid>
+    //         <Row size={1} />
+    //         <Row size={2.5}>
+    //           <Image
+    //             source={require("../assets/LogoWhite.png")}
+    //             style={styles.ImageStyle}
+    //           />
+    //         </Row>
+    //         <Row size={0.5} style={styles.bookTheBestTextRow}>
+    //           <Text style={styles.bookTheBestText}>
+    //             {t("first:description")}
+    //           </Text>
+    //         </Row>
+    //         <Row size={0.5} />
+    //         <Row size={1.5} style={styles.buttonRow}>
+    //           <Button
+    //             rounded
+    //             style={styles.button}
+    //             onPress={() => this.props.navigation.navigate("Area")}
+    //           >
+    //             <Text style={styles.text}>
+    //               <Icon
+    //                 type="MaterialCommunityIcons"
+    //                 name="needle"
+    //                 style={styles.needleIcon}
+    //               />
+    //               {t("first:input1")}
+    //             </Text>
+    //           </Button>
+    //         </Row>
+    //         <Row size={1.5} style={styles.buttonRow}>
+    //           <Button
+    //             rounded
+    //             style={styles.button}
+    //             onPress={() => this.props.navigation.navigate("SearchByDoctor")}
+    //           >
+    //             <Text style={styles.text}>
+    //               <Icon
+    //                 type="MaterialCommunityIcons"
+    //                 name="magnify"
+    //                 style={styles.needleIcon}
+    //               />
+    //               {t("first:input2")}
+    //             </Text>
+    //           </Button>
+    //         </Row>
+    //       </Grid>
+    //     </ImageBackground>
+    //   );
+    // }
   }
 }
 

@@ -41,7 +41,7 @@ class LoginPage extends Component {
   loginButton(username, password) {
     authStore.loginUser(username, password);
     // alert("You Are LoggedIn")
-    this.props.navigation.goBack();
+    this.props.navigation.navigate("FirstPage");
   }
   // }
   render() {
@@ -117,9 +117,10 @@ class LoginPage extends Component {
               transparent
               style={styles.buttonBorder}
               rounded
-              onPress={() =>
-                this.loginButton(this.state.username, this.state.password)
-              }
+              onPress={() => {
+                this.loginButton(this.state.username, this.state.password),
+                  alert("Welcome" + " " + this.state.username);
+              }}
             >
               <Text style={styles.TextStyle}>{t("first:login")}</Text>
             </Button>
@@ -131,18 +132,19 @@ class LoginPage extends Component {
             </Text>
             {/* <Hr /> */}
           </Row>
-
-          <Row size={1.85} style={[styles.Row]}>
-            <Button
-              rounded
-              transparent
-              style={[styles.buttonBorder]}
-              onPress={() => this.props.navigation.navigate("RegisterPage")}
-              // authStore.registerUser(this.state.username, this.state.password)
-            >
-              <Text style={styles.TextStyle}>{t("other:register")}</Text>
-            </Button>
-          </Row>
+          {!authStore.isAuthenticated ? (
+            <Row size={1.85} style={[styles.Row]}>
+              <Button
+                rounded
+                transparent
+                style={[styles.buttonBorder]}
+                onPress={() => this.props.navigation.navigate("RegisterPage")}
+                // authStore.registerUser(this.state.username, this.state.password)
+              >
+                <Text style={styles.TextStyle}>{t("other:register")}</Text>
+              </Button>
+            </Row>
+          ) : null}
         </Grid>
       </ImageBackground>
     );
