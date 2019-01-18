@@ -15,7 +15,8 @@ import {
   Input
 } from "native-base";
 
-const BASEURL = "http://207.154.246.97";
+const BASEURL = "http://192.168.1.35:8000";
+// "http://207.154.246.97";
 
 class Store {
   constructor() {

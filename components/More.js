@@ -109,7 +109,13 @@ class More extends Component {
                 <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
               </Right>
             </ListItem>
-            <ListItem onPress={() => authStore.logoutUser()}>
+            <ListItem
+              onPress={() => {
+                authStore.logoutUser(),
+                  alert("You logged out"),
+                  this.props.navigation.navigate("FirstPage");
+              }}
+            >
               <Left>
                 <Icon name="log-out" large style={{ color: "#00bfff" }} />
                 <Text>{t("more:logout")}</Text>

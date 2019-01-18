@@ -127,7 +127,7 @@ class RegisterPage extends Component {
           <Row size={0.1} style={[styles.Row]} />
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
-              <Icon name="call" style={{ color: "white" }} />
+              <Icon name="contact" style={{ color: "white" }} />
               <TextInput
                 style={{
                   fontFamily: "GTWalsheim-Medium",
@@ -143,23 +143,7 @@ class RegisterPage extends Component {
             </Button>
           </Row>
           <Row size={0.1} style={[styles.Row]} />
-          <Row size={0.65} style={[styles.Row]}>
-            <Button rounded transparent style={styles.formBorder}>
-              <Icon name="call" style={{ color: "white" }} />
-              <TextInput
-                style={{
-                  fontFamily: "GTWalsheim-Medium",
-                  fontSize: 20,
-                  color: "#fff",
-                  width: 200,
-                  height: 40
-                }}
-                placeholder={t("other:phonenumber")}
-                autoCapitalize="none"
-                onChangeText={phoneNumber => this.setState({ phoneNumber })}
-              />
-            </Button>
-          </Row>
+
           <Row size={0.1} style={[styles.Row]} />
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
@@ -203,15 +187,17 @@ class RegisterPage extends Component {
               rounded
               transparent
               style={[styles.buttonBorder]}
-              onPress={() =>
+              onPress={() => {
                 authStore.registerUser(
                   this.state.firstName,
                   this.state.lastName,
                   this.state.username,
-                  this.state.phoneNumber,
+                  this.state.emailAddress,
                   this.state.password
-                )
-              }
+                ),
+                  alert("welcome" + " " + this.state.username),
+                  this.props.navigation.navigate("LoginPage");
+              }}
             >
               <Text style={styles.TextStyle}>{t("other:register")}</Text>
             </Button>
