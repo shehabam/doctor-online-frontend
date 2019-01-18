@@ -186,7 +186,7 @@ const BottomTab = createBottomTabNavigator(
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         if (routeName === "Home") {
-          iconName = "search";
+          iconName = "home";
         } else if (routeName === "Appointment") {
           iconName = "calendar";
         } else if (routeName === "Offers") {
@@ -205,7 +205,7 @@ const BottomTab = createBottomTabNavigator(
     }),
     tabBarOptions: {
       activeTintColor: "white",
-      inactiveTintColor: "black",
+      inactiveTintColor: "dimgray",
       style: {
         backgroundColor: "#00bfff"
       },

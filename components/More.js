@@ -147,4 +147,6 @@ class More extends Component {
   }
 }
 
-export default withNamespaces(["more", "common"], { wait: true })(More);
+export default withNamespaces(["more", "common"], { wait: true })(
+  observer(More)
+);

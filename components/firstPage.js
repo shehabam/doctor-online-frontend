@@ -30,6 +30,7 @@ class FirstPage extends Component {
       backgroundColor: "#00bfff"
     }
   };
+
   render() {
     const { t, i18n, navigation } = this.props;
     if (!authStore.isAuthenticated) {
@@ -87,15 +88,17 @@ class FirstPage extends Component {
             </Row>
             <Row size={2} style={styles.touchableTextRow}>
               <TouchableHighlight>
-                <Button
-                  rounded
-                  style={styles.button}
-                  onPress={() => this.props.navigation.navigate("LoginPage")}
-                >
-                  <Text style={[styles.text, { marginTop: 1 }]}>
-                    {t("first:login")}
-                  </Text>
-                </Button>
+                {authStore.isAuthenticated ? null : (
+                  <Button
+                    rounded
+                    style={styles.button}
+                    onPress={() => this.props.navigation.navigate("LoginPage")}
+                  >
+                    <Text style={[styles.text, { marginTop: 1 }]}>
+                      {t("first:login")}
+                    </Text>
+                  </Button>
+                )}
               </TouchableHighlight>
             </Row>
 
@@ -264,4 +267,6 @@ const styles = StyleSheet.create({
   // }
 });
 //export default observer(FirstPage);
-export default withNamespaces(["first", "common"], { wait: true })(FirstPage);
+export default withNamespaces(["first", "common"], { wait: true })(
+  observer(FirstPage)
+);

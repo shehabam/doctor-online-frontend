@@ -85,11 +85,11 @@ class AppointmentManage extends Component {
   saveAppointment() {
     let d = Store.findDoctorByUsername(authStore.user.username);
     Store.AppointmentsList.push({
-      "id": new Date().getTime(),
-      "doctor": d.id,
-      "patient": this.state.patient,
-      "date": this.state.chosonDate,
-      "available_time": this.state.chosenTime
+      id: new Date().getTime(),
+      doctor: d.id,
+      patient: this.state.patient,
+      date: this.state.chosonDate,
+      available_time: this.state.chosenTime
     });
     Store.postBook(
       this.state.chosenDate,
@@ -99,7 +99,7 @@ class AppointmentManage extends Component {
     );
     if (this.state.update > 0) {
       Store.deleteAppointment(this.state.update);
-      this.setState({update: 0});
+      this.setState({ update: 0 });
     }
     this.setState({ modalVisible: false });
   }
@@ -160,7 +160,7 @@ class AppointmentManage extends Component {
     let schdule = Store.findScheduleById(this.state.clickedScheduleId)[0];
     this.setState({ chosenDate: schdule.date });
     this.setState({ chosenTime: schdule.available_time });
-    if(schdule.patient) {
+    if (schdule.patient) {
       let userinfo = Store.findUser(schdule.patient.username);
       this.setState({ patient: userinfo.id });
     }
@@ -183,20 +183,6 @@ class AppointmentManage extends Component {
     }
   }
 
-  // Edit() {
-  //   if (authStore.isAuthenticated) {
-  //     <ListItem onPress={() => this.props.navigation.navigate("FirstPage")}>
-  //       <Left>
-  //         <Icon name="md-person" large style={{ color: "#00bfff" }} />
-  //         <Text>{t("settings:editprofile")}</Text>
-  //       </Left>
-  //       <Right>
-  //         <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-  //       </Right>
-  //     </ListItem>;
-  //   }
-  // }
-
   render() {
     const { t, i18n, navigation } = this.props;
 
@@ -215,7 +201,7 @@ class AppointmentManage extends Component {
       );
     }
     let doctoruser = Store.findDoctorInUsers(authStore.user.user_id);
-    if (!doctoruser || authStore.user.username != "admin") {
+    if (!doctoruser) {
       return (
         <View
           style={{

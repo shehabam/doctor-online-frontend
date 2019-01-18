@@ -80,7 +80,7 @@ i18n
           floor: "Floor",
           profession: "Profession",
           waitingtime: "waiting Time",
-          votes: "votes",
+          votes: "Rates",
           book: "Book",
           bookdescription:
             "Book now and you will recieve full address details and clinic number",
@@ -100,7 +100,7 @@ i18n
           firstname: "First Name",
           lastname: "Last Name",
           phonenumber: "Phone Number",
-          searchplaceholder: "Search By Products...",
+          searchplaceholder: "Search By Doctor name...",
           loading: "loading...",
           confirm: "Confirm",
           showdatepicker: "Show Datepicker",
