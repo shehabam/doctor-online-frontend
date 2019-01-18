@@ -29,7 +29,6 @@ class AppointmentPage extends Component {
   });
 
   render() {
-    // console.log(Store.AppointmentsList);
     const { t, i18n, navigation } = this.props;
     if (!Store.doctorList) return <View style={styles.thumbnailStyle} />;
 
@@ -43,7 +42,7 @@ class AppointmentPage extends Component {
             backgroundColor: "white"
           }}
         >
-          <Text>{t("edit:pleaselogin")}</Text>
+          <Text>{t("other:pleaselogin")}</Text>
         </View>
       );
     }

@@ -29,6 +29,7 @@ i18n
       en: {
         more: {
           title: "More",
+          appointmentmanage: "Appointment Manage",
           settings: "Settings",
           contactus: "Contact Us",
           aboutus: "About Us",
@@ -108,7 +109,14 @@ i18n
           ratingvisiterror: "You Need To LogIn Or Register To Rate Any Doctor",
           ratingcontent: "How would you describe your visit to Doctor",
           ratealert: "your rate has been Submited",
-          book: "Book"
+          book: "Book",
+          cancel: 'Cancel',
+          newappointment: 'New Appointment',
+          save: 'Save',
+          editappointment: "Edit Appointment",
+          deleteappointment: "Delete Appointment",
+          onlydoctor: "This page must use only doctors",
+          pleaselogin: "Please login"
         },
         edit: {
           waitingtime: "waiting_time",
@@ -145,6 +153,7 @@ i18n
       ar: {
         more: {
           title: "المزيد",
+          appointmentmanage: "إدارة المواعيد",
           settings: "الإعدادات",
           contactus: "اتصل بنا",
           aboutus: "معلومات عنا",
@@ -229,7 +238,13 @@ i18n
           reservationday: "يوم الحجز",
           bookedsuccess: "تم الحجز بنجاح!",
           pleaselogin: "الرجاء تسجيل الدخول",
-          schedule: "جدول"
+          schedule: "جدول",
+          cancel: 'إلغاء',
+          newappointment: 'موعد جديد',
+          save: 'حفظ',
+          editappointment: "تحرير موعد",
+          deleteappointment: "حذف موعد",
+          onlydoctor: "يجب أن تستخدم هذه الصفحة الأطباء فقط"
         },
         edit: {
           waitingtime: "وقت الانتظار",

@@ -121,24 +121,31 @@ class Settings extends Component {
                 </Text>
               </Right>
             </ListItem>
+            <ListItem>
+              <Left>
+                <Icon name="ios-globe-outline" large style={{ color: "#00bfff" }} />
+                <Text>{t("settings:changelanguage")}</Text>
+              </Left>
+              <Right>
+                <Picker
+                  selectedValue={this.state.language}
+                  style={{
+                    height: 50,
+                    width: 100,
+                    justifyContent: "center",
+                    alignContent: "center",
+                    alignSelf: "center"
+                  }}
+                  onValueChange={(itemValue, itemIndex) => this.showMe(itemValue)}
+                >
+                  <Picker.Item label="English" value="en" />
+                  <Picker.Item label="Arabic" value="ar" />
+                </Picker>
+              </Right>
+            </ListItem>
           </List>
         </TouchableHighlight>
-        <Icon name="ios-globe-outline" large style={{ color: "#00bfff" }} />
-        <Text>{t("settings:changelanguage")}</Text>
-        <Picker
-          selectedValue={this.state.language}
-          style={{
-            height: 50,
-            width: 100,
-            justifyContent: "center",
-            alignContent: "center",
-            alignSelf: "center"
-          }}
-          onValueChange={(itemValue, itemIndex) => this.showMe(itemValue)}
-        >
-          <Picker.Item label="English" value="en" />
-          <Picker.Item label="Arabic" value="ar" />
-        </Picker>
+        
       </View>
     );
   }

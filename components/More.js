@@ -66,7 +66,7 @@ class More extends Component {
               >
                 <Left>
                   <Icon name="md-settings" large style={{ color: "#00bfff" }} />
-                  <Text>Appointment Manage</Text>
+                  <Text>{t("more:appointmentmanage")}</Text>
                 </Left>
                 <Right>
                   <Icon
@@ -109,21 +109,25 @@ class More extends Component {
                 <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
               </Right>
             </ListItem>
-            <ListItem
-              onPress={() => {
-                authStore.logoutUser(),
-                  alert("You logged out"),
-                  this.props.navigation.navigate("FirstPage");
-              }}
-            >
-              <Left>
-                <Icon name="log-out" large style={{ color: "#00bfff" }} />
-                <Text>{t("more:logout")}</Text>
-              </Left>
-              <Right>
-                <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-              </Right>
-            </ListItem>
+            { authStore.isAuthenticated ?
+                <ListItem 
+			onPress={() => {
+	                authStore.logoutUser(),
+	                  alert("You logged out"),
+	                  this.props.navigation.navigate("FirstPage");
+	              }}
+		      >
+                <Left>
+                  <Icon name="log-out" large style={{ color: "#00bfff" }} />
+                  <Text>{t("more:logout")}</Text>
+                </Left>
+                <Right>
+                  <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
+                </Right>
+              </ListItem> : 
+              <Text></Text>
+            }
+            
             <ListItem>
               <Left>
                 <Icon name="ios-glasses" large style={{ color: "#00bfff" }} />
@@ -135,7 +139,7 @@ class More extends Component {
                 </Text>
               </Right>
             </ListItem>
-            <ListItem
+            {/* <ListItem
               onPress={() => this.props.navigation.navigate("Notification")}
             >
               <Left>
@@ -145,7 +149,7 @@ class More extends Component {
               <Right>
                 <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
               </Right>
-            </ListItem>
+            </ListItem> */}
           </List>
         </TouchableHighlight>
       </View>

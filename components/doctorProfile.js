@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
+import { MapView } from "expo";
 import {
   Container,
   Header,
@@ -45,10 +46,10 @@ class DoctorProfile extends Component {
   });
 
   likeSwitch = false;
-  HeaderMaxHeight = 40;
+  HeaderMaxHeight = 100;
   HeaderMinHeight = 40;
-  ProfileImageMaxHeight = 40;
-  ProfileImageMinHeight = 30;
+  ProfileImageMaxHeight = 100;
+  ProfileImageMinHeight = 80;
   HalfProfileImageMaxHeight = this.ProfileImageMaxHeight / 2;
 
   likeButton() {
@@ -76,9 +77,18 @@ class DoctorProfile extends Component {
     }
   }
 
+  getDayVal(val) {
+    return new Date(new Date().getTime() + val * 86400 * 1000).getDate();
+  }
+
+  getMonthVal(val) {
+    return new Date(new Date().getTime() + val * 86400 * 1000).getMonth() + 1;
+  }
+
   render() {
     const { t, i18n, navigation } = this.props;
 
+    const year = new Date().getFullYear();
     const month = new Date().getMonth() + 1;
     const day = new Date().getDate();
 
@@ -130,7 +140,7 @@ class DoctorProfile extends Component {
         </Row>
 
         <Row
-          size={3.25}
+          size={5.25}
           style={{
             backgroundColor: "white"
           }}
@@ -166,28 +176,27 @@ class DoctorProfile extends Component {
               style={{
                 height: this.ProfileImageMaxHeight,
                 width: this.ProfileImageMinHeight,
-                borderRadius: this.ProfileImageMaxHeight / 2,
+                borderRadius: 100,
                 borderColor: "white",
                 borderWidth: 3,
                 marginTop:
                   this.HeaderMaxHeight - this.HalfProfileImageMaxHeight,
-                marginLeft: "45%",
+                marginLeft: "35%",
                 position: "relative",
-                top: -115,
-
+                top: -135,
                 zIndex: 20
               }}
             >
               <Thumbnail
-                style={styles.thumbnailStyle}
-                large
-                source={{ uri: profile.img }}
-              />
+                    style={styles.thumbnailStyle}
+                    large
+                    source={{ uri: profile.img }}
+                  />
             </View>
 
             <View
               style={{
-                top: -45,
+                top: -125,
                 alignSelf: "center",
                 alignContent: "center",
                 justifyContent: "center",
@@ -224,7 +233,7 @@ class DoctorProfile extends Component {
 
             <View
               style={{
-                top: -45,
+                top: -125,
                 alignSelf: "center",
                 alignContent: "center",
                 justifyContent: "center"
@@ -243,7 +252,7 @@ class DoctorProfile extends Component {
 
             <View
               style={{
-                top: -45,
+                top: -125,
                 alignSelf: "center",
                 alignContent: "center",
                 justifyContent: "center",
@@ -256,7 +265,7 @@ class DoctorProfile extends Component {
         </Row>
 
         <Row
-          size={3.75}
+          size={5.75}
           style={{
             backgroundColor: "white"
           }}
@@ -291,8 +300,17 @@ class DoctorProfile extends Component {
                   {t("other:googlemaps")}
                 </Text>
               </Icon>
+              
             </Left>
-
+            <MapView
+                  style={{ flex: 1,height:250 }}
+                  initialRegion={{
+                    latitude: 37.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                  }}
+                />
             <Text style={styles.BookingnowStyle}>
               {" "}
               {t("other:bookdescription")}
@@ -318,8 +336,8 @@ class DoctorProfile extends Component {
                       this.props.navigation.navigate("TimeDatePicker", {
                         cat: profile.id,
                         store: Store,
-                        day: day,
-                        month: month
+                        day: this.getDayVal(0),
+                        month: this.getMonthVal(0)
                       })
                     }
                   >
@@ -342,8 +360,8 @@ class DoctorProfile extends Component {
                       this.props.navigation.navigate("TimeDatePicker", {
                         cat: profile.id,
                         store: Store,
-                        day: day + 1,
-                        month: month
+                        day: this.getDayVal(1),
+                        month: this.getMonthVal(1)
                       })
                     }
                   >
@@ -366,8 +384,8 @@ class DoctorProfile extends Component {
                       this.props.navigation.navigate("TimeDatePicker", {
                         cat: profile.id,
                         store: Store,
-                        day: day + 2,
-                        month: month
+                        day: this.getDayVal(2),
+                        month: this.getMonthVal(2)
                       })
                     }
                   >
@@ -378,7 +396,7 @@ class DoctorProfile extends Component {
                           { color: "#fff", fontSize: 14, textAlign: "center" }
                         ]}
                       >
-                        {day + 2}/{month}
+                        { this.getDayVal(2) }/{ this.getMonthVal(2)}{" "}
                       </Text>
                     </View>
                   </TouchableOpacity>
@@ -401,8 +419,8 @@ class DoctorProfile extends Component {
                       this.props.navigation.navigate("TimeDatePicker", {
                         cat: profile.id,
                         store: Store,
-                        day: day + 3,
-                        month: month
+                        day: this.getDayVal(3),
+                        month: this.getMonthVal(3)
                       })
                     }
                   >
@@ -413,7 +431,7 @@ class DoctorProfile extends Component {
                           { color: "#fff", fontSize: 14 }
                         ]}
                       >
-                        {day + 3}/{month}
+                        { this.getDayVal(3) }/{ this.getMonthVal(3)}{" "}
                       </Text>
                     </View>
                   </TouchableOpacity>
@@ -425,8 +443,8 @@ class DoctorProfile extends Component {
                       this.props.navigation.navigate("TimeDatePicker", {
                         cat: profile.id,
                         store: Store,
-                        day: day + 4,
-                        month: month
+                        day: this.getDayVal(4),
+                        month: this.getMonthVal(4)
                       })
                     }
                   >
@@ -437,7 +455,7 @@ class DoctorProfile extends Component {
                           { color: "#fff", fontSize: 14 }
                         ]}
                       >
-                        {day + 4}/{month}
+                        { this.getDayVal(4) }/{ this.getMonthVal(4)}{" "}
                       </Text>
                     </View>
                   </TouchableOpacity>
@@ -449,8 +467,8 @@ class DoctorProfile extends Component {
                       this.props.navigation.navigate("TimeDatePicker", {
                         cat: profile.id,
                         store: Store,
-                        day: day + 5,
-                        month: month
+                        day: this.getDayVal(5),
+                        month: this.getMonthVal(5)
                       })
                     }
                   >
@@ -461,7 +479,7 @@ class DoctorProfile extends Component {
                           { color: "#fff", fontSize: 14, textAlign: "center" }
                         ]}
                       >
-                        {day + 5}/{month}
+                        { this.getDayVal(5) }/{ this.getMonthVal(5)}{" "}
                       </Text>
                     </View>
                   </TouchableOpacity>
@@ -484,8 +502,8 @@ class DoctorProfile extends Component {
                       this.props.navigation.navigate("TimeDatePicker", {
                         cat: profile.id,
                         store: Store,
-                        day: day + 6,
-                        month: month
+                        day: this.getDayVal(6),
+                        month: this.getMonthVal(6)
                       })
                     }
                   >
@@ -496,7 +514,7 @@ class DoctorProfile extends Component {
                           { color: "#fff", fontSize: 14 }
                         ]}
                       >
-                        {day + 6}/{month}
+                        { this.getDayVal(6) }/{ this.getMonthVal(6)}{" "}
                       </Text>
                     </View>
                   </TouchableOpacity>
@@ -508,8 +526,8 @@ class DoctorProfile extends Component {
                       this.props.navigation.navigate("TimeDatePicker", {
                         cat: profile.id,
                         store: Store,
-                        day: day + 7,
-                        month: month
+                        day: this.getDayVal(7),
+                        month: this.getMonthVal(7)
                       })
                     }
                   >
@@ -520,7 +538,7 @@ class DoctorProfile extends Component {
                           { color: "#fff", fontSize: 14 }
                         ]}
                       >
-                        {day + 7}/{month}
+                        { this.getDayVal(7) }/{ this.getMonthVal(7)}{" "}
                       </Text>
                     </View>
                   </TouchableOpacity>
@@ -532,8 +550,8 @@ class DoctorProfile extends Component {
                       this.props.navigation.navigate("TimeDatePicker", {
                         cat: profile.id,
                         store: Store,
-                        day: day + 8,
-                        month: month
+                        day: this.getDayVal(8),
+                        month: this.getMonthVal(8)
                       })
                     }
                   >
@@ -544,7 +562,7 @@ class DoctorProfile extends Component {
                           { color: "#fff", fontSize: 14, textAlign: "center" }
                         ]}
                       >
-                        {day + 8}/{month}{" "}
+                        { this.getDayVal(8) }/{ this.getMonthVal(8)}{" "}
                       </Text>
                     </View>
                   </TouchableOpacity>
@@ -578,27 +596,13 @@ class DoctorProfile extends Component {
             }}
           >
             <Row size={1}>
-              <Col style={{ marginTop: 20 }}>
-                <Icon
-                  type="EvilIcons"
-                  name="location"
-                  style={styles.locationIcon}
-                >
-                  <Text style={styles.thirdText}>
-                    {t("other:fees")}: {profile.fees} KD
-                  </Text>
-                </Icon>
-              </Col>
-
-              <Col style={{ marginTop: 20 }}>
-                <Right>
+                <Left>
                   <Icon type="Feather" name="clock" style={styles.clockIcon}>
                     <Text style={styles.thirdText}>
                       {t("other:waitingtime")}: {profile.waiting_time}
                     </Text>
                   </Icon>
-                </Right>
-              </Col>
+                </Left>
             </Row>
           </View>
         </Row>
@@ -657,7 +661,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignContent: "center",
     justifyContent: "center", // width: 40, // height: 40,
-    position: "absolute"
+    position: "absolute",
+    width: 100,
+    height: 80,
+    marginTop: 25
   },
   userViewsText: {
     fontFamily: "GTWalsheim-Medium",
