@@ -6,6 +6,7 @@ import {
   Content,
   Button,
   Text,
+  InputText,
   CustomIcon,
   Icon,
   View,
@@ -152,7 +153,7 @@ class EditProfile extends Component {
                 transparent
                 style={{ borderWidth: 1, borderColor: "gray", width: 300 }}
               >
-                <Input
+                <InputText
                   style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
                   placeholder="First Name"
                   autoCapitalize="none"
@@ -163,7 +164,7 @@ class EditProfile extends Component {
                 transparent
                 style={{ borderWidth: 1, borderColor: "gray" }}
               >
-                <Input
+                <InputText
                   style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
                   placeholder="Last Name"
                   autoCapitalize="none"
@@ -174,7 +175,7 @@ class EditProfile extends Component {
                 transparent
                 style={{ borderWidth: 1, borderColor: "gray", height: 130 }}
               >
-                <Input
+                <InputText
                   style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
                   placeholder="Description"
                   autoCapitalize="none"
@@ -291,7 +292,7 @@ class EditProfile extends Component {
                   style={styles.locationIcon}
                 >
                   <Button transparent rounded style={{ width: 50 }}>
-                    <Input
+                    <InputText
                       style={{
                         fontFamily: "GTWalsheim-Medium",
                         fontSize: 15,
@@ -309,11 +310,12 @@ class EditProfile extends Component {
                 <Right>
                   <Icon type="Feather" name="clock" style={styles.clockIcon}>
                     <Button transparent rounded style={{ width: 110 }}>
-                      <Input
+                      <InputText
                         style={{
                           fontFamily: "GTWalsheim-Medium",
                           fontSize: 15,
-                          borderWidth: 1
+                          borderWidth: 1,
+                          width: 100
                         }}
                         placeholder="Waiting Time"
                         autoCapitalize="none"

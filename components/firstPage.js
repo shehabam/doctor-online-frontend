@@ -101,7 +101,7 @@ class FirstPage extends Component {
               </TouchableHighlight>
             </Row>
           ) : (
-            pass
+            <Text></Text>
           )}
 
           {/* <Button rounded style={styles.button}>

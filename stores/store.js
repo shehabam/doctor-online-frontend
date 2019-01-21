@@ -15,8 +15,7 @@ import {
   Input
 } from "native-base";
 
-const BASEURL = "http://192.168.1.35:8000";
-// "http://207.154.246.97";
+const BASEURL = "http://207.154.246.97";
 
 class Store {
   constructor() {
@@ -53,6 +52,7 @@ class Store {
     this.fullusers = [];
     this.userName = "";
     this.filterappointment = [];
+    this.likeDoctors = [];
   }
 
   //for bringing Doctors only
@@ -235,18 +235,39 @@ class Store {
   addToLikeList(id) {
     const productInCat = this.doctorList.find(item => +item.id === +id);
     this.LikeList = productInCat;
-    console.log(this.LikeList);
+
+    axios
+      .get(BASEURL + `/make/favourite/` + id)
+      // .get(`http://192.168.5.142/make/favourite/3`)
+      .then(() => console.log("bla bla bla"))
+      .catch(err => console.error(err));
   }
 
   removeFromLikeList(id) {
-    // let indx = this.LikeList.filter((item) => +item.id === +id);
-    // if (indx) {
-    // console.log(indx);
-    // } else {
-    // console.log('nothing Happens');
-    // }
-    let indx = this.LikeList.filter(item => +item.id === +id);
-    let index = indx;
+    this.addToLikeList(id);
+  }
+
+  getLikeList() {
+    axios
+      .get(BASEURL + `/favourite/`)
+      // .get(`http://192.168.5.142/favourite/`)
+      .then(res => {
+        this.filterLikeList(res.data);
+      })
+      .catch(err => console.error(err));
+  }
+
+  filterLikeList(data) {
+    if( data.length > 0 ) {
+      let user = {};
+      this.likeDoctors = [];
+      for (var i in data) {
+        user = this.findDoctorByDoctorname(data[i].doctor_name);
+        if(user) {
+          this.likeDoctors.push(user);
+        }
+      }
+    }
   }
 
   ProfileToEdit(theUser) {
@@ -327,6 +348,11 @@ class Store {
     const user = this.doctorList.find(item => item.user.username === username);
     this.userDoctor = user;
     return this.userDoctor;
+  }
+
+  findDoctorByDoctorname(doctorname) {
+    const user = this.doctorList.find(item => (item.user.first_name + ' ' + item.user.last_name) === doctorname);
+    return user;
   }
 
   findUser(theUser) {
@@ -411,6 +437,7 @@ decorate(Store, {
   doctorList: observable,
   getDoctors: action,
   filteredDoctors: observable,
+  likeDoctors: observable,
   AreaDoctorNoSpeciality: observable,
   DoctorAreaAndSpe: observable,
   bringToSpeciality: action,

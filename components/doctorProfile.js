@@ -28,9 +28,11 @@ import {
   AppRegistry,
   ScrollView,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  Alert
 } from "react-native";
 import Store from "../stores/store";
+import authStore from "../stores/authStore";
 import { scrollViewHorizontal } from "react-native-gesture-handler";
 import { withNamespaces } from "react-i18next";
 import Swiper from "react-native-swiper";
@@ -53,6 +55,10 @@ class DoctorProfile extends Component {
   HalfProfileImageMaxHeight = this.ProfileImageMaxHeight / 2;
 
   likeButton() {
+    if (!authStore.isAuthenticated) {
+      Alert.alert(t('more:notification'), t('other:pleaselogin'));
+      return;
+    }
     if (Store.Like === false) {
       Store.Like = true;
     } else {
@@ -60,7 +66,7 @@ class DoctorProfile extends Component {
     }
   }
 
-  chnageHeart(id) {
+  chnageHeart(id, t) {
     const emptyHeart = (
       <Icon name="ios-heart-outline" style={{ color: "red" }} />
     );
@@ -70,7 +76,7 @@ class DoctorProfile extends Component {
       Store.addToLikeList(id); // console.log(Store.LikeList.length);
       return fullHeart;
     } else {
-      // Store.removeFromLikeList(id);
+      Store.removeFromLikeList(id);
       // Store.addToLikeList(id);
       // console.log(Store.LikeList);
       return emptyHeart;

@@ -6,53 +6,16 @@ import { Permissions, Notifications } from "expo";
 const PUSH_ENDPOINT = "https://expo.io/--/api/v2/push/send";
 
 export default async function registerForPushNotificationsAsync() {
-  // this method assumes the user has already granted permission
-  // to receive remote notificartions.
+  const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
 
-  // Get the token that uniquely identifies this device
-  let token = await Notifications.getExpoPushTokenAsync();
-
-  // Log it so we can easily copy it if we need to work with it
-  console.log(`Got this device's push token: ${token}`);
-
-  // POST the token to the Expo push server
-  let response = await fetch(PUSH_ENDPOINT, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify([
-      {
-        to: token,
-        title: "Welcome to Expo!",
-        body: "Native Component List is registered for push notifications.",
-        data: { example: "sample data" }
-      }
-    ])
-  });
-
-  let result = await response.json();
-  if (result.errors) {
-    for (let error of result.errors) {
-      console.warn(`API error sending push notification:`, error);
+  if (status !== 'granted') {
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    if (status !== 'granted') {
+      return;
     }
   }
 
-  let receipts = result.data;
-  if (receipts) {
-    let receipt = receipts[0];
-    if (receipt.status === "error") {
-      if (receipt.details) {
-        console.warn(
-          `Expo push service reported an error sending a notification: ${
-            receipt.details.error
-          }`
-        );
-      }
-      if (receipt.__debug) {
-        console.warn(receipt.__debug);
-      }
-    }
-  }
+  const token = await Notifications.getExpoPushTokenAsync();
+
+  return token;
 }

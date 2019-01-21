@@ -54,7 +54,11 @@ class Schedule extends Component {
                 <View style={{ width: "97%", margin: 5, marginVertical: 20 }}>
                   <View style={styles.item}>
                     <Text>{t("book:patientname")}</Text>
-                    <Text note>{item.patient.username}</Text>
+                    {item.patient ? (
+                      <Text note>{item.patient.username}</Text> )
+                      : null
+                    }
+                    
                   </View>
 
                   <View style={styles.item}>

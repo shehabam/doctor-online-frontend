@@ -1,13 +1,14 @@
 import { decorate, observable, action, computed } from "mobx";
 import axios from "axios";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage,Alert } from "react-native";
 import jwt_decode from "jwt-decode";
+
+import Notification from '../utils/Notification';
 
 // Utils
 import setAuthToken from "../utils/setAuthToken";
 
-const BASEURL = "http://192.168.1.35:8000";
-// "http://207.154.246.97";
+const BASEURL = "http://207.154.246.97";
 
 const instance = axios.create({
   // baseURL: "http://192.168.100.244:8000/"
@@ -17,6 +18,7 @@ const instance = axios.create({
 class Store {
   constructor() {
     this.user = null;
+    this.isLogin = false;
   }
 
   get isAuthenticated() {
@@ -31,7 +33,7 @@ class Store {
     AsyncStorage.removeItem("jwtToken").then(
       () => {
         this.user = null;
-
+        this.isLogin = false;
         setAuthToken();
       },
       () => {
@@ -55,25 +57,29 @@ class Store {
           () => {
             // Set token to Auth header
             setAuthToken(token);
+            this.isLogin = true;
             // Decode token to get user data
             const decoded = jwt_decode(token);
             // Set current user
             this.setCurrentUser(decoded);
+            this.setDeviceToken(this.user);
             // this.props.navigation.navigate('FirstPage');
           },
           () => console.log("something went wrong with setting jwt token")
         );
       })
-      .then(console.log("login Done"))
+      .then(() => { 
+        console.log("Login Done");
+      })
       .catch(err => console.log(err));
   }
 
-  registerUser(firstname, lastname, username, emailAddress, password) {
+  registerUser(firstname, lastname, username, phonenumber, password) {
     const userData = {
       first_name: firstname,
       last_name: lastname,
       username: username,
-      email: emailAddress,
+      email: phonenumber,
       password: password
     };
     instance
@@ -123,6 +129,24 @@ class Store {
       })
       .catch(err => console.error(err));
   };
+
+  setDeviceToken = (user) => {
+    Notification.registerForPushNotifications(function() {
+      const userData = {
+        user: user.user_id,
+        token: Notification.token
+      };
+      
+      axios
+        .put("http://192.168.5.142/profile/info/get&update/" + userData.user, userData)
+        .then(res => res.data)
+        .then(res => {
+          console.log(res);
+        });
+    });
+
+    
+  }
 }
 
 decorate(Store, {

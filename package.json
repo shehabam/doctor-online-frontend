@@ -17,7 +17,7 @@
     "axios": "^0.18.0",
     "boxen": "^2.1.0",
     "expo": "^30.0.1",
-    "expo-cli": "^2.6.14",
+    "expo-cli": "^2.3.5",
     "i18n": "^0.8.3",
     "i18next": "^12.1.0",
     "i18next-react-native-language-detector": "^1.0.2",
@@ -44,7 +44,6 @@
     "react-native-super-grid": "^2.4.3",
     "react-native-svg": "^7.0.3",
     "react-native-swiper": "^1.5.13",
-    "react-native-swiper-flatlist": "^1.0.8",
     "react-native-vector-icons": "^6.0.2",
     "react-native-view-overflow": "^0.0.3",
     "react-navigation": "^2.17.0"

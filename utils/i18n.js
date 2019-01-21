@@ -36,7 +36,8 @@ i18n
           logout: "LogOut",
           medicalinformation: "medical information",
           commingsoon: "Comming Soon",
-          notification: "Notification"
+          notification: "Notification",
+          favouritedoctor: "Favourite Doctors"
         },
         settings: {
           editprofile: "Edit my Profile",
@@ -160,7 +161,8 @@ i18n
           logout: "تسجيل خروج",
           medicalinformation: "معلومات طبية",
           commingsoon: "قريبا",
-          notification: "إعلام"
+          notification: "إعلام",
+          favouritedoctor: "الأطباء المفضلون"
         },
         settings: {
           editprofile: "تعديل ملفي الشخصي",

@@ -1,157 +1,137 @@
-import React, { Component } from "react";
-import { observer } from "mobx-react";
-import { Alert } from "react-native";
-import Store from "../stores/store";
-import { Theme } from "./Theme";
-import { withNamespaces } from "react-i18next";
-import { Permissions, Notifications } from "expo";
-import registerForPushNotificationsAsync from "../utils/registerForPushNotificationsAsync";
-
-import {
-  Container,
-  Header,
-  Content,
-  Button,
-  Text,
-  List,
-  View,
-  Icon,
-  ListItem,
-  Card,
-  CardItem,
-  Body,
-  Thumbnail,
-  Right,
-  Left
-} from "native-base";
-import { Col, Row, Grid } from "react-native-easy-grid";
+import React from 'react';
 import {
   StyleSheet,
-  TouchableHighlight,
-  ScrollView,
-  Image,
-  TextInput
-} from "react-native";
-import CollapsingToolbar from "react-native-collapse-view";
-import authStore from "../stores/authStore";
+  TextInput,
+  TouchableOpacity,
+  Text,
+  KeyboardAvoidingView,
+  View,
+} from 'react-native';
+import { Permissions, Notifications } from 'expo';
 
-class Notification extends Component {
+export default class Notification extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      language: this.props.i18n.language
+      token: null,
+      notification: null,
+      title: 'Hello World',
+      body: 'Say something!',
     };
   }
-  static navigationOptions = ({ navigation, screenProps }) => ({
-    title: screenProps.t("more:notification"),
-    headerStyle: {
-      backgroundColor: "#00bfff"
+
+  async registerForPushNotifications() {
+    const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+
+    if (status !== 'granted') {
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      if (status !== 'granted') {
+        return;
+      }
     }
-  });
 
-  render() {
-    const { t, i18n, navigation } = this.props;
+    const token = await Notifications.getExpoPushTokenAsync();
 
-    return (
-      <ScrollView style={{ padding: 10 }}>
-        <Text onPress={this._presentLocalNotificationAsync}>
-          <Text>notification immediately</Text>
-        </Text>
+    this.subscription = Notifications.addListener(this.handleNotification);
 
-        <Text>Push Notifications</Text>
-
-        <Text onPress={this._sendNotificationAsync}>
-          <Text>Send Me</Text>
-        </Text>
-      </ScrollView>
-    );
+    this.setState({
+      token,
+    });
   }
 
-  _obtainUserFacingNotifPermissionsAsync = async () => {
-    let permission = await Permissions.getAsync(
-      Permissions.USER_FACING_NOTIFICATIONS
-    );
-    if (permission.status !== "granted") {
-      permission = await Permissions.askAsync(
-        Permissions.USER_FACING_NOTIFICATIONS
-      );
-      if (permission.status !== "granted") {
-        Alert.alert(`We don't have permission to present notifications.`);
-      }
-    }
-    return permission;
-  };
-
-  _obtainRemoteNotifPermissionsAsync = async () => {
-    let permission = await Permissions.getAsync(Permissions.NOTIFICATIONS);
-    if (permission.status !== "granted") {
-      permission = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-      if (permission.status !== "granted") {
-        Alert.alert(
-          `We don't have permission to receive remote notifications.`
-        );
-      }
-    }
-    return permission;
-  };
-
-  _presentLocalNotificationAsync = async () => {
-    await this._obtainUserFacingNotifPermissionsAsync();
-    Notifications.presentLocalNotificationAsync({
-      title: "This project allowes push notification",
-      body: "You can see Push Notification perfectly. Good news!!!",
-      data: {
-        hello: "there"
+  sendPushNotification(token = this.state.token, title = this.state.title, body = this.state.body) {
+    return fetch('https://exp.host/--/api/v2/push/send', {
+      body: JSON.stringify({
+        to: token,
+        title: title,
+        body: body,
+        data: { message: `${title} - ${body}` },
+      }),
+      headers: {
+        'Content-Type': 'application/json',
       },
-      ios: {
-        sound: true
-      },
-      android: {
-        vibrate: true
-      }
+      method: 'POST',
+    });
+  }
+
+  handleNotification = notification => {
+    this.setState({
+      notification,
     });
   };
 
-  _scheduleLocalNotificationAsync = async () => {
-    await this._obtainUserFacingNotifPermissionsAsync();
-    Notifications.scheduleLocalNotificationAsync(
-      {
-        title: "Here is a scheduled notifiation!",
-        body: "This is the body",
-        data: {
-          hello: "there",
-          future: "self"
-        },
-        ios: {
-          sound: true
-        },
-        android: {
-          vibrate: true
-        }
-      },
-      {
-        time: new Date().getTime() + 10000
-      }
+  render() {
+    return (
+      <KeyboardAvoidingView style={styles.container} behavior="position">
+        <Text style={styles.title}>Expo Sample Notifications App</Text>
+        <Text style={styles.text}>Title</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={title => this.setState({ title })}
+          maxLength={100}
+          value={this.state.title}
+        />
+        <Text style={styles.text}>Message</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={body => this.setState({ body })}
+          maxLength={100}
+          value={this.state.body}
+        />
+        <TouchableOpacity
+          onPress={() => this.registerForPushNotifications()}
+          style={styles.touchable}>
+          <Text>Register me for notifications!</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.sendPushNotification()} style={styles.touchable}>
+          <Text>Send me a notification!</Text>
+        </TouchableOpacity>
+        {this.state.token ? (
+          <View>
+            <Text style={styles.text}>Token</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={token => this.setState({ token })}
+              value={this.state.token}
+            />
+          </View>
+        ) : null}
+        {this.state.notification ? (
+          <View>
+            <Text style={styles.text}>Last Notification:</Text>
+            <Text style={styles.text}>{JSON.stringify(this.state.notification.data.message)}</Text>
+          </View>
+        ) : null}
+      </KeyboardAvoidingView>
     );
-  };
-
-  _sendNotificationAsync = async () => {
-    const permission = await this._obtainRemoteNotifPermissionsAsync();
-    if (permission.status === "granted") {
-      registerForPushNotificationsAsync().done();
-    }
-  };
+  }
 }
 
-// export default observer(Settings);
-export default withNamespaces(["more", "common"], { wait: true })(Notification);
-
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   paddingTop: 30,
-  //   backgroundColor: "#fff",
-  //   justifyContent: "center",
-  //   paddingHorizontal: 10
-  // }
+  title: {
+    fontSize: 18,
+    padding: 8,
+  },
+  text: {
+    paddingBottom: 2,
+    padding: 8,
+  },
+  container: {
+    flex: 1,
+    paddingTop: 40,
+  },
+  touchable: {
+    borderWidth: 1,
+    borderRadius: 4,
+    margin: 8,
+    padding: 8,
+    width: '95%',
+  },
+  input: {
+    height: 40,
+    borderWidth: 1,
+    margin: 8,
+    padding: 8,
+    width: '95%',
+  },
 });

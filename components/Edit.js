@@ -23,6 +23,7 @@ import {
   StyleSheet,
   TouchableHighlight,
   Image,
+  TextInput,
   AppRegistry,
   ScrollView
 } from "react-native";
@@ -110,14 +111,14 @@ class Edit extends Component {
               height: "5%"
             }}
           >
-            <Input
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+            <TextInput
+              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:waitingtime")}
               autoCapitalize="none"
               onChangeText={w => (waiting_time = w)}
             >
               <Text>{waiting_time}</Text>
-            </Input>
+            </TextInput>
           </Button>
           <Row>
             <Text>{t("edit:fees")}: </Text>
@@ -133,14 +134,14 @@ class Edit extends Component {
               height: "5%"
             }}
           >
-            <Input
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+            <TextInput
+              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:fees")}
               autoCapitalize="none"
               onChangeText={f => (fees = f)}
             >
               <Text>{Store.editProf.fees}</Text>
-            </Input>
+            </TextInput>
           </Button>
           <Row>
             <Text>{t("edit:openingfile")}: </Text>
@@ -156,14 +157,14 @@ class Edit extends Component {
               height: "5%"
             }}
           >
-            <Input
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+            <TextInput
+              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:openingfile")}
               autoCapitalize="none"
               onChangeText={o => (opening_file = o)}
             >
               <Text>{Store.editProf.opening_file}</Text>
-            </Input>
+            </TextInput>
           </Button>
           <Row>
             <Text>{t("edit:block")}: </Text>
@@ -179,14 +180,14 @@ class Edit extends Component {
               height: "5%"
             }}
           >
-            <Input
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+            <TextInput
+              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:block")}
               autoCapitalize="none"
               onChangeText={b => (block = b)}
             >
               <Text>{Store.editProf.block}</Text>
-            </Input>
+            </TextInput>
           </Button>
           <Row>
             <Text>{t("edit:street")}: </Text>
@@ -202,14 +203,14 @@ class Edit extends Component {
               height: "5%"
             }}
           >
-            <Input
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+            <TextInput
+              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:street")}
               autoCapitalize="none"
               onChangeText={s => (street = s)}
             >
               <Text>{Store.editProf.street}</Text>
-            </Input>
+            </TextInput>
           </Button>
           <Row>
             <Text>{t("edit:building")}: </Text>
@@ -225,14 +226,14 @@ class Edit extends Component {
               height: "5%"
             }}
           >
-            <Input
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+            <TextInput
+              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:building")}
               autoCapitalize="none"
               onChangeText={bu => (building = bu)}
             >
               <Text>{Store.editProf.building}</Text>
-            </Input>
+            </TextInput>
           </Button>
           <Row>
             <Text>{t("edit:floor")}: </Text>
@@ -248,14 +249,14 @@ class Edit extends Component {
               height: "5%"
             }}
           >
-            <Input
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+            <TextInput
+              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:floor")}
               autoCapitalize="none"
               onChangeText={f => (floor = f)}
             >
               <Text>{Store.editProf.floor}</Text>
-            </Input>
+            </TextInput>
           </Button>
           <Row>
             <Text>{t("edit:googlemaps")}: </Text>
@@ -271,14 +272,14 @@ class Edit extends Component {
               height: "4%"
             }}
           >
-            <Input
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+            <TextInput
+              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:300, height: 40, marginLeft:10 }}
               placeholder={t("edit:googlemaps")}
               autoCapitalize="none"
               onChangeText={g => (google_maps = g)}
             >
               <Text>{Store.editProf.google_maps}</Text>
-            </Input>
+            </TextInput>
           </Button>
           <Row>
             <Text>{t("edit:description")}: </Text>
@@ -292,15 +293,17 @@ class Edit extends Component {
               height: "10%"
             }}
           >
-            <Input
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+            <TextInput
+              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:300, height: 40, marginLeft:10 }}
               placeholder={t("edit:description")}
               autoCapitalize="none"
+              multiline = {true}
+              numberOfLines = {4}
               onChangeText={e => this.handleChange(e)}
               value={Store.editProf.description}
             >
               <Text>{Store.editProf.description}</Text>
-            </Input>
+            </TextInput>
           </Button>
           <Row>
             <Text>{t("edit:service")}: </Text>
@@ -314,14 +317,16 @@ class Edit extends Component {
               height: "10%"
             }}
           >
-            <Input
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20 }}
+            <TextInput
+              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:300, height: 40, marginLeft:10 }}
               placeholder={t("edit:service")}
               autoCapitalize="none"
+              multiline = {true}
+              numberOfLines = {4}
               onChangeText={se => (service = se)}
             >
               <Text>{Store.editProf.service}</Text>
-            </Input>
+            </TextInput>
           </Button>
           <Button
             style={{
