@@ -138,7 +138,7 @@ class Store {
       };
       
       axios
-        .put("http://192.168.5.142/profile/info/get&update/" + userData.user, userData)
+        .put(BASEURL + "/profile/info/get&update/" + userData.user, userData)
         .then(res => res.data)
         .then(res => {
           console.log(res);
