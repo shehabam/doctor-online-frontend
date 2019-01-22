@@ -79,7 +79,14 @@ class LoginPage extends Component {
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="person" />
               <TextInput
-                style={{
+                style={i18n.language == 'ar' ? {
+                  fontFamily: "GTWalsheim-Medium",
+                  fontSize: 20,
+                  color: "#fff",
+                  width: 200,
+                  height: 40,
+                  textAlign: 'right'
+                } : {
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
                   color: "#fff",
@@ -97,7 +104,14 @@ class LoginPage extends Component {
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="lock" />
               <TextInput
-                style={{
+                style={i18n.language == 'ar' ? {
+                  fontFamily: "GTWalsheim-Medium",
+                  fontSize: 20,
+                  color: "#fff",
+                  width: 200,
+                  height: 40,
+                  textAlign: 'right'
+                } : {
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
                   color: "#fff",
