@@ -303,6 +303,7 @@ class EditProfile extends Component {
                       onChangeText={username => this.setState({ username })}
                     />
                   </Button>
+                  {/* <Text style={styles.thirdText}>Fees: {Store.doctorProfile.fees} KD</Text> */}
                 </Icon>
               </Col>
               <Col style={{ marginTop: 20 }}>
