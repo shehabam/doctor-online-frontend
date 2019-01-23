@@ -258,16 +258,17 @@ class Store {
   }
 
   filterLikeList(data) {
+    let result = [];
     if( data.length > 0 ) {
       let user = {};
-      this.likeDoctors = [];
       for (var i in data) {
         user = this.findDoctorByDoctorname(data[i].doctor_name);
         if(user) {
-          this.likeDoctors.push(user);
+          result.push(user);
         }
       }
     }
+    this.likeDoctors = result;
   }
 
   ProfileToEdit(theUser) {
@@ -355,6 +356,11 @@ class Store {
     return user;
   }
 
+  getDoctorName(doctorid){
+    const doctor = this.doctorList.find(item => item.id === doctorid);
+    return doctor.user.username;
+  }
+
   findUser(theUser) {
     const user = this.users.find(item => item.username === theUser);
     // console.log(user)
@@ -437,7 +443,6 @@ decorate(Store, {
   doctorList: observable,
   getDoctors: action,
   filteredDoctors: observable,
-  likeDoctors: observable,
   AreaDoctorNoSpeciality: observable,
   DoctorAreaAndSpe: observable,
   bringToSpeciality: action,
@@ -481,6 +486,7 @@ decorate(Store, {
   getUsers: action,
   getAllUsersProfile: action,
   findSchedule: action,
+  getDoctorName: action,
   userName: observable,
   deleteAppointment: action,
   Bla: action,

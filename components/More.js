@@ -68,7 +68,7 @@ class More extends Component {
                 }
               >
                 <Left>
-                  <Icon name="md-settings" large style={{ color: "#00bfff" }} />
+                  <Icon name="md-contact" large style={{ color: "#00bfff" }} />
                   <Text>{t("more:favouritedoctor")}</Text>
                 </Left>
                 <Right>
@@ -88,7 +88,7 @@ class More extends Component {
                 }
               >
                 <Left>
-                  <Icon name="md-settings" large style={{ color: "#00bfff" }} />
+                  <Icon name="book" large style={{ color: "#00bfff" }} />
                   <Text>{t("more:booksuccess")}</Text>
                 </Left>
                 <Right>
@@ -109,7 +109,7 @@ class More extends Component {
                   }
                 >
                   <Left>
-                    <Icon name="md-settings" large style={{ color: "#00bfff" }} />
+                    <Icon name="clock" large style={{ color: "#00bfff" }} />
                     <Text>{t("more:appointmentmanage")}</Text>
                   </Left>
                   <Right>
@@ -218,7 +218,7 @@ class More extends Component {
                   />
                 </Left>
                 <Right>
-                  <Icon name="md-settings" large style={{ color: "#00bfff" }} />
+                  <Icon name="md-contact" large style={{ color: "#00bfff" }} />
                   <Text>{t("more:favouritedoctor")}</Text>
                 </Right>
               </ListItem> : 
@@ -238,7 +238,7 @@ class More extends Component {
                   />
                 </Left>
                 <Right>
-                  <Icon name="md-settings" large style={{ color: "#00bfff" }} />
+                  <Icon name="book" large style={{ color: "#00bfff" }} />
                   <Text>{t("more:booksuccess")}</Text>
                 </Right>                
               </ListItem> : 
@@ -259,7 +259,7 @@ class More extends Component {
                     />
                   </Left>
                   <Right>
-                    <Icon name="md-settings" large style={{ color: "#00bfff" }} />
+                    <Icon name="clock" large style={{ color: "#00bfff" }} />
                     <Text>{t("more:appointmentmanage")}</Text>
                   </Right>
                 </ListItem>
