@@ -22,14 +22,17 @@ import {
 // import SwiperFlatList from 'react-native-swiper-flatlist';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import {
+  Platform,
   StyleSheet,
   TouchableHighlight,
   Image,
   AppRegistry,
   ScrollView,
+  WebView,
   TouchableOpacity,
   Dimensions,
-  Alert
+  Alert,
+  Modal
 } from "react-native";
 import Store from "../stores/store";
 import authStore from "../stores/authStore";
@@ -47,6 +50,11 @@ class DoctorProfile extends Component {
     }
   });
 
+  state = {
+    modalVisible: false
+  };
+
+  selectedURL = {uri: ""};
   likeSwitch = false;
   HeaderMaxHeight = 100;
   HeaderMinHeight = 40;
@@ -60,8 +68,10 @@ class DoctorProfile extends Component {
       return;
     }
     if (Store.Like === false) {
+      Store.addToLikeList(id); // console.log(Store.LikeList.length);
       Store.Like = true;
     } else {
+      Store.removeFromLikeList(id);
       Store.Like = false;
     }
   }
@@ -73,14 +83,21 @@ class DoctorProfile extends Component {
     const fullHeart = <Icon name="ios-heart" style={{ color: "red" }} />;
 
     if (Store.Like === true) {
-      Store.addToLikeList(id); // console.log(Store.LikeList.length);
       return fullHeart;
     } else {
-      Store.removeFromLikeList(id);
       // Store.addToLikeList(id);
       // console.log(Store.LikeList);
       return emptyHeart;
     }
+  }
+
+  showMapView(url) {
+    if (url == "http://googlemap.com") {
+      url = "https://www.google.com/maps/";
+    }
+    this.setState({modalVisible: true});
+    this.selectedURL = {uri: url};
+    console.log(this.selectedURL);
   }
 
   getDayVal(val) {
@@ -117,7 +134,7 @@ class DoctorProfile extends Component {
       return <View />;
     }
     return (
-      // <ScrollView style={{flex:1, backgroundColor:"white"}}>
+      <View style={{flex:1, backgroundColor:"white"}}>
       <Grid
         style={{
           backgroundColor: "orange",
@@ -146,7 +163,7 @@ class DoctorProfile extends Component {
         </Row>
 
         <Row
-          size={5.25}
+          size={5.75}
           style={{
             backgroundColor: "white"
           }}
@@ -301,14 +318,20 @@ class DoctorProfile extends Component {
               >
                 <Text
                   style={styles.locationText}
-                  // onPress={() => LinkingIOS.openURL(profile.google_maps)}
+                  onPress={() => {
+                    this.showMapView(profile.google_maps)
+                    // if (Platform.OS == 'ios')
+                    //   LinkingIOS.openURL(profile.google_maps);
+                    // else
+                    //   LinkingIOS.openURL(profile.google_maps);
+                  }}
                 >
                   {t("other:googlemaps")}
                 </Text>
               </Icon>
               
             </Left>
-            <MapView
+            {/* <MapView
                   style={{ flex: 1,height:250 }}
                   initialRegion={{
                     latitude: 37.78825,
@@ -316,7 +339,11 @@ class DoctorProfile extends Component {
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                   }}
-                />
+                /> */}
+                {/* <WebView
+                  source={{uri: "https://goo.gl/maps/12XLqheJxoB2"}}
+                  style={{marginTop: 20, height: 100}}
+                /> */}
             <Text style={styles.BookingnowStyle}>
               {" "}
               {t("other:bookdescription")}
@@ -609,11 +636,40 @@ class DoctorProfile extends Component {
                     </Text>
                   </Icon>
                 </Left>
+                <Right>
+                  <Icon type="Feather" name="clock" style={styles.clockIcon}>
+                    <Text style={styles.thirdText}>
+                      {t("other:fees")}: {profile.fees} {" K.D "}
+                    </Text>
+                  </Icon>
+                </Right>
             </Row>
           </View>
         </Row>
       </Grid>
-      // </ScrollView>
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={this.state.modalVisible}
+        onRequestClose={() => {
+          this.setState({modalVisible: false});
+        }}
+        >
+          <View>
+            <Button style={{alignSelf: 'flex-end'}} transparent onPress={() => {
+              this.setState({modalVisible: false});
+            }}>
+              <Icon name="md-close"></Icon>
+            </Button>
+          </View>
+          
+          <WebView
+            source={this.selectedURL}
+           style={{ marginTop: 10, width: "100%", height: "100%" }}>
+
+          </WebView>
+      </Modal>
+      </View>
     );
   }
 }

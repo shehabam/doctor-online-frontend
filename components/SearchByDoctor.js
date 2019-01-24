@@ -139,7 +139,7 @@ class SearchByDoctor extends Component {
                   style={{ height: 20, width: 20 }}
                 />
                 <Text note style={styles.thirdText}>
-                  {/* Fees: {list.fees.toFixed(3)} K.D */}
+                {t("other:fees")}: {list.fees}{" K.D "}
                 </Text>
               </CardItem>
               <CardItem style={styles.bookingButtonCardItem}>

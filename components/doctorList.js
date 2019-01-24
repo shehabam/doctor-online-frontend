@@ -138,7 +138,7 @@ class DoctorList extends Component {
                   style={{ height: 20, width: 20 }}
                 />
                 <Text note style={styles.thirdText}>
-                  {t("other:fees")}: {list.fees} K.D
+                  {t("other:fees")}: {list.fees}{" K.D "}
                 </Text>
               </CardItem>
               <CardItem style={styles.bookingButtonCardItem}>
