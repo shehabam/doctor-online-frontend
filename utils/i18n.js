@@ -37,6 +37,7 @@ i18n
           medicalinformation: "medical information",
           commingsoon: "Comming Soon",
           notification: "Notification",
+          booksuccess: "Book Success",
           favouritedoctor: "Favourite Doctors"
         },
         settings: {
@@ -162,7 +163,8 @@ i18n
           medicalinformation: "معلومات طبية",
           commingsoon: "قريبا",
           notification: "إعلام",
-          favouritedoctor: "الأطباء المفضلون"
+          favouritedoctor: "الأطباء المفضلون",
+          booksuccess: "حجز النجاح",
         },
         settings: {
           editprofile: "تعديل ملفي الشخصي",

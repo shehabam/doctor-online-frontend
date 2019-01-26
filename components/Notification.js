@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Alert,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -8,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { Permissions, Notifications } from 'expo';
+import Store from '../stores/store';
 
 export default class Notification extends React.Component {
   constructor(props) {
@@ -54,6 +56,36 @@ export default class Notification extends React.Component {
     });
   }
 
+  sendToAllUserPushNotification() {
+
+    let user = Store.fullusers;
+    let body = [];
+    for (let i in user) {
+      if (user[i].token) {
+        let mem = {};
+        mem.to = user[i].token;
+        mem.body = "Admin Notification";
+        mem.sound = "default";
+        body.push(mem);
+      }
+    }
+    console.log(JSON.stringify(body));
+    if(body.length > 0) {
+      return fetch('https://exp.host/--/api/v2/push/send', {
+        title: "Admin Notification",
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      });
+    } else {
+      Alert.alert('Please register devices');
+      return true;
+    }
+    
+  }
+
   handleNotification = notification => {
     this.setState({
       notification,
@@ -63,7 +95,7 @@ export default class Notification extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="position">
-        <Text style={styles.title}>Expo Sample Notifications App</Text>
+        <Text style={styles.title}>Send Notification To All User</Text>
         <Text style={styles.text}>Title</Text>
         <TextInput
           style={styles.input}
@@ -78,13 +110,13 @@ export default class Notification extends React.Component {
           maxLength={100}
           value={this.state.body}
         />
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => this.registerForPushNotifications()}
           style={styles.touchable}>
           <Text>Register me for notifications!</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.sendPushNotification()} style={styles.touchable}>
-          <Text>Send me a notification!</Text>
+        </TouchableOpacity> */}
+        <TouchableOpacity onPress={() => this.sendToAllUserPushNotification()} style={styles.touchable}>
+          <Text>Send Notification</Text>
         </TouchableOpacity>
         {this.state.token ? (
           <View>
@@ -126,6 +158,7 @@ const styles = StyleSheet.create({
     margin: 8,
     padding: 8,
     width: '95%',
+    justifyContent: 'center',
   },
   input: {
     height: 40,

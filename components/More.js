@@ -183,6 +183,7 @@ class More extends Component {
                   </Text>
                 </Right>
               </ListItem>
+              {authStore.user.username == "admin" ?
               <ListItem
                 onPress={() => this.props.navigation.navigate("Notification")}
               >
@@ -193,7 +194,8 @@ class More extends Component {
                 <Right>
                   <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
                 </Right>
-              </ListItem>
+              </ListItem> : <Text />
+               }
             </List>
           </TouchableHighlight>
         </View>
@@ -331,6 +333,7 @@ class More extends Component {
                 </Right>
                 
               </ListItem>
+              {authStore.user.username == "admin" ?
               <ListItem
                 onPress={() => this.props.navigation.navigate("Notification")}
               >
@@ -342,7 +345,8 @@ class More extends Component {
                   <Text>{t("more:notification")}</Text>
                 </Right>
                 
-              </ListItem>
+              </ListItem> : <Text />
+              }
             </List>
           </TouchableHighlight>
           </ScrollView>

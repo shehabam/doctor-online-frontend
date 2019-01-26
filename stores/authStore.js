@@ -134,11 +134,13 @@ class Store {
     Notification.registerForPushNotifications(function() {
       const userData = {
         user: user.user_id,
-        token: Notification.token
+        token: Notification.token,
+        user_email: user.email
       };
-      
+      console.log(Notification.token);
       axios
         .put(BASEURL + "/profile/info/get&update/" + userData.user, userData)
+        // .put("http://192.168.5.142/profile/info/get&update/" + userData.user, userData)
         .then(res => res.data)
         .then(res => {
           console.log(res);

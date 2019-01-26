@@ -2,6 +2,7 @@ import { decorate, observable, action, computed } from "mobx";
 import React, { Component } from "react";
 import axios from "axios";
 import authStore from "./authStore";
+import Notification from "../utils/Notification";
 import {
   Container,
   Header,
@@ -233,9 +234,7 @@ class Store {
   }
 
   addToLikeList(id) {
-    const productInCat = this.doctorList.find(item => +item.id === +id);
-    this.LikeList = productInCat;
-
+    
     axios
       .get(BASEURL + `/make/favourite/` + id)
       // .get(`http://192.168.5.142/make/favourite/3`)
@@ -305,8 +304,20 @@ class Store {
     console.log("bla 1 2 bookdata", bookdata);
     axios
       .post(BASEURL + `/create/schedeul/`, bookdata)
-      .then(response => this.getAppointments())
+      .then(response => {
+        this.getAppointments();
+        if(userId) {
+          let token = this.getToken(id);
+          Notification.sendPushNotification(token, 'Book Success', 'Sent Notification Successfull to Doctor.');
+        }
+      })
       .catch(err => console.error(err));
+  }
+
+  getToken(id) {
+    const user = this.fullusers.find(duser => duser.user_email === this.doctorProfile.user.email);
+    if(user)
+      return user.token;
   }
 
   getUsers() {
@@ -322,12 +333,14 @@ class Store {
   getAllUsersProfile() {
     axios
       .get(BASEURL + "/users/profiles")
+      // .get("http://192.168.5.142/users/profiles")
       .then(res => res.data)
       .then(users => {
         this.fullusers = users;
       })
       .catch(err => console.error(err));
   }
+  
 
   getAppointments() {
     axios
@@ -466,7 +479,6 @@ decorate(Store, {
   counter: observable,
   StarRatingDoctorSearch: action,
   Like: observable,
-  LikeList: observable,
   addToLikeList: action,
   removeFromLikeList: action,
   EditProfile: action,
