@@ -52,8 +52,10 @@ class More extends Component {
     let isDoctor = "";
     if (authStore.isAuthenticated) {
       isDoctor = Store.findDoctorInUsers(authStore.user.user_id);
-      if (authStore.user.username == "admin") {
-        isDoctor = authStore.user.user_id;
+      if(authStore.user) {
+        if (authStore.user.username == "admin") {
+          isDoctor = authStore.user.user_id;
+        }
       }
     }
     if(lang == 'en' || lang == 'en-US') {
@@ -183,7 +185,7 @@ class More extends Component {
                   </Text>
                 </Right>
               </ListItem>
-              {authStore.user.username == "admin" ?
+              { authStore.user ? (authStore.user.username == "admin" ?
               <ListItem
                 onPress={() => this.props.navigation.navigate("Notification")}
               >
@@ -195,7 +197,7 @@ class More extends Component {
                   <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
                 </Right>
               </ListItem> : <Text />
-               }
+               ) : <Text />}
             </List>
           </TouchableHighlight>
         </View>
@@ -333,7 +335,7 @@ class More extends Component {
                 </Right>
                 
               </ListItem>
-              {authStore.user.username == "admin" ?
+              {authStore.user ? (authStore.user.username == "admin" ?
               <ListItem
                 onPress={() => this.props.navigation.navigate("Notification")}
               >
@@ -346,7 +348,7 @@ class More extends Component {
                 </Right>
                 
               </ListItem> : <Text />
-              }
+              ) : <Text />}
             </List>
           </TouchableHighlight>
           </ScrollView>
