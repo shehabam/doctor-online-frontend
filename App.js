@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, I18nManager as RNI18nManager, } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Root, Container, Icon } from "native-base";
 import FirstPage from "./components/firstPage";
@@ -13,6 +13,7 @@ import TimeDatePicker from "./components/TimeDatePicker";
 import Settings from "./components/Settings";
 import AppointmentManage from "./components/AppointmentManage";
 import FavouriteDoctor from "./components/FavouriteDoctor";
+import BookSuccess from "./components/BookSuccess";
 import Notification from "./components/Notification";
 import Schedule from "./components/Schedule";
 
@@ -68,6 +69,18 @@ class App extends Component {
   }
   render() {
     if (this.state.fontLoaded) {
+      // const RNDir = RNI18nManager.isRTL ? 'RTL' : 'LTR';
+
+      // if (i18n.dir().toUpperCase() !== RNDir) {
+      //     const isLocaleRTL = i18n.dir().toUpperCase() === 'RTL';
+
+      //     RNI18nManager.forceRTL(isLocaleRTL);
+
+      //     // RN won't set the layout direction if we
+      //     // don't restart the app's JavaScript.
+      //     Expo.Updates.reloadFromCache();
+      // }
+
       console.log("fonts loaded: ", this.state.fontLoaded);
       return (
         <Container>
@@ -143,12 +156,24 @@ const MoreTab = createStackNavigator(
     Settings: Settings,
     AppointmentManage: AppointmentManage,
     FavouriteDoctor: FavouriteDoctor,
+    BookSuccess: BookSuccess,
     Notification: Notification,
     EditProfile: EditProfile,
     Schedule: Schedule,
     Edit: Edit
   },
-  {}
+  {
+    navigationOptions: {
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#90d4ed"
+      },
+      headerTextStyle: {
+        fontWeight: "bold"
+      },
+      hideTabBar: true
+    }
+  }
 );
 const AppointmentTab = createStackNavigator(
   {
