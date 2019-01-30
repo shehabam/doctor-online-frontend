@@ -62,7 +62,7 @@ class DoctorProfile extends Component {
   ProfileImageMinHeight = 80;
   HalfProfileImageMaxHeight = this.ProfileImageMaxHeight / 2;
 
-  likeButton() {
+  likeButton(id) {
     if (!authStore.isAuthenticated) {
       Alert.alert(t('more:notification'), t('other:pleaselogin'));
       return;
@@ -187,8 +187,8 @@ class DoctorProfile extends Component {
               }
             }}
           >
-            <Button transparent onPress={() => this.likeButton()}>
-              {this.chnageHeart(profile.id)}
+            <Button transparent onPress={() => this.likeButton(profile.id)}>
+              {this.chnageHeart()}
             </Button>
 
             <Text style={styles.userViewsText}>

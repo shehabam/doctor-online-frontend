@@ -19,9 +19,8 @@ class Notification {
         return;
       }
     }
-
+    
     const token = await Notifications.getExpoPushTokenAsync();
-    console.log(token);
     this.subscription = Notifications.addListener(this.handleNotification);
 
     this.token = token;

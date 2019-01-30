@@ -228,8 +228,8 @@ class Settings extends Component {
                     }}
                     onValueChange={(itemValue, itemIndex) => this.showMe(itemValue)}
                   >
-                    <Picker.Item label="English" value="en" />
-                    <Picker.Item label="Arabic" value="ar" />
+                    <Picker.Item label={t("more:english")} value="en" />
+                    <Picker.Item label={t("more:arabic")} value="ar" />
                   </Picker>
                 </Left>
                 <Right>

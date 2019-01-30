@@ -38,7 +38,9 @@ i18n
           commingsoon: "Comming Soon",
           notification: "Notification",
           booksuccess: "Book Success",
-          favouritedoctor: "Favourite Doctors"
+          favouritedoctor: "Favourite Doctors",
+          arabic: "Arabic",
+          english: "English"
         },
         settings: {
           editprofile: "Edit my Profile",
@@ -165,6 +167,8 @@ i18n
           notification: "إعلام",
           favouritedoctor: "الأطباء المفضلون",
           booksuccess: "حجز النجاح",
+          arabic: "عربى",
+          english: "الإنجليزية"
         },
         settings: {
           editprofile: "تعديل ملفي الشخصي",

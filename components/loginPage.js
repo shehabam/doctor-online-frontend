@@ -39,6 +39,10 @@ class LoginPage extends Component {
   }
   // componentWillMount(){
   loginButton(username, password) {
+    if (!username || !password) {
+      alert('Please input Username and Password!');
+      return;
+    }
     authStore.loginUser(username, password);
     // alert("You Are LoggedIn")
     this.props.navigation.navigate("FirstPage");
@@ -132,8 +136,7 @@ class LoginPage extends Component {
               style={styles.buttonBorder}
               rounded
               onPress={() => {
-                this.loginButton(this.state.username, this.state.password),
-                  alert("Welcome" + " " + this.state.username);
+                this.loginButton(this.state.username, this.state.password)
               }}
             >
               <Text style={styles.TextStyle}>{t("first:login")}</Text>

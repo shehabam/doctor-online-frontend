@@ -32,6 +32,7 @@
     "react-native-collapse-view": "^1.0.0",
     "react-native-easy-grid": "^0.2.0",
     "react-native-elements": "^0.19.1",
+    "react-native-fcm": "^16.2.4",
     "react-native-hr": "^1.1.4",
     "react-native-hr-plus": "^1.0.6",
     "react-native-locale-detector": "^1.0.1",
@@ -52,7 +53,11 @@
     "husky": "^1.1.2",
     "prettier": "1.14.3",
     "pretty-quick": "^1.8.0",
-    "react-devtools": "^3.4.3"
+    "react-devtools": "^3.4.3",
+    "jest-expo": "29.0.0"
+  },
+  "jest": {
+    "preset": "jest-expo"
   },
   "version": "1.0.0",
   "license": "MIT"

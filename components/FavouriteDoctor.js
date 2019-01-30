@@ -26,7 +26,7 @@ import CollapsingToolbar from "react-native-collapse-view";
 import authStore from "../stores/authStore";
 import { withNamespaces } from "react-i18next";
 
-class SearchByDoctor extends Component {
+class FavouriteDoctor extends Component {
 
   constructor(props) {
     super(props);
@@ -70,11 +70,13 @@ class SearchByDoctor extends Component {
       }
       return numbers;
     };
-    Store.getLikeList();
-    this.state.doctorlist = Store.likeDoctors;
-    if (!this.state.doctorlist) return <View style={styles.thumbnailStyle} />;
 
-    let listOfcities = this.state.doctorlist.map(list => {
+    Store.getLikeList();
+    
+    let doctorlist = Store.likeDoctors;
+    if (!doctorlist) return <View style={styles.thumbnailStyle} />;
+
+    let listOfcities = doctorlist.map(list => {
       const value = Store.StarRatingDoctorSearch(list.id);
       const filledStars = value - (value % 1);
       const halfStar = value % 1 !== 0;
@@ -223,7 +225,7 @@ class SearchByDoctor extends Component {
 }
 
 export default withNamespaces(["other", "common"], { wait: true })(
-  observer(SearchByDoctor)
+  observer(FavouriteDoctor)
 );
 
 const styles = StyleSheet.create({

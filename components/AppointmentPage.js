@@ -46,12 +46,12 @@ class AppointmentPage extends Component {
         </View>
       );
     }
-    let listOfcities = Store.findSchedule(authStore.user.username);
-
+    let list = Store.findScheduleGoing(authStore.user.username);
+    
     return (
       <View style={styles.container}>
         <ScrollView style={{ marginTop: 2, backgroundColor: "white" }}>
-          {listOfcities.map(item => (
+          {list.map(item => (
             <View style={styles.itemView} key={item.id}>
               {/* {authStore.user.username == item.patient.username ? ( */}
               <View

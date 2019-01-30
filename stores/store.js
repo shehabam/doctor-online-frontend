@@ -54,6 +54,7 @@ class Store {
     this.userName = "";
     this.filterappointment = [];
     this.likeDoctors = [];
+    this.goingList = [];
   }
 
   //for bringing Doctors only
@@ -252,6 +253,7 @@ class Store {
       // .get(`http://192.168.5.142/favourite/`)
       .then(res => {
         this.filterLikeList(res.data);
+        // return this.filterLikeList(res.data);
       })
       .catch(err => console.error(err));
   }
@@ -393,6 +395,22 @@ class Store {
     return filterappointment;
   }
 
+  findScheduleGoing(user) {
+    if (!authStore.isAuthenticated) {
+      filterappointment = null;
+      return;
+    }
+    let dateObj = new Date();
+    let dateval = dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1) + '-' + dateObj.getDate();
+    let alist = this.AppointmentsList.filter(item => item.patient !== null);
+    if(!user) {
+      user = authStore.user.username;
+    }
+    filterlist = alist.filter(item => item.patient.username === user);
+    this.goingList = filterlist.filter(item => item.date >= dateval);
+    return this.goingList;
+  }
+
   findScheduleById(id) {
     if (!authStore.isAuthenticated) {
       filterappointment = null;
@@ -454,6 +472,8 @@ decorate(Store, {
   onSearchSpecialityChangeHandler: action,
   changeSpecialityValue: action,
   doctorList: observable,
+  likeDoctors: observable,
+  goingList: observable,
   getDoctors: action,
   filteredDoctors: observable,
   AreaDoctorNoSpeciality: observable,

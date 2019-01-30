@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignContent: "center",
     justifyContent: "center",
+    textAlign: "center",
     fontSize: 22,
     height: 60,
     fontFamily: "GTWalsheim-Medium",

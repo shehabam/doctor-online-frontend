@@ -69,7 +69,7 @@ class Store {
         );
       })
       .then(() => { 
-        console.log("Login Done");
+        alert("Welcome" + " " + username);
       })
       .catch(err => console.log(err));
   }
