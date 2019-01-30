@@ -10,6 +10,7 @@ import {
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import {
+  Platform,
   StyleSheet,
   TouchableHighlight,
   Image,
@@ -75,10 +76,10 @@ class anime extends Component {
             ref={animation => {
               this.animation = animation;
             }}
-            style={{
+            style={[{
               width: window.width,
-              height: window.width / 1.1
-            }}
+              height: window.width / 1.1,
+            }, Platform.OS == 'ios' ? {bottom: 50} : {}]}
             source={this.state.animation}
           />
         )}
