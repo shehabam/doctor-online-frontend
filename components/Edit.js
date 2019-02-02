@@ -42,16 +42,16 @@ class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // waiting_time: '',
-      // fees: '',
-      // opening_file: '',
-      // block: '',
-      // street: '',
-      // building: '',
-      // floor: '',
-      // google_maps: '',
-      descriptionValue: ""
-      // service: ''
+      waiting_time: '',
+      fees: "",
+      opening_file: "",
+      block: "",
+      street: '',
+      building: "",
+      floor: "",
+      google_maps: "",
+      description: "",
+      service: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -59,33 +59,30 @@ class Edit extends Component {
   }
 
   handleChange(event) {
-    this.setState({ descriptionValue: event });
+    this.setState({ description: event });
   }
 
   handleSubmit(event) {
-    const ID = this.props.navigation.getParam("cat");
-    const description = this.state.descriptionValue;
-    Store.EditProfile(ID, description);
+    Store.EditProfile(this.state);
   }
 
   componentDidMount() {
     let profileID = this.props.navigation.getParam("cat");
-    Store.getEditProfile(profileID);
   }
 
   render() {
     const { t, i18n, navigation } = this.props;
-
-    let waiting_time = Store.editProf.waiting_time;
-    let fees = Store.editProf.fees;
-    let opening_file = Store.editProf.opening_file;
-    let block = Store.editProf.block;
-    let street = Store.editProf.street;
-    let building = Store.editProf.building;
-    let floor = Store.editProf.floor;
-    let google_maps = Store.editProf.google_maps;
-    let description = Store.editProf.description;
-    let service = Store.editProf.service;
+    this.state.waiting_time = Store.editProf.waiting_time;
+    this.state.fees = Store.editProf.fees;
+    this.state.opening_file = Store.editProf.opening_file;
+    this.state.block = Store.editProf.block;
+    this.state.street = Store.editProf.street;
+    this.state.building = Store.editProf.building;
+    this.state.floor = Store.editProf.floor;
+    this.state.google_maps = Store.editProf.google_maps;
+    this.state.description = Store.editProf.description;
+    this.state.service = Store.editProf.service;
+    // console.log(Store.editProf);return;
     if (!Store.editProf) {
       return (
         <View>
@@ -115,9 +112,9 @@ class Edit extends Component {
               style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:waitingtime")}
               autoCapitalize="none"
-              onChangeText={w => (waiting_time = w)}
+              onChangeText={waiting_time => {this.state.waiting_time = waiting_time}}
             >
-              <Text>{waiting_time}</Text>
+              <Text>{this.state.waiting_time}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -138,9 +135,9 @@ class Edit extends Component {
               style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:fees")}
               autoCapitalize="none"
-              onChangeText={f => (fees = f)}
+              onChangeText={fees => {this.state.fees = fees}}
             >
-              <Text>{Store.editProf.fees}</Text>
+            <Text>{this.state.fees}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -161,9 +158,9 @@ class Edit extends Component {
               style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:openingfile")}
               autoCapitalize="none"
-              onChangeText={o => (opening_file = o)}
+              onChangeText={opening_file => {this.state.opening_file = opening_file}}
             >
-              <Text>{Store.editProf.opening_file}</Text>
+             <Text>{this.state.opening_file}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -184,9 +181,9 @@ class Edit extends Component {
               style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:block")}
               autoCapitalize="none"
-              onChangeText={b => (block = b)}
+              onChangeText={block => {this.state.block = block}}
             >
-              <Text>{Store.editProf.block}</Text>
+               <Text>{this.state.block}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -207,9 +204,9 @@ class Edit extends Component {
               style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:street")}
               autoCapitalize="none"
-              onChangeText={s => (street = s)}
+              onChangeText={street => {this.state.street = street}}
             >
-              <Text>{Store.editProf.street}</Text>
+              <Text>{this.state.street}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -230,9 +227,9 @@ class Edit extends Component {
               style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:building")}
               autoCapitalize="none"
-              onChangeText={bu => (building = bu)}
+              onChangeText={building => {this.state.building = building}}
             >
-              <Text>{Store.editProf.building}</Text>
+            <Text>{this.state.building}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -253,9 +250,9 @@ class Edit extends Component {
               style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
               placeholder={t("edit:floor")}
               autoCapitalize="none"
-              onChangeText={f => (floor = f)}
+              onChangeText={floor => {this.state.floor = floor}}
             >
-              <Text>{Store.editProf.floor}</Text>
+            <Text>{this.state.floor}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -276,9 +273,9 @@ class Edit extends Component {
               style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:300, height: 40, marginLeft:10 }}
               placeholder={t("edit:googlemaps")}
               autoCapitalize="none"
-              onChangeText={g => (google_maps = g)}
+              onChangeText={google_maps => {this.state.google_maps = google_maps}}
             >
-              <Text>{Store.editProf.google_maps}</Text>
+            <Text>{this.state.google_maps}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -299,10 +296,9 @@ class Edit extends Component {
               autoCapitalize="none"
               multiline = {true}
               numberOfLines = {4}
-              onChangeText={e => this.handleChange(e)}
-              value={Store.editProf.description}
+              onChangeText={description => this.state.description = description}
             >
-              <Text>{Store.editProf.description}</Text>
+            <Text>{this.state.description}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -323,9 +319,9 @@ class Edit extends Component {
               autoCapitalize="none"
               multiline = {true}
               numberOfLines = {4}
-              onChangeText={se => (service = se)}
+              onChangeText={service => {this.state.service = service}}
             >
-              <Text>{Store.editProf.service}</Text>
+            <Text>{this.state.service}</Text>
             </TextInput>
           </Button>
           <Button

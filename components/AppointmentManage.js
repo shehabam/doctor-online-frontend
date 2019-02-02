@@ -116,6 +116,7 @@ class AppointmentManage extends Component {
       (dateObj.getMonth() + 1) +
       "-" +
       dateObj.getDate();
+    console.log(dateval);
     this.setState({ chosenDate: dateval });
     this._hideDatePicker();
   };

@@ -8,6 +8,8 @@ import Notification from '../utils/Notification';
 // Utils
 import setAuthToken from "../utils/setAuthToken";
 
+import Store from "./store";
+
 const BASEURL = "http://207.154.246.97";
 
 const instance = axios.create({
@@ -15,7 +17,7 @@ const instance = axios.create({
   baseURL: BASEURL
 });
 
-class Store {
+class authStore {
   constructor() {
     this.user = null;
     this.isLogin = false;
@@ -63,6 +65,8 @@ class Store {
             // Set current user
             this.setCurrentUser(decoded);
             this.setDeviceToken(this.user);
+            
+            Store.getProfileId(this.user.user_id);
             // this.props.navigation.navigate('FirstPage');
           },
           () => console.log("something went wrong with setting jwt token")
@@ -151,9 +155,9 @@ class Store {
   }
 }
 
-decorate(Store, {
+decorate(authStore, {
   user: observable,
   isAuthenticated: computed
 });
 
-export default new Store();
+export default new authStore();

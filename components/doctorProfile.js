@@ -43,6 +43,11 @@ import Swiper from "react-native-swiper";
 const deviceWidth = Dimensions.get("window").width;
 
 class DoctorProfile extends Component {
+
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
   static navigationOptions = ({ navigation, screenProps }) => ({
     title: screenProps.t("other:doctorprofile"),
     headerStyle: {
@@ -64,7 +69,7 @@ class DoctorProfile extends Component {
 
   likeButton(id) {
     if (!authStore.isAuthenticated) {
-      Alert.alert(t('more:notification'), t('other:pleaselogin'));
+      Alert.alert(this.props.t('more:notification'), this.props.t('other:pleaselogin'));
       return;
     }
     if (Store.Like === false) {

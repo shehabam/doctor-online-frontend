@@ -55,6 +55,7 @@ class Store {
     this.filterappointment = [];
     this.likeDoctors = [];
     this.goingList = [];
+    this.myProfileId = null;
   }
 
   //for bringing Doctors only
@@ -126,38 +127,22 @@ class Store {
     return productInCat;
   }
 
-  EditProfile(
-    id,
-    description,
-    google_maps,
-    waiting_time,
-    service,
-    fees,
-    opening_file,
-    block,
-    street,
-    building,
-    floor
-  ) {
-    const userData = {
-      description: description,
-      google_maps: google_maps,
-      waiting_time: waiting_time,
-      service: service,
-      fees: fees,
-      opening_file,
-      block: block,
-      street: street,
-      building: building,
-      floor: floor
-    };
+  EditProfile(state) {
+    state.id = this.myProfileId;
+    const userData = state;
     axios
-      .put(BASEURL + `/update/profile/` + id, userData)
+      .put(BASEURL + `/update/profile/` + this.myProfileId, userData)
       .then(res => res.data)
+      .then(() => {
+        alert("Success");
+      })
       .catch(() => console.log("You Failed"));
   }
 
   getEditProfile(id) {
+    if (id) {
+      id = this.myProfileId;
+    }
     axios
       .get(BASEURL + `/update/profile/` + id)
       .then(res => res.data)
@@ -167,6 +152,19 @@ class Store {
       .catch(() => console.log("llllllllllllll"));
   } //for bringing area id to the Speciality page to get doctor from this area only
 
+  getProfileId(user_id) {
+    if (!user_id) {
+      user_id = authStore.user.user_id;
+    }
+    axios
+      .get(BASEURL + `/profile/info/get&update/` + authStore.user.user_id)
+      .then(res => res.data)
+      .then(data => {
+        this.myProfileId = data.id;
+        this.getEditProfile(this.myProfileId);
+      })
+      .catch(() => console.log("llllllllllllll"));
+  }
   bringToSpeciality(id) {
     const AreaId = this.doctorList.filter(item => +item.area.id === +id);
     this.AreaDoctorNoSpeciality = AreaId;
@@ -473,7 +471,6 @@ decorate(Store, {
   changeSpecialityValue: action,
   doctorList: observable,
   likeDoctors: observable,
-  goingList: observable,
   getDoctors: action,
   filteredDoctors: observable,
   AreaDoctorNoSpeciality: observable,
@@ -504,6 +501,7 @@ decorate(Store, {
   EditProfile: action,
   editProf: observable,
   getEditProfile: action,
+  getProfileId: action,
   ProfileToEdit: action,
   offersPics: observable,
   doctorSettingProfile: observable,
