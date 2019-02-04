@@ -167,6 +167,7 @@ class DoctorProfile extends Component {
           />
           
         </Row>
+        {Platform.OS == 'android' ? 
         <View
               style={{
                 height: 120,
@@ -186,7 +187,29 @@ class DoctorProfile extends Component {
                     large
                     source={{ uri: profile.img }}
                   />
+            </View> :
+            <View
+              style={{
+                height: this.ProfileImageMaxHeight,
+                width: this.ProfileImageMinHeight,
+                borderRadius: 100,
+                borderColor: "white",
+                borderWidth: 3,
+                marginTop:
+                  this.HeaderMaxHeight - this.HalfProfileImageMaxHeight,
+                marginLeft: "35%",
+                position: "relative",
+                top: -135,
+                zIndex: 20
+              }}
+            >
+              <Thumbnail
+                    style={styles.thumbnailStyle}
+                    large
+                    source={{ uri: profile.img }}
+                  />
             </View>
+        }
         <Row
           size={3.75}
           style={{

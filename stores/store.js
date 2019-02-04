@@ -128,10 +128,10 @@ class Store {
   }
 
   EditProfile(state) {
-    state.id = this.myProfileId;
+    state.id = this.doctorProfile.id;
     const userData = state;
     axios
-      .put(BASEURL + `/update/profile/` + this.myProfileId, userData)
+      .put(BASEURL + `/update/profile/` + this.doctorProfile.id, userData)
       .then(res => res.data)
       .then(() => {
         alert("Success");
@@ -399,13 +399,13 @@ class Store {
       return;
     }
     let dateObj = new Date();
-    let dateval = dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1) + '-' + dateObj.getDate();
+    let dateval = dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1) + '-' + dateObj.getDate() + ' ' + dateObj.getHours() + ':' + dateObj.getMinutes();
     let alist = this.AppointmentsList.filter(item => item.patient !== null);
     if(!user) {
       user = authStore.user.username;
     }
     filterlist = alist.filter(item => item.patient.username === user);
-    this.goingList = filterlist.filter(item => item.date >= dateval);
+    this.goingList = filterlist.filter(item => (item.date + ' ' + item.available_time) >= dateval);
     return this.goingList;
   }
 
