@@ -128,23 +128,23 @@ class Store {
   }
 
   EditProfile(state) {
-    state.id = this.doctorProfile.id;
+    let doctor = this.findDoctorByUsername(authStore.user.username);
+    state.id = doctor.id;
     const userData = state;
     axios
-      .put(BASEURL + `/update/profile/` + this.doctorProfile.id, userData)
+      .put(BASEURL + `/update/profile/` + doctor.id, userData)
       .then(res => res.data)
       .then(() => {
+        this.getDoctors();
         alert("Success");
       })
       .catch(() => console.log("You Failed"));
   }
 
   getEditProfile(id) {
-    if (id) {
-      id = this.myProfileId;
-    }
+    let doctor = this.findDoctorByUsername(authStore.user.username);
     axios
-      .get(BASEURL + `/update/profile/` + id)
+      .get(BASEURL + `/update/profile/` + doctor.id)
       .then(res => res.data)
       .then(rates => {
         this.editProf = rates;
