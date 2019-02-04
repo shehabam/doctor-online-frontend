@@ -149,7 +149,7 @@ class DoctorProfile extends Component {
         }}
       >
         <Row
-          size={0.5}
+          size={1.5}
           style={{
             backgroundColor: "white"
           }}
@@ -165,10 +165,30 @@ class DoctorProfile extends Component {
               height: this.HeaderMaxHeight
             }}
           />
+          
         </Row>
-
+        <View
+              style={{
+                height: 120,
+                width: 120,
+                borderColor: "white",
+                marginTop:
+                  this.HeaderMaxHeight - this.HalfProfileImageMaxHeight,
+                marginLeft: "29%",
+                borderRadius: 100,
+                position: "absolute",
+                top: -55,
+                zIndex: 20
+              }}
+            >
+              <Thumbnail
+                    style={styles.thumbnailStyle}
+                    large
+                    source={{ uri: profile.img }}
+                  />
+            </View>
         <Row
-          size={5.75}
+          size={3.75}
           style={{
             backgroundColor: "white"
           }}
@@ -200,31 +220,11 @@ class DoctorProfile extends Component {
               {t("other:views")} {profile.viewers}
             </Text>
 
-            <View
-              style={{
-                height: this.ProfileImageMaxHeight,
-                width: this.ProfileImageMinHeight,
-                borderRadius: 100,
-                borderColor: "white",
-                borderWidth: 3,
-                marginTop:
-                  this.HeaderMaxHeight - this.HalfProfileImageMaxHeight,
-                marginLeft: "35%",
-                position: "relative",
-                top: -135,
-                zIndex: 20
-              }}
-            >
-              <Thumbnail
-                    style={styles.thumbnailStyle}
-                    large
-                    source={{ uri: profile.img }}
-                  />
-            </View>
+            
 
             <View
               style={{
-                top: -125,
+                top: -20,
                 alignSelf: "center",
                 alignContent: "center",
                 justifyContent: "center",
@@ -261,7 +261,7 @@ class DoctorProfile extends Component {
 
             <View
               style={{
-                top: -125,
+                top: -20,
                 alignSelf: "center",
                 alignContent: "center",
                 justifyContent: "center"
@@ -280,7 +280,7 @@ class DoctorProfile extends Component {
 
             <View
               style={{
-                top: -125,
+                top: -20,
                 alignSelf: "center",
                 alignContent: "center",
                 justifyContent: "center",
@@ -611,7 +611,7 @@ class DoctorProfile extends Component {
         </Row>
 
         <Row
-          size={1.5}
+          size={2}
           style={{
             backgroundColor: "white"
           }}
@@ -729,9 +729,10 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center", // width: 40, // height: 40,
     position: "absolute",
-    width: 100,
+    width: 80,
     height: 80,
-    marginTop: 25
+    marginTop: 25,
+    borderRadius: 100
   },
   userViewsText: {
     fontFamily: "GTWalsheim-Medium",

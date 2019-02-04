@@ -67,6 +67,8 @@ class authStore {
             this.setDeviceToken(this.user);
             
             Store.getProfileId(this.user.user_id);
+            
+            Store.getLikeList();
             // this.props.navigation.navigate('FirstPage');
           },
           () => console.log("something went wrong with setting jwt token")

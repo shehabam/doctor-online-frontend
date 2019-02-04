@@ -365,7 +365,7 @@ class Store {
   }
 
   findDoctorByDoctorname(doctorname) {
-    const user = this.doctorList.find(item => (item.user.first_name + ' ' + item.user.last_name) === doctorname);
+    const user = this.doctorList.find(item => (item.user.first_name + (item.user.last_name ? ' ' + item.user.last_name : '')) === doctorname);
     return user;
   }
 
