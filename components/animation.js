@@ -76,10 +76,13 @@ class anime extends Component {
             ref={animation => {
               this.animation = animation;
             }}
-            style={[{
-              width: window.width,
-              height: window.width / 1.1,
-            }, Platform.OS == 'ios' ? {bottom: 50} : {}]}
+            style={[
+              {
+                width: window.width,
+                height: window.width / 1.1
+              },
+              Platform.OS == "ios" ? { bottom: 150 } : {}
+            ]}
             source={this.state.animation}
           />
         )}
