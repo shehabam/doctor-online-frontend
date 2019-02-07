@@ -144,7 +144,7 @@ class DoctorProfile extends Component {
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <Grid
           style={{
-            backgroundColor: "orange",
+            backgroundColor: "white",
             position: "relative",
             flex: 1,
             zIndex: 1
@@ -179,7 +179,7 @@ class DoctorProfile extends Component {
                 marginLeft: "29%",
                 borderRadius: 100,
                 position: "absolute",
-                top: -55,
+                top: -45,
                 zIndex: 20
               }}
             >
@@ -199,9 +199,9 @@ class DoctorProfile extends Component {
                 borderWidth: 3,
                 marginTop:
                   this.HeaderMaxHeight - this.HalfProfileImageMaxHeight,
-                marginLeft: "37%",
-                position: "relative",
-                top: -135,
+                marginLeft: "35%",
+                position: "absolute",
+                top: -75,
                 zIndex: 20
               }}
             >
@@ -213,7 +213,7 @@ class DoctorProfile extends Component {
             </View>
           )}
           <Row
-            size={Platform.OS == "android" ? 3.75 : 5.75}
+            size={Platform.OS == "android" ? 3.75 : 8.75}
             style={{
               backgroundColor: "white"
             }}
@@ -316,7 +316,7 @@ class DoctorProfile extends Component {
           </Row>
 
           <Row
-            size={5.75}
+            size={Platform.OS == "android" ? 3.75 : 8.75}
             style={{
               backgroundColor: "white"
             }}
@@ -633,7 +633,7 @@ class DoctorProfile extends Component {
           </Row>
 
           <Row
-            size={2}
+            size={Platform.OS == "android" ? 2 : 5}
             style={{
               backgroundColor: "white"
             }}
@@ -756,15 +756,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 80,
     height: 80,
-    marginTop: 25,
-    borderRadius: 100
+    marginTop: 25
   },
   thumbnailiosStyle: {
     alignSelf: "center",
     alignContent: "center",
     justifyContent: "center", // width: 40, // height: 40,
     position: "absolute",
-    width: 100,
+    width: 80,
     height: 80,
     marginTop: 25
   },
