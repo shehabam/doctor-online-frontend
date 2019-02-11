@@ -58,7 +58,7 @@ class More extends Component {
         }
       }
     }
-    if(lang == 'en' || lang == 'en-US') {
+    // if(lang == 'en' || lang == 'en-US') {
       return (
         <View style={{ flex: 1, backgroundColor: "white" }}>
           <TouchableHighlight>
@@ -202,159 +202,159 @@ class More extends Component {
           </TouchableHighlight>
         </View>
       );
-    } else {
-      return (
-        <View style={{ flex: 1, backgroundColor: "white" }}>
-        <ScrollView>
-          <TouchableHighlight>
-            <List>
-            { authStore.isAuthenticated ?
-            <ListItem
-                onPress={() =>
-                  this.props.navigation.navigate("FavouriteDoctor")
-                }
-              >
-                <Left>
-                  <Icon
-                    name="arrow-forward"
-                    large
-                    style={{ color: "#00bfff" }}
-                  />
-                </Left>
-                <Right>
-                  <Icon name="md-contact" large style={{ color: "#00bfff" }} />
-                  <Text>{t("more:favouritedoctor")}</Text>
-                </Right>
-              </ListItem> : 
-              <Text />
-              }
-              { authStore.isAuthenticated ?
-            <ListItem
-                onPress={() =>
-                  this.props.navigation.navigate("BookSuccess")
-                }
-              >
-                <Left>
-                  <Icon
-                    name="arrow-forward"
-                    large
-                    style={{ color: "#00bfff" }}
-                  />
-                </Left>
-                <Right>
-                  <Icon name="book" large style={{ color: "#00bfff" }} />
-                  <Text>{t("more:booksuccess")}</Text>
-                </Right>                
-              </ListItem> : 
-              <Text />
-              }
-              {isDoctor ? (
+    // } else {
+    //   return (
+    //     <View style={{ flex: 1, backgroundColor: "white" }}>
+    //     <ScrollView>
+    //       <TouchableHighlight>
+    //         <List>
+    //         { authStore.isAuthenticated ?
+    //         <ListItem
+    //             onPress={() =>
+    //               this.props.navigation.navigate("FavouriteDoctor")
+    //             }
+    //           >
+    //             <Left>
+    //               <Icon
+    //                 name="arrow-forward"
+    //                 large
+    //                 style={{ color: "#00bfff" }}
+    //               />
+    //             </Left>
+    //             <Right>
+    //               <Icon name="md-contact" large style={{ color: "#00bfff" }} />
+    //               <Text>{t("more:favouritedoctor")}</Text>
+    //             </Right>
+    //           </ListItem> : 
+    //           <Text />
+    //           }
+    //           { authStore.isAuthenticated ?
+    //         <ListItem
+    //             onPress={() =>
+    //               this.props.navigation.navigate("BookSuccess")
+    //             }
+    //           >
+    //             <Left>
+    //               <Icon
+    //                 name="arrow-forward"
+    //                 large
+    //                 style={{ color: "#00bfff" }}
+    //               />
+    //             </Left>
+    //             <Right>
+    //               <Icon name="book" large style={{ color: "#00bfff" }} />
+    //               <Text>{t("more:booksuccess")}</Text>
+    //             </Right>                
+    //           </ListItem> : 
+    //           <Text />
+    //           }
+    //           {isDoctor ? (
                 
-                <ListItem
-                  onPress={() =>
-                    this.props.navigation.navigate("AppointmentManage")
-                  }
-                >
-                  <Left>
-                    <Icon
-                      name="arrow-forward"
-                      large
-                      style={{ color: "#00bfff" }}
-                    />
-                  </Left>
-                  <Right>
-                    <Icon name="clock" large style={{ color: "#00bfff" }} />
-                    <Text>{t("more:appointmentmanage")}</Text>
-                  </Right>
-                </ListItem>
-              ) : (
-                <Text />
-              )}
-              <ListItem
-                onPress={() => this.props.navigation.navigate("Settings")}
-              >
-                <Left>
-                  <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-                </Left>
-                <Right>
-                  <Icon name="md-settings" large style={{ color: "#00bfff" }} />
-                  <Text>{t("more:settings")}</Text>
-                </Right>
+    //             <ListItem
+    //               onPress={() =>
+    //                 this.props.navigation.navigate("AppointmentManage")
+    //               }
+    //             >
+    //               <Left>
+    //                 <Icon
+    //                   name="arrow-forward"
+    //                   large
+    //                   style={{ color: "#00bfff" }}
+    //                 />
+    //               </Left>
+    //               <Right>
+    //                 <Icon name="clock" large style={{ color: "#00bfff" }} />
+    //                 <Text>{t("more:appointmentmanage")}</Text>
+    //               </Right>
+    //             </ListItem>
+    //           ) : (
+    //             <Text />
+    //           )}
+    //           <ListItem
+    //             onPress={() => this.props.navigation.navigate("Settings")}
+    //           >
+    //             <Left>
+    //               <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
+    //             </Left>
+    //             <Right>
+    //               <Icon name="md-settings" large style={{ color: "#00bfff" }} />
+    //               <Text>{t("more:settings")}</Text>
+    //             </Right>
                 
-              </ListItem>
+    //           </ListItem>
   
-              <ListItem>
-                <Left>
-                  <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-                </Left>
-                <Right>
-                  <Icon name="ios-call" large style={{ color: "#00bfff" }} />
-                  <Text>{t("more:contactus")}</Text>
-                </Right>
+    //           <ListItem>
+    //             <Left>
+    //               <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
+    //             </Left>
+    //             <Right>
+    //               <Icon name="ios-call" large style={{ color: "#00bfff" }} />
+    //               <Text>{t("more:contactus")}</Text>
+    //             </Right>
                 
-              </ListItem>
-              <ListItem>
-                <Left>
-                  <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-                </Left>
-                <Right>
-                  <Icon name="md-bulb" large style={{ color: "#00bfff" }} />
-                  <Text>{t("more:aboutus")}</Text>
-                </Right>
+    //           </ListItem>
+    //           <ListItem>
+    //             <Left>
+    //               <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
+    //             </Left>
+    //             <Right>
+    //               <Icon name="md-bulb" large style={{ color: "#00bfff" }} />
+    //               <Text>{t("more:aboutus")}</Text>
+    //             </Right>
                 
-              </ListItem>
-              { authStore.isAuthenticated ?
-                  <ListItem 
-                    onPress={() => {
-                    authStore.logoutUser(),
-                      alert("You logged out"),
-                      this.props.navigation.navigate("FirstPage");
-                  }}
-            >
-                  <Left>
-                    <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-                  </Left>
-                  <Right>
-                    <Icon name="log-out" large style={{ color: "#00bfff" }} />
-                    <Text>{t("more:logout")}</Text>
-                  </Right>
+    //           </ListItem>
+    //           { authStore.isAuthenticated ?
+    //               <ListItem 
+    //                 onPress={() => {
+    //                 authStore.logoutUser(),
+    //                   alert("You logged out"),
+    //                   this.props.navigation.navigate("FirstPage");
+    //               }}
+    //         >
+    //               <Left>
+    //                 <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
+    //               </Left>
+    //               <Right>
+    //                 <Icon name="log-out" large style={{ color: "#00bfff" }} />
+    //                 <Text>{t("more:logout")}</Text>
+    //               </Right>
                   
-                </ListItem> : 
-                <Text></Text>
-              }
+    //             </ListItem> : 
+    //             <Text></Text>
+    //           }
               
-              <ListItem>
-                <Left>
-                  <Text style={{ fontSize: 13 }} note>
-                    {t("more:commingsoon")}
-                  </Text>
-                </Left>
-                <Right>
-                  <Icon name="ios-glasses" large style={{ color: "#00bfff" }} />
-                  <Text>{t("more:medicalinformation")}</Text>
-                </Right>
+    //           <ListItem>
+    //             <Left>
+    //               <Text style={{ fontSize: 13 }} note>
+    //                 {t("more:commingsoon")}
+    //               </Text>
+    //             </Left>
+    //             <Right>
+    //               <Icon name="ios-glasses" large style={{ color: "#00bfff" }} />
+    //               <Text>{t("more:medicalinformation")}</Text>
+    //             </Right>
                 
-              </ListItem>
-              {authStore.user ? (authStore.user.username == "admin" ?
-              <ListItem
-                onPress={() => this.props.navigation.navigate("Notification")}
-              >
-                <Left>
-                  <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-                </Left>
-                <Right>
-                  <Icon name="home" style={{ color: "#00bfff" }} />
-                  <Text>{t("more:notification")}</Text>
-                </Right>
+    //           </ListItem>
+    //           {authStore.user ? (authStore.user.username == "admin" ?
+    //           <ListItem
+    //             onPress={() => this.props.navigation.navigate("Notification")}
+    //           >
+    //             <Left>
+    //               <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
+    //             </Left>
+    //             <Right>
+    //               <Icon name="home" style={{ color: "#00bfff" }} />
+    //               <Text>{t("more:notification")}</Text>
+    //             </Right>
                 
-              </ListItem> : <Text />
-              ) : <Text />}
-            </List>
-          </TouchableHighlight>
-          </ScrollView>
-        </View>
-      );
-    }
+    //           </ListItem> : <Text />
+    //           ) : <Text />}
+    //         </List>
+    //       </TouchableHighlight>
+    //       </ScrollView>
+    //     </View>
+    //   );
+    // }
   }
 }
 

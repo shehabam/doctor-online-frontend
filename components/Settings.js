@@ -60,7 +60,7 @@ class Settings extends Component {
   render() {
     const { t, i18n, navigation } = this.props;
     let lang = i18n.language;
-    if(lang == 'en' || lang == 'en-US') {
+    // if(lang == 'en' || lang == 'en-US') {
       return (
         <View style={{ flex: 1, backgroundColor: "white" }}>
           <TouchableHighlight>
@@ -87,7 +87,7 @@ class Settings extends Component {
                 </ListItem>
               )}
   
-              {authStore.isAuthenticated ? (
+              {/* {authStore.isAuthenticated ? (
                 <ListItem
                   onPress={() => this.props.navigation.navigate("Schedule")}
                 >
@@ -109,7 +109,7 @@ class Settings extends Component {
                     <Text note>{t("settings:schedule")}</Text>
                   </Left>
                 </ListItem>
-              )}
+              )} */}
   
               <ListItem>
                 <Left>
@@ -149,100 +149,100 @@ class Settings extends Component {
           
         </View>
       );
-    } else {
-      return (
-        <View style={{ flex: 1, backgroundColor: "white" }}>
-          <TouchableHighlight>
-            <List>
-              {authStore.isAuthenticated ? (
-                <ListItem onPress={() => this.props.navigation.navigate("Edit")}>
-                  <Left>
-                    <Icon
-                      name="arrow-forward"
-                      large
-                      style={{ color: "#00bfff" }}
-                    />
-                  </Left>
-                  <Right>
-                    <Icon name="md-person" large style={{ color: "#00bfff" }} />
-                    <Text>{t("settings:editprofile")}</Text>
-                  </Right>
-                </ListItem>
-              ) : (
-                <ListItem>
-                  <Left></Left>
-                  <Right>
-                    <Text note>{t("settings:loginedityourprofile")}</Text>
-                  </Right>
-                </ListItem>
-              )}
+    // } else {
+    //   return (
+    //     <View style={{ flex: 1, backgroundColor: "white" }}>
+    //       <TouchableHighlight>
+    //         <List>
+    //           {authStore.isAuthenticated ? (
+    //             <ListItem onPress={() => this.props.navigation.navigate("Edit")}>
+    //               <Left>
+    //                 <Icon
+    //                   name="arrow-forward"
+    //                   large
+    //                   style={{ color: "#00bfff" }}
+    //                 />
+    //               </Left>
+    //               <Right>
+    //                 <Icon name="md-person" large style={{ color: "#00bfff" }} />
+    //                 <Text>{t("settings:editprofile")}</Text>
+    //               </Right>
+    //             </ListItem>
+    //           ) : (
+    //             <ListItem>
+    //               <Left></Left>
+    //               <Right>
+    //                 <Text note>{t("settings:loginedityourprofile")}</Text>
+    //               </Right>
+    //             </ListItem>
+    //           )}
   
-              {authStore.isAuthenticated ? (
-                <ListItem
-                  onPress={() => this.props.navigation.navigate("Schedule")}
-                >
-                  <Left>
-                    <Icon
-                      name="arrow-forward"
-                      large
-                      style={{ color: "#00bfff" }}
-                    />
-                  </Left>
-                  <Right>
-                    <Icon name="md-globe" large style={{ color: "#00bfff" }} />
-                    <Text>{t("settings:schedule")}</Text>
-                  </Right>
+    //           {authStore.isAuthenticated ? (
+    //             <ListItem
+    //               onPress={() => this.props.navigation.navigate("Schedule")}
+    //             >
+    //               <Left>
+    //                 <Icon
+    //                   name="arrow-forward"
+    //                   large
+    //                   style={{ color: "#00bfff" }}
+    //                 />
+    //               </Left>
+    //               <Right>
+    //                 <Icon name="md-globe" large style={{ color: "#00bfff" }} />
+    //                 <Text>{t("settings:schedule")}</Text>
+    //               </Right>
                   
-                </ListItem>
-              ) : (
-                <ListItem>
-                  <Left></Left>
-                  <Right>
-                    <Text note>{t("settings:schedule")}</Text>
-                  </Right>
-                </ListItem>
-              )}
+    //             </ListItem>
+    //           ) : (
+    //             <ListItem>
+    //               <Left></Left>
+    //               <Right>
+    //                 <Text note>{t("settings:schedule")}</Text>
+    //               </Right>
+    //             </ListItem>
+    //           )}
   
-              <ListItem>
-                <Left>
-                  <Text style={{ fontSize: 13 }} note>
-                    {t("more:commingsoon")}
-                  </Text>
-                </Left>
-                <Right>
-                  <Icon name="md-globe" large style={{ color: "#00bfff" }} />
-                  <Text>{t("settings:changemycountry")}</Text>
-                </Right>
+    //           <ListItem>
+    //             <Left>
+    //               <Text style={{ fontSize: 13 }} note>
+    //                 {t("more:commingsoon")}
+    //               </Text>
+    //             </Left>
+    //             <Right>
+    //               <Icon name="md-globe" large style={{ color: "#00bfff" }} />
+    //               <Text>{t("settings:changemycountry")}</Text>
+    //             </Right>
                 
-              </ListItem>
-              <ListItem>
-                <Left>
-                  <Picker
-                    selectedValue={this.state.language}
-                    style={{
-                      height: 50,
-                      width: 100,
-                      justifyContent: "center",
-                      alignContent: "center",
-                      alignSelf: "center"
-                    }}
-                    onValueChange={(itemValue, itemIndex) => this.showMe(itemValue)}
-                  >
-                    <Picker.Item label={t("more:english")} value="en" />
-                    <Picker.Item label={t("more:arabic")} value="ar" />
-                  </Picker>
-                </Left>
-                <Right>
-                  <Icon name="ios-globe-outline" large style={{ color: "#00bfff" }} />
-                  <Text>{t("settings:changelanguage")}</Text>
-                </Right>
-              </ListItem>
-            </List>
-          </TouchableHighlight>
+    //           </ListItem>
+    //           <ListItem>
+    //             <Left>
+    //               <Picker
+    //                 selectedValue={this.state.language}
+    //                 style={{
+    //                   height: 50,
+    //                   width: 100,
+    //                   justifyContent: "center",
+    //                   alignContent: "center",
+    //                   alignSelf: "center"
+    //                 }}
+    //                 onValueChange={(itemValue, itemIndex) => this.showMe(itemValue)}
+    //               >
+    //                 <Picker.Item label={t("more:english")} value="en" />
+    //                 <Picker.Item label={t("more:arabic")} value="ar" />
+    //               </Picker>
+    //             </Left>
+    //             <Right>
+    //               <Icon name="ios-globe-outline" large style={{ color: "#00bfff" }} />
+    //               <Text>{t("settings:changelanguage")}</Text>
+    //             </Right>
+    //           </ListItem>
+    //         </List>
+    //       </TouchableHighlight>
           
-        </View>
-      );
-    }
+    //     </View>
+    //   );
+    // }
     
   }
 }

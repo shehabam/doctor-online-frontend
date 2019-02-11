@@ -236,7 +236,7 @@ class Store {
     
     axios
       .get(BASEURL + `/make/favourite/` + id)
-      // .get(`http://192.168.5.142/make/favourite/3`)
+      // .get(`http://192.168.5.142/make/favourite/` + id)
       .then(() => console.log("bla bla bla"))
       .catch(err => console.error(err));
   }
@@ -399,13 +399,13 @@ class Store {
       return;
     }
     let dateObj = new Date();
-    let dateval = dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1) + '-' + dateObj.getDate() + ' ' + dateObj.getHours() + ':' + dateObj.getMinutes();
+    let dateval = dateObj.getFullYear() + '-' + ((dateObj.getMonth() + 1) > 9 ? dateObj.getMonth() + 1 : '0' + (dateObj.getMonth() + 1)) + '-' + (dateObj.getDate() > 9 ? dateObj.getDate() : '0' + dateObj.getDate());
     let alist = this.AppointmentsList.filter(item => item.patient !== null);
     if(!user) {
       user = authStore.user.username;
     }
     filterlist = alist.filter(item => item.patient.username === user);
-    this.goingList = filterlist.filter(item => (item.date + ' ' + item.available_time) >= dateval);
+    this.goingList = filterlist.filter(item => new Date(item.date.split('-')[0] + '-' + (item.date.split('-')[1] * 1 > 9 ? item.date.split('-')[1] : '0' + item.date.split('-')[1]) + '-' + (item.date.split('-')[2] * 1 > 9 ? item.date.split('-')[2] : '0' + item.date.split('-')[2])).getTime() >= new Date(dateval).getTime());
     return this.goingList;
   }
 

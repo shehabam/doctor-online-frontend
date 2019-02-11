@@ -231,8 +231,8 @@ class AppointmentManage extends Component {
       );
     }
     let d = Store.findDoctorByUsername(authStore.user.username);
-    // this.state.Appointment = Store.findScheduleByDoctorId(d.id);
-    this.state.Appointment = Store.findScheduleGoing(authStore.user.username);
+    this.state.Appointment = Store.findScheduleByDoctorId(d.id);
+    // this.state.Appointment = Store.findScheduleGoing(authStore.user.username);
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <View style={{ flexDirection: "row" }}>
