@@ -27,8 +27,8 @@ class anime1 extends Component {
           backgroundColor: "white",
           justifyContent: "center",
           alignSelf: "center",
-          // width: '100%',
-          // height: '100%',
+          width: "100%",
+          height: "100%",
           alignContent: "center"
         }}
       >
@@ -38,10 +38,11 @@ class anime1 extends Component {
             // flex: 1,
             justifyContent: "center",
             alignSelf: "center",
-            width: 420,
-            height: 320,
+            width: 500,
+            height: 310,
             alignContent: "center"
           }}
+          resizeMode="contain"
         />
       </View>
     );
