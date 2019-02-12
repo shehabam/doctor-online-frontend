@@ -88,7 +88,7 @@ class AppointmentManage extends Component {
       "id": new Date().getTime(),
       "doctor": d.id,
       "patient": this.state.patient,
-      "date": this.state.chosonDate,
+      "date": this.state.chosenDate,
       "available_time": this.state.chosenTime
     });
     Store.postBook(
@@ -231,7 +231,7 @@ class AppointmentManage extends Component {
       );
     }
     let d = Store.findDoctorByUsername(authStore.user.username);
-    this.state.Appointment = Store.findScheduleByDoctorId(d.id);
+    this.state.Appointment = Store.findScheduleByLastDoctorId(d.id);
     // this.state.Appointment = Store.findScheduleGoing(authStore.user.username);
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>

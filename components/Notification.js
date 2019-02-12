@@ -7,6 +7,7 @@ import {
   Text,
   KeyboardAvoidingView,
   View,
+  ScrollView
 } from 'react-native';
 import { Permissions, Notifications } from 'expo';
 import Store from '../stores/store';
@@ -94,7 +95,7 @@ export default class Notification extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="position">
+      <ScrollView style={styles.container}>
         <Text style={styles.title}>Send Notification To All User</Text>
         <Text style={styles.text}>Title</Text>
         <TextInput
@@ -134,7 +135,7 @@ export default class Notification extends React.Component {
             <Text style={styles.text}>{JSON.stringify(this.state.notification.data.message)}</Text>
           </View>
         ) : null}
-      </KeyboardAvoidingView>
+      </ScrollView> 
     );
   }
 }

@@ -442,6 +442,36 @@ class Store {
     return filterappointment;
   }
 
+  /**
+   * find schedule list by doctor Id
+   * @author: JingWei Chen
+   * @created: 1/3/2019
+   */
+  findScheduleByLastDoctorId(user, year, month, day) {
+    filterappointment = this.AppointmentsList.filter(
+      item => item.doctor === user
+    );
+    let dateObj = new Date();
+    let dateval = dateObj.getFullYear() + '-' + ((dateObj.getMonth() + 1) > 9 ? dateObj.getMonth() + 1 : '0' + (dateObj.getMonth() + 1)) + '-' + (dateObj.getDate() > 9 ? dateObj.getDate() : '0' + dateObj.getDate());
+    console.log(filterappointment);
+    filterappointment = filterappointment.filter(
+      item => item.date ? new Date(item.date.split('-')[0] + '-' + (item.date.split('-')[1] * 1 > 9 ? item.date.split('-')[1] : '0' + item.date.split('-')[1]) + '-' + (item.date.split('-')[2] * 1 > 9 ? item.date.split('-')[2] : '0' + item.date.split('-')[2])).getTime() >= new Date(dateval).getTime() : true
+    );
+
+    let result = [];
+    if (year && month && day) {
+      for (let i in filterappointment) {
+        let d = filterappointment[i].date.replace(" ", "");
+        let dary = d.split("-");
+        if (dary[0] == year && dary[1] == month && dary[2] == day) {
+          result.push(filterappointment[i]);
+        }
+      }
+      return result;
+    }
+    return filterappointment;
+  }
+
   Bla() {
     if (authStore.isAuthenticated) {
       this.userName = authStore.user.username;
