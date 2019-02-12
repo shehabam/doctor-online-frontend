@@ -89,7 +89,6 @@ class LoginPage extends Component {
                   color: "#fff",
                   width: 200,
                   height: 40,
-                  textAlign: 'right'
                 } : {
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
@@ -114,7 +113,6 @@ class LoginPage extends Component {
                   color: "#fff",
                   width: 200,
                   height: 40,
-                  textAlign: 'right'
                 } : {
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
