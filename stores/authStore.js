@@ -69,6 +69,7 @@ class authStore {
             Store.getProfileId(this.user.user_id);
             
             Store.getLikeList();
+            AsyncStorage.setItem('userinfo', JSON.stringify(decoded));
             // this.props.navigation.navigate('FirstPage');
           },
           () => console.log("something went wrong with setting jwt token")

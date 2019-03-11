@@ -6,6 +6,7 @@ import {
   Button,
   Text,
   Icon,
+  AsyncStorage,
   View
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -33,7 +34,11 @@ class FirstPage extends Component {
 
   render() {
     const { t, i18n, navigation } = this.props;
-
+    var token = AsyncStorage.getItem('jwtToken');
+    if(token) {
+      authStore.isAuthenticated = true;
+      authStore.user = JSON.parse(AsyncStorage.getItem('userinfo'));
+    }
     return (
       // rgba(153, 204, 255, .6)
       <ImageBackground
