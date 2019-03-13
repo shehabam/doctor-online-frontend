@@ -180,9 +180,10 @@ class FirstPage extends Component {
       //     </ImageBackground>
       //   );
       // }
-        }
 
-  });
+      });
+
+    }
 }
 
 const styles = StyleSheet.create({
