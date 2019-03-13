@@ -43,10 +43,10 @@ class FirstPage extends Component {
         // Set current user
         authStore.setCurrentUser(decoded);
         authStore.setDeviceToken(authStore.user);
-
+        
         Store.getProfileId(authStore.user.user_id);
               
-        Store.getLikeList();
+        // Store.getLikeList();
       }
     });
   }
