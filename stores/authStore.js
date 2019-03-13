@@ -52,11 +52,13 @@ class authStore {
     instance
       .post("login/", userData)
       .then(res => res.data)
-      .then(user => {
+      .then((user) => {
         const { token } = user;
+
         // Save token to localStorage
         AsyncStorage.setItem("jwtToken", token).then(
           () => {
+            console.log(token);
             // Set token to Auth header
             setAuthToken(token);
             this.isLogin = true;
@@ -69,13 +71,12 @@ class authStore {
             Store.getProfileId(this.user.user_id);
             
             Store.getLikeList();
-            AsyncStorage.setItem('userinfo', JSON.stringify(decoded));
             // this.props.navigation.navigate('FirstPage');
           },
           () => console.log("something went wrong with setting jwt token")
         );
       })
-      .then(() => { 
+      .then((err) => { 
         alert("Welcome" + " " + username);
       })
       .catch(err => console.log(err));

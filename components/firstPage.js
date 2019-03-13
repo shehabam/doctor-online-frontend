@@ -6,7 +6,6 @@ import {
   Button,
   Text,
   Icon,
-  AsyncStorage,
   View
 } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -14,12 +13,14 @@ import {
   StyleSheet,
   TouchableHighlight,
   Image,
-  ImageBackground
+  ImageBackground,
+  AsyncStorage,
 } from "react-native";
 import { observer } from "mobx-react";
 import authStore from "../stores/authStore";
 import Store from "../stores/store";
 import { withNamespaces } from "react-i18next";
+import jwt_decode from "jwt-decode";
 
 // import Search from '../assets/Search.png';
 // import FirstBackground from "../assets"
@@ -32,12 +33,28 @@ class FirstPage extends Component {
     }
   };
 
+  componentWillMount() {
+    AsyncStorage.getItem('jwtToken').then(token => {
+      console.log(token);
+      if(token) {
+        authStore.isLogin = true;
+       // Decode token to get user data
+        const decoded = jwt_decode(token);
+        // Set current user
+        authStore.setCurrentUser(decoded);
+        authStore.setDeviceToken(authStore.user);
+
+        Store.getProfileId(authStore.user.user_id);
+              
+        Store.getLikeList();
+      }
+    });
+  }
+
   render() {
     const { t, i18n, navigation } = this.props;
-    AsyncStorage.getItem('jwtToken').then(token => {
-      authStore.isAuthenticated = true;
-      authStore.user = JSON.parse(AsyncStorage.getItem('userinfo'));
-      return (
+    
+    return (
         // rgba(153, 204, 255, .6)
         <ImageBackground
           source={require("../assets/doc.png")}
@@ -123,65 +140,6 @@ class FirstPage extends Component {
           </Grid>
         </ImageBackground>
       );
-      // } else {
-      //   return (
-      //     // rgba(153, 204, 255, .6)
-      //     <ImageBackground
-      //       source={require("../assets/doc.png")}
-      //       style={{ flex: 1, width: "100%", height: "100%" }}
-      //     >
-      //       <Grid>
-      //         <Row size={1} />
-      //         <Row size={2.5}>
-      //           <Image
-      //             source={require("../assets/LogoWhite.png")}
-      //             style={styles.ImageStyle}
-      //           />
-      //         </Row>
-      //         <Row size={0.5} style={styles.bookTheBestTextRow}>
-      //           <Text style={styles.bookTheBestText}>
-      //             {t("first:description")}
-      //           </Text>
-      //         </Row>
-      //         <Row size={0.5} />
-      //         <Row size={1.5} style={styles.buttonRow}>
-      //           <Button
-      //             rounded
-      //             style={styles.button}
-      //             onPress={() => this.props.navigation.navigate("Area")}
-      //           >
-      //             <Text style={styles.text}>
-      //               <Icon
-      //                 type="MaterialCommunityIcons"
-      //                 name="needle"
-      //                 style={styles.needleIcon}
-      //               />
-      //               {t("first:input1")}
-      //             </Text>
-      //           </Button>
-      //         </Row>
-      //         <Row size={1.5} style={styles.buttonRow}>
-      //           <Button
-      //             rounded
-      //             style={styles.button}
-      //             onPress={() => this.props.navigation.navigate("SearchByDoctor")}
-      //           >
-      //             <Text style={styles.text}>
-      //               <Icon
-      //                 type="MaterialCommunityIcons"
-      //                 name="magnify"
-      //                 style={styles.needleIcon}
-      //               />
-      //               {t("first:input2")}
-      //             </Text>
-      //           </Button>
-      //         </Row>
-      //       </Grid>
-      //     </ImageBackground>
-      //   );
-      // }
-
-      });
 
     }
 }
