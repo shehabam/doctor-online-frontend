@@ -34,155 +34,155 @@ class FirstPage extends Component {
 
   render() {
     const { t, i18n, navigation } = this.props;
-    var token = AsyncStorage.getItem('jwtToken');
-    if(token) {
+    AsyncStorage.getItem('jwtToken').then(token => {
       authStore.isAuthenticated = true;
       authStore.user = JSON.parse(AsyncStorage.getItem('userinfo'));
-    }
-    return (
-      // rgba(153, 204, 255, .6)
-      <ImageBackground
-        source={require("../assets/doc.png")}
-        style={{ flex: 1, width: "100%", height: "100%" }}
-      >
-        <Grid>
-          <Row size={1} />
-          <Row size={2.5}>
-            <Image
-              source={require("../assets/LogoWhite.png")}
-              style={styles.ImageStyle}
-            />
-          </Row>
-          <Row size={0.5} style={styles.bookTheBestTextRow}>
-            <Text style={styles.bookTheBestText}>{t("first:description")}</Text>
-          </Row>
-          <Row size={0.5} />
-          <Row size={1.5} style={styles.buttonRow}>
-            <Button
-              rounded
-              style={styles.button}
-              onPress={() => this.props.navigation.navigate("Area")}
-            >
+      return (
+        // rgba(153, 204, 255, .6)
+        <ImageBackground
+          source={require("../assets/doc.png")}
+          style={{ flex: 1, width: "100%", height: "100%" }}
+        >
+          <Grid>
+            <Row size={1} />
+            <Row size={2.5}>
+              <Image
+                source={require("../assets/LogoWhite.png")}
+                style={styles.ImageStyle}
+              />
+            </Row>
+            <Row size={0.5} style={styles.bookTheBestTextRow}>
+              <Text style={styles.bookTheBestText}>{t("first:description")}</Text>
+            </Row>
+            <Row size={0.5} />
+            <Row size={1.5} style={styles.buttonRow}>
+              <Button
+                rounded
+                style={styles.button}
+                onPress={() => this.props.navigation.navigate("Area")}
+              >
+                <Text style={styles.text}>
+                  <Icon
+                    type="MaterialCommunityIcons"
+                    name="needle"
+                    style={styles.needleIcon}
+                  />
+                  {t("first:input1")}
+                </Text>
+              </Button>
+            </Row>
+            <Row size={1.5} style={styles.buttonRow}>
+              <Button
+                rounded
+                style={styles.button}
+                onPress={() => this.props.navigation.navigate("SearchByDoctor")}
+              >
+                <Text style={styles.text}>
+                  <Icon
+                    type="MaterialCommunityIcons"
+                    name="magnify"
+                    style={styles.needleIcon}
+                  />
+                  {t("first:input2")}
+                </Text>
+              </Button>
+            </Row>
+            {!authStore.isAuthenticated ? (
+              <Row size={2} style={styles.touchableTextRow}>
+                <TouchableHighlight>
+                  {authStore.isAuthenticated ? null : (
+                    <Button
+                      rounded
+                      style={styles.button}
+                      onPress={() => this.props.navigation.navigate("LoginPage")}
+                    >
+                      <Text style={[styles.text, { marginTop: 1 }]}>
+                        {t("first:login")}
+                      </Text>
+                    </Button>
+                  )}
+                </TouchableHighlight>
+              </Row>
+            ) : (
+              <Text></Text>
+            )}
+
+            {/* <Button rounded style={styles.button}>
               <Text style={styles.text}>
                 <Icon
                   type="MaterialCommunityIcons"
                   name="needle"
                   style={styles.needleIcon}
                 />
-                {t("first:input1")}
+                Choose by Speciality and Area
               </Text>
             </Button>
-          </Row>
-          <Row size={1.5} style={styles.buttonRow}>
-            <Button
-              rounded
-              style={styles.button}
-              onPress={() => this.props.navigation.navigate("SearchByDoctor")}
-            >
-              <Text style={styles.text}>
-                <Icon
-                  type="MaterialCommunityIcons"
-                  name="magnify"
-                  style={styles.needleIcon}
-                />
-                {t("first:input2")}
-              </Text>
-            </Button>
-          </Row>
-          {!authStore.isAuthenticated ? (
-            <Row size={2} style={styles.touchableTextRow}>
-              <TouchableHighlight>
-                {authStore.isAuthenticated ? null : (
-                  <Button
-                    rounded
-                    style={styles.button}
-                    onPress={() => this.props.navigation.navigate("LoginPage")}
-                  >
-                    <Text style={[styles.text, { marginTop: 1 }]}>
-                      {t("first:login")}
-                    </Text>
-                  </Button>
-                )}
-              </TouchableHighlight>
-            </Row>
-          ) : (
-            <Text></Text>
-          )}
+            <TouchableHighlight style={styles.touchable}>
+              <Text style={styles.loginText}>Login</Text>
+            </TouchableHighlight> */}
+          </Grid>
+        </ImageBackground>
+      );
+      // } else {
+      //   return (
+      //     // rgba(153, 204, 255, .6)
+      //     <ImageBackground
+      //       source={require("../assets/doc.png")}
+      //       style={{ flex: 1, width: "100%", height: "100%" }}
+      //     >
+      //       <Grid>
+      //         <Row size={1} />
+      //         <Row size={2.5}>
+      //           <Image
+      //             source={require("../assets/LogoWhite.png")}
+      //             style={styles.ImageStyle}
+      //           />
+      //         </Row>
+      //         <Row size={0.5} style={styles.bookTheBestTextRow}>
+      //           <Text style={styles.bookTheBestText}>
+      //             {t("first:description")}
+      //           </Text>
+      //         </Row>
+      //         <Row size={0.5} />
+      //         <Row size={1.5} style={styles.buttonRow}>
+      //           <Button
+      //             rounded
+      //             style={styles.button}
+      //             onPress={() => this.props.navigation.navigate("Area")}
+      //           >
+      //             <Text style={styles.text}>
+      //               <Icon
+      //                 type="MaterialCommunityIcons"
+      //                 name="needle"
+      //                 style={styles.needleIcon}
+      //               />
+      //               {t("first:input1")}
+      //             </Text>
+      //           </Button>
+      //         </Row>
+      //         <Row size={1.5} style={styles.buttonRow}>
+      //           <Button
+      //             rounded
+      //             style={styles.button}
+      //             onPress={() => this.props.navigation.navigate("SearchByDoctor")}
+      //           >
+      //             <Text style={styles.text}>
+      //               <Icon
+      //                 type="MaterialCommunityIcons"
+      //                 name="magnify"
+      //                 style={styles.needleIcon}
+      //               />
+      //               {t("first:input2")}
+      //             </Text>
+      //           </Button>
+      //         </Row>
+      //       </Grid>
+      //     </ImageBackground>
+      //   );
+      // }
+        }
 
-          {/* <Button rounded style={styles.button}>
-            <Text style={styles.text}>
-              <Icon
-                type="MaterialCommunityIcons"
-                name="needle"
-                style={styles.needleIcon}
-              />
-              Choose by Speciality and Area
-            </Text>
-          </Button>
-          <TouchableHighlight style={styles.touchable}>
-            <Text style={styles.loginText}>Login</Text>
-          </TouchableHighlight> */}
-        </Grid>
-      </ImageBackground>
-    );
-    // } else {
-    //   return (
-    //     // rgba(153, 204, 255, .6)
-    //     <ImageBackground
-    //       source={require("../assets/doc.png")}
-    //       style={{ flex: 1, width: "100%", height: "100%" }}
-    //     >
-    //       <Grid>
-    //         <Row size={1} />
-    //         <Row size={2.5}>
-    //           <Image
-    //             source={require("../assets/LogoWhite.png")}
-    //             style={styles.ImageStyle}
-    //           />
-    //         </Row>
-    //         <Row size={0.5} style={styles.bookTheBestTextRow}>
-    //           <Text style={styles.bookTheBestText}>
-    //             {t("first:description")}
-    //           </Text>
-    //         </Row>
-    //         <Row size={0.5} />
-    //         <Row size={1.5} style={styles.buttonRow}>
-    //           <Button
-    //             rounded
-    //             style={styles.button}
-    //             onPress={() => this.props.navigation.navigate("Area")}
-    //           >
-    //             <Text style={styles.text}>
-    //               <Icon
-    //                 type="MaterialCommunityIcons"
-    //                 name="needle"
-    //                 style={styles.needleIcon}
-    //               />
-    //               {t("first:input1")}
-    //             </Text>
-    //           </Button>
-    //         </Row>
-    //         <Row size={1.5} style={styles.buttonRow}>
-    //           <Button
-    //             rounded
-    //             style={styles.button}
-    //             onPress={() => this.props.navigation.navigate("SearchByDoctor")}
-    //           >
-    //             <Text style={styles.text}>
-    //               <Icon
-    //                 type="MaterialCommunityIcons"
-    //                 name="magnify"
-    //                 style={styles.needleIcon}
-    //               />
-    //               {t("first:input2")}
-    //             </Text>
-    //           </Button>
-    //         </Row>
-    //       </Grid>
-    //     </ImageBackground>
-    //   );
-    // }
-  }
+  });
 }
 
 const styles = StyleSheet.create({
