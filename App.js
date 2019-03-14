@@ -228,7 +228,7 @@ const BottomTab = createBottomTabNavigator(
         return (
           <Icon
             name={iconName}
-            style={{ color: tintColor }}
+            style={{ color: tintColor, marginRight: -4 }}
             type="FontAwesome"
           />
         );

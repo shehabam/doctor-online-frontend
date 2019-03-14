@@ -58,7 +58,7 @@ class FirstPage extends Component {
         // rgba(153, 204, 255, .6)
         <ImageBackground
           source={require("../assets/doc.png")}
-          style={{ flex: 1, width: "100%", height: "100%" }}
+          style={{ flex: 1, width: "100%", height: "100%", alignItems: "center" }}
         >
           <Grid>
             <Row size={1} />
@@ -177,8 +177,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignContent: "center",
     // margin: '10%'
-    height: "110%",
-    width: "100%"
+    height: "120%",
+    width: "80%",
+    marginLeft: "10%"
   },
   text: {
     color: "#54BEED",
