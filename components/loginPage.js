@@ -74,7 +74,7 @@ class LoginPage extends Component {
           <Row size={2.5} style={[styles.Row]}>
             <Image
               source={require("../assets/LogoWhite.png")}
-              style={{ height: 200, width: null, flex: 1 }}
+              style={{ height: "120%", width: "80%", marginLeft: "10%", justifyContent: "center",alignSelf: "center",alignContent: "center"}}
             />
           </Row>
           <Row size={1} style={[styles.Row]} />

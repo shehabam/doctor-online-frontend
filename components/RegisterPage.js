@@ -52,7 +52,7 @@ class RegisterPage extends Component {
         source={require("../assets/Rectangle.png")}
         style={{ width: "100%", height: "100%" }}
       >
-        <Grid>
+        <Grid style={{width: "100%"}}>
           <Row size={0.5} style={[styles.Row][{ ImageBackground: "white" }]} />
           <Row size={0.5} style={[styles.Row][{ ImageBackground: "white" }]}>
             <Icon
@@ -67,7 +67,7 @@ class RegisterPage extends Component {
           <Row size={2.5} style={[styles.Row]}>
             <Image
               source={require("../assets/LogoWhite.png")}
-              style={{ height: 200, width: null, flex: 1 }}
+              style={{ height: "130%", width: "80%", marginLeft: "10%" }}
             />
           </Row>
           <Row size={1} style={[styles.Row]} />
@@ -78,6 +78,7 @@ class RegisterPage extends Component {
                 style={{
                   fontFamily: "GTWalsheim-Medium",
                   fontSize: 20,
+                  paddingLeft: 0,
                   color: "#fff",
                   width: 200,
                   height: 40
@@ -91,7 +92,7 @@ class RegisterPage extends Component {
           <Row size={0.1} style={[styles.Row]} />
           <Row size={0.65} style={[styles.Row]}>
             <Button rounded transparent style={styles.formBorder}>
-              <Icon name="person" style={{ color: "white" }} />
+              <Icon name="person" style={{ color: "white", width: 30 }} />
               <TextInput
                 style={{
                   fontFamily: "GTWalsheim-Medium",
