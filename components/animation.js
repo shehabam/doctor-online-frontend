@@ -18,7 +18,8 @@ import {
 } from "react-native";
 import { DangerZone } from "expo";
 import IMPULSE from "../utils/pulse.json";
-const { Lottie } = DangerZone;
+import Lottie from "lottie-react-native";
+
 const window = Dimensions.get("window");
 
 class anime extends Component {
