@@ -2,13 +2,10 @@
   "expo": {
     "name": "Mohammad Shehata",
     "description": "This project is really great.",
-    "slug": "Mohammad Shehata",
+    "slug": "aalnjjar",
     "privacy": "public",
-    "sdkVersion": "30.0.0",
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "sdkVersion": "33.0.0",
+    "platforms": ["ios", "android"],
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,9 +17,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.doctoronline.app",
       "supportsTablet": true
