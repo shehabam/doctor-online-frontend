@@ -1,12 +1,6 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  I18nManager as RNI18nManager
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, Text, View, Button, I18nManager as RNI18nManager, } from "react-native";
+// import { Ionicons } from "@expo/vector-icons";
 import { Root, Container, Icon } from "native-base";
 import FirstPage from "./components/firstPage";
 // import BottomTab from './components/BottomTab';
@@ -44,17 +38,9 @@ import RegisterPage from "./components/RegisterPage";
 import RatingPage from "./components/RatingPage";
 import { withNamespaces } from "react-i18next";
 import i18n from "./utils/i18n";
-import * as Expo from "expo";
-
 let iconName;
 
-const WrappedStack = ({ t }) => (
-  <SuperNav
-    screenProps={{
-      t
-    }}
-  />
-);
+const WrappedStack = ({ t }) => <SuperNav screenProps={{ t }} />;
 const ReloadAppOnLanguageChange = withNamespaces("common", {
   bindI18n: "languageChanged",
   bindStore: false
@@ -63,9 +49,7 @@ const ReloadAppOnLanguageChange = withNamespaces("common", {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      fontLoaded: false
-    };
+    this.state = { fontLoaded: false };
   }
 
   async componentDidMount() {
@@ -75,11 +59,10 @@ class App extends Component {
         "GTWalsheim-Black": require("./assets/fonts/GT-Walsheim-Black.ttf"),
         Roboto: require("native-base/Fonts/Roboto.ttf"),
         Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+        Ionicons: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf"),
         Arial: require("native-base/Fonts/Roboto.ttf")
       });
-      this.setState({
-        fontLoaded: true
-      });
+      this.setState({ fontLoaded: true });
     } catch (error) {
       console.log(error);
     }
@@ -101,13 +84,14 @@ class App extends Component {
       console.log("fonts loaded: ", this.state.fontLoaded);
       return (
         <Container>
-          <ReloadAppOnLanguageChange /> {/* <RelodAppOnLanguageChange  /> */}{" "}
+          <ReloadAppOnLanguageChange />
+          {/* <RelodAppOnLanguageChange  /> */}
         </Container>
       );
     } else {
       return (
         <View>
-          <Text> loading </Text>{" "}
+          <Text>loading</Text>
         </View>
       );
     }
@@ -244,10 +228,7 @@ const BottomTab = createBottomTabNavigator(
         return (
           <Icon
             name={iconName}
-            style={{
-              color: tintColor,
-              marginRight: -4
-            }}
+            style={{ color: tintColor, marginRight: -4 }}
             type="FontAwesome"
           />
         );
