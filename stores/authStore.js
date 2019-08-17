@@ -1,14 +1,14 @@
 import { decorate, observable, action, computed } from "mobx";
 import axios from "axios";
-import { AsyncStorage,Alert } from "react-native";
+import { AsyncStorage, Alert } from "react-native";
 import jwt_decode from "jwt-decode";
 
-import Notification from '../utils/Notification';
+import Notification from "../utils/Notification";
 
 // Utils
 import setAuthToken from "../utils/setAuthToken";
 
-import Store from "./store";
+//import Store from "./store";
 
 const BASEURL = "https://doctoronlinekuwait.herokuapp.com";
 
@@ -52,7 +52,7 @@ class authStore {
     instance
       .post("login/", userData)
       .then(res => res.data)
-      .then((user) => {
+      .then(user => {
         const { token } = user;
 
         // Save token to localStorage
@@ -67,16 +67,16 @@ class authStore {
             // Set current user
             this.setCurrentUser(decoded);
             this.setDeviceToken(this.user);
-            
-            Store.getProfileId(this.user.user_id);
-            
-            Store.getLikeList();
+
+            // Store.getProfileId(this.user.user_id);
+
+            // Store.getLikeList();
             // this.props.navigation.navigate('FirstPage');
           },
           () => console.log("something went wrong with setting jwt token")
         );
       })
-      .then((err) => { 
+      .then(err => {
         alert("Welcome" + " " + username);
       })
       .catch(err => console.log(err));
@@ -138,7 +138,7 @@ class authStore {
       .catch(err => console.error(err));
   };
 
-  setDeviceToken = (user) => {
+  setDeviceToken = user => {
     Notification.registerForPushNotifications(function() {
       const userData = {
         user: user.user_id,
@@ -154,9 +154,7 @@ class authStore {
           console.log(res);
         });
     });
-
-    
-  }
+  };
 }
 
 decorate(authStore, {

@@ -76,7 +76,6 @@ class SearchByDoctor extends Component {
     };
 
     if (!Store.filteredDoctors) return <View style={styles.thumbnailStyle} />;
-
     let listOfcities = Store.filteredDoctors.map(list => {
       const value = Store.StarRatingDoctorSearch(list.id);
       const filledStars = value - (value % 1);
@@ -139,7 +138,8 @@ class SearchByDoctor extends Component {
                   style={{ height: 20, width: 20 }}
                 />
                 <Text note style={styles.thirdText}>
-                {t("other:fees")}: {list.fees}{" K.D "}
+                  {t("other:fees")}: {list.fees}
+                  {" K.D "}
                 </Text>
               </CardItem>
               <CardItem style={styles.bookingButtonCardItem}>
