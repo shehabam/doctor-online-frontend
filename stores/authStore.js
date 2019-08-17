@@ -10,7 +10,7 @@ import setAuthToken from "../utils/setAuthToken";
 
 import Store from "./store";
 
-const BASEURL = "http://207.154.246.97";
+const BASEURL = "https://doctoronlinekuwait.herokuapp.com";
 
 const instance = axios.create({
   // baseURL: "http://192.168.100.244:8000/"
