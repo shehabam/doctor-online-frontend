@@ -1,7 +1,6 @@
 import i18n from "i18next";
 import { reactI18nextModule } from "react-i18next";
-import Expo from "expo";
-
+import * as Expo from "expo";
 // creating a language detection plugin using expo
 // http://i18next.com/docs/ownplugin/#languagedetector
 const languageDetector = {
@@ -9,11 +8,13 @@ const languageDetector = {
   async: true, // flags below detection to be async
   //   detect: (callback) => { return /*'en'; */ Localization.getLocalizationAsync().then(({ locale }) => { callback(locale); }) },
   detect: callback => {
-    return /*'en'; */ Expo.DangerZone.Localization.getCurrentLocaleAsync().then(
-      lng => {
-        callback(lng.replace("_", "-"));
-      }
-    );
+    // console.log(Expo.Localization.locale.replace("_", "-"))
+    return Expo.Localization.locale.replace("_", "-");
+    // Expo.Localization.locale.then(
+    //   lng => {
+    //     callback(lng.replace("_", "-"));
+    //   }
+    // );
   },
   init: () => {},
   cacheUserLanguage: () => {}
@@ -114,9 +115,9 @@ i18n
           ratingcontent: "How would you describe your visit to Doctor",
           ratealert: "your rate has been Submited",
           book: "Book",
-          cancel: 'Cancel',
-          newappointment: 'New Appointment',
-          save: 'Save',
+          cancel: "Cancel",
+          newappointment: "New Appointment",
+          save: "Save",
           editappointment: "Edit Appointment",
           deleteappointment: "Delete Appointment",
           onlydoctor: "This page must use only doctors",
@@ -247,9 +248,9 @@ i18n
           bookedsuccess: "تم الحجز بنجاح!",
           pleaselogin: "الرجاء تسجيل الدخول",
           schedule: "جدول",
-          cancel: 'إلغاء',
-          newappointment: 'موعد جديد',
-          save: 'حفظ',
+          cancel: "إلغاء",
+          newappointment: "موعد جديد",
+          save: "حفظ",
           editappointment: "تحرير موعد",
           deleteappointment: "حذف موعد",
           onlydoctor: "يجب أن تستخدم هذه الصفحة الأطباء فقط"
