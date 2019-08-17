@@ -16,7 +16,7 @@ import {
   Input
 } from "native-base";
 
-const BASEURL = "http://207.154.246.97";
+const BASEURL = "https://doctoronlinekuwait.herokuapp.com";
 
 class Store {
   constructor() {
@@ -233,7 +233,6 @@ class Store {
   }
 
   addToLikeList(id) {
-    
     axios
       .get(BASEURL + `/make/favourite/` + id)
       // .get(`http://192.168.5.142/make/favourite/` + id)
@@ -258,11 +257,11 @@ class Store {
 
   filterLikeList(data) {
     let result = [];
-    if( data.length > 0 ) {
+    if (data.length > 0) {
       let user = {};
       for (var i in data) {
         user = this.findDoctorByDoctorname(data[i].doctor_name);
-        if(user) {
+        if (user) {
           result.push(user);
         }
       }
@@ -306,18 +305,23 @@ class Store {
       .post(BASEURL + `/create/schedeul/`, bookdata)
       .then(response => {
         this.getAppointments();
-        if(userId) {
+        if (userId) {
           let token = this.getToken(id);
-          Notification.sendPushNotification(token, 'Book Success', 'Sent Notification Successfull to Doctor.');
+          Notification.sendPushNotification(
+            token,
+            "Book Success",
+            "Sent Notification Successfull to Doctor."
+          );
         }
       })
       .catch(err => console.error(err));
   }
 
   getToken(id) {
-    const user = this.fullusers.find(duser => duser.user_email === this.doctorProfile.user.email);
-    if(user)
-      return user.token;
+    const user = this.fullusers.find(
+      duser => duser.user_email === this.doctorProfile.user.email
+    );
+    if (user) return user.token;
   }
 
   getUsers() {
@@ -340,7 +344,6 @@ class Store {
       })
       .catch(err => console.error(err));
   }
-  
 
   getAppointments() {
     axios
@@ -365,11 +368,16 @@ class Store {
   }
 
   findDoctorByDoctorname(doctorname) {
-    const user = this.doctorList.find(item => (item.user.first_name + (item.user.last_name ? ' ' + item.user.last_name : '')) === doctorname);
+    const user = this.doctorList.find(
+      item =>
+        item.user.first_name +
+          (item.user.last_name ? " " + item.user.last_name : "") ===
+        doctorname
+    );
     return user;
   }
 
-  getDoctorName(doctorid){
+  getDoctorName(doctorid) {
     const doctor = this.doctorList.find(item => item.id === doctorid);
     return doctor.user.username;
   }
@@ -399,13 +407,33 @@ class Store {
       return;
     }
     let dateObj = new Date();
-    let dateval = dateObj.getFullYear() + '-' + ((dateObj.getMonth() + 1) > 9 ? dateObj.getMonth() + 1 : '0' + (dateObj.getMonth() + 1)) + '-' + (dateObj.getDate() > 9 ? dateObj.getDate() : '0' + dateObj.getDate());
+    let dateval =
+      dateObj.getFullYear() +
+      "-" +
+      (dateObj.getMonth() + 1 > 9
+        ? dateObj.getMonth() + 1
+        : "0" + (dateObj.getMonth() + 1)) +
+      "-" +
+      (dateObj.getDate() > 9 ? dateObj.getDate() : "0" + dateObj.getDate());
     let alist = this.AppointmentsList.filter(item => item.patient !== null);
-    if(!user) {
+    if (!user) {
       user = authStore.user.username;
     }
     filterlist = alist.filter(item => item.patient.username === user);
-    this.goingList = filterlist.filter(item => new Date(item.date.split('-')[0] + '-' + (item.date.split('-')[1] * 1 > 9 ? item.date.split('-')[1] : '0' + item.date.split('-')[1]) + '-' + (item.date.split('-')[2] * 1 > 9 ? item.date.split('-')[2] : '0' + item.date.split('-')[2])).getTime() >= new Date(dateval).getTime());
+    this.goingList = filterlist.filter(
+      item =>
+        new Date(
+          item.date.split("-")[0] +
+            "-" +
+            (item.date.split("-")[1] * 1 > 9
+              ? item.date.split("-")[1]
+              : "0" + item.date.split("-")[1]) +
+            "-" +
+            (item.date.split("-")[2] * 1 > 9
+              ? item.date.split("-")[2]
+              : "0" + item.date.split("-")[2])
+        ).getTime() >= new Date(dateval).getTime()
+    );
     return this.goingList;
   }
 
@@ -452,10 +480,30 @@ class Store {
       item => item.doctor === user
     );
     let dateObj = new Date();
-    let dateval = dateObj.getFullYear() + '-' + ((dateObj.getMonth() + 1) > 9 ? dateObj.getMonth() + 1 : '0' + (dateObj.getMonth() + 1)) + '-' + (dateObj.getDate() > 9 ? dateObj.getDate() : '0' + dateObj.getDate());
+    let dateval =
+      dateObj.getFullYear() +
+      "-" +
+      (dateObj.getMonth() + 1 > 9
+        ? dateObj.getMonth() + 1
+        : "0" + (dateObj.getMonth() + 1)) +
+      "-" +
+      (dateObj.getDate() > 9 ? dateObj.getDate() : "0" + dateObj.getDate());
     console.log(filterappointment);
     filterappointment = filterappointment.filter(
-      item => item.date ? new Date(item.date.split('-')[0] + '-' + (item.date.split('-')[1] * 1 > 9 ? item.date.split('-')[1] : '0' + item.date.split('-')[1]) + '-' + (item.date.split('-')[2] * 1 > 9 ? item.date.split('-')[2] : '0' + item.date.split('-')[2])).getTime() >= new Date(dateval).getTime() : true
+      item =>
+        item.date
+          ? new Date(
+              item.date.split("-")[0] +
+                "-" +
+                (item.date.split("-")[1] * 1 > 9
+                  ? item.date.split("-")[1]
+                  : "0" + item.date.split("-")[1]) +
+                "-" +
+                (item.date.split("-")[2] * 1 > 9
+                  ? item.date.split("-")[2]
+                  : "0" + item.date.split("-")[2])
+            ).getTime() >= new Date(dateval).getTime()
+          : true
     );
 
     let result = [];

@@ -15,7 +15,6 @@ import { StyleSheet, ScrollView } from "react-native";
 import Store from "../stores/store";
 import { withNamespaces } from "react-i18next";
 import authStore from "../stores/authStore";
-
 class AppointmentPage extends Component {
   state = {
     authenticated: false
@@ -47,7 +46,7 @@ class AppointmentPage extends Component {
       );
     }
     let list = Store.findScheduleGoing(authStore.user.username);
-    
+
     return (
       <View style={styles.container}>
         <ScrollView style={{ marginTop: 2, backgroundColor: "white" }}>

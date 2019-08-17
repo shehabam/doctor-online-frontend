@@ -33,7 +33,9 @@ import SpecialityPage from "./components/specialityPage";
 import HomeScreen from "./components/HomeScreen";
 import {
   createStackNavigator,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createAppContainer,
+  createSwitchNavigator
 } from "react-navigation";
 import DoctorProfile from "./components/doctorProfile";
 import EditProfile from "./components/EditProfile";
@@ -46,7 +48,9 @@ import { withNamespaces } from "react-i18next";
 import i18n from "./utils/i18n";
 let iconName;
 
-const WrappedStack = ({ t }) => <SuperNav screenProps={{ t }} />;
+//const { t } = this.props;
+
+const WrappedStack = ({ t }) => <Containerx screenProps={{ t }} />;
 const ReloadAppOnLanguageChange = withNamespaces("common", {
   bindI18n: "languageChanged",
   bindStore: false
@@ -73,26 +77,13 @@ class App extends Component {
       console.log(error);
     }
   }
+
   render() {
     if (this.state.fontLoaded) {
-      // const RNDir = RNI18nManager.isRTL ? 'RTL' : 'LTR';
-
-      // if (i18n.dir().toUpperCase() !== RNDir) {
-      //     const isLocaleRTL = i18n.dir().toUpperCase() === 'RTL';
-
-      //     RNI18nManager.forceRTL(isLocaleRTL);
-
-      //     // RN won't set the layout direction if we
-      //     // don't restart the app's JavaScript.
-      //     Expo.Updates.reloadFromCache();
-      // }
-
-      console.log("fonts loaded: ", this.state.fontLoaded);
       return (
-        <Container>
+        <WrappedStack>
           <ReloadAppOnLanguageChange />
-          {/* <RelodAppOnLanguageChange  /> */}
-        </Container>
+        </WrappedStack>
       );
     } else {
       return (
@@ -104,12 +95,12 @@ class App extends Component {
   }
 }
 
-const AnimeTab = createStackNavigator(
+const AnimeTab = createSwitchNavigator(
   {
     anime: anime,
     anime1: {
       screen: anime1,
-      navigationOptions: {
+      defualtnavigationOptions: {
         header: null
       },
       hideTabBar: true
@@ -130,7 +121,7 @@ const FirstPageTab = createStackNavigator(
     DoctorProfile: DoctorProfile,
     TimeDatePicker: {
       screen: TimeDatePicker,
-      navigationOptions: {
+      defualtnavigationOptions: {
         headerTintColor: "white",
         headerStyle: {
           backgroundColor: "#00bfff"
@@ -143,7 +134,7 @@ const FirstPageTab = createStackNavigator(
     RatingPage: RatingPage
   },
   {
-    navigationOptions: {
+    defualtnavigationOptions: {
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#90d4ed"
@@ -169,7 +160,7 @@ const MoreTab = createStackNavigator(
     Edit: Edit
   },
   {
-    navigationOptions: {
+    defualtnavigationOptions: {
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#90d4ed"
@@ -211,7 +202,7 @@ const BottomTab = createBottomTabNavigator(
   },
   {
     initialRouteName: "Home",
-    navigationOptions: ({ navigation, screenProps }) => ({
+    defualtnavigationOptions: ({ navigation, screenProps }) => ({
       title:
         navigation.state.routeName === "Home"
           ? screenProps.t("other:home")
@@ -240,7 +231,7 @@ const BottomTab = createBottomTabNavigator(
         );
       }
     }),
-    tabBarOptions: {
+    defaulttabBarOptions: {
       activeTintColor: "white",
       inactiveTintColor: "black",
       style: {
@@ -253,17 +244,20 @@ const BottomTab = createBottomTabNavigator(
   }
 );
 
-const SuperNav = createStackNavigator(
+const SuperNav = createSwitchNavigator(
   {
     Anime: AnimeTab,
     //  RatingPage: RatingPage,
     BottomTab: BottomTab
   },
   {
-    navigationOptions: {
-      header: null
+    defualtnavigationOptions: {
+      header: null,
+      headerTintColor: "red"
     }
   }
 );
+
+export const Containerx = createAppContainer(SuperNav);
 
 export default App;
