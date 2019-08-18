@@ -27,12 +27,11 @@ import authStore from "../stores/authStore";
 import { withNamespaces } from "react-i18next";
 
 class FavouriteDoctor extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       doctorlist: []
-    }
+    };
   }
 
   get goTo() {
@@ -72,7 +71,7 @@ class FavouriteDoctor extends Component {
     };
 
     Store.getLikeList();
-    
+
     let doctorlist = Store.likeDoctors;
     if (!doctorlist) return <View style={styles.thumbnailStyle} />;
 
@@ -138,7 +137,8 @@ class FavouriteDoctor extends Component {
                   style={{ height: 20, width: 20 }}
                 />
                 <Text note style={styles.thirdText}>
-                  Fees: {list.fees}{" K.D "}
+                  Fees: {list.fees}
+                  {" K.D "}
                 </Text>
               </CardItem>
               <CardItem style={styles.bookingButtonCardItem}>
@@ -215,7 +215,6 @@ class FavouriteDoctor extends Component {
 
     return (
       <View style={{ backgroundColor: "white", flex: 1 }}>
-        
         <ScrollView style={{ backgroundColor: "white" }}>
           {listOfcities}
         </ScrollView>
@@ -224,7 +223,7 @@ class FavouriteDoctor extends Component {
   }
 }
 
-export default withNamespaces(["other", "common"], { wait: true })(
+export default withNamespaces(["other", "common"], { wait: false })(
   observer(FavouriteDoctor)
 );
 

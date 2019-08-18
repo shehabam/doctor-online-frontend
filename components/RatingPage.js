@@ -193,7 +193,7 @@ class RatingPage extends Component {
 }
 
 //export default observer(RatingPage);
-export default withNamespaces(["other", "common"], { wait: true })(RatingPage);
+export default withNamespaces(["other", "common"], { wait: false })(RatingPage);
 
 const styles = StyleSheet.create({
   text: {

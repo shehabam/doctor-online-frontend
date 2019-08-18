@@ -55,10 +55,8 @@ class Schedule extends Component {
                   <View style={styles.item}>
                     <Text>{t("book:patientname")}</Text>
                     {item.patient ? (
-                      <Text note>{item.patient.username}</Text> )
-                      : null
-                    }
-                    
+                      <Text note>{item.patient.username}</Text>
+                    ) : null}
                   </View>
 
                   <View style={styles.item}>
@@ -80,7 +78,7 @@ class Schedule extends Component {
   }
 }
 
-export default withNamespaces(["book", "common"], { wait: true })(Schedule);
+export default withNamespaces(["book", "common"], { wait: false })(Schedule);
 
 const styles = StyleSheet.create({
   container: {

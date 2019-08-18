@@ -42,16 +42,16 @@ class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      waiting_time: '',
+      waiting_time: "",
       fees: "",
       opening_file: "",
       block: "",
-      street: '',
+      street: "",
       building: "",
       floor: "",
       google_maps: "",
       description: "",
-      service: ''
+      service: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -109,10 +109,18 @@ class Edit extends Component {
             }}
           >
             <TextInput
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
+              style={{
+                fontFamily: "GTWalsheim-Medium",
+                fontSize: 20,
+                width: 150,
+                height: 40,
+                marginLeft: 10
+              }}
               placeholder={t("edit:waitingtime")}
               autoCapitalize="none"
-              onChangeText={waiting_time => {this.state.waiting_time = waiting_time}}
+              onChangeText={waiting_time => {
+                this.state.waiting_time = waiting_time;
+              }}
             >
               <Text>{this.state.waiting_time}</Text>
             </TextInput>
@@ -132,12 +140,20 @@ class Edit extends Component {
             }}
           >
             <TextInput
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
+              style={{
+                fontFamily: "GTWalsheim-Medium",
+                fontSize: 20,
+                width: 150,
+                height: 40,
+                marginLeft: 10
+              }}
               placeholder={t("edit:fees")}
               autoCapitalize="none"
-              onChangeText={fees => {this.state.fees = fees}}
+              onChangeText={fees => {
+                this.state.fees = fees;
+              }}
             >
-            <Text>{this.state.fees}</Text>
+              <Text>{this.state.fees}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -155,12 +171,20 @@ class Edit extends Component {
             }}
           >
             <TextInput
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
+              style={{
+                fontFamily: "GTWalsheim-Medium",
+                fontSize: 20,
+                width: 150,
+                height: 40,
+                marginLeft: 10
+              }}
               placeholder={t("edit:openingfile")}
               autoCapitalize="none"
-              onChangeText={opening_file => {this.state.opening_file = opening_file}}
+              onChangeText={opening_file => {
+                this.state.opening_file = opening_file;
+              }}
             >
-             <Text>{this.state.opening_file}</Text>
+              <Text>{this.state.opening_file}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -178,12 +202,20 @@ class Edit extends Component {
             }}
           >
             <TextInput
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
+              style={{
+                fontFamily: "GTWalsheim-Medium",
+                fontSize: 20,
+                width: 150,
+                height: 40,
+                marginLeft: 10
+              }}
               placeholder={t("edit:block")}
               autoCapitalize="none"
-              onChangeText={block => {this.state.block = block}}
+              onChangeText={block => {
+                this.state.block = block;
+              }}
             >
-               <Text>{this.state.block}</Text>
+              <Text>{this.state.block}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -201,10 +233,18 @@ class Edit extends Component {
             }}
           >
             <TextInput
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
+              style={{
+                fontFamily: "GTWalsheim-Medium",
+                fontSize: 20,
+                width: 150,
+                height: 40,
+                marginLeft: 10
+              }}
               placeholder={t("edit:street")}
               autoCapitalize="none"
-              onChangeText={street => {this.state.street = street}}
+              onChangeText={street => {
+                this.state.street = street;
+              }}
             >
               <Text>{this.state.street}</Text>
             </TextInput>
@@ -224,12 +264,20 @@ class Edit extends Component {
             }}
           >
             <TextInput
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
+              style={{
+                fontFamily: "GTWalsheim-Medium",
+                fontSize: 20,
+                width: 150,
+                height: 40,
+                marginLeft: 10
+              }}
               placeholder={t("edit:building")}
               autoCapitalize="none"
-              onChangeText={building => {this.state.building = building}}
+              onChangeText={building => {
+                this.state.building = building;
+              }}
             >
-            <Text>{this.state.building}</Text>
+              <Text>{this.state.building}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -247,12 +295,20 @@ class Edit extends Component {
             }}
           >
             <TextInput
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:150, height: 40, marginLeft:10 }}
+              style={{
+                fontFamily: "GTWalsheim-Medium",
+                fontSize: 20,
+                width: 150,
+                height: 40,
+                marginLeft: 10
+              }}
               placeholder={t("edit:floor")}
               autoCapitalize="none"
-              onChangeText={floor => {this.state.floor = floor}}
+              onChangeText={floor => {
+                this.state.floor = floor;
+              }}
             >
-            <Text>{this.state.floor}</Text>
+              <Text>{this.state.floor}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -270,12 +326,20 @@ class Edit extends Component {
             }}
           >
             <TextInput
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:300, height: 40, marginLeft:10 }}
+              style={{
+                fontFamily: "GTWalsheim-Medium",
+                fontSize: 20,
+                width: 300,
+                height: 40,
+                marginLeft: 10
+              }}
               placeholder={t("edit:googlemaps")}
               autoCapitalize="none"
-              onChangeText={google_maps => {this.state.google_maps = google_maps}}
+              onChangeText={google_maps => {
+                this.state.google_maps = google_maps;
+              }}
             >
-            <Text>{this.state.google_maps}</Text>
+              <Text>{this.state.google_maps}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -291,14 +355,22 @@ class Edit extends Component {
             }}
           >
             <TextInput
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:300, height: 40, marginLeft:10 }}
+              style={{
+                fontFamily: "GTWalsheim-Medium",
+                fontSize: 20,
+                width: 300,
+                height: 40,
+                marginLeft: 10
+              }}
               placeholder={t("edit:description")}
               autoCapitalize="none"
-              multiline = {true}
-              numberOfLines = {4}
-              onChangeText={description => this.state.description = description}
+              multiline={true}
+              numberOfLines={4}
+              onChangeText={description =>
+                (this.state.description = description)
+              }
             >
-            <Text>{this.state.description}</Text>
+              <Text>{this.state.description}</Text>
             </TextInput>
           </Button>
           <Row>
@@ -314,14 +386,22 @@ class Edit extends Component {
             }}
           >
             <TextInput
-              style={{ fontFamily: "GTWalsheim-Medium", fontSize: 20, width:300, height: 40, marginLeft:10 }}
+              style={{
+                fontFamily: "GTWalsheim-Medium",
+                fontSize: 20,
+                width: 300,
+                height: 40,
+                marginLeft: 10
+              }}
               placeholder={t("edit:service")}
               autoCapitalize="none"
-              multiline = {true}
-              numberOfLines = {4}
-              onChangeText={service => {this.state.service = service}}
+              multiline={true}
+              numberOfLines={4}
+              onChangeText={service => {
+                this.state.service = service;
+              }}
             >
-            <Text>{this.state.service}</Text>
+              <Text>{this.state.service}</Text>
             </TextInput>
           </Button>
           <Button
@@ -342,7 +422,7 @@ class Edit extends Component {
 }
 
 // export default observer(Edit);
-export default withNamespaces(["edit", "common"], { wait: true })(Edit);
+export default withNamespaces(["edit", "common"], { wait: false })(Edit);
 const styles = StyleSheet.create({
   // wrapper: {
   //   marginTop: 80

@@ -52,19 +52,19 @@ class More extends Component {
     let isDoctor = "";
     if (authStore.isAuthenticated) {
       isDoctor = Store.findDoctorInUsers(authStore.user.user_id);
-      if(authStore.user) {
+      if (authStore.user) {
         if (authStore.user.username == "admin") {
           isDoctor = authStore.user.user_id;
         }
       }
     }
     // if(lang == 'en' || lang == 'en-US') {
-      return (
-        <View style={{ flex: 1, backgroundColor: "white" }}>
-          <TouchableHighlight>
-            <List>
-            { authStore.isAuthenticated ?
-            <ListItem
+    return (
+      <View style={{ flex: 1, backgroundColor: "white" }}>
+        <TouchableHighlight>
+          <List>
+            {authStore.isAuthenticated ? (
+              <ListItem
                 onPress={() =>
                   this.props.navigation.navigate("FavouriteDoctor")
                 }
@@ -80,14 +80,13 @@ class More extends Component {
                     style={{ color: "#00bfff" }}
                   />
                 </Right>
-              </ListItem> : 
+              </ListItem>
+            ) : (
               <Text />
-              }
-              { authStore.isAuthenticated ?
-            <ListItem
-                onPress={() =>
-                  this.props.navigation.navigate("BookSuccess")
-                }
+            )}
+            {authStore.isAuthenticated ? (
+              <ListItem
+                onPress={() => this.props.navigation.navigate("BookSuccess")}
               >
                 <Left>
                   <Icon name="book" large style={{ color: "#00bfff" }} />
@@ -100,19 +99,104 @@ class More extends Component {
                     style={{ color: "#00bfff" }}
                   />
                 </Right>
-              </ListItem> : 
+              </ListItem>
+            ) : (
               <Text />
-              }
-              {isDoctor ? (
-                
+            )}
+            {isDoctor ? (
+              <ListItem
+                onPress={() =>
+                  this.props.navigation.navigate("AppointmentManage")
+                }
+              >
+                <Left>
+                  <Icon name="clock" large style={{ color: "#00bfff" }} />
+                  <Text>{t("more:appointmentmanage")}</Text>
+                </Left>
+                <Right>
+                  <Icon
+                    name="arrow-forward"
+                    large
+                    style={{ color: "#00bfff" }}
+                  />
+                </Right>
+              </ListItem>
+            ) : (
+              <Text />
+            )}
+            <ListItem
+              onPress={() => this.props.navigation.navigate("Settings")}
+            >
+              <Left>
+                <Icon name="md-settings" large style={{ color: "#00bfff" }} />
+                <Text>{t("more:settings")}</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
+              </Right>
+            </ListItem>
+
+            <ListItem>
+              <Left>
+                <Icon name="ios-call" large style={{ color: "#00bfff" }} />
+                <Text>{t("more:contactus")}</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
+              </Right>
+            </ListItem>
+            <ListItem>
+              <Left>
+                <Icon name="md-bulb" large style={{ color: "#00bfff" }} />
+                <Text>{t("more:aboutus")}</Text>
+              </Left>
+              <Right>
+                <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
+              </Right>
+            </ListItem>
+            {authStore.isAuthenticated ? (
+              <ListItem
+                onPress={() => {
+                  authStore.logoutUser(),
+                    alert("You logged out"),
+                    this.props.navigation.navigate("FirstPage");
+                }}
+              >
+                <Left>
+                  <Icon name="log-out" large style={{ color: "#00bfff" }} />
+                  <Text>{t("more:logout")}</Text>
+                </Left>
+                <Right>
+                  <Icon
+                    name="arrow-forward"
+                    large
+                    style={{ color: "#00bfff" }}
+                  />
+                </Right>
+              </ListItem>
+            ) : (
+              <Text />
+            )}
+
+            <ListItem>
+              <Left>
+                <Icon name="ios-glasses" large style={{ color: "#00bfff" }} />
+                <Text>{t("more:medicalinformation")}</Text>
+              </Left>
+              <Right>
+                <Text style={{ fontSize: 13 }} note>
+                  {t("more:commingsoon")}
+                </Text>
+              </Right>
+            </ListItem>
+            {authStore.user ? (
+              authStore.user.username == "admin" ? (
                 <ListItem
-                  onPress={() =>
-                    this.props.navigation.navigate("AppointmentManage")
-                  }
+                  onPress={() => this.props.navigation.navigate("Notification")}
                 >
                   <Left>
-                    <Icon name="clock" large style={{ color: "#00bfff" }} />
-                    <Text>{t("more:appointmentmanage")}</Text>
+                    <Icon name="home" large style={{ color: "#00bfff" }} />
+                    <Text>{t("more:notification")}</Text>
                   </Left>
                   <Right>
                     <Icon
@@ -124,84 +208,14 @@ class More extends Component {
                 </ListItem>
               ) : (
                 <Text />
-              )}
-              <ListItem
-                onPress={() => this.props.navigation.navigate("Settings")}
-              >
-                <Left>
-                  <Icon name="md-settings" large style={{ color: "#00bfff" }} />
-                  <Text>{t("more:settings")}</Text>
-                </Left>
-                <Right>
-                  <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-                </Right>
-              </ListItem>
-  
-              <ListItem>
-                <Left>
-                  <Icon name="ios-call" large style={{ color: "#00bfff" }} />
-                  <Text>{t("more:contactus")}</Text>
-                </Left>
-                <Right>
-                  <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-                </Right>
-              </ListItem>
-              <ListItem>
-                <Left>
-                  <Icon name="md-bulb" large style={{ color: "#00bfff" }} />
-                  <Text>{t("more:aboutus")}</Text>
-                </Left>
-                <Right>
-                  <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-                </Right>
-              </ListItem>
-              { authStore.isAuthenticated ?
-                  <ListItem 
-        onPress={() => {
-                    authStore.logoutUser(),
-                      alert("You logged out"),
-                      this.props.navigation.navigate("FirstPage");
-                  }}
-            >
-                  <Left>
-                    <Icon name="log-out" large style={{ color: "#00bfff" }} />
-                    <Text>{t("more:logout")}</Text>
-                  </Left>
-                  <Right>
-                    <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-                  </Right>
-                </ListItem> : 
-                <Text></Text>
-              }
-              
-              <ListItem>
-                <Left>
-                  <Icon name="ios-glasses" large style={{ color: "#00bfff" }} />
-                  <Text>{t("more:medicalinformation")}</Text>
-                </Left>
-                <Right>
-                  <Text style={{ fontSize: 13 }} note>
-                    {t("more:commingsoon")}
-                  </Text>
-                </Right>
-              </ListItem>
-              { authStore.user ? (authStore.user.username == "admin" ?
-              <ListItem
-                onPress={() => this.props.navigation.navigate("Notification")}
-              >
-                <Left>
-                  <Icon name="home" large style={{ color: "#00bfff" }} />
-                  <Text>{t("more:notification")}</Text>
-                </Left>
-                <Right>
-                  <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
-                </Right>
-              </ListItem> : <Text />
-               ) : <Text />}
-            </List>
-          </TouchableHighlight>
-        </View>
-      );
+              )
+            ) : (
+              <Text />
+            )}
+          </List>
+        </TouchableHighlight>
+      </View>
+    );
     // } else {
     //   return (
     //     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -225,7 +239,7 @@ class More extends Component {
     //               <Icon name="md-contact" large style={{ color: "#00bfff" }} />
     //               <Text>{t("more:favouritedoctor")}</Text>
     //             </Right>
-    //           </ListItem> : 
+    //           </ListItem> :
     //           <Text />
     //           }
     //           { authStore.isAuthenticated ?
@@ -244,12 +258,12 @@ class More extends Component {
     //             <Right>
     //               <Icon name="book" large style={{ color: "#00bfff" }} />
     //               <Text>{t("more:booksuccess")}</Text>
-    //             </Right>                
-    //           </ListItem> : 
+    //             </Right>
+    //           </ListItem> :
     //           <Text />
     //           }
     //           {isDoctor ? (
-                
+
     //             <ListItem
     //               onPress={() =>
     //                 this.props.navigation.navigate("AppointmentManage")
@@ -280,9 +294,9 @@ class More extends Component {
     //               <Icon name="md-settings" large style={{ color: "#00bfff" }} />
     //               <Text>{t("more:settings")}</Text>
     //             </Right>
-                
+
     //           </ListItem>
-  
+
     //           <ListItem>
     //             <Left>
     //               <Icon name="arrow-forward" large style={{ color: "#00bfff" }} />
@@ -291,7 +305,7 @@ class More extends Component {
     //               <Icon name="ios-call" large style={{ color: "#00bfff" }} />
     //               <Text>{t("more:contactus")}</Text>
     //             </Right>
-                
+
     //           </ListItem>
     //           <ListItem>
     //             <Left>
@@ -301,10 +315,10 @@ class More extends Component {
     //               <Icon name="md-bulb" large style={{ color: "#00bfff" }} />
     //               <Text>{t("more:aboutus")}</Text>
     //             </Right>
-                
+
     //           </ListItem>
     //           { authStore.isAuthenticated ?
-    //               <ListItem 
+    //               <ListItem
     //                 onPress={() => {
     //                 authStore.logoutUser(),
     //                   alert("You logged out"),
@@ -318,11 +332,11 @@ class More extends Component {
     //                 <Icon name="log-out" large style={{ color: "#00bfff" }} />
     //                 <Text>{t("more:logout")}</Text>
     //               </Right>
-                  
-    //             </ListItem> : 
+
+    //             </ListItem> :
     //             <Text></Text>
     //           }
-              
+
     //           <ListItem>
     //             <Left>
     //               <Text style={{ fontSize: 13 }} note>
@@ -333,7 +347,7 @@ class More extends Component {
     //               <Icon name="ios-glasses" large style={{ color: "#00bfff" }} />
     //               <Text>{t("more:medicalinformation")}</Text>
     //             </Right>
-                
+
     //           </ListItem>
     //           {authStore.user ? (authStore.user.username == "admin" ?
     //           <ListItem
@@ -346,7 +360,7 @@ class More extends Component {
     //               <Icon name="home" style={{ color: "#00bfff" }} />
     //               <Text>{t("more:notification")}</Text>
     //             </Right>
-                
+
     //           </ListItem> : <Text />
     //           ) : <Text />}
     //         </List>
@@ -358,6 +372,6 @@ class More extends Component {
   }
 }
 
-export default withNamespaces(["more", "common"], { wait: true })(
+export default withNamespaces(["more", "common"], { wait: false })(
   observer(More)
 );

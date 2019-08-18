@@ -40,7 +40,7 @@ class LoginPage extends Component {
   // componentWillMount(){
   loginButton(username, password) {
     if (!username || !password) {
-      alert('Please input Username and Password!');
+      alert("Please input Username and Password!");
       return;
     }
     authStore.loginUser(username, password);
@@ -74,7 +74,14 @@ class LoginPage extends Component {
           <Row size={2.5} style={[styles.Row]}>
             <Image
               source={require("../assets/LogoWhite.png")}
-              style={{ height: "120%", width: "80%", marginLeft: "10%", justifyContent: "center",alignSelf: "center",alignContent: "center"}}
+              style={{
+                height: "120%",
+                width: "80%",
+                marginLeft: "10%",
+                justifyContent: "center",
+                alignSelf: "center",
+                alignContent: "center"
+              }}
             />
           </Row>
           <Row size={1} style={[styles.Row]} />
@@ -83,20 +90,24 @@ class LoginPage extends Component {
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="person" />
               <TextInput
-                style={i18n.language == 'ar' ? {
-                  fontFamily: "GTWalsheim-Medium",
-                  fontSize: 20,
-                  color: "#fff",
-                  width: 200,
-                  height: 40,
-                  textAlign: 'center'
-                } : {
-                  fontFamily: "GTWalsheim-Medium",
-                  fontSize: 20,
-                  color: "#fff",
-                  width: 200,
-                  height: 40
-                }}
+                style={
+                  i18n.language == "ar"
+                    ? {
+                        fontFamily: "GTWalsheim-Medium",
+                        fontSize: 20,
+                        color: "#fff",
+                        width: 200,
+                        height: 40,
+                        textAlign: "center"
+                      }
+                    : {
+                        fontFamily: "GTWalsheim-Medium",
+                        fontSize: 20,
+                        color: "#fff",
+                        width: 200,
+                        height: 40
+                      }
+                }
                 placeholder={t("other:username")}
                 autoCapitalize="none"
                 onChangeText={username => this.setState({ username })}
@@ -108,20 +119,24 @@ class LoginPage extends Component {
             <Button rounded transparent style={styles.formBorder}>
               <Icon name="lock" />
               <TextInput
-                style={i18n.language == 'ar' ? {
-                  fontFamily: "GTWalsheim-Medium",
-                  fontSize: 20,
-                  color: "#fff",
-                  width: 200,
-                  height: 40,
-                  textAlign: 'center'
-                } : {
-                  fontFamily: "GTWalsheim-Medium",
-                  fontSize: 20,
-                  color: "#fff",
-                  width: 200,
-                  height: 40
-                }}
+                style={
+                  i18n.language == "ar"
+                    ? {
+                        fontFamily: "GTWalsheim-Medium",
+                        fontSize: 20,
+                        color: "#fff",
+                        width: 200,
+                        height: 40,
+                        textAlign: "center"
+                      }
+                    : {
+                        fontFamily: "GTWalsheim-Medium",
+                        fontSize: 20,
+                        color: "#fff",
+                        width: 200,
+                        height: 40
+                      }
+                }
                 placeholder={t("other:password")}
                 autoCapitalize="none"
                 secureTextEntry={true}
@@ -136,7 +151,7 @@ class LoginPage extends Component {
               style={styles.buttonBorder}
               rounded
               onPress={() => {
-                this.loginButton(this.state.username, this.state.password)
+                this.loginButton(this.state.username, this.state.password);
               }}
             >
               <Text style={styles.TextStyle}>{t("first:login")}</Text>
@@ -169,7 +184,7 @@ class LoginPage extends Component {
 }
 
 //export default observer(LoginPage);
-export default withNamespaces(["other", "common"], { wait: true })(LoginPage);
+export default withNamespaces(["other", "common"], { wait: false })(LoginPage);
 
 const styles = StyleSheet.create({
   Row: {

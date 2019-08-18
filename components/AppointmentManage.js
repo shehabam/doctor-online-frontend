@@ -85,11 +85,11 @@ class AppointmentManage extends Component {
   saveAppointment() {
     let d = Store.findDoctorByUsername(authStore.user.username);
     Store.AppointmentsList.push({
-      "id": new Date().getTime(),
-      "doctor": d.id,
-      "patient": this.state.patient,
-      "date": this.state.chosenDate,
-      "available_time": this.state.chosenTime
+      id: new Date().getTime(),
+      doctor: d.id,
+      patient: this.state.patient,
+      date: this.state.chosenDate,
+      available_time: this.state.chosenTime
     });
     Store.postBook(
       this.state.chosenDate,
@@ -99,7 +99,7 @@ class AppointmentManage extends Component {
     );
     if (this.state.update > 0) {
       Store.deleteAppointment(this.state.update);
-      this.setState({update: 0});
+      this.setState({ update: 0 });
     }
     this.setState({ modalVisible: false });
   }
@@ -161,7 +161,7 @@ class AppointmentManage extends Component {
     let schdule = Store.findScheduleById(this.state.clickedScheduleId)[0];
     this.setState({ chosenDate: schdule.date });
     this.setState({ chosenTime: schdule.available_time });
-    if(schdule.patient) {
+    if (schdule.patient) {
       let userinfo = Store.findUser(schdule.patient.username);
       this.setState({ patient: userinfo.id });
     }
@@ -266,7 +266,9 @@ class AppointmentManage extends Component {
                 style={{ width: "99%", backgroundColor: "rgba(0,0,0,0)" }}
                 onPress={() => this.editApponitment(!this.state.modalVisible)}
               >
-                <Text style={{ textAlign: "center" }}>{t("other:editappointment")}</Text>
+                <Text style={{ textAlign: "center" }}>
+                  {t("other:editappointment")}
+                </Text>
               </Button>
               <Button
                 title="Learn More"
@@ -278,7 +280,9 @@ class AppointmentManage extends Component {
                 }}
                 onPress={() => this.deleteApponitment()}
               >
-                <Text style={{ textAlign: "center" }}>{t("other:deleteappointment")}</Text>
+                <Text style={{ textAlign: "center" }}>
+                  {t("other:deleteappointment")}
+                </Text>
               </Button>
             </Fragment>
           )}
@@ -302,7 +306,9 @@ class AppointmentManage extends Component {
               }}
             >
               <View style={{ height: 50 }}>
-                <Text style={{ fontSize: 20 }}>{t("other:newappointment")}</Text>
+                <Text style={{ fontSize: 20 }}>
+                  {t("other:newappointment")}
+                </Text>
               </View>
               <View
                 style={
@@ -368,7 +374,9 @@ class AppointmentManage extends Component {
                 />
               </View>
               <View style={{ height: 50, marginTop: 30 }}>
-                <Text style={{ fontSize: 20 }}>{t("book:reservationtime")}: </Text>
+                <Text style={{ fontSize: 20 }}>
+                  {t("book:reservationtime")}:{" "}
+                </Text>
                 <TextInput
                   style={{
                     fontFamily: "GTWalsheim-Medium",
@@ -462,7 +470,7 @@ class AppointmentManage extends Component {
 
 // export default observer(Settings);
 export default withNamespaces(["book", "edit", "other"], {
-  wait: true
+  wait: false
 })(AppointmentManage);
 
 const styles = StyleSheet.create({

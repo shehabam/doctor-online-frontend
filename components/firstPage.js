@@ -233,7 +233,8 @@ const styles = StyleSheet.create({
   //   fontFamily: "GTWalsheim-Medium"
   // }
 });
+
 //export default observer(FirstPage);
-export default withNamespaces(["first", "common"], { wait: true })(
+export default withNamespaces(["first", "common"], { wait: false })(
   observer(FirstPage)
 );

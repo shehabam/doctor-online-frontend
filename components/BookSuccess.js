@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 
-import {
-  Text,
-  View
-} from "native-base";
+import { Text, View } from "native-base";
 
 import { StyleSheet, ScrollView } from "react-native";
 import Store from "../stores/store";
@@ -95,7 +92,7 @@ class BookSuccess extends Component {
 }
 
 export default withNamespaces(["book", "appointment", "other", "edit"], {
-  wait: true
+  wait: false
 })(observer(BookSuccess));
 
 const styles = StyleSheet.create({

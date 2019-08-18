@@ -67,7 +67,7 @@ class offersPage extends Component {
 }
 
 //export default observer(offersPage);
-export default withNamespaces(["offer", "common"], { wait: true })(offersPage);
+export default withNamespaces(["offer", "common"], { wait: false })(offersPage);
 
 const styles = StyleSheet.create({
   // wrapper: {

@@ -138,7 +138,8 @@ class DoctorList extends Component {
                   style={{ height: 20, width: 20 }}
                 />
                 <Text note style={styles.thirdText}>
-                  {t("other:fees")}: {list.fees}{" K.D "}
+                  {t("other:fees")}: {list.fees}
+                  {" K.D "}
                 </Text>
               </CardItem>
               <CardItem style={styles.bookingButtonCardItem}>
@@ -224,7 +225,7 @@ class DoctorList extends Component {
 }
 
 // export default observer(DoctorList);
-export default withNamespaces(["other", "common"], { wait: true })(
+export default withNamespaces(["other", "common"], { wait: false })(
   observer(DoctorList)
 );
 

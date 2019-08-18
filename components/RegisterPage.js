@@ -52,7 +52,7 @@ class RegisterPage extends Component {
         source={require("../assets/Rectangle.png")}
         style={{ width: "100%", height: "100%" }}
       >
-        <Grid style={{width: "100%"}}>
+        <Grid style={{ width: "100%" }}>
           <Row size={0.5} style={[styles.Row][{ ImageBackground: "white" }]} />
           <Row size={0.5} style={[styles.Row][{ ImageBackground: "white" }]}>
             <Icon
@@ -209,7 +209,7 @@ class RegisterPage extends Component {
   }
 }
 
-export default withNamespaces(["other", "common"], { wait: true })(
+export default withNamespaces(["other", "common"], { wait: false })(
   RegisterPage
 );
 

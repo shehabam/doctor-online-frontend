@@ -89,7 +89,7 @@ class FooterApp extends Component {
 }
 
 //export default FooterApp;
-export default withNamespaces(["more", "common"], { wait: true })(FooterApp);
+export default withNamespaces(["more", "common"], { wait: false })(FooterApp);
 
 const styles = StyleSheet.create({
   // inputStyle: {

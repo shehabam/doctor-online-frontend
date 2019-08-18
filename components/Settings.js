@@ -61,33 +61,33 @@ class Settings extends Component {
     const { t, i18n, navigation } = this.props;
     let lang = i18n.language;
     // if(lang == 'en' || lang == 'en-US') {
-      return (
-        <View style={{ flex: 1, backgroundColor: "white" }}>
-          <TouchableHighlight>
-            <List>
-              {authStore.isAuthenticated ? (
-                <ListItem onPress={() => this.props.navigation.navigate("Edit")}>
-                  <Left>
-                    <Icon name="md-person" large style={{ color: "#00bfff" }} />
-                    <Text>{t("settings:editprofile")}</Text>
-                  </Left>
-                  <Right>
-                    <Icon
-                      name="arrow-forward"
-                      large
-                      style={{ color: "#00bfff" }}
-                    />
-                  </Right>
-                </ListItem>
-              ) : (
-                <ListItem>
-                  <Left>
-                    <Text note>{t("settings:loginedityourprofile")}</Text>
-                  </Left>
-                </ListItem>
-              )}
-  
-              {/* {authStore.isAuthenticated ? (
+    return (
+      <View style={{ flex: 1, backgroundColor: "white" }}>
+        <TouchableHighlight>
+          <List>
+            {authStore.isAuthenticated ? (
+              <ListItem onPress={() => this.props.navigation.navigate("Edit")}>
+                <Left>
+                  <Icon name="md-person" large style={{ color: "#00bfff" }} />
+                  <Text>{t("settings:editprofile")}</Text>
+                </Left>
+                <Right>
+                  <Icon
+                    name="arrow-forward"
+                    large
+                    style={{ color: "#00bfff" }}
+                  />
+                </Right>
+              </ListItem>
+            ) : (
+              <ListItem>
+                <Left>
+                  <Text note>{t("settings:loginedityourprofile")}</Text>
+                </Left>
+              </ListItem>
+            )}
+
+            {/* {authStore.isAuthenticated ? (
                 <ListItem
                   onPress={() => this.props.navigation.navigate("Schedule")}
                 >
@@ -110,45 +110,50 @@ class Settings extends Component {
                   </Left>
                 </ListItem>
               )} */}
-  
-              <ListItem>
-                <Left>
-                  <Icon name="md-globe" large style={{ color: "#00bfff" }} />
-                  <Text>{t("settings:changemycountry")}</Text>
-                </Left>
-                <Right>
-                  <Text style={{ fontSize: 13 }} note>
-                    {t("more:commingsoon")}
-                  </Text>
-                </Right>
-              </ListItem>
-              <ListItem>
-                <Left>
-                  <Icon name="ios-globe-outline" large style={{ color: "#00bfff" }} />
-                  <Text>{t("settings:changelanguage")}</Text>
-                </Left>
-                <Right>
-                  <Picker
-                    selectedValue={this.state.language}
-                    style={{
-                      height: 50,
-                      width: 100,
-                      justifyContent: "center",
-                      alignContent: "center",
-                      alignSelf: "center"
-                    }}
-                    onValueChange={(itemValue, itemIndex) => this.showMe(itemValue)}
-                  >
-                    <Picker.Item label="English" value="en" />
-                    <Picker.Item label="Arabic" value="ar" />
-                  </Picker>
-                </Right>
-              </ListItem>
-            </List>
-          </TouchableHighlight>
-          
-        </View>
-      );
+
+            <ListItem>
+              <Left>
+                <Icon name="md-globe" large style={{ color: "#00bfff" }} />
+                <Text>{t("settings:changemycountry")}</Text>
+              </Left>
+              <Right>
+                <Text style={{ fontSize: 13 }} note>
+                  {t("more:commingsoon")}
+                </Text>
+              </Right>
+            </ListItem>
+            <ListItem>
+              <Left>
+                <Icon
+                  name="ios-globe-outline"
+                  large
+                  style={{ color: "#00bfff" }}
+                />
+                <Text>{t("settings:changelanguage")}</Text>
+              </Left>
+              <Right>
+                <Picker
+                  selectedValue={this.state.language}
+                  style={{
+                    height: 50,
+                    width: 100,
+                    justifyContent: "center",
+                    alignContent: "center",
+                    alignSelf: "center"
+                  }}
+                  onValueChange={(itemValue, itemIndex) =>
+                    this.showMe(itemValue)
+                  }
+                >
+                  <Picker.Item label="English" value="en" />
+                  <Picker.Item label="Arabic" value="ar" />
+                </Picker>
+              </Right>
+            </ListItem>
+          </List>
+        </TouchableHighlight>
+      </View>
+    );
     // } else {
     //   return (
     //     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -176,7 +181,7 @@ class Settings extends Component {
     //               </Right>
     //             </ListItem>
     //           )}
-  
+
     //           {authStore.isAuthenticated ? (
     //             <ListItem
     //               onPress={() => this.props.navigation.navigate("Schedule")}
@@ -192,7 +197,7 @@ class Settings extends Component {
     //                 <Icon name="md-globe" large style={{ color: "#00bfff" }} />
     //                 <Text>{t("settings:schedule")}</Text>
     //               </Right>
-                  
+
     //             </ListItem>
     //           ) : (
     //             <ListItem>
@@ -202,7 +207,7 @@ class Settings extends Component {
     //               </Right>
     //             </ListItem>
     //           )}
-  
+
     //           <ListItem>
     //             <Left>
     //               <Text style={{ fontSize: 13 }} note>
@@ -213,7 +218,7 @@ class Settings extends Component {
     //               <Icon name="md-globe" large style={{ color: "#00bfff" }} />
     //               <Text>{t("settings:changemycountry")}</Text>
     //             </Right>
-                
+
     //           </ListItem>
     //           <ListItem>
     //             <Left>
@@ -239,16 +244,15 @@ class Settings extends Component {
     //           </ListItem>
     //         </List>
     //       </TouchableHighlight>
-          
+
     //     </View>
     //   );
     // }
-    
   }
 }
 
 // export default observer(Settings);
-export default withNamespaces(["settings", "common", "other"], { wait: true })(
+export default withNamespaces(["settings", "common", "other"], { wait: false })(
   Settings
 );
 

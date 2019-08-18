@@ -8,8 +8,8 @@ const languageDetector = {
   async: true, // flags below detection to be async
   //   detect: (callback) => { return /*'en'; */ Localization.getLocalizationAsync().then(({ locale }) => { callback(locale); }) },
   detect: callback => {
-    // console.log(Expo.Localization.locale.replace("_", "-"))
-    return Expo.Localization.locale.replace("_", "-");
+    console.log(Expo.Localization.locale.replace("_", "-"));
+    return Expo.Localization.locale.split("-")[0];
     // Expo.Localization.locale.then(
     //   lng => {
     //     callback(lng.replace("_", "-"));
@@ -287,7 +287,9 @@ i18n
     // have a common namespace used around the full app
     ns: ["common"],
     defaultNS: "common",
-
+    react: {
+      wait: false
+    },
     debug: true,
 
     // cache: {

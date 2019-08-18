@@ -47,7 +47,7 @@ class AppointmentPage extends Component {
       );
     }
     let list = Store.findScheduleGoing(authStore.user.username);
-    
+
     return (
       <View style={styles.container}>
         <ScrollView style={{ marginTop: 2, backgroundColor: "white" }}>
@@ -90,7 +90,7 @@ class AppointmentPage extends Component {
 }
 
 export default withNamespaces(["book", "appointment", "other", "edit"], {
-  wait: true
+  wait: false
 })(observer(AppointmentPage));
 
 const styles = StyleSheet.create({

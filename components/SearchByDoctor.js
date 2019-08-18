@@ -233,7 +233,7 @@ class SearchByDoctor extends Component {
   }
 }
 
-export default withNamespaces(["other", "common"], { wait: true })(
+export default withNamespaces(["other", "common"], { wait: false })(
   observer(SearchByDoctor)
 );
 

@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, I18nManager as RNI18nManager, } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  I18nManager as RNI18nManager
+} from "react-native";
 // import { Ionicons } from "@expo/vector-icons";
 import { Root, Container, Icon } from "native-base";
 import FirstPage from "./components/firstPage";
@@ -63,6 +69,7 @@ class App extends Component {
         Arial: require("native-base/Fonts/Roboto.ttf")
       });
       this.setState({ fontLoaded: true });
+      console.log("gdsgsdg");
     } catch (error) {
       console.log(error);
     }

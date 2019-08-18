@@ -337,7 +337,9 @@ class EditProfile extends Component {
 }
 
 // export default observer(EditProfile);
-export default withNamespaces(["other", "common"], { wait: true })(EditProfile);
+export default withNamespaces(["other", "common"], { wait: false })(
+  EditProfile
+);
 
 const styles = StyleSheet.create({
   wrapper: {
